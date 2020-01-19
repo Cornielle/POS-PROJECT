@@ -16,7 +16,8 @@
     "react-native-paper": "^3.4.0",
     "react-native-router-flux": "^4.2.0",
     "react-native-web": "~0.11.7",
-    "react-router": "^5.1.2"
+    "react-router": "^5.1.2",
+    "react-router-native": "^5.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
