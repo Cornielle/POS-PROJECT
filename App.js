@@ -1,12 +1,32 @@
-import React from 'react';
+import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import {NativeRouter,Switch, Route} from "react-router-native";
+import { DefaultTheme,Provider as PaperProvider } from 'react-native-paper';
+import Routes from './src/Routes';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
+
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: 'tomato',
+    accent: 'yellow',
+  },
+};
+export default class App extends React.Component {
+  render(){
+    return (
+    <NativeRouter>
+      <PaperProvider theme={theme}>
+      <Switch>
+        <View style={styles.container}>
+            <Routes/>
+        </View>
+      </Switch>
+      </PaperProvider>
+    </NativeRouter>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
