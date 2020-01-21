@@ -2,8 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import {NativeRouter, Route} from "react-router-native";
 
-import Home from "../src/Views/Home"
-import Products from "./Views/Products"
+import Home from "../src/Screens/Home"
+import Products from "./Screens/Products"
 export default class Routes  extends React.Component {
   render(){
     return (
