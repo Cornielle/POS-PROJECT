@@ -1,19 +1,17 @@
-import React from 'react'
+import React, { Component } from 'react'
 import {View, Text, StyleSheet, SafeAreaView, TouchableOpacity} from 'react-native';
 import {FontAwesome5} from '@expo/vector-icons';
+import Home  from '../Screens/Home'
 
-export default class Screen extends React.Component {
+export default class Screen extends Component {
     constructor(props) {
         super(props);
         this.state = { 
             //states
         };
       }
-      componentDidMount(){
-        console.log(this.props.name)
-      }
-
     render() {
+        const {name} = this.props
         return(
             <View style={styles.container}>
                 <SafeAreaView style={{flex:1}}>
@@ -21,15 +19,14 @@ export default class Screen extends React.Component {
                     onPress={this.props.navigation.openDrawer}>
                         <FontAwesome5 name="bars" size={24} color={styles.text.color} />
                     </TouchableOpacity>
-                    <View style={{flex:1, alignItems: "center", justifyContent: "center"}}>
-                        <Text style={styles.text}>{this.props.name}</Text>
+                    <View style={{flex:1, alignItems: "center", justifyContent: "center"}}> 
+                        <Home/>
                     </View>
                 </SafeAreaView>
             </View>
         )
     }
 }
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,

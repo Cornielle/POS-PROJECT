@@ -1,12 +1,7 @@
 
-import * as React from 'react';
-
 import { createAppContainer } from "react-navigation";
 import { createDrawerNavigator} from "react-navigation-drawer";
 
-import { Dimensions } from "react-native";
-
-import { Feather } from "@expo/vector-icons";
 
 import {
   DashboardHome,
@@ -21,6 +16,9 @@ const DrawerNavigation = createDrawerNavigator({
   'Inicio': {
     screen: DashboardHome,
     path:'./src/Screens/',
+    navigationOptions: {
+      title: 'Inicio'
+    }
   },
   'Control de Caja': {
     screen: CashierManagement,
@@ -34,17 +32,10 @@ const DrawerNavigation = createDrawerNavigator({
     screen: UsersManagement,
     path:'./src/Screens/',
   },
-  'Control de Usuarios': {
-    screen: UsersManagement,
+  'Control de Inventario': {
+    screen: InventoryManagement,
     path:'./src/Screens/',
   }
-  //   CashierManagement,
-  //   SalesManagement,
-  //   UsersManagement,
-  //   InventoryManagement,
-  //   TableManagement,
-  //   TaxReceipt
-  // }
 });
 
 export default createAppContainer(DrawerNavigation);
