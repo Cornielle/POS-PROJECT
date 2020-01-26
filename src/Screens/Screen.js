@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {View, Text, StyleSheet, SafeAreaView, TouchableOpacity} from 'react-native';
 import {FontAwesome5} from '@expo/vector-icons';
+
 import Home  from '../Screens/Home'
 
 export default class Screen extends Component {
@@ -20,7 +21,7 @@ export default class Screen extends Component {
                         <FontAwesome5 name="bars" size={24} color={styles.text.color} />
                     </TouchableOpacity>
                     <View style={{flex:1, alignItems: "center", justifyContent: "center"}}> 
-                        <Home/>
+                        <Text>{name}</Text>{}
                     </View>
                 </SafeAreaView>
             </View>
@@ -35,6 +36,6 @@ const styles = StyleSheet.create({
     text: {
         color: '#161924',
         fontSize: 20,
-        fontWeight:"500"
+        fontWeight:"200"
     }
 })

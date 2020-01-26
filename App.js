@@ -2,18 +2,26 @@
 import { createAppContainer } from "react-navigation";
 import { createDrawerNavigator} from "react-navigation-drawer";
 
-
+//importando variable que continen la navegacion a los componentes
 import {
+  Users,
   DashboardHome,
   CashierManagement,
   SalesManagement,
   UsersManagement,
   InventoryManagement,
-  TableManagement,
-  TaxReceipt
 } from "./src/Screens";
+
+//creando los perfiles de navegacion en el drawer navigation
 const DrawerNavigation = createDrawerNavigator({
-  'Inicio': {
+  'AddUser': {
+    screen: Users,
+    path:'./src/Component/',
+    navigationOptions: {
+      title: 'Sesion'
+    }
+  },
+  'Home': {
     screen: DashboardHome,
     path:'./src/Screens/',
     navigationOptions: {
@@ -39,47 +47,3 @@ const DrawerNavigation = createDrawerNavigator({
 });
 
 export default createAppContainer(DrawerNavigation);
-
-
-
-/** Otra manera de hacer las rutas **/
-
-// import * as React from 'react';
-// import { StyleSheet, Text, View } from 'react-native';
-// import {NativeRouter,Switch, Route} from "react-router-native";
-// import { DefaultTheme,Provider as PaperProvider } from 'react-native-paper';
-// import Routes from './src/Routes';
-
-
-// const theme = {
-//   ...DefaultTheme,
-//   colors: {
-//     ...DefaultTheme.colors,
-//     primary: 'tomato',
-//     accent: 'yellow',
-//   },
-// };
-// export default class App extends React.Component {
-//   render(){
-//     return (
-//     <NativeRouter>
-//       <PaperProvider theme={theme}>
-//       <Switch>
-//         <View style={styles.container}>
-//             <Routes/>
-//         </View>
-//       </Switch>
-//       </PaperProvider>
-//     </NativeRouter>
-//     );
-//   }
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
