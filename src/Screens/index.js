@@ -1,20 +1,22 @@
 import * as React from 'react'
 import Screen from './Screen'
-import { View } from 'react-native'
 import {DefaultTheme, Provider as PaperProvider } from 'react-native-paper';// tema por defecto de paper
+
+//exportando dimensiones
+
 //exportando todos los componentes 
 import Home  from '../Screens/Home'
-import AddUser  from './AddUser'
+import Register  from './Register'
 import Products  from '../Screens/Products'
   
 // Constantes que contienen la navegacion hacia cada componente en especifico , con sus nombres especificos
-export const Users  = 
+export const UsersRegister  = 
 ({navigation}) =>
     <PaperProvider theme={theme}>
-            <AddUser 
+            <Register 
                 navigation={navigation}
+                name="Registro"
                 subtitle="Crear perfil de usuario" 
-                name="Añadir usuario" 
             />
     </PaperProvider>
 export const DashboardHome  = 
@@ -38,18 +40,11 @@ export const TaxReceipt = ({navigation}) => <Screen navigation={navigation} name
 // configuracion del tema por defecto de react native paper
 const theme = {
     ...DefaultTheme,
-    roundness: 3,
+    roundness: 4,
+    mode:'adaptive',
     colors: {
       ...DefaultTheme.colors,
-      primary: '#38ef7d',
+      primary: '#42b842',
 
-    },
-  };
-
-  // estilos propios
-const styles = {
-    container: {
-        backgroundColor:'#38ef7d',
-        color:'#ffffff'
     },
   };

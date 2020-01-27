@@ -4,7 +4,7 @@ import { createDrawerNavigator} from "react-navigation-drawer";
 
 //importando variable que continen la navegacion a los componentes
 import {
-  Users,
+  UsersRegister,
   DashboardHome,
   CashierManagement,
   SalesManagement,
@@ -14,8 +14,8 @@ import {
 
 //creando los perfiles de navegacion en el drawer navigation
 const DrawerNavigation = createDrawerNavigator({
-  'AddUser': {
-    screen: Users,
+  'Register': {
+    screen: UsersRegister,
     path:'./src/Component/',
     navigationOptions: {
       title: 'Sesion'

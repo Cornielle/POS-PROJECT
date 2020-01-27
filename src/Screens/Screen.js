@@ -21,7 +21,7 @@ export default class Screen extends Component {
                         <FontAwesome5 name="bars" size={24} color={styles.text.color} />
                     </TouchableOpacity>
                     <View style={{flex:1, alignItems: "center", justifyContent: "center"}}> 
-                        <Text>{name}</Text>{}
+                        <Text>{name}</Text>
                     </View>
                 </SafeAreaView>
             </View>
