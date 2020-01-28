@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { TextInput, Avatar, Button, Card  } from 'react-native-paper';
+import { TextInput, Avatar, Button, Card, RadioButton  } from 'react-native-paper';
 import { StyleSheet, Text, View, ScrollView, Picker } from 'react-native';
+import {Block} from 'galio-framework'
 import normalize from 'react-native-normalize';
 import Header from '../Components/Header'
 export default class Register extends Component{
@@ -8,11 +9,12 @@ export default class Register extends Component{
         super(props);
         this.state = { 
             text:'',
+            checked:'first'
         };
       }
     render(){
         const {name, subtitle, navigation} = this.props
-        const { text,enabled } =  this.state
+        const { text,enabled, checked } =  this.state
         return (
             <ScrollView>
             <View style={styles.ViewStyle}>
@@ -47,18 +49,39 @@ export default class Register extends Component{
                             <TextInput
                                 style={styles.Input}
                                 mode='flat'
-                                label='Cèdula'
-                                value={text}
-                                onChangeText={text => this.setState({ text })}
-                            />
-                            <Text>{"\n"}</Text>
-                            <TextInput
-                                style={styles.Input}
-                                mode='flat'
                                 label='Telèfono'
                                 value={text}
                                 onChangeText={text => this.setState({ text })}
                             />
+                            <Text>{"\n"}</Text>
+                            <Block row style={{paddingLeft:normalize(10)}}>
+                            <Text style={{fontWeight:'bold'}}>Tipo de Identificaciòn:      </Text>
+                            <View>
+                                <Text>Cedula</Text>
+                                <RadioButton
+                                    value="first"
+                                    status={checked === 'first' ? 'checked' : 'unchecked'}
+                                    onPress={() => { this.setState({ checked: 'first' }); }}
+                                />
+                            </View>
+                            <Block row style={{paddingLeft:normalize(35)}} />
+                            <View>
+                                <Text>Pasaporte</Text>
+                                <RadioButton
+                                    value="first"
+                                    status={checked === 'second' ? 'checked' : 'unchecked'}
+                                    onPress={() => { this.setState({ checked: 'first' }); }}
+                                />
+                            </View>
+                            </Block>
+                            <TextInput
+                                style={styles.Input}
+                                mode='flat'
+                                label=''
+                                value={text}
+                                onChangeText={text => this.setState({ text })}
+                            />
+                            <Block row style={{paddingBotton:normalize(15)}} />
                             <Text>{"\n"}</Text>
                             <TextInput
                                 style={styles.Input}
@@ -76,6 +99,16 @@ export default class Register extends Component{
                                 onChangeText={text => this.setState({ text })}
                             />
                             <Text>{"\n"}</Text>
+                            <Text>Seleccionar un rol:</Text>
+                            <Picker
+                                selectedValue={this.state.language}
+                                style={{height: 50, width: 100}}
+                                onValueChange={(itemValue, itemIndex) =>
+                                    this.setState({language: itemValue})
+                                }>
+                                <Picker.Item label="Rol 1" value="java" />
+                                <Picker.Item label="Rol 2" value="js" />
+                            </Picker>
                             <Button
                                 labelStyle={styles.Button} 
                                 icon="account" 
