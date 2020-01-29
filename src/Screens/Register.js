@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, ScrollView, Picker } from 'react-native';
 import {Block} from 'galio-framework'
 import normalize from 'react-native-normalize';
 import Header from '../Components/Header'
+import whatever from '../../src'
 export default class Register extends Component{
     constructor(props) {
         super(props);
@@ -33,7 +34,7 @@ export default class Register extends Component{
                             <TextInput
                                 style={styles.Input}
                                 mode='flat'
-                                label='Nombres'
+                                label='Nombressss1'
                                 value={text}
                                 onChangeText={text => this.setState({ text })}
                             />
