@@ -54,3 +54,14 @@ export default class App extends React.Component {
      },
    });
    
+
+
+// import React from 'react';
+// import { StyleSheet, Text, View } from 'react-native';
+// import DbCreator from "./Source/Components/DbCreator"
+// import QueryCreator from "./Source/Components/QueryCreator"
+// import * as SQLite from "expo-sqlite"
+// import {BaseModel, types} from 'expo-sqlite-orm'
+// import Estudiantes from './Models/Estudiantes'
+// import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
+// import Empleados from './Models/Empleados'

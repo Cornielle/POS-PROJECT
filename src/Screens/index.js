@@ -5,9 +5,9 @@ import {DefaultTheme, Provider as PaperProvider } from 'react-native-paper';// t
 //exportando dimensiones
 
 //exportando todos los componentes 
-import Home  from '../Screens/Home'
+import Home  from './Home'
 import Register  from './Register'
-import Products  from '../Screens/Products'
+import Products  from './Products'
   
 // Constantes que contienen la navegacion hacia cada componente en especifico , con sus nombres especificos
 export const UsersRegister  = 

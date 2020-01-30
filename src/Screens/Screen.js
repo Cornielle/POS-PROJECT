@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import {View, Text, StyleSheet, SafeAreaView, TouchableOpacity} from 'react-native';
-import {FontAwesome5} from '@expo/vector-icons';
+import {FontAwesome5} from '@expo/vector-icons/build/Icons';
 
-import Home  from '../Screens/Home'
+import Home  from './Home'
 
 export default class Screen extends Component {
     constructor(props) {

@@ -34,7 +34,7 @@ export default class Register extends Component{
                             <TextInput
                                 style={styles.Input}
                                 mode='flat'
-                                label='Nombressss1'
+                                label='Nombres'
                                 value={text}
                                 onChangeText={text => this.setState({ text })}
                             />
