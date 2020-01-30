@@ -1,56 +1,59 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import DbCreator from "./src/Components/DbCreator"
-import QueryCreator from "./src/Components/QueryCreator"
+import DbCreator from "./Source/Components/DbCreator"
+import QueryCreator from "./Source/Components/QueryCreator"
 import * as SQLite from "expo-sqlite"
 import {BaseModel, types} from 'expo-sqlite-orm'
 import Estudiantes from './Models/Estudiantes'
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
 import Empleados from './Models/Empleados'
+import { createAppContainer } from "react-navigation";
+import { createDrawerNavigator} from "react-navigation-drawer";
 
-export default class App extends React.Component {
- /*  GetDatabaseObj = (database) =>{} */
-async componentDidMount(){
 
-const data ={
-  Calificaciones:85,
-  NombreEstudiante:"bob marley"
-  
-} 
+//importando variable que continen la navegacion a los componentes
+import {
+  UsersRegister,
+  DashboardHome,
+  CashierManagement,
+  SalesManagement,
+  UsersManagement,
+  InventoryManagement,
+} from "./src/Screens";
 
-Empleados.createTable();
-
-const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-databaseLayer.executeSql(
-  'SELECT name FROM sqlite_master WHERE type = "table"'
-  ).then(respon =>{console.log(respon)})
-
-/*
-const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-databaseLayer.executeSql('create table Estudiantes(Id INTEGER PRIMARY KEY,  NomprePersona TEXT NOT NULL, '+
-'TipoIdentificacion INTEGER, Identificacion TEXT, Activo INTEGER, FechaCreacion TEXT, FechaModificacion TEXT, UsuarioCreacion TEXT, UsuarioModificacion Text ').then(respon =>{console.log(respon)})
-*/
-//const response = await Estudiantes.create(data);
-//console.log(response);
-}
-  render(){
-    return (
-      <View style={styles.container}>
-
-   <Text>Este el el projecto pos</Text>
-       
-      </View>
-    );
-
-  }
-
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+//creando los perfiles de navegacion en el drawer navigation
+const DrawerNavigation = createDrawerNavigator({
+  'Register': {
+    screen: UsersRegister,
+    path:'./src/Component/',
+    navigationOptions: {
+      title: 'Sesion'
+    }
   },
+  'Home': {
+    screen: DashboardHome,
+    path:'./src/Screens/',
+    navigationOptions: {
+      title: 'Inicio'
+    }
+  },
+  'Control de Caja': {
+    screen: CashierManagement,
+    path:'./src/Screens/',
+  }, 
+  'Control de Ventas': {
+    screen: SalesManagement,
+    path:'./src/Screens/',
+  },
+  'Control de Usuarios': {
+    screen: UsersManagement,
+    path:'./src/Screens/',
+  },
+  'Control de Inventario': {
+    screen: InventoryManagement,
+    path:'./src/Screens/',
+  }
 });
+
+export default createAppContainer(DrawerNavigation);
+

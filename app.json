@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "POS_proj",
-    "slug": "POS_Project",
+    "name": "POS-PROJECT",
+    "slug": "pos-project",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
