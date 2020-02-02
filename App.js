@@ -1,9 +1,9 @@
 import { createAppContainer } from "react-navigation";
 import { createDrawerNavigator} from "react-navigation-drawer";
 
-
 //importando variable que continen la navegacion a los componentes
 import {
+  UsersLogin,
   UsersRegister,
   DashboardHome,
   CashierManagement,
@@ -18,7 +18,14 @@ const DrawerNavigation = createDrawerNavigator({
     screen: UsersRegister,
     path:'./src/Component/',
     navigationOptions: {
-      title: 'Sesion'
+      title: 'Registro'
+    }
+  },
+  'Login': {
+    screen: UsersLogin,
+    path:'./src/Component/',
+    navigationOptions: {
+      title: 'Iniciar Sesión'
     }
   },
   'Home': {

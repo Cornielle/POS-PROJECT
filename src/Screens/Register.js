@@ -20,7 +20,7 @@ export default class Register extends Component{
             <ScrollView>
             <View style={styles.ViewStyle}>
                 {/*Header generico que debe ser reutilizado en casi todas las vistas*/}
-                <Header name={name} subtitle={subtitle} navigationEnabled={false} navigation={navigation}/>
+                <Header name={name} subtitle={subtitle} goBackEnabled={true} navigationEnabled={false} navigation={navigation}/>
                 <View style={styles.Form}>
                     <Card>
                         <Card.Title 
@@ -50,7 +50,7 @@ export default class Register extends Component{
                             <TextInput
                                 style={styles.Input}
                                 mode='flat'
-                                label='Telèfono'
+                                label='Teléfono'
                                 value={text}
                                 onChangeText={text => this.setState({ text })}
                             />
