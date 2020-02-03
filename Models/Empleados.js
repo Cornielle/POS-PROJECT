@@ -1,5 +1,4 @@
 import React from 'react'
-import {View} from 'react-native'
 import{BaseModel,types} from 'expo-sqlite-orm'
 import * as SQLite from 'expo-sqlite'
 
@@ -10,7 +9,6 @@ export default class Empleados extends BaseModel{
 constructor(obj){
 
 super(obj)
-
 
 }
 
@@ -28,18 +26,27 @@ return 'Empleados';
 return{
 Id:{type: types.INTEGER, primary_key:true},
 NombrePersona:{type: types.TEXT, not_null:true},
-TipoIdentificacion:{type: types.INTEGER, not_null:true},
+ApellidoPersona:{type: types.TEXT, not_null:true},
+
+Telefono:{type: types.TEXT, not_null:true},
+
+TipoIdentificacion:{type: types.TEXT, not_null:true},
+
 Identificacion: {type: types.TEXT, not_null:true},
+
+IdRoll:{type: types.INTEGER, not_null:true},
+
+Correo:{type: types.TEXT, not_null:false},
+Contrasena:{type:types.TEXT, not_null:true},
+
 Activo:{type: types.INTEGER, not_null:true},
+
 FechaCreacion: {type: types.TEXT, not_null:true},
-FechaModificacion:{type:types.TEXT, not_null:true},
-UsuarioCreacion:{type:types.TEXT, not_null:true}
 
+FechaModificacion:{type:types.TEXT, not_null:false},
 
-
-
-
-
+UsuarioCreacion:{type:types.TEXT, not_null:true},
+UsuarioModificacion:{type:types.TEXT, not_null:false}
 
 }
 
