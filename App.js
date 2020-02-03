@@ -20,6 +20,7 @@ import {
   UsersManagement,
   InventoryManagement,
 } from "./src/Screens";
+ 
 
 //creando los perfiles de navegacion en el drawer navigation
 const DrawerNavigation = createDrawerNavigator({
@@ -52,7 +53,8 @@ const DrawerNavigation = createDrawerNavigator({
   'Control de Inventario': {
     screen: InventoryManagement,
     path:'./src/Screens/',
-  }
+  },
+
 });
 
 export default createAppContainer(DrawerNavigation);

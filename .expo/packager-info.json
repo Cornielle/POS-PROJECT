@@ -1,10 +1,9 @@
 {
-  "devToolsPort": 19002,
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 14768,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
-  "webpackServerPort": null
+  "packagerPid": 21512,
+  "expoServerNgrokUrl": "https://x8-cdu.freddymateo02.pos-project.exp.direct",
+  "packagerNgrokUrl": "https://packager.x8-cdu.freddymateo02.pos-project.exp.direct",
+  "ngrokPid": 23116,
+  "devToolsPort": 19002
 }
