@@ -9,6 +9,6 @@ npm-debug.*
 *.orig.*
 web-build/
 web-report/
-
+.packager-info.json
 # macOS
 .DS_Store

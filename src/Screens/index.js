@@ -2,14 +2,13 @@ import * as React from 'react'
 import Screen from './Screen'
 import {DefaultTheme, Provider as PaperProvider } from 'react-native-paper';// tema por defecto de paper
 
-//exportando dimensiones
-
 //exportando todos los componentes 
-import Home  from '../Screens/Home'
+import Home  from './Home'
 import Register  from './Register'
-import Products  from '../Screens/Products'
+import Products  from './Products'
+import Login  from './Login'
   
-// Constantes que contienen la navegacion hacia cada componente en especifico , con sus nombres especificos
+// Constantes que contienen la navegacion hacia cada componente en especifico , con sus nombres especificos//
 export const UsersRegister  = 
 ({navigation}) =>
     <PaperProvider theme={theme}>
@@ -27,6 +26,14 @@ export const DashboardHome  =
             name="Home"
             subtitle="Inicio" 
         />    
+    </PaperProvider>
+export const UsersLogin = 
+({navigation}) => 
+    <PaperProvider theme={theme}> 
+        <Login 
+            navigation={navigation} 
+            name="Iniciar Sesión"
+            />
     </PaperProvider>
 export const CashierManagement = ({navigation}) => <Products navigation={navigation} name="Control de Caja" />
 export const SalesManagement  = ({navigation}) => <Screen navigation={navigation} name="Control de Ventas" />

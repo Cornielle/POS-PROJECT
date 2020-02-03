@@ -1,18 +1,9 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import DbCreator from "./Source/Components/DbCreator"
-import QueryCreator from "./Source/Components/QueryCreator"
-import * as SQLite from "expo-sqlite"
-import {BaseModel, types} from 'expo-sqlite-orm'
-import Estudiantes from './Models/Estudiantes'
-import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
-import Empleados from './Models/Empleados'
 import { createAppContainer } from "react-navigation";
 import { createDrawerNavigator} from "react-navigation-drawer";
 
-
 //importando variable que continen la navegacion a los componentes
 import {
+  UsersLogin,
   UsersRegister,
   DashboardHome,
   CashierManagement,
@@ -28,7 +19,14 @@ const DrawerNavigation = createDrawerNavigator({
     screen: UsersRegister,
     path:'./src/Component/',
     navigationOptions: {
-      title: 'Sesion'
+      title: 'Registro'
+    }
+  },
+  'Login': {
+    screen: UsersLogin,
+    path:'./src/Component/',
+    navigationOptions: {
+      title: 'Iniciar Sesión'
     }
   },
   'Home': {
