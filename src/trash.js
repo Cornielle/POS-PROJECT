@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import DbCreator from "./Source/Components/DbCreator"
-import QueryCreator from "./Source/Components/QueryCreator"
+import DbCreator from "./Database/DbCreator"
+import QueryCreator from "./Database/QueryCreator"
 import * as SQLite from "expo-sqlite"
 import {BaseModel, types} from 'expo-sqlite-orm'
 import Estudiantes from './Models/Estudiantes'

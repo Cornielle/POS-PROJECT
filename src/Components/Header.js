@@ -6,7 +6,7 @@ import {FontAwesome5} from '@expo/vector-icons';
 export default class MyComponent extends React.Component {
   _goBack = () => this.props.navigation.goBack();
   render() {
-    const {name, subtitle,goBackEnabled} = this.props
+    const {name, subtitle,goBackEnabled, searchEnabled} = this.props
     return (
         <SafeAreaView>
           <Appbar.Header>
