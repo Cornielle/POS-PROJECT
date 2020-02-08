@@ -8,7 +8,9 @@ import * as Filesystem from "expo-file-system"
 import * as SQLite from "expo-sqlite"
 import {BaseModel, types} from 'expo-sqlite-orm'
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
+import Icon from 'react-native-vector-icons/FontAwesome';
 import Empleados from '../../Models/Empleados.js'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 //import whatever from '../src'
 export default class Register extends Component{
@@ -175,10 +177,15 @@ else{
                             </Picker>
                             <Button
                                 labelStyle={styles.Button} 
-                                icon="account" 
                                 mode="contained" 
                                 onPress={this.GuardarEmpleado}
-                            >-
+                            >
+                                <Icon 
+                                    name="save" 
+                                    size={15} 
+                                    color="#ffffff" 
+                                    style={styles.Icon}
+                                /> <Text>{"  "}</Text>   
                                 Agregar
                             </Button>
                         </Card.Content>
