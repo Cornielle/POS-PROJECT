@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TextInput, Button, Card, Checkbox  } from 'react-native-paper';
-import { StyleSheet, Text, View, ScrollView, Picker } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, KeyboardAvoidingView } from 'react-native';
 import {Block} from 'galio-framework'
 import normalize from 'react-native-normalize';
 import Header from '../Components/Header'

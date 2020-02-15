@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TextInput, Avatar, Button, Card, RadioButton  } from 'react-native-paper';
-import { StyleSheet, Text, View, ScrollView, Picker,Alert } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Picker,Alert, KeyboardAvoidingView } from 'react-native';
 import {Block} from 'galio-framework'
 import normalize from 'react-native-normalize';
 import Header from '../Components/Header'
@@ -85,6 +85,7 @@ else{
                             icon="account" />} 
                         />
                         <Card.Content>
+                        <KeyboardAvoidingView>
                             <TextInput
                                 style={styles.Input}
                                 mode='flat'
@@ -134,6 +135,7 @@ else{
                                 style={styles.Input}
                                 mode='flat'
                                 label=''
+                                placeholder={'XXX-XXXXXXX-X'}
                                 value={this.state.IDENTIFICACION}
                                 onChangeText={IDENTIFICACION => this.setState({ IDENTIFICACION })}
                             />
@@ -188,6 +190,7 @@ else{
                                 /> <Text>{"  "}</Text>   
                                 Agregar
                             </Button>
+                            </KeyboardAvoidingView>
                         </Card.Content>
                     </Card>
                 </View>

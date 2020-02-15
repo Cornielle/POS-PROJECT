@@ -1,159 +1,113 @@
-import * as React from 'react';
-import {View , StyleSheet, Picker} from 'react-native'
-import { DataTable, Card, Button,Text } from 'react-native-paper';
-import Header from '../Components/Header';
-import Search from '../Components/Search';
-import {  Block  } from 'galio-framework';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import normalize from 'react-native-normalize';
+import React, { Component } from 'react';
+import { ListItem } from 'react-native-elements'
+import { Badge } from 'react-native-paper'
+import { View,Modal,Text, TouchableHighlight } from 'react-native'
+import Header from '../Components/Header'
 import { TouchableOpacity } from 'react-native-gesture-handler';
-
-
-type State = {
-  page: number;
-  sortAscending: boolean;
-  items: Array<{ key: number; name: string; calories: number; fat: number }>;
-};
-
-
+import ActionSheet from 'react-native-actionsheet';
 
 
 export default class Users extends React.Component {
-
-  state = {
-    page: 0,
-    sortAscending: true,
-    items: [
-      {
-        key: 1,
-        name: 'Cupcake',
-        calories: 356,
-        fat: 16,
-      },
-      {
-        key: 2,
-        name: 'Eclair',
-        calories: 262,
-        fat: 16,
-      },
-      {
-        key: 3,
-        name: 'Frozen yogurt',
-        calories: 159,
-        fat: 6,
-      },
-      {
-        key: 4,
-        name: 'Gingerbread',
-        calories: 305,
-        fat: 3.7,
-      },
-      {
-        key: 5,
-        name: 'Ice cream sandwich',
-        calories: 237,
-        fat: 9,
-      },
-      {
-        key: 6,
-        name: 'Jelly Bean',
-        calories: 375,
-        fat: 0,
-      },
-    ],
-  };
-  render() {
-    const { name, subtitle, navigation } =  this.props;
-    const { sortAscending, page } = this.state;
-
-    const items = 
-    this.state.items
-      .slice()
-      .sort((item1,item2) =>
-      (sortAscending
-      ? item1.name < item2.name
-      : item2.name < item1.name)
-        ? 1 : -1
-      );
-      const itemsPerPage = 2;
-      const from = this.state.page * itemsPerPage;
-      const to = (this.state.page + 1) * itemsPerPage;
-      
-    return (
-    <View style={styles.Container}>
-        <Header name={name} subtitle={subtitle} goBackEnabled={true} 
-        navigationEnabled={true} navigation={navigation} />
-        <Search query={'test'}/>
-        <Block row style={{height:20}}/>
-        <Card>
-        <DataTable>
-        <DataTable.Header>
-              <DataTable.Title
-                sortDirection={
-                  this.state.sortAscending ? 'ascending' : 'descending'
-                }
-                onPress={() =>
-                  this.setState(state => ({
-                    sortAscending: !state.sortAscending,
-                  }))
-                }
-                style={styles.first}
-              >
-                Nombre
-              </DataTable.Title>
-              <DataTable.Title numeric >Rol</DataTable.Title>
-              <DataTable.Title numeric >Estado</DataTable.Title>
-              <DataTable.Title numeric ></DataTable.Title>
-            </DataTable.Header>
-            {/* <DataTable.Row>
-              <Icon 
-                name="ellipsis-v" 
-                size={25} 
-                color="#2c3e50" 
-                style={styles.Icon}
-                />
-            </DataTable.Row> */}
-            {items.slice(from, to).map(item => (
-              <DataTable.Row key={item.key}>
-                <DataTable.Cell style={styles.first}>
-                  {item.name}
-                </DataTable.Cell>
-                <DataTable.Cell numeric>{item.calories}</DataTable.Cell>
-                <DataTable.Cell numeric>{item.fat}</DataTable.Cell>
-                <DataTable.Cell numeric>
-                    <Icon 
-                      name="ellipsis-v" 
-                      size={25} 
-                      color="#2c3e50" 
-                      style={styles.Icon} 
-                      />
-                </DataTable.Cell>
-              </DataTable.Row>
-            ))}
-            <DataTable.Pagination
-              page={page}
-              numberOfPages={Math.floor(items.length / itemsPerPage)}
-              onPageChange={page => {
-                this.setState({ page });
-              }}
-              label={`${from + 1}-${to} of ${items.length}`}
+  constructor(props) {
+    super(props);
+    this.state = { 
+        modalVisible:false,
+        checked:'unchecked',
+        index:0,
+        list: [
+          {
+            key:1,
+            name: 'Amy Farha',
+            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+            subtitle: 'Camarero',
+            estado: false
+          },
+          { key:2,
+            name: 'Chris Jackson',
+            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+            subtitle: 'Cocinero',
+            estado: false
+          },
+        ],
+        optionArray: [
+          'Editar',
+          'Activar',
+          'Cancel'
+        ],
+    };
+    this._showMenu = this._showMenu.bind(this);
+  }
+    _showMenu(index){
+      this.setState({
+        index
+      })
+      this.state.list[index]['estado']
+      ? this.state.optionArray[1] = 'Desactivar' 
+      : this.state.optionArray[1] = 'Activar'  
+    }
+    _makeAction(action){    
+      switch(action){
+        case 0:
+          break
+        case 1:
+          this.state.list[this.state.index]['estado'] = !this.state.list[this.state.index]['estado']
+          this.setState({ state: this.state });
+          break
+        default:
+          break
+      }
+    }
+    setModalVisible(visible) {
+      this.setState({modalVisible: visible});
+        //To show the Bottom ActionSheet
+        this.ActionSheet.show();
+    }
+  render(){
+    const {name, subtitle, navigation} = this.props
+    return(
+      <View>
+      <Header 
+        name={name} 
+        subtitle={subtitle} 
+        goBackEnabled={true} 
+        navigationEnabled={true} 
+        navigation={navigation}
+      />
+        {this.state.list.map((l, i) => (
+          <View>
+            <TouchableOpacity
+              onPress={() => {
+                this.setModalVisible(true);
+              }}            
+            >
+            <ListItem
+              onPress={() => this._showMenu(i)}
+              key={i}
+              leftAvatar={{ source: { uri: l.avatar_url } }}
+              rightAvatar={ l.estado === true ? <Badge>Activado</Badge> : <Badge>Desactivado</Badge>}
+              title={l.name}
+              subtitle={l.subtitle}
+              icon=""
+              bottomDivider
             />
-          </DataTable>
-        </Card>
+            </TouchableOpacity>
+            </View>
+          ))
+        }
+            <ActionSheet
+              onPress={(index) => this._makeAction(index)}
+              ref={o => (this.ActionSheet = o)}
+              //Title of the Bottom Sheet
+              title={'¿Que deseas hacer?'}
+              //Options Array to show in bottom sheet
+              options={this.state.optionArray}
+              //Define cancel button index in the option array
+              //this will take the cancel option in bottom and will highlight it
+              cancelButtonIndex={2}
+              //If you want to highlight any specific option you can use below prop
+              destructiveButtonIndex={1}
+            />
       </View>
     );
-  }
+  } 
 }
-const styles = StyleSheet.create({
-  Container: {
-    flex: 1,
-    backgroundColor:'#f1f1f1'
-  },
-  Icon:{
-    marginTop:normalize(15),
-    alignItems: 'flex-end'
-  },
-    first: {
-      flex: 1,
-    },
-});
