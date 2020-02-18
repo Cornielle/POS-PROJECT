@@ -2,9 +2,9 @@
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerNgrokUrl": "https://x8-cdu.anonymous.pos-projects.exp.direct",
+  "packagerNgrokUrl": "https://packager.x8-cdu.anonymous.pos-projects.exp.direct",
+  "ngrokPid": 1260,
   "devToolsPort": 19002,
   "webpackServerPort": null
 }

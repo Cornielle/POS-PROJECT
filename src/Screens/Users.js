@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { ListItem } from 'react-native-elements'
-import { Badge } from 'react-native-paper'
-import { View,Modal,Text, TouchableHighlight } from 'react-native'
+import { Badge,Searchbar } from 'react-native-paper'
+import { View } from 'react-native'
 import Header from '../Components/Header'
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity, FlatList } from 'react-native-gesture-handler';
 import ActionSheet from 'react-native-actionsheet';
 
 
@@ -14,7 +14,7 @@ export default class Users extends React.Component {
         modalVisible:false,
         checked:'unchecked',
         index:0,
-        list: [
+        data: [
           {
             key:1,
             name: 'Amy Farha',
@@ -32,34 +32,59 @@ export default class Users extends React.Component {
         optionArray: [
           'Editar',
           'Activar',
+          'Detalle',
           'Cancel'
         ],
+        filterData:[],
+        newData:'',
+        text:''
     };
     this._showMenu = this._showMenu.bind(this);
+    // this.searchFilterFunction = this.searchFilterFunction.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
+    componentWillMount(){
+      this.setState({
+        filterData:this.state.data
+      })
+    }
     _showMenu(index){
       this.setState({
         index
       })
-      this.state.list[index]['estado']
+      this.state.data[index]['estado']
       ? this.state.optionArray[1] = 'Desactivar' 
       : this.state.optionArray[1] = 'Activar'  
     }
     _makeAction(action){    
       switch(action){
         case 0:
+          console.log('editar')
           break
         case 1:
-          this.state.list[this.state.index]['estado'] = !this.state.list[this.state.index]['estado']
+          this.state.data[this.state.index]['estado'] = !this.state.data[this.state.index]['estado']
           this.setState({ state: this.state });
+          break
+        case 2:
+          console.log('detalle')
           break
         default:
           break
       }
     }
+    handleSearch = (text) => {
+      const filterData = this.state.data.filter(x => String(x.name).includes(text));
+      
+      this.setState({ filterData, text})
+      console.log(filterData,'here')
+    }
+    handleEnd = () => {
+      this.setState(state=>{page: this.state.page + 1});
+
+    }
     setModalVisible(visible) {
       this.setState({modalVisible: visible});
-        //To show the Bottom ActionSheet
+        //To show the Bottom ActionSheetsfsff
         this.ActionSheet.show();
     }
   render(){
@@ -73,27 +98,39 @@ export default class Users extends React.Component {
         navigationEnabled={true} 
         navigation={navigation}
       />
-        {this.state.list.map((l, i) => (
+       <Searchbar
+          searchIcon={{ size: 24 }}
+          onChangeText={this.handleSearch}
+          placeholder="Escribe aqui..."
+          value={this.state.text}
+        />
+
           <View>
-            <TouchableOpacity
-              onPress={() => {
-                this.setModalVisible(true);
-              }}            
-            >
-            <ListItem
-              onPress={() => this._showMenu(i)}
-              key={i}
-              leftAvatar={{ source: { uri: l.avatar_url } }}
-              rightAvatar={ l.estado === true ? <Badge>Activado</Badge> : <Badge>Desactivado</Badge>}
-              title={l.name}
-              subtitle={l.subtitle}
-              icon=""
-              bottomDivider
-            />
-            </TouchableOpacity>
+              <FlatList
+                data={this.state.filterData}
+                keyExtractor={(x,i) => i}
+                renderItem={({ item, index }) =>
+                  <TouchableOpacity
+                  onPress={() => {
+                    this.setModalVisible(true);
+                  }}            
+                >
+                  <ListItem
+                    onPress={() => this._showMenu(index)}
+                    leftAvatar={{ source: { uri: item.avatar_url } }}
+                    rightAvatar={ item.estado === true ? <Badge>Activado</Badge> : <Badge>Desactivado</Badge>}
+                    title={item.name}
+                    subtitle={item.subtitle}
+                    icon=""
+                    bottomDivider
+                  />
+                    </TouchableOpacity>
+                  }
+                  onEndReached={0}
+                  onEndThreshold={0}
+                />
             </View>
-          ))
-        }
+
             <ActionSheet
               onPress={(index) => this._makeAction(index)}
               ref={o => (this.ActionSheet = o)}
@@ -103,7 +140,7 @@ export default class Users extends React.Component {
               options={this.state.optionArray}
               //Define cancel button index in the option array
               //this will take the cancel option in bottom and will highlight it
-              cancelButtonIndex={2}
+              cancelButtonIndex={3}
               //If you want to highlight any specific option you can use below prop
               destructiveButtonIndex={1}
             />
