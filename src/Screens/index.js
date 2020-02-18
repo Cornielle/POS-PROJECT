@@ -10,6 +10,8 @@ import Login  from './Login'
 import Categorias from "./Categorias"
 import Articulos from "./Articulos"
 import Stock from './Stock'
+import Users  from './Users'
+  
 // Constantes que contienen la navegacion hacia cada componente en especifico , con sus nombres especificos//
 export const UsersRegister  = 
 ({navigation}) =>
@@ -34,13 +36,20 @@ export const UsersLogin =
     <PaperProvider theme={theme}> 
         <Login 
             navigation={navigation} 
-            name="Iniciar Sesión"
+            name="Control de Usuarios"
             />
     </PaperProvider>
-
+export const UsersManagement  = 
+({navigation}) => 
+    <PaperProvider theme={theme}> 
+        <Users 
+            navigation={navigation} 
+            name="Control de Usuarios"
+            subtitle="Manejo de control de usuarios" 
+        />
+    </PaperProvider>
 export const CashierManagement = ({navigation}) => <Products navigation={navigation} name="Control de Caja" />
 export const SalesManagement  = ({navigation}) => <Screen navigation={navigation} name="Control de Ventas" />
-export const UsersManagement  = ({navigation}) => <Screen navigation={navigation} name="Control de Usuarios" />
 export const InventoryManagement = ({navigation}) => <Screen navigation={navigation} name="Manejo de Inventario" />
 export const TableManagement = ({navigation}) => <Screen navigation={navigation} name="Manejo de Mesas" />
 export const TaxReceipt = ({navigation}) => <Screen navigation={navigation} name="Comprobante Fiscal" />

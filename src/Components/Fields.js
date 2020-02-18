@@ -10,64 +10,33 @@ import {BaseModel, types} from 'expo-sqlite-orm'
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Empleados from '../../Models/Empleados.js'
-import Data from'../../BindObject/CategoriasList.js'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 //import whatever from '../src'
-export default class Register extends Component{
+export default class Fields extends Component{
     constructor(props) {
         super(props);
         this.state = { 
-   
-NOMBRE :"", 
-APELLIDO:"",
-NOMBREUSUARIO:"",
-TELEFONO:"",
-CONTRASENA:"",
-CONTRASENA2:"",
-TIPOIDENTIFICACION:"Cedula",
-IDENTIFICACION:"",
-CORREO:"",
-IDROLL:""
-};
+        NOMBRE :"", 
+        APELLIDO:"",
+        TELEFONO:"",
+        CONTRASENA:"",
+        CONTRASENA2:"",
+        TIPOIDENTIFICACION:"Cedula",
+        IDENTIFICACION:"",
+        CORREO:"",
+        IDROLL:""
+        };
       }
+    async componentDidMount(){
 
-
-
-
- componentDidMount(){
-
-   /// this.props.navigation.navigate("Login")
-//const DbCreated = await Empleados.createTable();
-
-
-const lista  = Data();
-
-
-
-/*
     const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
     databaseLayer.executeSql(
-      'SELECT name FROM sqlite_master WHERE type = "table"'
-      ).then(respon =>{console.log(respon)})
-   */
-/*
-  const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-  databaseLayer.executeSql(
-    'SELECT * FROM Empleados'
-    ).then(respon =>{console.log(respon)})
-    */
-   const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-   databaseLayer.executeSql(
-     'SELECT * FROM Empleados'
-     ).then(respon =>{console.log(respon)})
-    
-}
-
+        'SELECT * FROM Empleados'
+        ).then(respon =>{console.log(respon)})
+    }
 
     render(){
-
-      
         const {name, subtitle, navigation} = this.props
         const { text,enabled, checked } =  this.state
         return (
@@ -93,21 +62,13 @@ const lista  = Data();
                                 value={this.state.NOMBRE}
                                 onChangeText={(NOMBRE)=> this.setState({NOMBRE})}
                             />
-                            <Text>{"\n"}</Text>                
+                            <Text>{"\n"}</Text>
                             <TextInput
                                 style={styles.Input}
                                 mode='flat'
                                 label='Apellidos'
                                 value={this.state.APELLIDO}
                                 onChangeText={(APELLIDO) => this.setState({ APELLIDO })}
-                            />
-                            <Text>{"\n"}</Text>
-                            <TextInput
-                                style={styles.Input}
-                                mode='flat'
-                                label='Nombre Usuario'
-                                value={this.state.NOMBREUSUARIO}
-                                onChangeText={(NOMBREUSUARIO) => this.setState({ NOMBREUSUARIO })}
                             />
                             <Text>{"\n"}</Text>
                             <TextInput
@@ -210,31 +171,38 @@ const lista  = Data();
 
 
  GuardarEmpleado = async ()=>{
-try{
-    console.log("Entreee!!");
-
+    try{
 
     this.Validaciones();
- 
+
 const valInsert={
 
     NombrePersona:this.state.NOMBRE, 
+    
     ApellidoPersona:this.state.APELLIDO,
-    NombreUsuario: this.state.NOMBREUSUARIO,
+    
     Telefono:this.state.TELEFONO,
+ 
     TipoIdentificacion:this.state.TIPOIDENTIFICACION,
+      
     Identificacion:this.state.IDENTIFICACION,
+     
     IdRoll:this.state.IDROLL,
+    
     Correo: this.state.CORREO,
     Contrasena:this.state.CONTRASENA,
+    
     Activo:1,
+   
     FechaCreacion: "2020-02-02",
+     
     FechaModificacion:null,
+    
     UsuarioCreacion:"system",
     UsuarioModificacion:"null"
     
 }
-console.log(valInsert);
+//console.log(valInsert);
 
 //const DbCreated = Empleados.createTable();
 const response = await  Empleados.create(valInsert);

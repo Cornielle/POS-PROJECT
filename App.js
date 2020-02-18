@@ -55,7 +55,6 @@ componentDidMount(){
 const DrawerNavigation = createDrawerNavigator({
   'Register': {
     screen: UsersRegister,
-    path:'./src/Component/',
     navigationOptions: {
       title: 'Registro'
     }
@@ -92,16 +91,20 @@ navigationOptions:{
   },
   'Login': {
     screen: UsersLogin,
-    path:'./src/Component/',
     navigationOptions: {
       title: 'Iniciar Sesión'
     }
   },
   'Home': {
     screen: DashboardHome,
-    path:'./src/Screens/',
     navigationOptions: {
       title: 'Inicio'
+    }
+  },
+  'User Management': {
+    screen: UsersManagement,
+    navigationOptions: {
+      title: 'Control de Usuario'
     }
   },
   'Control de Caja': {
@@ -113,8 +116,11 @@ navigationOptions:{
     path:'./src/Screens/',
   },
   'Control de Usuarios': {
-    screen: UsersManagement,
+    screen: UsersLogin,
     path:'./src/Screens/',
+    navigationOptions: {
+      title: 'Iniciar Sesión'
+    }
   },
   'Control de Inventario': {
     screen: InventoryManagement,

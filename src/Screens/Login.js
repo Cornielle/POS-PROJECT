@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {createSwitchNavigator, createAppContainer} from 'react-navigation'
 import {createStackNavigator} from 'react-navigation-stack'
 import { TextInput, Button, Card, Checkbox  } from 'react-native-paper';
-import { StyleSheet, Text, View, ScrollView, Picker, AsyncStorage, Alert} from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Picker,KeyboardAvoidingView, AsyncStorage, Alert} from 'react-native';
 import{BaseModel,types} from 'expo-sqlite-orm'
 import * as SQLite from 'expo-sqlite'
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
