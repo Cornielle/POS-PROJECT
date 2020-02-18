@@ -18,12 +18,12 @@ export default class App extends React.Component {
    } 
    
     //const tablesRepeat=  Empleados.createTable();
-   
+   /*
    const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
    databaseLayer.executeSql(
      'SELECT name FROM sqlite_master WHERE type = "table"'
      ).then(respon =>{console.log(respon)})
-   
+   */
    /*
    const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
    databaseLayer.executeSql('create table Estudiantes(Id INTEGER PRIMARY KEY,  NomprePersona TEXT NOT NULL, '+

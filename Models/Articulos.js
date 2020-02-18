@@ -1,0 +1,72 @@
+import {BaseModel,types} from "expo-sqlite-orm"
+import * as SQLite from 'expo-sqlite'
+
+export default class Articulos extends BaseModel{
+
+
+
+constructor(obj){
+
+
+super(obj)
+
+}
+
+ static get database (){
+
+
+return ()=>SQLite.openDatabase("PuntoVentaDb.db");
+
+ }
+
+ static get tableName(){
+
+    return "Articulos"
+ }
+
+ static get columnMapping (){
+
+return{
+
+
+Id:{type:types.INTEGER, primary_key:true},
+Codigo:{type: types.TEXT, not_null:true},
+CategoriaId: {type: types.int, not_null:true},
+Descripcion:{type: types.TEXT, not_null:true},
+DescripcionPantalla:{type: types.TEXT, not_null:true},
+NombreArticulo:{type: types.TEXT, not_null:true},
+CodigoDeBarra:{type: types.TEXT, not_null:true},
+PrecioCosto:{type: types.TEXT, not_null:true},
+PrecioVenta:{type: types.TEXT, not_null:true},
+ProveedoresId:{type: types.TEXT, not_null:true},
+CatidadExistencia:{type:types.INTEGER, not_null:true},
+MedidaDeVenta:{type: types.TEXT, not_null:true},
+Activo:{type: types.INTEGER, not_null:true},
+
+
+    FechaCreacion: {type: types.TEXT, not_null:true},
+    
+    FechaModificacion:{type:types.TEXT, not_null:false},
+    
+    UsuarioCreacion:{type:types.TEXT, not_null:true},
+    UsuarioModificacion:{type:types.TEXT, not_null:false}
+
+
+}
+
+
+
+
+
+
+
+
+
+ }
+
+
+
+
+
+
+}
