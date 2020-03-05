@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TextInput, Avatar, Button, Card, RadioButton  } from 'react-native-paper';
-import { StyleSheet, Text, View, ScrollView, Picker,Alert, KeyboardAvoidingView, ToastAndroid} from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Picker,Alert, KeyboardAvoidingView } from 'react-native';
 import {Block} from 'galio-framework'
 import normalize from 'react-native-normalize';
 import Header from '../Components/Header'
@@ -14,36 +14,28 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import Roles from "../../Models/Roles"
 
 
-const InitialState ={
-
-    NombreRol:"",
-    Comentario :""
-
-}
-
-export default class RolesScreen extends React.Component {
+export default class AccionesScreen extends React.Component{
 
 
 constructor(props){
+
 super(props)
 
+}
+state ={
 
+    IdVista:"",
+    NombreControl:"",
+    TipoControl:"",
+    Comentario:""
 
 }
 
 componentDidMount(){
-    const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-    databaseLayer.executeSql(
-      'SELECT * FROM Roles'
-      ).then(respon =>{console.log(respon)})
+
+
+
     
-}
-
-s
-
-state={
-NombreRol:"",
-Comentario :""
 }
 render(){
  
@@ -66,14 +58,38 @@ render(){
                     />
                     <Card.Content>
                     <KeyboardAvoidingView>
+
+                    <Text>Seleccionar una vistas</Text>
+                            <Picker
+                                selectedValue={this.state.IdVista}
+                                style={{height: 50, width: 200}}
+                                onValueChange={(itemValue, itemIndex) =>
+                                    this.setState({IdVista: itemValue})
+                                }>
+                                <Picker.Item label="Rol 1" value="1" />
+                                <Picker.Item label="Rol 2" value="2" />
+                            </Picker>
+
                         <TextInput
                             style={styles.Input}
                             mode='flat'
-                            label='Nombre Del Rol'
-                            value={this.state.NombreRol}
-                            onChangeText={(NombreRol)=> this.setState({NombreRol})}
+                            label='Nombre Del Control'
+                            value={this.state.NombreControl}
+                            onChangeText={(NombreControl)=> this.setState({NombreControl})}
                         />
                         <Text>{"\n"}</Text>                
+                        <Text>Seleccionar una vistas</Text>
+                            <Picker
+                                selectedValue={this.state.IdVista}
+                                style={{height: 50, width: 200}}
+                                onValueChange={(itemValue, itemIndex) =>
+                                    this.setState({IdVista: itemValue})
+                                }>
+                                <Picker.Item label="Rol 1" value="1" />
+                                <Picker.Item label="Rol 2" value="2" />
+                            </Picker>
+
+                        <Text>{"\n"}</Text>  
                         <TextInput
                             style={styles.Input}
                             mode='flat'
@@ -93,7 +109,7 @@ render(){
                                 size={15} 
                                 color="#ffffff" 
                                 style={styles.Icon}
-                            /> <Text>{"  "}</Text>   
+                            /> <Text>{"\n"}</Text>   
                             Agregar
                         </Button>
                         </KeyboardAvoidingView>
@@ -105,63 +121,8 @@ render(){
     );
     }
 
-    Validaciones  = () =>{
 
-
-
-        if(this.state.NombreRol === "" ){
-        
-        Alert.alert("El campo Nombre Roll no puede estar vacio");
-        return; 
-        
-        }
-        
-        }
-        
-
-
-        GuardarRol =  async () =>{
-
-            this.Validaciones();
-           // await Roles.dropTable();
-            await Roles.createTable();                                                                                                                                                                                                                                                                                     
-            
-const date = new Date();
-
-    console.log("Entreeee");
-
-        const ValInsert ={
-            NombreRol: this.state.NombreRol,
-            Comentario: this.state.Comentario, 
-            Activo:1,
-            FechaCreacion: '02/01/1993',
-            FechaModificacion:null,
-            UsuarioCreacion:"system",
-            UsuarioModificacion:null
-            
-        }
-    
-        console.log(ValInsert);
-       var response = await Roles.create(ValInsert);
-
-       console.log(response)
-       if (Object.keys(response).length <=0){
-
-        Alert.alert("Error al insertar en la base de datos");
-        
-        }
-        else{
-ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
-
-
-this.setState({InitialState})
-        }
-        
-        }
 }
-
-
-
 
 
 const styles = StyleSheet.create({

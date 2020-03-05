@@ -15,7 +15,11 @@ import {
   InventoryManagement,
   CategoryManagement,
   ArticulosManagemet,
-  Stockmanagement
+  Stockmanagement,
+  RolesManagement,
+  AccionesManagement,
+  VistasManagement,
+ArticulosGreedManagemet
  
 } from "./src/Screens";
 import { lockToLandscapeLeft } from "react-native-orientation";
@@ -70,25 +74,53 @@ const DrawerNavigation = createDrawerNavigator({
     }
   },
 
-  /*'Stock':{
-    screen: Stockmanagement,
+  'Users':{
+    screen: UsersManagement,
     path:'./src/Component/',
     navigationOptions:{
     
-      title:'Categorias'
+      title:'Users'
     
     }
-  },*/
+  },
   'Categorias':{
 screen: CategoryManagement,
 path:'./src/Component/',
 navigationOptions:{
-
   title:'Categorias'
-
 }
-  
   },
+  'Grid':{
+    screen: ArticulosGreedManagemet,
+    path:'./src/Component/',
+    navigationOptions:{
+      title:'Grid'
+    }
+      },
+  'Vistas':{
+    screen: VistasManagement,
+    path:'./src/Component/',
+    navigationOptions:{
+      title:'Vistas'
+    }
+      },
+  'Roles':{
+    screen: RolesManagement,
+    path:'./src/Component/',
+    navigationOptions:{
+      title:'Roles'
+    }
+  },
+      'Acciones':{
+        screen: AccionesManagement,
+        path:'./src/Component/',
+        navigationOptions:{
+        
+          title:'Acciones'
+        
+        }
+          
+          },
   'Login': {
     screen: UsersLogin,
     navigationOptions: {
@@ -101,12 +133,7 @@ navigationOptions:{
       title: 'Inicio'
     }
   },
-  'User Management': {
-    screen: UsersManagement,
-    navigationOptions: {
-      title: 'Control de Usuario'
-    }
-  },
+
   'Control de Caja': {
     screen: CashierManagement,
     path:'./src/Screens/',
@@ -128,22 +155,13 @@ navigationOptions:{
   },
 
 });
-
-
-
-
-
+/*
 const AuthStack= createStackNavigator({Login:UsersLogin})
-
-
 export default createAppContainer(createSwitchNavigator({
-  AuthLoading:AuthLoadingScreen,
+AuthLoading:AuthLoadingScreen,
 App:DrawerNavigation,
 Auth:AuthStack
-
-
-
 }))
-
-//export default createAppContainer(DrawerNavigation);
+*/
+export default createAppContainer(DrawerNavigation);
 

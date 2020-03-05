@@ -130,7 +130,7 @@ export default class Users extends React.Component {
                   onEndThreshold={0}
                 />
             </View>
-
+ 
             <ActionSheet
               onPress={(index) => this._makeAction(index)}
               ref={o => (this.ActionSheet = o)}

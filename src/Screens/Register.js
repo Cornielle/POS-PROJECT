@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { TextInput, Avatar, Button, Card, RadioButton  } from 'react-native-paper';
-import { StyleSheet, Text, View, ScrollView, Picker,Alert, KeyboardAvoidingView } from 'react-native';
-import {Block} from 'galio-framework'
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
+import { StyleSheet, Text, View, ScrollView, Picker,Alert, KeyboardAvoidingView, ToastAndroid } from 'react-native';
+import {Block, Toast} from 'galio-framework'
 import normalize from 'react-native-normalize';
 import Header from '../Components/Header'
 import * as Filesystem from "expo-file-system"
@@ -12,67 +13,110 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Empleados from '../../Models/Empleados.js'
 import Data from'../../BindObject/CategoriasList.js'
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import Roles from  '../../Models/Roles'
+
 
 //import whatever from '../src'
-export default class Register extends Component{
+export default class Register extends React.Component{
     constructor(props) {
-        super(props);
-        this.state = { 
-   
-NOMBRE :"", 
-APELLIDO:"",
-NOMBREUSUARIO:"",
-TELEFONO:"",
-CONTRASENA:"",
-CONTRASENA2:"",
-TIPOIDENTIFICACION:"Cedula",
-IDENTIFICACION:"",
-CORREO:"",
-IDROLL:""
-};
+         super(props);
+
       }
+    
+
+    state = { 
+   
+        NOMBRE :"", 
+        APELLIDO:"",
+        NOMBREUSUARIO:"",
+        TELEFONO:"",
+        CONTRASENA:"",
+        CONTRASENA2:"",
+        TIPOIDENTIFICACION:"Cedula",
+        IDENTIFICACION:"",
+        CORREO:"",
+        ROLL:"Camarero",
+        Roles:[]
+        };
 
 
+ LoadData = async () =>{
+
+    var options  ={
+
+        columns:'Id,NombreRol,Comentario',
+         where:{
+        Id_gt:0
+        },
+        page:1,
+        limit:100
+        
+        }
+        
+        const response  = await Roles.query(options);
+        
+        this.setState({Roles:response})
+
+       
+ }
 
 
- componentDidMount(){
+  componentDidMount(){
+ this.LoadData();
+
+//console.log(this.state.Roles);
+/*
+    const sql = 'SELECT * FROM Roles'
+    const params = []
+    const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+   databaseLayer.executeSql(sql, params).then(   ({ rows }) => {
+
+this.setState ({Roles:rows}) ;
+   
+
+    } )
+*/
+// console.log(this.state.Roles);
 
    /// this.props.navigation.navigate("Login")
 //const DbCreated = await Empleados.createTable();
-
-
-const lista  = Data();
-
-
 
 /*
     const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
     databaseLayer.executeSql(
       'SELECT name FROM sqlite_master WHERE type = "table"'
       ).then(respon =>{console.log(respon)})
+   
    */
-/*
   const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
   databaseLayer.executeSql(
     'SELECT * FROM Empleados'
     ).then(respon =>{console.log(respon)})
-    */
+
+   /*
    const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
    databaseLayer.executeSql(
      'SELECT * FROM Empleados'
-     ).then(respon =>{console.log(respon)})
-    
+     ).then(respon =>{console.log("")})
+    */
 }
 
 
     render(){
 
-      
+ 
+     // this.LoadData()
         const {name, subtitle, navigation} = this.props
         const { text,enabled, checked } =  this.state
         return (
+      
+         
             <ScrollView>
+                   
+
             <View style={styles.ViewStyle}>
+
+         
                 {/*Header generico que debe ser reutilizado en casi todas las vistas*/}
                 <Header name={name} subtitle={subtitle} goBackEnabled={true} navigationEnabled={false} navigation={navigation}/>
                 <View style={styles.Form}>
@@ -84,8 +128,11 @@ const lista  = Data();
                             left={(props) => <Avatar.Icon {...props} 
                             icon="account" />} 
                         />
+
+
                         <Card.Content>
-                        <KeyboardAvoidingView>
+         
+          
                             <TextInput
                                 style={styles.Input}
                                 mode='flat'
@@ -177,13 +224,21 @@ const lista  = Data();
                             <Text>{"\n"}</Text>
                             <Text>Seleccionar un rol:</Text>
                             <Picker
-                                selectedValue={this.state.IDROLL}
+                                selectedValue={this.state.Roll}
                                 style={{height: 50, width: 200}}
                                 onValueChange={(itemValue, itemIndex) =>
-                                    this.setState({IDROLL: itemValue})
+                                    this.setState({Roll: itemValue})
                                 }>
-                                <Picker.Item label="Rol 1" value="1" />
-                                <Picker.Item label="Rol 2" value="2" />
+                               {
+                                 
+                                       this.state.Roles.map(xo =>(
+                                        <Picker.Item label={xo.NombreRol.toString()} value={xo.NombreRol.toString()} key={xo.Id.toString()} />
+                                       
+                                       )
+                               
+                                       )
+
+                               }
                             </Picker>
                             <Button
                                 labelStyle={styles.Button} 
@@ -198,12 +253,17 @@ const lista  = Data();
                                 /> <Text>{"  "}</Text>   
                                 Agregar
                             </Button>
-                            </KeyboardAvoidingView>
+                       
                         </Card.Content>
+                     
+
                     </Card>
                 </View>
+           
             </View>
+       
             </ScrollView>
+
         );
         }
 
@@ -214,7 +274,7 @@ try{
     console.log("Entreee!!");
 
 
-    this.Validaciones();
+  //  this.Validaciones();
  
 const valInsert={
 
@@ -224,7 +284,7 @@ const valInsert={
     Telefono:this.state.TELEFONO,
     TipoIdentificacion:this.state.TIPOIDENTIFICACION,
     Identificacion:this.state.IDENTIFICACION,
-    IdRoll:this.state.IDROLL,
+    Roll:this.state.Roll,
     Correo: this.state.CORREO,
     Contrasena:this.state.CONTRASENA,
     Activo:1,
@@ -232,11 +292,9 @@ const valInsert={
     FechaModificacion:null,
     UsuarioCreacion:"system",
     UsuarioModificacion:"null"
-    
 }
 console.log(valInsert);
 
-//const DbCreated = Empleados.createTable();
 const response = await  Empleados.create(valInsert);
 
 
@@ -245,8 +303,11 @@ if (Object.keys(response).length <=0){
 Alert.alert("Error al insertar en la base de datos");
 
 }
-//const response =  await Empleados.dropTable();
-//console.log(response);
+else{
+
+    ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
+}
+
 
 }
 catch(e){
@@ -294,8 +355,6 @@ Validaciones = ()=>{
         Alert.Alert("Ha ocurrido un error: " + e)
 
     }
-
-  
 
 }
 

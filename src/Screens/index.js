@@ -11,7 +11,12 @@ import Categorias from "./Categorias"
 import Articulos from "./Articulos"
 import Stock from './Stock'
 import Users  from './Users'
-  
+import RolesScreen from './RolesScreen'
+import AccionesScreen from './AccionesScreen'
+import VistaScreen from './VistaScreen'
+import ArticulosGridScreen from "../GridScreen/ArticulosGridScreen"
+//import Users from './Users'
+
 // Constantes que contienen la navegacion hacia cada componente en especifico , con sus nombres especificos//
 export const UsersRegister  = 
 ({navigation}) =>
@@ -56,6 +61,11 @@ export const TaxReceipt = ({navigation}) => <Screen navigation={navigation} name
 export const CategoryManagement =({navigation}) => <Categorias navigation ={navigation} subtitle="Categorias" name="Categorias" />
 export const ArticulosManagemet =({navigation}) => <Articulos navigation={navigation} subtitle="Articulos" name="Articulos del stock" />
 export const StockManagement =({navigation}) => <Stock navigation={navigation} subtitle="Stock" name="Stock" ></Stock>
+export const RolesManagement = ({navigation}) => <RolesScreen navigation={navigation} subtitle="Roles" name="Roles" />
+export const AccionesManagement = ({navigation}) => <AccionesScreen navigation={navigation} subtitle="Acciones" name="Acciones" />
+export const VistasManagement = ({navigation}) => <VistaScreen navigation={navigation} subtitle ="Menu" name="Menu" />
+export const ArticulosGreedManagemet = ({navigation}) => <ArticulosGridScreen navigation={navigation} subtitle="Grid" name="Grid" />
+
 // configuracion del tema por defecto de react native paper
 const theme = {
     ...DefaultTheme,
