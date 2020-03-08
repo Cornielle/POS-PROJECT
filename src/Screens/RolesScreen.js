@@ -121,10 +121,9 @@ render(){
 
 
         GuardarRol =  async () =>{
-
+   
             this.Validaciones();
-           // await Roles.dropTable();
-            await Roles.createTable();                                                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                                          
             
 const date = new Date();
 

@@ -274,7 +274,9 @@ try{
     console.log("Entreee!!");
 
 
-  //  this.Validaciones();
+const create  = Empleados.createTable();
+
+    this.Validaciones();
  
 const valInsert={
 

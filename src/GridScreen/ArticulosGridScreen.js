@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { ListItem, FormLabel, FormInput } from 'react-native-elements'
 import { Badge,Searchbar,Card, TextInput , Title,Paragraph, Avatar,  } from 'react-native-paper'
 import { View, StyleSheet, Modal,Text, Button, Image,ScrollView} from 'react-native'
@@ -11,6 +11,7 @@ import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler';
 import ActionSheet from 'react-native-actionsheet';
 import Empleados from '../../Models/Empleados'
+
 
 
 
@@ -52,7 +53,12 @@ export default class ArticulosGridScreen extends React.Component{
           TipoIdentificacion:"",
           Identificacion:"",
           Roll:"",
-          Correo:""
+          Correo:"",
+          Activo:1,
+          FechaCreacion: "",
+          FechaModificacion:"",
+          UsuarioCreacion:"",
+          UsuarioModificacion:""
           
 
         }
@@ -88,9 +94,6 @@ estado: Activo ?true: false
  arra.push(objeto)
  
   });
-
-
-
   this.setState({data:arra})
 
   this.setState({
@@ -103,9 +106,10 @@ estado: Activo ?true: false
 
  componentDidMount(){
 
-        
+    
         }
 
+      
 FillEmpleado = async (id) =>{
  
 try{
@@ -113,7 +117,7 @@ try{
   const {key} = id;
   console.log(key);
    const Empleado = await Empleados.find(key)
-  console.log(Empleado)
+
    this.setState({Empleado})
 
    console.log(this.state.Empleado);
@@ -138,24 +142,31 @@ Alert.alert("Ha ocurrido el siguiente error: "+ex);
           : this.state.optionArray[1] = 'Activar'  
 
         }
-        _makeAction(action){    
+        _makeAction(action){ 
+          const idIndex = (this.state.index);
+
+          //  console.log(idIndex);
+
+            const id = this.state.data[idIndex];
+
           switch(action){
             case 0:
+
               console.log('editar')
+                   
+           
+              this.FillEmpleado(id)
+
+              this._showModal()
               break
             case 1:
               this.state.data[this.state.index]['estado'] = !this.state.data[this.state.index]['estado']
               this.setState({ state: this.state });
-
+         
               break
             case 2:
             //console.log("Detalle");
-              const idIndex = (this.state.index);
-
-                //  console.log(idIndex);
-
-                  const id = this.state.data[idIndex];
-
+          
                //   console.log(obj);
 
               // console.log(id)
@@ -199,21 +210,46 @@ Alert.alert("Ha ocurrido el siguiente error: "+ex);
 <Card>
     <Card.Title title="Perfil De usuario" subtitle="Card Subtitle" left={(props) => <Avatar.Icon {...props} icon="folder" />} />
     <Card.Content>
-        <Title>{this.state.Empleado.NombrePersona }</Title>
-        <Paragraph>{this.state.Empleado.Roll}</Paragraph>
-    </Card.Content>
-    { /*   <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />*/}
-
-
     <View style={styles.Boxone}>
 
 <Image style={styles.ImageBox} source={{uri:'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg'}}/>
 </View>
+    </Card.Content>
+    { /*   <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />*/}
+
+                            <TextInput
+                                style={styles.Input}
+                                mode='flat'
+                                label='Nombre'
+                                value={this.state.Empleado.NombrePersona}
+                                disabled={true}
+                                onChangeText={(NombrePersona)=> this.setState({NombrePersona})}
+                            />
+                                    
+                            <TextInput
+                                style={styles.Input}
+                                mode='flat'
+                                label='Apellidos'
+                                value={this.state.Empleado.ApellidoPersona}
+                                onChangeText={(ApellidoPersona) => this.setState({ ApellidoPersona })}
+                                disabled={true}
+                            />
+                   
+                            <TextInput
+                                style={styles.Input}
+                                mode='flat'
+                                label='Nombre Usuario'
+                                value={this.state.Empleado.NombreUsuario}
+                                disabled= {true}
+                                onChangeText={(NombreUsuario) => this.setState({ NombreUsuario })}
+                            />
+
+
 
     
     <Card.Actions>
-      <Button title="Cancel"></Button>
-      <Button title="Ok"></Button>
+
+      <Button title="Cerrar"onPress={this._hideModal} ></Button>
     </Card.Actions>
   </Card>
 {
