@@ -80,11 +80,11 @@ const DrawerNavigation = createDrawerNavigator({
     }
   },*/
   'Categorias':{
-screen: CategoryManagement,
-path:'./src/Component/',
-navigationOptions:{
+    screen: CategoryManagement,
+    path:'./src/Component/',
+    navigationOptions:{
 
-  title:'Categorias'
+      title:'Categorias'
 
 }
   
@@ -115,6 +115,13 @@ navigationOptions:{
     screen: SalesManagement,
     path:'./src/Screens/',
   },
+    'Control de Usuarios': {
+    screen: UsersLogin,
+    path:'./src/Screens/',
+    navigationOptions: {
+      title: 'Iniciar Sesión'
+    }
+  },
   'Control de Usuarios': {
     screen: UsersLogin,
     path:'./src/Screens/',
@@ -133,17 +140,17 @@ navigationOptions:{
 
 
 
-const AuthStack= createStackNavigator({Login:UsersLogin})
+// const AuthStack= createStackNavigator({Users:UsersManagement})
 
 
-export default createAppContainer(createSwitchNavigator({
-  AuthLoading:AuthLoadingScreen,
-App:DrawerNavigation,
-Auth:AuthStack
+// export default createAppContainer(createSwitchNavigator({
+//   AuthLoading:AuthLoadingScreen,
+// App:DrawerNavigation,
+// Auth:AuthStack
 
 
 
-}))
+// }))
 
-//export default createAppContainer(DrawerNavigation);
+export default createAppContainer(DrawerNavigation);
 

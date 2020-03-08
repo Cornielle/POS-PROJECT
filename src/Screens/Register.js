@@ -61,20 +61,20 @@ const lista  = Data();
    databaseLayer.executeSql(
      'SELECT * FROM Empleados'
      ).then(respon =>{console.log(respon)})
-    
 }
-
-
-    render(){
-
-      
+    render(){     
         const {name, subtitle, navigation} = this.props
         const { text,enabled, checked } =  this.state
         return (
             <ScrollView>
             <View style={styles.ViewStyle}>
                 {/*Header generico que debe ser reutilizado en casi todas las vistas*/}
-                <Header name={name} subtitle={subtitle} goBackEnabled={true} navigationEnabled={false} navigation={navigation}/>
+                <Header name={name} 
+                        subtitle={subtitle}
+                        goBackEnabled={true} 
+                        navigationEnabled={false}
+                        navigation={navigation}
+                    />
                 <View style={styles.Form}>
                     <Card>
                         <Card.Title 
