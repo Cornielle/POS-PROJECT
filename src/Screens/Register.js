@@ -1,31 +1,53 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { TextInput, Avatar, Button, Card, RadioButton  } from 'react-native-paper';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
-import { StyleSheet, Text, View, ScrollView, Picker,Alert, KeyboardAvoidingView, ToastAndroid } from 'react-native';
-import {Block, Toast} from 'galio-framework'
+import { StyleSheet, Text, View, ScrollView, Picker,Alert,  ToastAndroid } from 'react-native';
+import {Block} from 'galio-framework'
 import normalize from 'react-native-normalize';
 import Header from '../Components/Header'
-import * as Filesystem from "expo-file-system"
 import * as SQLite from "expo-sqlite"
 import {BaseModel, types} from 'expo-sqlite-orm'
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Empleados from '../../Models/Empleados.js'
-import Data from'../../BindObject/CategoriasList.js'
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import Roles from  '../../Models/Roles'
 
+const InitialState ={
+
+    NOMBRE :"", 
+    APELLIDO:"",
+    NOMBREUSUARIO:"",
+    TELEFONO:"",
+    CONTRASENA:"",
+    CONTRASENA2:"",
+    TIPOIDENTIFICACION:"Cedula",
+    IDENTIFICACION:"",
+    CORREO:"",
+    ROLL:"Camarero",
+    Roles:[],
+    ExistenDatos:false,
+    QueDatosExisten:""
+
+}
 
 //import whatever from '../src'
 export default class Register extends React.Component{
     constructor(props) {
          super(props);
+ this.state = InitialState;
+ 
+      }
+
+
+      reset = () =>{
+
+ this.setState(InitialState)
+
+
 
       }
     
 
     state = { 
-   
         NOMBRE :"", 
         APELLIDO:"",
         NOMBREUSUARIO:"",
@@ -35,8 +57,10 @@ export default class Register extends React.Component{
         TIPOIDENTIFICACION:"Cedula",
         IDENTIFICACION:"",
         CORREO:"",
-        ROLL:"Camarero",
-        Roles:[]
+        ROLL:"",
+        Roles:[],
+        ExistenDatos:false,
+        QueDatosExisten:""
         };
 
 
@@ -56,12 +80,15 @@ export default class Register extends React.Component{
         const response  = await Roles.query(options);
         
         this.setState({Roles:response})
-
+  
        
  }
 
 
   componentDidMount(){
+
+  
+    Empleados.createTable();
  this.LoadData();
 
 //console.log(this.state.Roles);
@@ -88,11 +115,13 @@ this.setState ({Roles:rows}) ;
       ).then(respon =>{console.log(respon)})
    
    */
+
+   /*
   const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
   databaseLayer.executeSql(
     'SELECT * FROM Empleados'
     ).then(respon =>{console.log(respon)})
-
+*/
    /*
    const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
    databaseLayer.executeSql(
@@ -271,12 +300,61 @@ this.setState ({Roles:rows}) ;
 
  GuardarEmpleado = async ()=>{
 try{
-    console.log("Entreee!!");
 
+    const sql = 'SELECT * FROM Empleados where NombreUsuario =? or Identificacion =?'
+    const params = [this.state.NOMBREUSUARIO, this.state.IDENTIFICACION]
+    const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+   databaseLayer.executeSql(sql, params).then(   ({ rows }) => {
+
+    const cantidad = Object.keys(rows).length;
+    const {} =  rows;
+
+if(cantidad > 0){
+this.setState ({ExistenDatos:true}) ;
+console.log(this.state.ExistenDatos)
+}
+    } )
+
+ 
+console.log(this.state.ExistenDatos)
+if(this.state.ExistenDatos){
+
+Alert.alert("ya existen datos");
+return;
+}
+
+    
+    if(this.state.NOMBRE ===""){
+        Alert.alert("El campo nombre no puede estar vacio.");
+        return;
+        }
+        
+        if(this.state.APELLIDO ===""){
+            Alert.alert("El campo apellido no puede estar vacio.");
+            return;
+        }
+
+        if(this.state.TELEFONO ===""){
+            Alert.alert("El campo Telefono no puede estar vacio.");
+            return;
+        }
+        
+        if(this.state.IDENTIFICACION===""){
+       Alert.alert("El campo identificacion no puede estar vacio.");
+       return;
+           }
+
+           if(this.state.CONTRASENA !== this.state.CONTRASENA2){
+              
+            Alert.alert("La contraseña de verificacion no coinciden");
+            return;
+           }
+
+   // this.Validaciones();
 
 const create  = Empleados.createTable();
 
-    this.Validaciones();
+ 
  
 const valInsert={
 
@@ -299,7 +377,6 @@ console.log(valInsert);
 
 const response = await  Empleados.create(valInsert);
 
-
 if (Object.keys(response).length <=0){
 
 Alert.alert("Error al insertar en la base de datos");
@@ -308,6 +385,7 @@ Alert.alert("Error al insertar en la base de datos");
 else{
 
     ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
+   this.reset();
 }
 
 
@@ -315,47 +393,21 @@ else{
 catch(e){
 
 Alert.alert("Ha ocurrido un error, favor contactar a FreddyBrian Corp: "+ e);
-
+console.log(e)
 }
 }
 
 Validaciones = ()=>{
-
+ 
     try{
 
-        if(this.state.NOMBRE ===""){
-            Alert.alert("El campo nombre no puede estar vacio.");
-            return;
-            }
-            
-            if(this.state.APELLIDO ===""){
-                Alert.alert("El campo apellido no puede estar vacio.");
-                return;
-            }
-    
-            if(this.state.TELEFONO ===""){
-                Alert.alert("El campo Telefono no puede estar vacio.");
-                return;
-            }
-            
-            if(this.state.IDENTIFICACION===""){
-           Alert.alert("El campo identificacion no puede estar vacio.");
-           return;
-               }
-    
-               if(this.state.CONTRASENA !== this.state.CONTRASENA2){
-                  
-                Alert.alert("La contraseña de verificacion no coinciden");
-                return;
-               }
-
-
+             
     }
 
     catch(e){
 
-        Alert.Alert("Ha ocurrido un error: " + e)
-
+        Alert.Alert("Ha ocurrido un error validanto datos: " + e)
+ console.log(e);
     }
 
 }

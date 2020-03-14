@@ -18,8 +18,10 @@ import {
   Stockmanagement,
   RolesManagement,
   AccionesManagement,
-  VistasManagement,
-ArticulosGreedManagemet
+  MenuManagement,
+ArticulosGreedManagemet,
+RolesMenuManagement,
+RolesGridManagement,
  
 } from "./src/Screens";
 import { lockToLandscapeLeft } from "react-native-orientation";
@@ -98,10 +100,10 @@ navigationOptions:{
     }
       },
   'Vistas':{
-    screen: VistasManagement,
+    screen: MenuManagement,
     path:'./src/Component/',
     navigationOptions:{
-      title:'Vistas'
+      title:'Menu'
     }
       },
   'Roles':{
@@ -134,6 +136,37 @@ navigationOptions:{
     }
   },
 
+  
+"Roles Menu":{
+screen: RolesMenuManagement,
+navigationOptions:{
+
+title:"Roles Menu"
+
+}
+
+
+}, 
+
+"Roles Grid":{
+screen:RolesGridManagement, 
+navigationOptions:{
+
+
+title:"Roles Grid"
+
+}
+
+
+
+
+}
+
+
+
+
+  
+/*
   'Control de Caja': {
     screen: CashierManagement,
     path:'./src/Screens/',
@@ -153,7 +186,7 @@ navigationOptions:{
     screen: InventoryManagement,
     path:'./src/Screens/',
   },
-
+*/
 });
 /*
 const AuthStack= createStackNavigator({Login:UsersLogin})

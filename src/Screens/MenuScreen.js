@@ -12,36 +12,56 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Empleados from '../../Models/Empleados.js'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Roles from "../../Models/Roles"
-import vistas from '../../Models/Vistas';
+import Menu from "../../Models/Menu"
 
-export default class VistaScreen extends React.Component{
+const InitialState ={
+
+
+    NombreMenu:"",
+    IdMenuPadre:0,
+    Comentario:"",
+    MenuLabel:"",
+    
+
+}
+
+
+export default class MenuScreen extends React.Component{
 
 
     constructor(props){
          super(props)
+
+
     }
 
 
 async componentDidMount(){
 
+ Menu.createTable();
 
-    const response = await vistas.findBy({Id_gt:0})
-    console.log(response);
+    const sql =   'SELECT * FROM MENU'
+    const params = []
+    const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+   databaseLayer.executeSql(sql, params).then(({ rows }) => {
+    this.setState({Menu:rows})
+  
+    } )
 
-
-await vistas.createTable();
 }
 
+
     state={
-        NombreVista:"",
-        IdVistaPadre:"",
-        Comentario:""
-        
+        NombreMenu:"",
+        IdMenuPadre:0,
+        Comentario:"",
+        MenuLabel:"",
+        Menu:[]
 
 
     }
     render(){
- 
+       
 
         const {name, subtitle, navigation} = this.props
         const { text,enabled, checked } =  this.state
@@ -65,22 +85,38 @@ await vistas.createTable();
                                 style={styles.Input}
                                 mode='flat'
                                 label='Nombre del Menu'
-                                value={this.state.NombreVista}
-                                onChangeText={(NombreVista)=> this.setState({NombreVista})}
+                                value={this.state.NombreMenu}
+                                onChangeText={(NombreMenu)=> this.setState({NombreMenu})}
                             />
-                            <Text>{"\n"}</Text>                
+                            <Text>{"\n"}</Text>    
+                            <TextInput
+                                style={styles.Input}
+                                mode='flat'
+                                label='Label menu'
+                                value={this.state.MenuLabel}
+                                onChangeText={(MenuLabel)=> this.setState({MenuLabel})}
+                            />
+                            <Text>{"\n"}</Text>             
                             <Text>Seleccionar el padre del menu</Text>
                             <Picker
-                                selectedValue={this.state.IdVista}
+                                selectedValue={this.state.IdMenuPadre}
                                 style={{height: 50, width: 200}}
                                 onValueChange={(itemValue, itemIndex) =>
                                     this.setState({IdVista: itemValue})
                                 }>
-                                <Picker.Item label="Rol 1" value="1" />
-                                <Picker.Item label="Rol 2" value="2" />
+                        {
+                                 
+                                 this.state.Menu.map(xo =>(
+                                  <Picker.Item label={xo.NombreMenu.toString()} value={xo.Id.toString()} key={xo.Id.toString()} />
+                                 
+                                 )
+                         
+                                 )
+
+                         }
                             </Picker>
 
-                            <Text>{"\n"}</Text>
+                   
                             <TextInput
                                 style={styles.Input}
                                 mode='flat'
@@ -113,48 +149,44 @@ await vistas.createTable();
     
 
 
-        Validaciones = () =>{
-
-try{
-
-    if(this.state.NombreVista ===""){
-        Alert.alert("Debe ingresar el nombre de la vista");
-        return;
-       }
-}
-
-catch(ex){
-
-Alert.alert("Hubo un error en la aplicacion, favor contartar al soporte");
-
-}
-
-
-
-
-        }
-
 
         GuardarVistas = async () =>{
 
             try{
 
+                /********************** Validaciones **********************/
+
+                if(this.state.NombreMenu ===""){
+                    Alert.alert("Debe ingresar el nombre de la vista");
+                    return;
+                   }
+
+                   if(this.state.MenuLabel ===""){
+                    Alert.alert("Debe ingresar el nombre de la vista");
+                    return;
+                   }
+                
+                
+              var fecha = new Date()
+   
                 console.log("Entree mi loco!!");
                 const Insert = {
-        
-                    NombreVista:this.state.NombreVista,
-                    IdVistaPadre:this.state.IdVistaPadre,
+                    NombreMenu:this.state.NombreMenu,
+                    IdMenuPadre:this.state.IdMenuPadre,
+                    MenuLabel: this.state.MenuLabel,
                     Comentario:this.state.Comentario,
                     Activo:1,
-                    FechaCreacion: "20/12/1995",
+                    FechaCreacion: fecha.toString(),
+                    IdEmpresa: 1,
+                    IdSucursal:null,
                     FechaModificacion:null,
                     UsuarioCreacion:"system",
                     UsuarioModificacion:null
                 }
         
                 console.log(Insert);
-        
-                const response =  await vistas.create(Insert);
+       
+                const response =  await Menu.create(Insert);
         
                 if(Object.keys(response).length <= 0){
         
@@ -163,25 +195,17 @@ Alert.alert("Hubo un error en la aplicacion, favor contartar al soporte");
         
                 }
                 else{
-        
-                  if(Platform.OS ==='android'){
-        
+
         ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT);
-                  }
-                  if(Platform.OS ==="ios"){
-        
-        Alert.alert("Guardado Correctamente!!");
-                  }
-        
-        
+this.setState(InitialState);
                 }
 
             }
             
             catch(ex){
-            
+                Alert.alert(ex)
             Alert.alert("Hubo un error en la aplicacion, favor contartar al soporte");
-            
+        
             }
             
 

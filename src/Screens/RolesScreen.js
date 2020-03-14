@@ -32,6 +32,10 @@ super(props)
 }
 
 componentDidMount(){
+
+
+Roles.createTable();
+
     const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
     databaseLayer.executeSql(
       'SELECT * FROM Roles'
@@ -133,6 +137,8 @@ const date = new Date();
             NombreRol: this.state.NombreRol,
             Comentario: this.state.Comentario, 
             Activo:1,
+            IdEmpresa:1,
+    IdSucursal:0,
             FechaCreacion: '02/01/1993',
             FechaModificacion:null,
             UsuarioCreacion:"system",
@@ -153,7 +159,7 @@ const date = new Date();
 ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
 
 
-this.setState({InitialState})
+this.setState(InitialState)
         }
         
         }

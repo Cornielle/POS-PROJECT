@@ -104,8 +104,12 @@ estado: Activo ?true: false
     }
 
 
- componentDidMount(){
+async  componentDidMount(){
 
+
+  const crear = await Empleados.createTable();
+
+  console.log(crear);
     
         }
 
