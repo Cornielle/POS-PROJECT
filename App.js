@@ -195,25 +195,6 @@ title:"Roles Grid"
   },
 */
 });
-<<<<<<< HEAD
-
-
-
-
-
-// const AuthStack= createStackNavigator({Users:UsersManagement})
-
-
-// export default createAppContainer(createSwitchNavigator({
-//   AuthLoading:AuthLoadingScreen,
-// App:DrawerNavigation,
-// Auth:AuthStack
-
-
-
-// }))
-
-=======
 /*
 const AuthStack= createStackNavigator({Login:UsersLogin})
 export default createAppContainer(createSwitchNavigator({
@@ -222,6 +203,5 @@ App:DrawerNavigation,
 Auth:AuthStack
 }))
 */
->>>>>>> d6bc9c2d6a4cd006d7f60b2d68e36ad5df2d6dc3
 export default createAppContainer(DrawerNavigation);
 
