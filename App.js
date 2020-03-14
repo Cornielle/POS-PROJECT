@@ -15,7 +15,13 @@ import {
   InventoryManagement,
   CategoryManagement,
   ArticulosManagemet,
-  Stockmanagement
+  Stockmanagement,
+  RolesManagement,
+  AccionesManagement,
+  MenuManagement,
+ArticulosGreedManagemet,
+RolesMenuManagement,
+RolesGridManagement,
  
 } from "./src/Screens";
 import { lockToLandscapeLeft } from "react-native-orientation";
@@ -70,25 +76,53 @@ const DrawerNavigation = createDrawerNavigator({
     }
   },
 
-  /*'Stock':{
-    screen: Stockmanagement,
+  'Users':{
+    screen: UsersManagement,
     path:'./src/Component/',
     navigationOptions:{
     
-      title:'Categorias'
+      title:'Users'
     
     }
-  },*/
+  },
   'Categorias':{
-    screen: CategoryManagement,
+screen: CategoryManagement,
+path:'./src/Component/',
+navigationOptions:{
+  title:'Categorias'
+}
+  },
+  'Grid':{
+    screen: ArticulosGreedManagemet,
     path:'./src/Component/',
     navigationOptions:{
-
-      title:'Categorias'
-
-}
-  
+      title:'Grid'
+    }
+      },
+  'Vistas':{
+    screen: MenuManagement,
+    path:'./src/Component/',
+    navigationOptions:{
+      title:'Menu'
+    }
+      },
+  'Roles':{
+    screen: RolesManagement,
+    path:'./src/Component/',
+    navigationOptions:{
+      title:'Roles'
+    }
   },
+      'Acciones':{
+        screen: AccionesManagement,
+        path:'./src/Component/',
+        navigationOptions:{
+        
+          title:'Acciones'
+        
+        }
+          
+          },
   'Login': {
     screen: UsersLogin,
     navigationOptions: {
@@ -101,12 +135,38 @@ const DrawerNavigation = createDrawerNavigator({
       title: 'Inicio'
     }
   },
-  'User Management': {
-    screen: UsersManagement,
-    navigationOptions: {
-      title: 'Control de Usuario'
-    }
-  },
+
+  
+"Roles Menu":{
+screen: RolesMenuManagement,
+navigationOptions:{
+
+title:"Roles Menu"
+
+}
+
+
+}, 
+
+"Roles Grid":{
+screen:RolesGridManagement, 
+navigationOptions:{
+
+
+title:"Roles Grid"
+
+}
+
+
+
+
+}
+
+
+
+
+  
+/*
   'Control de Caja': {
     screen: CashierManagement,
     path:'./src/Screens/',
@@ -133,8 +193,9 @@ const DrawerNavigation = createDrawerNavigator({
     screen: InventoryManagement,
     path:'./src/Screens/',
   },
-
+*/
 });
+<<<<<<< HEAD
 
 
 
@@ -152,5 +213,15 @@ const DrawerNavigation = createDrawerNavigator({
 
 // }))
 
+=======
+/*
+const AuthStack= createStackNavigator({Login:UsersLogin})
+export default createAppContainer(createSwitchNavigator({
+AuthLoading:AuthLoadingScreen,
+App:DrawerNavigation,
+Auth:AuthStack
+}))
+*/
+>>>>>>> d6bc9c2d6a4cd006d7f60b2d68e36ad5df2d6dc3
 export default createAppContainer(DrawerNavigation);
 

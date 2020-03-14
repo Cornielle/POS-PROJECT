@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {createSwitchNavigator, createAppContainer} from 'react-navigation'
 import {createStackNavigator} from 'react-navigation-stack'
 import { TextInput, Button, Card, Checkbox  } from 'react-native-paper';
-import { StyleSheet, Text, View, ScrollView, Picker,KeyboardAvoidingView, AsyncStorage, Alert} from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Picker, AsyncStorage, Alert} from 'react-native';
 import{BaseModel,types} from 'expo-sqlite-orm'
 import * as SQLite from 'expo-sqlite'
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
@@ -11,6 +11,7 @@ import normalize from 'react-native-normalize';
 import Header from '../Components/Header'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Empleados from "../../Models/Empleados"
+import Roles from '../../Models/Roles';
 
 
 //import whatever from '../src'
@@ -27,7 +28,9 @@ import Empleados from "../../Models/Empleados"
           };
 componentDidMount(){
 
-    this.props.navigation.navigate("Auth")
+
+   
+    this.props.navigation.navigate("App")
 
 }
 
@@ -39,7 +42,7 @@ componentDidMount(){
         const {name, subtitle, navigation} = this.props
         const { text,enabled, checked } =  this.state
 
-
+/*
         const sql = 'SELECT * FROM Empleados'
         const params = []
         const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
@@ -47,7 +50,7 @@ componentDidMount(){
   console.log(rows)
          
         } )
-
+*/
         return (
             <ScrollView>
             <View style={styles.ViewStyle}>

@@ -11,7 +11,15 @@ import Categories from "./Categories"
 import Articulos from "../Fields/Articulos"
 import Stock from '../Fields/Stock'
 import Users  from './Users'
-  
+import RolesScreen from './RolesScreen'
+import AccionesScreen from './AccionesScreen'
+import MenuScreen from './MenuScreen'
+import ArticulosGridScreen from "../GridScreen/ArticulosGridScreen"
+import RolesMenuScreen from "./RolesMenuSceen"
+import RolesGridScreen  from "../GridScreen/RolesGridScreen"
+
+//import Users from './Users'
+
 // Constantes que contienen la navegacion hacia cada componente en especifico , con sus nombres especificos//
 export const UsersRegister  = 
 ({navigation}) =>
@@ -65,6 +73,12 @@ export const TableManagement = ({navigation}) => <Screen navigation={navigation}
 export const TaxReceipt = ({navigation}) => <Screen navigation={navigation} name="Comprobante Fiscal" />
 export const ArticulosManagemet =({navigation}) => <Articulos navigation={navigation} subtitle="Articulos" name="Articulos del stock" />
 export const StockManagement =({navigation}) => <Stock navigation={navigation} subtitle="Stock" name="Stock" ></Stock>
+export const RolesManagement = ({navigation}) => <RolesScreen navigation={navigation} subtitle="Roles" name="Roles" />
+export const AccionesManagement = ({navigation}) => <AccionesScreen navigation={navigation} subtitle="Acciones" name="Acciones" />
+export const MenuManagement = ({navigation}) => <MenuScreen navigation={navigation} subtitle ="Menu" name="Menu" />
+export const ArticulosGreedManagemet = ({navigation}) => <ArticulosGridScreen navigation={navigation} subtitle="Grid" name="Grid" />
+export const RolesMenuManagement = ({navigation}) => <RolesMenuScreen navigation={navigation} subtitle="Roles Menu" name="Roles Menu" />
+export const RolesGridManagement = ({navigation}) => <RolesGridScreen navigation={navigation} subtitle="Roles" name="Roles" />
 // configuracion del tema por defecto de react native paper
 const theme = {
     ...DefaultTheme,
