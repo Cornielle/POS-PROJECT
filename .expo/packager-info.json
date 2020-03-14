@@ -1,7 +1,7 @@
 {
   "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 8992,
+  "packagerPort": null,
+  "packagerPid": null,
   "expoServerNgrokUrl": "https://hd-tzw.freddymateo02.pos-project.exp.direct",
   "packagerNgrokUrl": "https://packager.hd-tzw.freddymateo02.pos-project.exp.direct",
   "ngrokPid": 14780,
