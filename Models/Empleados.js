@@ -34,7 +34,7 @@ TipoIdentificacion:{type: types.TEXT, not_null:true},
 
 Identificacion: {type: types.TEXT, not_null:true},
 
-IdRoll:{type: types.INTEGER, not_null:true},
+Roll:{type: types.TEXT, not_null:true},
 
 Correo:{type: types.TEXT, not_null:false},
 Contrasena:{type:types.TEXT, not_null:true},

@@ -69,6 +69,7 @@ this.setState ({Categorias:rows}) ;
      
     } )
 
+
 const sql1 =  'SELECT name FROM sqlite_master WHERE type = "table"'
 const params1 = []
 const databaseLayer1 = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
@@ -77,7 +78,7 @@ databaseLayer1.executeSql(sql1,params1).then(  ({ rows }) => {
 console.log(rows); 
 } )
 
- 
+
 }
 
 render(){
@@ -319,19 +320,19 @@ console.log("llegue!!1");
 
     console.log("llegue!!2");
     
-    const response = await  Articulos.create(Insert);
+    //const response = await  Articulos.create(Insert);
 
-    console.log(response);
+    //console.log(response);
 
-    if (Object.keys(response).length <=0){
+   // if (Object.keys(response).length <=0){
 
-        Alert.alert("Error al insertar en la base de datos");
+  //      Alert.alert("Error al insertar en la base de datos");
         
-        }else{
+     //   }else{
 
 
-            Alert.alert("Guardado Correctamente!");
-        }
+        //    Alert.alert("Guardado Correctamente!");
+      //  }
 
 }
 catch(e){

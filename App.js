@@ -15,7 +15,13 @@ import {
   InventoryManagement,
   CategoryManagement,
   ArticulosManagemet,
-  Stockmanagement
+  Stockmanagement,
+  RolesManagement,
+  AccionesManagement,
+  MenuManagement,
+ArticulosGreedManagemet,
+RolesMenuManagement,
+RolesGridManagement,
  
 } from "./src/Screens";
 import { lockToLandscapeLeft } from "react-native-orientation";
@@ -70,25 +76,53 @@ const DrawerNavigation = createDrawerNavigator({
     }
   },
 
-  /*'Stock':{
-    screen: Stockmanagement,
+  'Users':{
+    screen: UsersManagement,
     path:'./src/Component/',
     navigationOptions:{
     
-      title:'Categorias'
+      title:'Users'
     
     }
-  },*/
+  },
   'Categorias':{
 screen: CategoryManagement,
 path:'./src/Component/',
 navigationOptions:{
-
   title:'Categorias'
-
 }
-  
   },
+  'Grid':{
+    screen: ArticulosGreedManagemet,
+    path:'./src/Component/',
+    navigationOptions:{
+      title:'Grid'
+    }
+      },
+  'Vistas':{
+    screen: MenuManagement,
+    path:'./src/Component/',
+    navigationOptions:{
+      title:'Menu'
+    }
+      },
+  'Roles':{
+    screen: RolesManagement,
+    path:'./src/Component/',
+    navigationOptions:{
+      title:'Roles'
+    }
+  },
+      'Acciones':{
+        screen: AccionesManagement,
+        path:'./src/Component/',
+        navigationOptions:{
+        
+          title:'Acciones'
+        
+        }
+          
+          },
   'Login': {
     screen: UsersLogin,
     navigationOptions: {
@@ -101,12 +135,38 @@ navigationOptions:{
       title: 'Inicio'
     }
   },
-  'User Management': {
-    screen: UsersManagement,
-    navigationOptions: {
-      title: 'Control de Usuario'
-    }
-  },
+
+  
+"Roles Menu":{
+screen: RolesMenuManagement,
+navigationOptions:{
+
+title:"Roles Menu"
+
+}
+
+
+}, 
+
+"Roles Grid":{
+screen:RolesGridManagement, 
+navigationOptions:{
+
+
+title:"Roles Grid"
+
+}
+
+
+
+
+}
+
+
+
+
+  
+/*
   'Control de Caja': {
     screen: CashierManagement,
     path:'./src/Screens/',
@@ -126,24 +186,15 @@ navigationOptions:{
     screen: InventoryManagement,
     path:'./src/Screens/',
   },
-
+*/
 });
-
-
-
-
-
+/*
 const AuthStack= createStackNavigator({Login:UsersLogin})
-
-
 export default createAppContainer(createSwitchNavigator({
-  AuthLoading:AuthLoadingScreen,
+AuthLoading:AuthLoadingScreen,
 App:DrawerNavigation,
 Auth:AuthStack
-
-
-
 }))
-
-//export default createAppContainer(DrawerNavigation);
+*/
+export default createAppContainer(DrawerNavigation);
 

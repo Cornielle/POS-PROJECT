@@ -4,7 +4,7 @@ import {BaseModel,types} from 'expo-sqlite-orm'
 import { deleteAsync } from 'expo-file-system'
 
 
-export default class RolAcciones extends BaseModel{
+export default class RolMenu extends BaseModel{
  constructor(obj){
 
 super(obj)
@@ -21,7 +21,7 @@ return ()=> SQLite.openDatabase("PuntoVentaDb.db");
  static get tableName(){
 
 
-return "RolAcciones";
+return "RolMenu";
 
 
  }
@@ -32,14 +32,16 @@ return "RolAcciones";
 return{
 
     Id:{type:types.INTEGER, primary_key:true},
-    IdAcciones:{type: types.INTEGER, not_null:true},
+    IdMenu:{type: types.INTEGER, not_null:true},
     RolId:{type: types.INTEGER, not_null:true},
-    comentario:{type: types.TEXT, not_null:false},
+    Comentario:{type: types.TEXT, not_null:false},
     Activo:{type: types.INTEGER, not_null:true},
+    IdEmpresa:{type:types, not_null:true},
+    IdSucursal:{type:types, not_null:false},
     FechaCreacion: {type: types.TEXT, not_null:true},
-    FechaModificacion:{type:types.TEXT, not_null:true},
+    FechaModificacion:{type:types.TEXT, not_null:false},
     UsuarioCreacion:{type:types.TEXT, not_null:true},
-    UsuarioModificacion:{type:types.TEXT, not_null:true}
+    UsuarioModificacion:{type:types.TEXT, not_null:false}
 
 
 }
