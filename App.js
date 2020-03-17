@@ -14,14 +14,14 @@ import {
   UsersManagement,
   InventoryManagement,
   CategoryManagement,
-  ArticulosManagemet,
+  ArticulosManagement,
   Stockmanagement,
   RolesManagement,
   AccionesManagement,
   MenuManagement,
-ArticulosGreedManagemet,
-RolesMenuManagement,
-RolesGridManagement,
+  ArticulosGridManagement,
+  RolesMenuManagement,
+  RolesGridManagement,
  
 } from "./src/Screens";
 import { lockToLandscapeLeft } from "react-native-orientation";
@@ -45,10 +45,6 @@ componentDidMount(){
     return (
       <View>
         {
-          /*
-        <ActivityIndicator />
-        <StatusBar barStyle="default" />
-*/
         }
 
       </View>
@@ -68,61 +64,49 @@ const DrawerNavigation = createDrawerNavigator({
 
   'Articulos':{
 
-    screen:ArticulosManagemet,
-    path:'./src/Component',
+    screen:ArticulosManagement,
     navigationOptions:{
-
       title:"Articulos"
     }
   },
 
   'Users':{
     screen: UsersManagement,
-    path:'./src/Component/',
     navigationOptions:{
-    
       title:'Users'
     
     }
   },
   'Categorias':{
-screen: CategoryManagement,
-path:'./src/Component/',
-navigationOptions:{
-  title:'Categorias'
-}
+    screen: CategoryManagement,
+    navigationOptions:{
+      title:'Categorias'
+    }
   },
   'Grid':{
-    screen: ArticulosGreedManagemet,
-    path:'./src/Component/',
+    screen: ArticulosGridManagement,
     navigationOptions:{
       title:'Grid'
     }
-      },
+  },
   'Vistas':{
     screen: MenuManagement,
-    path:'./src/Component/',
     navigationOptions:{
       title:'Menu'
     }
       },
   'Roles':{
     screen: RolesManagement,
-    path:'./src/Component/',
     navigationOptions:{
       title:'Roles'
     }
   },
-      'Acciones':{
-        screen: AccionesManagement,
-        path:'./src/Component/',
-        navigationOptions:{
-        
-          title:'Acciones'
-        
-        }
-          
-          },
+  'Acciones':{
+    screen: AccionesManagement,
+    navigationOptions:{
+    title:'Acciones'
+    }      
+  },
   'Login': {
     screen: UsersLogin,
     navigationOptions: {
@@ -135,34 +119,20 @@ navigationOptions:{
       title: 'Inicio'
     }
   },
+  "Roles Menu":{
+    screen: RolesMenuManagement,
+    navigationOptions:{
+    title:"Roles Menu"
+    }
+  }, 
+  "Roles Grid":{
+    screen:RolesGridManagement, 
+    navigationOptions:{
+    title:"Roles Grid"
+    }
+  }
 
-  
-"Roles Menu":{
-screen: RolesMenuManagement,
-navigationOptions:{
-
-title:"Roles Menu"
-
-}
-
-
-}, 
-
-"Roles Grid":{
-screen:RolesGridManagement, 
-navigationOptions:{
-
-
-title:"Roles Grid"
-
-}
-
-
-
-
-}
-
-
+});
 
 
   
@@ -194,7 +164,6 @@ title:"Roles Grid"
     path:'./src/Screens/',
   },
 */
-});
 /*
 const AuthStack= createStackNavigator({Login:UsersLogin})
 export default createAppContainer(createSwitchNavigator({

@@ -3,35 +3,27 @@ import { StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
 import { Appbar } from 'react-native-paper';
 import normalize from 'react-native-normalize';
 import {FontAwesome5} from '@expo/vector-icons';
-export default class MyComponent extends React.Component {
-  _goBack = () => this.props.navigation.goBack();
+import { Text } from 'native-base';
+export default class ModalControls extends React.Component {
+  _goBack = (backDirection) => this.props.navigation.goBack(backDirection);
   render() {
-    const {name, subtitle,goBackEnabled } = this.props
+    const { modalTitle,backDirection } = this.props
     return (
         <SafeAreaView>
           <Appbar.Header>
-          {goBackEnabled !== false &&
           <Appbar.BackAction
             onPress={this._goBack}
             color={styles.title.color}
-          />}
+          />
           <Appbar.Content 
             color={styles.title.color}
-            title={name} 
-            subtitle={subtitle}
-            style={styles.Header}
-            />
+            title={modalTitle} 
+            style={{alignItems: "center"}}
+            />  
           <TouchableOpacity  
             style={{alignItems: "flex-end", margin:16}} 
-            onPress={this.props.navigation.openDrawer}
           >
-            {this.props.navigationEnabled === true &&(
-              <FontAwesome5 
-                name="bars" 
-                size={24} 
-                color={styles.title.color}
-              />
-            )}
+            <Text>Guardar</Text>
           </TouchableOpacity>
         </Appbar.Header>
       </SafeAreaView>
@@ -51,6 +43,6 @@ const styles = StyleSheet.create({
     fontWeight:'200' 
   },
   Header:{
-    alignItems: 'center'
+    alignItems: 'center',
   }
 });

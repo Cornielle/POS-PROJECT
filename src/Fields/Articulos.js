@@ -311,29 +311,9 @@ console.log("llegue!!1");
         FechaModificacion:null,
         UsuarioCreacion:"system",
         UsuarioModificacion:"null"
-        
-    
-    
     };
-
     console.log(Insert);
-
     console.log("llegue!!2");
-    
-    //const response = await  Articulos.create(Insert);
-
-    //console.log(response);
-
-   // if (Object.keys(response).length <=0){
-
-  //      Alert.alert("Error al insertar en la base de datos");
-        
-     //   }else{
-
-
-        //    Alert.alert("Guardado Correctamente!");
-      //  }
-
 }
 catch(e){
 

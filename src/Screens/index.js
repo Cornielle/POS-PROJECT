@@ -1,5 +1,4 @@
 import * as React from 'react'
-import Screen from './Screen'
 import {DefaultTheme, Provider as PaperProvider } from 'react-native-paper';// tema por defecto de paper
 
 //exportando todos los componentes 
@@ -67,16 +66,16 @@ export const CategoryManagement =
 </PaperProvider>
 
 export const CashierManagement = ({navigation}) => <Products navigation={navigation} name="Control de Caja" />
-export const SalesManagement  = ({navigation}) => <Screen navigation={navigation} name="Control de Ventas" />
-export const InventoryManagement = ({navigation}) => <Screen navigation={navigation} name="Manejo de Inventario" />
-export const TableManagement = ({navigation}) => <Screen navigation={navigation} name="Manejo de Mesas" />
-export const TaxReceipt = ({navigation}) => <Screen navigation={navigation} name="Comprobante Fiscal" />
-export const ArticulosManagemet =({navigation}) => <Articulos navigation={navigation} subtitle="Articulos" name="Articulos del stock" />
+// export const SalesManagement  = ({navigation}) => <Screen navigation={navigation} name="Control de Ventas" />
+// export const InventoryManagement = ({navigation}) => <Screen navigation={navigation} name="Manejo de Inventario" />
+// export const TableManagement = ({navigation}) => <Screen navigation={navigation} name="Manejo de Mesas" />
+// export const TaxReceipt = ({navigation}) => <Screen navigation={navigation} name="Comprobante Fiscal" />
+export const ArticulosManagement =({navigation}) => <Articulos navigation={navigation} subtitle="Articulos" name="Articulos del stock" />
 export const StockManagement =({navigation}) => <Stock navigation={navigation} subtitle="Stock" name="Stock" ></Stock>
 export const RolesManagement = ({navigation}) => <RolesScreen navigation={navigation} subtitle="Roles" name="Roles" />
 export const AccionesManagement = ({navigation}) => <AccionesScreen navigation={navigation} subtitle="Acciones" name="Acciones" />
 export const MenuManagement = ({navigation}) => <MenuScreen navigation={navigation} subtitle ="Menu" name="Menu" />
-export const ArticulosGreedManagemet = ({navigation}) => <ArticulosGridScreen navigation={navigation} subtitle="Grid" name="Grid" />
+export const ArticulosGridManagement = ({navigation}) => <ArticulosGridScreen navigation={navigation} subtitle="Grid" name="Grid" />
 export const RolesMenuManagement = ({navigation}) => <RolesMenuScreen navigation={navigation} subtitle="Roles Menu" name="Roles Menu" />
 export const RolesGridManagement = ({navigation}) => <RolesGridScreen navigation={navigation} subtitle="Roles" name="Roles" />
 // configuracion del tema por defecto de react native paper
