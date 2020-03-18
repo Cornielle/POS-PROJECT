@@ -153,17 +153,16 @@ return(
 <Modal visible={visible}>
 <View style={styles.Form}> 
 <Card>
+<ModalControls modalTitle={this.state.modalTitle} hideModal={this._hideModal}/>
     <Card.Content  style={styles.cardContent}>
-        <ModalControls modalTitle={this.state.modalTitle}/>
     <View style={styles.Boxone}>
         <Image style={styles.ImageBox} source={{uri:'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg'}}/>
         <View style={styles.fabIcon}>
         <FAB
           icon="camera"
           color="#fff"
-          fabStyle={{paddingBottom:20}}
           style={styles.fabImage}
-          onPress={() => console.log(this.props.navigation.navigate('Register'))} 
+          onPress={() => console.log('open imagen')} 
           />
         </View> 
     </View>
@@ -261,9 +260,9 @@ return(
 }
 const styles = StyleSheet.create({
   Input: {
-    color: '#161924',
+    color: '#000000',
     fontSize: 14,
-    fontWeight:"200",
+    fontWeight:"500",
     backgroundColor:'#FFFFFF',
 },
 Form: {
@@ -286,15 +285,16 @@ ImageBox:{
   width:160,
   height:160,
   borderRadius:normalize(160/2),
-  borderWidth:1
+  borderWidth:1,
+  marginBottom:normalize(30),
   },
   Boxone:{
     justifyContent:"center",
     alignItems:"center",
-    height:normalize(250)
+    height:normalize(200)
  },
   cardContent:{
-    backgroundColor: '#70e1f5'
+    backgroundColor: '#0b8793'
   },
   Boxtwo:{
     flex:4,
@@ -310,13 +310,11 @@ ImageBox:{
   },       
   fabIcon:{
     position:'relative',
-    bottom:normalize(40),
-    left:normalize(40), 
-    paddingBottom:32
+    bottom:normalize(80),
+    left:normalize(50), 
+    paddingBottom:2
   },
   fabImage: {
-    width:50,  
-    height:52,
     alignItems:'center',
-  }
+  },
 });
