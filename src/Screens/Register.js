@@ -147,7 +147,12 @@ this.setState ({Roles:rows}) ;
 
          
                 {/*Header generico que debe ser reutilizado en casi todas las vistas*/}
-                <Header name={name} subtitle={subtitle} goBackEnabled={true} navigationEnabled={false} navigation={navigation}/>
+                <Header name={name} 
+                        subtitle={subtitle}
+                        goBackEnabled={true} 
+                        navigationEnabled={false}
+                        navigation={navigation}
+                    />
                 <View style={styles.Form}>
                     <Card>
                         <Card.Title 

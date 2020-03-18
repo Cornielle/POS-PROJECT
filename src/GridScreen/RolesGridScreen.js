@@ -16,21 +16,10 @@ export default class RolesGridScreen extends React.Component{
 
     constructor(props) {
         super(props);
-    // this.LoadData();
         this._showMenu = this._showMenu.bind(this);
-        // this.searchFilterFunction = this.searchFilterFunction.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
 
       }
-      /*
-      componentDidMount(){
-          this.setState({
-            filterData:this.state.data
-          })
-
-          this.LoadData();
-        }
-*/
         state = { 
             modalVisible:false,
             Roles:[],

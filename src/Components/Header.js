@@ -6,7 +6,7 @@ import {FontAwesome5} from '@expo/vector-icons';
 export default class MyComponent extends React.Component {
   _goBack = () => this.props.navigation.goBack();
   render() {
-    const {name, subtitle,goBackEnabled, searchEnabled} = this.props
+    const {name, subtitle,goBackEnabled } = this.props
     return (
         <SafeAreaView>
           <Appbar.Header>
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   title: {
     color: '#ffffff',
     fontSize: 20,
-    fontWeight:'200'
+    fontWeight:'200' 
   },
   Header:{
     alignItems: 'center'
