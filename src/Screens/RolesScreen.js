@@ -50,10 +50,8 @@ NombreRol:"",
 Comentario :""
 }
 render(){
- 
 
     const {name, subtitle, navigation} = this.props
-    const { text,enabled, checked } =  this.state
     return (
         <ScrollView>
         <View style={styles.ViewStyle}>
@@ -164,10 +162,6 @@ this.setState(InitialState)
         
         }
 }
-
-
-
-
 
 const styles = StyleSheet.create({
     ViewStyle:{

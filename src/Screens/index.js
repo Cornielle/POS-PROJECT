@@ -14,6 +14,7 @@ import RolesScreen from './RolesScreen'
 import AccionesScreen from './AccionesScreen'
 import MenuScreen from './MenuScreen'
 import ArticulosGridScreen from "../GridScreen/ArticulosGridScreen"
+import OpeningClosingGridScreen from "../GridScreen/OpeningClosingGridScreen"
 import RolesMenuScreen from "./RolesMenuSceen"
 import RolesGridScreen  from "../GridScreen/RolesGridScreen"
 
@@ -63,9 +64,14 @@ export const CategoryManagement =
             subtitle="Categorias" 
             name="Categorias" 
         />
-</PaperProvider>
-
-export const CashierManagement = ({navigation}) => <Products navigation={navigation} name="Control de Caja" />
+    </PaperProvider>
+export const OpeningClosingCash = 
+({navigation}) => 
+    <OpeningClosingGridScreen 
+        navigation={navigation} 
+        name="Apertura/Cierre de Caja" 
+    />
+// export const CashierManagement = ({navigation}) => <Products navigation={navigation} name="Control de Caja" />
 // export const SalesManagement  = ({navigation}) => <Screen navigation={navigation} name="Control de Ventas" />
 // export const InventoryManagement = ({navigation}) => <Screen navigation={navigation} name="Manejo de Inventario" />
 // export const TableManagement = ({navigation}) => <Screen navigation={navigation} name="Manejo de Mesas" />

@@ -1,6 +1,5 @@
-import { createAppContainer, createSwitchNavigator} from "react-navigation";
+import { createAppContainer} from "react-navigation";
 import { createDrawerNavigator} from "react-navigation-drawer";
-import {createStackNavigator} from 'react-navigation-stack'
 import React from 'react'
 import {View} from 'react-native'
 
@@ -9,7 +8,7 @@ import {
   UsersLogin,
   UsersRegister,
   DashboardHome,
-  CashierManagement,
+  OpeningClosingCash,
   SalesManagement,
   UsersManagement,
   InventoryManagement,
@@ -61,9 +60,7 @@ const DrawerNavigation = createDrawerNavigator({
       title: 'Registro'
     }
   },
-
   'Articulos':{
-
     screen:ArticulosManagement,
     navigationOptions:{
       title:"Articulos"
@@ -130,17 +127,15 @@ const DrawerNavigation = createDrawerNavigator({
     navigationOptions:{
     title:"Roles Grid"
     }
-  }
-
-});
-
-
-  
-/*
-  'Control de Caja': {
-    screen: CashierManagement,
-    path:'./src/Screens/',
+  },
+  'OCCashier': {
+  screen: OpeningClosingCash,
+  navigationOptions:{
+    title:"Apertura/Cierre de caja"
+    }
   }, 
+});
+  /*
   'Control de Ventas': {
     screen: SalesManagement,
     path:'./src/Screens/',

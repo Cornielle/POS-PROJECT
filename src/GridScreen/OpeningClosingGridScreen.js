@@ -1,33 +1,38 @@
 import React from 'react';
 import { ListItem } from 'react-native-elements'
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { Input } from 'react-native-elements';
 import { Badge,Searchbar,Card, TextInput , FAB } from 'react-native-paper'
 import  ModalControls from '../Components/ModalControls'
-import { View, StyleSheet, Modal, Text, Image,ScrollView} from 'react-native'
+import { View, StyleSheet, Modal, Text,ScrollView} from 'react-native'
 import normalize from 'react-native-normalize';
 import Header from '../Components/Header'
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler';
 import ActionSheet from 'react-native-actionsheet';
 import Empleados from '../../Models/Empleados'
-export default class ArticulosGridScreen extends React.Component{
+export default class OpeningClosingGridScreen extends React.Component{
     constructor(props) {
         super(props);
         this.LoadEmpleadoData()  
         this._showMenu = this._showMenu.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
+        this._showModal =  this._showModal.bind(this);
+        this._hideModal = this._hideModal.bind(this);
+        this.formatAMPM =  this.formatAMPM.bind(this);
       }
       state = { 
         modalVisible:false,
-        visible:false,
+        openingVisible:false,
+        closedVisible:false,
         checked:'unchecked',
         index:0,
         ModalVisibility:false,
         data:[],
         optionArray: [
-          'Editar',
-          'Activar',
           'Detalle',
-          'Cancel'
+          'Cancelar'
         ],
+        date:'',
         modalTitle:'',
         filterData:[],
         newData:'',
@@ -50,8 +55,20 @@ export default class ArticulosGridScreen extends React.Component{
         }
     };
  
-  _showModal = () => this.setState({visible:true})
-  _hideModal = () => this.setState({visible:false})
+  _showModal = (modalName) => {
+    console.log(modalName)
+    if(modalName ==='closed'){
+      this.setState({modalTitle:'Cierre de Caja'})
+      this.setState({openingVisible:true})
+    } else {
+      this.setState({modalTitle:'Apertura de Caja'})
+      this.setState({closeVisible:true})
+    }
+  }
+  _hideModal = () => {
+    this.setState({openingVisible:false})
+    this.setState({closedVisible:false})
+  }
   LoadEmpleadoData = async () =>{
     const options ={
         columns:'Id,NombrePersona,ApellidoPersona,Identificacion,TipoIdentificacion,NombreUsuario,Telefono,Roll',
@@ -61,16 +78,16 @@ export default class ArticulosGridScreen extends React.Component{
         page:1,
         limit:30
     }
-  const empleobj = await Empleados.query(options)
+  const cashier = await Empleados.query(options)
   let arra =[]
-  empleobj.map(x => {
+  cashier.map(x => {
     const{Id, NombrePersona, Roll, Activo} = x;
     var objeto  ={
     key: Id.toString(),
     name:NombrePersona,
     avatar_url:'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
     subtitle: Roll,
-    estado: Activo ?true: false
+    estado: true
   }
   arra.push(objeto)
     });
@@ -80,9 +97,9 @@ export default class ArticulosGridScreen extends React.Component{
       filterData:arra
     })
   }
+
   async  componentDidMount(){
     const crear = await Empleados.createTable();
-    console.log(crear);
   }
   FillEmpleado = async (id) =>{
     try{
@@ -96,11 +113,22 @@ export default class ArticulosGridScreen extends React.Component{
     Alert.alert("Ha ocurrido el siguiente error: "+ex);
     }
   }
+
+  formatAMPM(date) {
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    let ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    var strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+  }
 _showMenu(index){
   this.setState({index})
   this.state.data[index]['estado']
-  ? this.state.optionArray[1] = 'Desactivar' 
-  : this.state.optionArray[1] = 'Activar'  
+  ? this.state.optionArray[0] = 'Cerrar' 
+  : this.state.optionArray[0] = 'Detalle' 
 }
 _makeAction(action){ 
   const idIndex = (this.state.index);
@@ -109,18 +137,11 @@ _makeAction(action){
   switch(action){
     case 0:
       this.FillEmpleado(id)
-      this._showModal()
-      this.setState({modalTitle:'Editar Usuario'})
-      break
-    case 1:
-      this.state.data[this.state.index]['estado'] = !this.state.data[this.state.index]['estado']
-      this.setState({ state: this.state });
-      break
-    case 2:
-      this.FillEmpleado(id)
-      this._showModal()
-      this.setState({modalTitle:'Detalles Usuario'})
-      break
+      if(id.estado ===true)
+        this._showModal('closed')
+        this.setState({ state: this.state });
+        this.setState({modalTitle:'Cierre de Caja'})
+        break
     default:
       break
   }
@@ -128,7 +149,6 @@ _makeAction(action){
 handleSearch = (text) => {
   const filterData = this.state.data.filter(x => String(x.name).includes(text));
   this.setState({ filterData, text})
-  console.log(filterData,'here')
 }
 handleEnd = () => {
   this.setState(state=>{page: this.state.page + 1});
@@ -140,53 +160,73 @@ setModalVisible(visible) {
 }
 render(){
 const {name, subtitle, navigation} = this.props
-const {visible} = this.state
+const {openingVisible, closedVisible} = this.state
 return(
 <ScrollView style={{height:800, zIndex:-50}}>
 <View style={{  zIndex:-1}}>
-<Modal visible={visible}>
-<View style={styles.Form}> 
-<Card>
-<ModalControls modalTitle={this.state.modalTitle} hideModal={this._hideModal}/>
-    <Card.Content  style={styles.cardContent}>
-    <View style={styles.Boxone}>
-        <Image style={styles.ImageBox} source={{uri:'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg'}}/>
-        <View style={styles.fabIcon}>
-        <FAB
-          icon="camera"
-          color="#fff"
-          style={styles.fabImage}
-          onPress={() => console.log('open imagen')} 
-          />
-        </View> 
-    </View>
-    </Card.Content>
-      <TextInput
-          style={styles.Input}
-          mode='flat'
-          label='Nombre'
-          value={this.state.Empleado.NombrePersona}
-          disabled={true}
-          onChangeText={(NombrePersona)=> this.setState({NombrePersona})}
-      />
-      <TextInput
-          style={styles.Input}
-          mode='flat'
-          label='Apellidos'
-          value={this.state.Empleado.ApellidoPersona}
-          onChangeText={(ApellidoPersona) => this.setState({ ApellidoPersona })}
-          disabled={true}
-      />
-      <TextInput
-          style={styles.Input}
-          mode='flat'
-          label='Nombre Usuario'
-          value={this.state.Empleado.NombreUsuario}
-          disabled= {true}
-          onChangeText={(NombreUsuario) => this.setState({ NombreUsuario })}
-      />
-  </Card>
-</View>
+<Modal visible={openingVisible}>
+  <View style={styles.Form}> 
+    <Card style={styles.Card}>
+      <ModalControls modalTitle={this.state.modalTitle? this.state.modalTitle: ''} hideModal={this._hideModal}/>
+        <TextInput
+            style={styles.Input}
+            mode='flat'
+            label='Caja:'
+            placeholder=" Ingresar nombre de caja"
+            value={this.state.Empleado.NombrePersona}
+            onChangeText={(NombrePersona)=> this.setState({NombrePersona})}
+        />
+        <TextInput
+            style={styles.Input}
+            mode='flat'
+            label='Monto de Apertura:'
+            keyboardType='numeric'
+            placeholder="Solo numeros decimales y enteros"
+            value={this.state.Empleado.ApellidoPersona}
+            onChangeText={(ApellidoPersona) => this.setState({ ApellidoPersona })}
+        />
+        <TextInput
+            style={styles.Input}
+            mode='flat'
+            label='Fecha:'
+            disabled={true}
+            value={this.formatAMPM(new Date()) +' '+ new Date().toLocaleDateString('es-ES')}
+            onChangeText={(NombreUsuario) => this.setState({ NombreUsuario })}
+        />
+    </Card>
+  </View>
+</Modal>
+<Modal visible={closedVisible}>
+  <View style={styles.Form}> 
+    <Card style={styles.Card}>
+      <ModalControls modalTitle={this.state.modalTitle? this.state.modalTitle: ''} hideModal={this._hideModal}/>
+        <TextInput
+            style={styles.Input}
+            mode='flat'
+            label='Caja:'
+            placeholder=" Ingresar nombre de caja"
+            value={this.state.Empleado.NombrePersona}
+            onChangeText={(NombrePersona)=> this.setState({NombrePersona})}
+        />
+        <TextInput
+            style={styles.Input}
+            mode='flat'
+            label='Monto de Apertura:'
+            keyboardType='numeric'
+            placeholder="Solo numeros decimales y enteros"
+            value={this.state.Empleado.ApellidoPersona}
+            onChangeText={(ApellidoPersona) => this.setState({ ApellidoPersona })}
+        />
+        <TextInput
+            style={styles.Input}
+            mode='flat'
+            label='Fecha:'
+            disabled={true}
+            value={this.formatAMPM(new Date()) +' '+ new Date().toLocaleDateString('es-ES')}
+            onChangeText={(NombreUsuario) => this.setState({ NombreUsuario })}
+        />
+    </Card>
+  </View>
 </Modal>
   <Header 
     name={name} 
@@ -215,7 +255,20 @@ return(
             style={{zIndex:-2}}
             onPress={() => this._showMenu(index)}
             leftAvatar={{ source: { uri: item.avatar_url } }}
-            rightAvatar={ item.estado === true ? <Badge>Activado</Badge> : <Badge>Desactivado</Badge>}
+            rightAvatar={ 
+              <View>
+                <Text>Fecha de Apertura:{"\n"}
+                  <Text style={{fontSize:12, color:'rgba(0, 0, 0, .5)'}}>
+                    Fecha de Apertura
+                  </Text>
+                </Text>
+                <Text>Fecha de Cierre:{"\n"}
+                <Text style={{fontSize:12, color:'rgba(0, 0, 0, .5)'}}>
+                  Fecha de Cierre
+                </Text>
+              </Text>
+              </View>
+            }
             title={item.name}
             subtitle={item.subtitle}
             bottomDivider
@@ -235,18 +288,18 @@ return(
         options={this.state.optionArray}
         //Define cancel button index in the option array
         //this will take the cancel option in bottom and will highlight it
-        cancelButtonIndex={3}
+        cancelButtonIndex={1}
         //If you want to highlight any specific option you can use below prop
         destructiveButtonIndex={1}
       />
     </View>
     <View style={styles.fab}>
-        <FAB
-          icon="plus"
-          color="#fff"
-          onPress={() => console.log(this.props.navigation.navigate('Register'))} 
-          />
-        </View> 
+      <FAB
+        icon="plus"
+        color="#fff"
+        onPress={() => this._showModal('opening')} 
+        />
+    </View> 
     </ScrollView>
     );
   } 
@@ -255,8 +308,12 @@ const styles = StyleSheet.create({
   Input: {
     color: '#000000',
     fontSize: 14,
-    fontWeight:"500",
+    fontWeight:"bold",
     backgroundColor:'#FFFFFF',
+},
+Card: {
+  height:normalize(250),
+  borderRadius:-1
 },
 Form: {
   padding:normalize(15),

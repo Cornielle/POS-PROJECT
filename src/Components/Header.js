@@ -4,7 +4,7 @@ import { Appbar } from 'react-native-paper';
 import normalize from 'react-native-normalize';
 import {FontAwesome5} from '@expo/vector-icons';
 export default class MyComponent extends React.Component {
-  _goBack = () => this.props.navigation.goBack();
+  _goBack = () => {this.props.navigation.navigate(this.props.goBackNavigationName)};
   render() {
     const {name, subtitle,goBackEnabled } = this.props
     return (

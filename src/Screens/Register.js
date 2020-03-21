@@ -136,20 +136,16 @@ this.setState ({Roles:rows}) ;
  
      // this.LoadData()
         const {name, subtitle, navigation} = this.props
-        const { text,enabled, checked } =  this.state
         return (
       
          
             <ScrollView>
-                   
-
             <View style={styles.ViewStyle}>
-
-         
                 {/*Header generico que debe ser reutilizado en casi todas las vistas*/}
                 <Header name={name} 
                         subtitle={subtitle}
-                        goBackEnabled={true} 
+                        goBackEnabled={true}
+                        goBackNavigationName={'Grid'}
                         navigationEnabled={false}
                         navigation={navigation}
                     />

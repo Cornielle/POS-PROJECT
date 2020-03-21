@@ -1,14 +1,10 @@
 import React from 'react'
-import{TextInput, Avatar, Button, Card, RadioButton} from 'react-native-paper'
+import{TextInput, Avatar, Button, Card} from 'react-native-paper'
 import {StyleSheet, Text, View, ScrollView,Picker,Alert} from 'react-native'
-import {Block} from 'galio-framework'
 import normalize from 'react-native-normalize';
 import Header from  '../Components/Header'
-
 import * as SQLite from "expo-sqlite"
-import {BaseModel, types} from 'expo-sqlite-orm'
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
-import ListaCategoria from '../../BindObject/PickerBind'
 import Articulos from '../../Models/Articulos'
 
 
@@ -58,18 +54,12 @@ Categorias:[]
 
 }
   componentDidMount(){   
-
-
     const sql = 'SELECT * FROM Categorias'
     const params = []
     const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
    databaseLayer.executeSql(sql,params).then(  ({ rows }) => {
 
-this.setState ({Categorias:rows}) ;
-     
-    } )
-
-
+this.setState ({Categorias:rows}) ;})
 const sql1 =  'SELECT name FROM sqlite_master WHERE type = "table"'
 const params1 = []
 const databaseLayer1 = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
@@ -175,66 +165,56 @@ onChangeText={(CatidadExistencia) => this.setState({CatidadExistencia:CatidadExi
 <Text>{"\n"}</Text>
 
 <Text>Seleccionar una Categoria:</Text>
-                            <Picker
-                                selectedValue={this.state.CategoriaId}
-                                style={{height: 50, width: 200}}
-                                onValueChange={(itemValue, itemIndex) =>
-                                    this.setState({CategoriaId: itemValue})
-                                }>
-                                <Picker.Item label="Administrador" value="1" />
-                                <Picker.Item label="Invitado" value="2" />
-                            </Picker>
+<Picker
+    selectedValue={this.state.CategoriaId}
+    style={{height: 50, width: 200}}
+    onValueChange={(itemValue, itemIndex) =>
+        this.setState({CategoriaId: itemValue})
+    }>
+    <Picker.Item label="Administrador" value="1" />
+    <Picker.Item label="Invitado" value="2" />
+</Picker>
 
 <Text>Seleccionar una Proveedor:</Text>
-                            <Picker
-                                selectedValue={this.state.ProveedoresId}
-                                style={{height: 50, width: 200}}
-                                onValueChange={(itemValue, itemIndex) =>
-                                    this.setState({ProveedoresId: itemValue})
-                                }>
+<Picker
+    selectedValue={this.state.ProveedoresId}
+    style={{height: 50, width: 200}}
+    onValueChange={(itemValue, itemIndex) =>
+        this.setState({ProveedoresId: itemValue})
+    }>
 
-                                <Picker.Item label="Coca cola" value="1" />
-                                <Picker.Item label="Rica" value="2" />
-                            </Picker>
- 
+    <Picker.Item label="Coca cola" value="1" />
+    <Picker.Item label="Rica" value="2" />
+</Picker>
 
-                            <Text>Seleccionar medida :</Text>
-                            <Picker
-                                selectedValue={this.state.MedidaDeVenta}
-                                style={{height: 50, width: 200}}
-                                onValueChange={(itemValue, itemIndex) =>
-                                    this.setState({MedidaDeVenta: itemValue})
-                                }>
-                                   {
 
-this.state.Categorias.map(lol =>(
+<Text>Seleccionar medida :</Text>
+<Picker
+    selectedValue={this.state.MedidaDeVenta}
+    style={{height: 50, width: 200}}
+    onValueChange={(itemValue, itemIndex) =>
+        this.setState({MedidaDeVenta: itemValue})
+    }>
+{this.state.Categorias.map(lol =>(
     <Picker.Item label={lol.NombreCategoria.toString()} value={lol.Id.toString()}  key={lol.Id.toString()} />
     ))
-                                   }
-                            </Picker>
-                            <Button
-                                labelStyle={styles.Button} 
-                                icon="account" 
-                                mode="contained" 
-                                onPress={this.GuardarArticulo}
-                            >-
-                                Agregar
-                            </Button>
-</Card.Content>
-
-</Card>
-
-</View>
-</View>
-
-</ScrollView>
-
-)
-
-
 }
-
-
+</Picker>
+                <Button
+                    labelStyle={styles.Button} 
+                    icon="account" 
+                    mode="contained" 
+                    onPress={this.GuardarArticulo}
+                >
+                    Agregar
+                </Button>
+            </Card.Content>
+        </Card>
+    </View>
+</View>
+</ScrollView>
+)
+    }
 }
 Validaciones = ()=>{
 

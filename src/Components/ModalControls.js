@@ -3,13 +3,15 @@ import { StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
 import { Appbar } from 'react-native-paper';
 import normalize from 'react-native-normalize';
 import { Text } from 'native-base';
+
 export default class ModalControls extends React.Component {
   _goBack = (backDirection) => this.props.navigation.goBack(backDirection);
   render() {
-    const { modalTitle,back } = this.props
+    const { modalTitle } = this.props
+
     return (
         <SafeAreaView>
-          <Appbar.Header style={styles.Header} noShadow={true} >
+          <Appbar.Header style={styles.Header } noShadow={true} >
           <Appbar.BackAction
             onPress={this.props.hideModal}
             color={styles.title.color} 
@@ -17,7 +19,7 @@ export default class ModalControls extends React.Component {
           <Appbar.Content 
             color={styles.title.color}
             title={modalTitle} 
-            titleStyle={styles.title}
+            titleStyle={modalTitle.length>=15? {marginLeft:normalize(41),fontSize:16} : {marginLeft:normalize(61),fontSize:16} }
             />  
           <TouchableOpacity  
             style={{alignItems: "flex-end",color:'#fff'}} 
@@ -38,7 +40,7 @@ const styles = StyleSheet.create({
   title: {
     color: '#ffffff',
     fontSize:16,
-    marginLeft:normalize(61),
+    marginLeft:normalize(61)
   },
   Header:{
     alignItems: 'center',
