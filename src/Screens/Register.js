@@ -73,7 +73,8 @@ export default class Register extends React.Component{
         Id_gt:0
         },
         page:1,
-        limit:100
+        limit:100,
+        order:"Id ASC"
         
         }
         
@@ -87,22 +88,22 @@ export default class Register extends React.Component{
 
   componentDidMount(){
 
-  
     Empleados.createTable();
  this.LoadData();
 
 //console.log(this.state.Roles);
-/*
-    const sql = 'SELECT * FROM Roles'
+
+    const sql = 'SELECT * FROM RolMenu'
     const params = []
     const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
    databaseLayer.executeSql(sql, params).then(   ({ rows }) => {
 
-this.setState ({Roles:rows}) ;
-   
+//this.setState ({Roles:rows}) ;
+  
+console.log(rows);
 
     } )
-*/
+
 // console.log(this.state.Roles);
 
    /// this.props.navigation.navigate("Login")
@@ -122,11 +123,11 @@ this.setState ({Roles:rows}) ;
     'SELECT * FROM Empleados'
     ).then(respon =>{console.log(respon)})
 */
-   /*
+ /*
    const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
    databaseLayer.executeSql(
      'SELECT * FROM Empleados'
-     ).then(respon =>{console.log("")})
+     ).then(respon =>{console.log(respon)})
     */
 }
 
@@ -261,7 +262,7 @@ this.setState ({Roles:rows}) ;
                                {
                                  
                                        this.state.Roles.map(xo =>(
-                                        <Picker.Item label={xo.NombreRol.toString()} value={xo.NombreRol.toString()} key={xo.Id.toString()} />
+                                        <Picker.Item label={xo.NombreRol.toString()} value={xo.Id} key={xo.Id.toString()} />
                                        
                                        )
                                

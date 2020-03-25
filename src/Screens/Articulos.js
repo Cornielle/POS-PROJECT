@@ -116,7 +116,7 @@ onChangeText={(Codigo) =>this.setState({Codigo:Codigo})}
  <TextInput 
 style={styles.Input}
 model='flat'
-label='Descripcion Articulo'
+label='Nombre a mostrar'
 value={this.state.DescripcionPantalla}
 onChangeText={(DescripcionPantalla) => this.setState({DescripcionPantalla:DescripcionPantalla})}
 

@@ -38,7 +38,7 @@ export default class MenuScreen extends React.Component{
 
 async componentDidMount(){
 
- Menu.createTable();
+ await Menu.createTable();
 
     const sql =   'SELECT * FROM MENU'
     const params = []
@@ -46,6 +46,7 @@ async componentDidMount(){
    databaseLayer.executeSql(sql, params).then(({ rows }) => {
     this.setState({Menu:rows})
   
+    console.log(rows);
     } )
 
 }

@@ -11,8 +11,15 @@ import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Empleados from '../../Models/Empleados.js'
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import Roles from "../../Models/Roles"
+import Acciones from "../../Models/Acciones"
 import Menu from "../../Models/Menu"
+import  MenuAcciones from '../../Models/MenuAcciones'
+
+const InitialState ={ 
+     IdMenu:0,
+    IdAccion:0,
+    Comentario:"",
+}
 
 export default class MenuAccionesScreen extends React.Component{
 
@@ -21,23 +28,50 @@ constructor(obj){
 super(obj);
 
 }
- state = {
+
+async componentDidMount(){
+ 
+    MenuAcciones.createTable();
+
+    const sql =   'SELECT * FROM Acciones'
+    const params = []
+    const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+   databaseLayer.executeSql(sql, params).then(({ rows }) => {
+    this.setState({Acciones:rows})
+ // console.log(rows);
+    } )
+
+    const sqlMenu =   'SELECT * FROM Menu'
+    const paramsMenu = []
+    const databaseLayerMenu = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+   databaseLayerMenu.executeSql(sqlMenu, paramsMenu).then(({ rows }) => {
+    this.setState({Menu:rows})
+ // console.log(rows);
+    } )
+
+
+    const sqlTodo =   'SELECT * FROM MenuAcciones'
+    const paramsTodo = []
+    const databaseLayerTodo = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+   databaseLayerTodo.executeSql(sqlTodo, paramsTodo).then(({ rows }) => {
+ 
+  console.log(rows);
+    } )
+  
+
+}
+ 
+state = {
 
     IdMenu:0,
     IdAccion:0,
-    Comentario:""
+    Comentario:"",
+    Acciones:[],
+    Menu:[]
 
 
 
  }
-
-componentWillMount(){
-
-
-}
-
- 
-
 render(){
     const {name, subtitle, navigation} = this.props
     const { text,enabled, checked } =  this.state
@@ -58,28 +92,32 @@ return(
                 />
                 <Card.Content>
                 <KeyboardAvoidingView>
-                    <TextInput
-                        style={styles.Input}
-                        mode='flat'
-                        label='Nombre del Menu'
-                        value={this.state.NombreMenu}
-                        onChangeText={(NombreMenu)=> this.setState({NombreMenu})}
-                    />
-                    <Text>{"\n"}</Text>    
-                    <TextInput
-                        style={styles.Input}
-                        mode='flat'
-                        label='Label menu'
-                        value={this.state.MenuLabel}
-                        onChangeText={(MenuLabel)=> this.setState({MenuLabel})}
-                    />
+                <Text>Seleccionar el padre del menu</Text>
+                    <Picker
+                        selectedValue={this.state.IdMenuPadre}
+                        style={{height: 50, width: 200}}
+                        onValueChange={(itemValue, itemIndex) =>
+                            this.setState({IdAccion: itemValue})
+                        }>
+                {
+                        
+                         this.state.Acciones.map(xo =>(
+                          <Picker.Item label={xo.NombreAccion} value={xo.Id.toString()} key={xo.Id.toString()} />
+                         
+                         )
+                 
+                         )
+
+                 }
+                    </Picker>
+
                     <Text>{"\n"}</Text>             
                     <Text>Seleccionar el padre del menu</Text>
                     <Picker
                         selectedValue={this.state.IdMenuPadre}
                         style={{height: 50, width: 200}}
                         onValueChange={(itemValue, itemIndex) =>
-                            this.setState({IdVista: itemValue})
+                            this.setState({IdMenu: itemValue})
                         }>
                 {
                          
@@ -105,7 +143,7 @@ return(
                     <Button
                         labelStyle={styles.Button} 
                         mode="contained" 
-                        onPress={this.GuardarVistas}
+                        onPress={this.GuardarMenuAcciones}
                     >
                         <Icon 
                             name="save" 
@@ -121,10 +159,71 @@ return(
         </View>
     </View>
     </ScrollView>
-
-
-
 )
+
+
+}
+
+
+GuardarMenuAcciones = async () => {
+
+try{
+
+if(this.state.IdAccion === 0){
+    Alert.alert("Debe Seleccionar una accion");
+    return;
+}
+
+if(this.state.IdMenu === 0){
+    Alert.alert("Debes de seleccionar un menu");
+return;
+}
+var fecha = new Date();
+
+var insert ={
+
+                    IdMenu: this.state.IdMenu,
+                    IdAccion : this.state.IdAccion,
+                    Comentario: this.state.Comentario,
+                    Activo:1,
+                    FechaCreacion: fecha.toString(),
+                    IdEmpresa: 1,
+                    IdSucursal:null,
+                    FechaModificacion:null,
+                    UsuarioCreacion:"system",
+                    UsuarioModificacion:null
+    
+}
+
+console.log(insert);
+
+const response  = await MenuAcciones.create(insert);
+
+
+if (Object.keys(response).length <=0){
+
+    Alert.alert("Error al insertar en la base de datos");
+    
+    }
+    else{
+ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
+
+
+this.setState(InitialState)
+    }
+    
+
+
+
+
+}
+catch(ex){
+
+console.log(ex);
+
+
+}
+
 
 
 
@@ -135,21 +234,23 @@ return(
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 } 
+
+const styles = StyleSheet.create({
+    ViewStyle:{
+        backgroundColor:"#f6f6f6",
+    },
+    Form: {
+        padding:normalize(15),
+        marginBottom:10,
+    },
+    Input: {
+        color: '#161924',
+        fontSize: 14,
+        fontWeight:"200",
+        backgroundColor:'#FFFFFF',
+    },
+    Button:{
+        color:'#ffffff',
+    }
+})

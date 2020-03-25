@@ -22,6 +22,9 @@ import {
 ArticulosGreedManagemet,
 RolesMenuManagement,
 RolesGridManagement,
+MenuAccionesManagement,
+OptionManagement
+
  
 } from "./src/Screens";
 import { lockToLandscapeLeft } from "react-native-orientation";
@@ -35,7 +38,7 @@ class AuthLoadingScreen extends React.Component {
   // Fetch the token from storage then navigate to our appropriate place
 
 componentDidMount(){
- this.props.navigation.navigate('Auth');
+  this.props.navigation.navigate('Auth');
 }
   
 
@@ -156,11 +159,32 @@ navigationOptions:{
 title:"Roles Grid"
 
 }
+},
 
+
+"Menu Acciones":{
+screen:MenuAccionesManagement,
+navigationOptions:{
+
+title:"Menu Acciones"
+
+}
+
+
+
+},
+
+"Opciones Screen":{
+screen:OptionManagement,
+navigationOptions:{
+
+  title:"Opciones"
+}
 
 
 
 }
+
 
 
 
@@ -188,13 +212,20 @@ title:"Roles Grid"
   },
 */
 });
-/*
+
+
 const AuthStack= createStackNavigator({Login:UsersLogin})
+
+
 export default createAppContainer(createSwitchNavigator({
-AuthLoading:AuthLoadingScreen,
+  AuthLoading:AuthLoadingScreen,
 App:DrawerNavigation,
 Auth:AuthStack
+
+
+
 }))
-*/
-export default createAppContainer(DrawerNavigation);
+
+
+//export default createAppContainer(DrawerNavigation);
 

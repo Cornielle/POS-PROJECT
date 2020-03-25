@@ -17,6 +17,8 @@ import MenuScreen from './MenuScreen'
 import ArticulosGridScreen from "../GridScreen/ArticulosGridScreen"
 import RolesMenuScreen from "./RolesMenuSceen"
 import RolesGridScreen  from "../GridScreen/RolesGridScreen"
+import MenuAccionesScreen from "./MenuAccionesScreen" 
+import OptionScreen from "./OptionScreen"
 
 //import Users from './Users'
 
@@ -70,6 +72,8 @@ export const MenuManagement = ({navigation}) => <MenuScreen navigation={navigati
 export const ArticulosGreedManagemet = ({navigation}) => <ArticulosGridScreen navigation={navigation} subtitle="Grid" name="Grid" />
 export const RolesMenuManagement = ({navigation}) => <RolesMenuScreen navigation={navigation} subtitle="Roles Menu" name="Roles Menu" />
 export const RolesGridManagement = ({navigation}) => <RolesGridScreen navigation={navigation} subtitle="Roles" name="Roles" />
+export const MenuAccionesManagement =({navigation}) => <MenuAccionesScreen navigation={navigation} subtitle="Menu Acciones" name="Menu Acciones" />
+export const OptionManagement = ({navigation}) =><OptionScreen navigation={navigation} subtitle="Opciones" name="Opciones" />
 // configuracion del tema por defecto de react native paper
 const theme = {
     ...DefaultTheme,
