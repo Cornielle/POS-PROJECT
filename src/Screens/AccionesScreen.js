@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TextInput, Avatar, Button, Card, RadioButton  } from 'react-native-paper';
-import { StyleSheet, Text, View, ScrollView, Picker,Alert, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Picker,Alert, KeyboardAvoidingView, ToastAndroid } from 'react-native';
 import {Block} from 'galio-framework'
 import normalize from 'react-native-normalize';
 import Header from '../Components/Header'
@@ -11,9 +11,14 @@ import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Empleados from '../../Models/Empleados.js'
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import Roles from "../../Models/Roles"
+import Acciones from '../../Models/Acciones'
 
+ const  InitialState ={
 
+    NombreAcciones:"",
+    Comentario:""
+
+ }
 export default class AccionesScreen extends React.Component{
 
 
@@ -23,17 +28,24 @@ super(props)
 
 }
 state ={
-
-    IdVista:"",
-    NombreControl:"",
-    TipoControl:"",
+    NombreAcciones:"",
     Comentario:""
 
 }
 
-componentDidMount(){
+async componentDidMount(){
 
+    const sql =   'SELECT * FROM Acciones'
+    const params = []
+    const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+   databaseLayer.executeSql(sql, params).then(({ rows }) => {
+    //this.setState({Menu:rows})
+  
+console.log(rows);
 
+    } )
+
+ Acciones.createTable();
 
     
 }
@@ -45,8 +57,16 @@ render(){
     return (
         <ScrollView>
         <View style={styles.ViewStyle}>
-            {/*Header generico que debe ser reutilizado en casi todas las vistas*/}
-            <Header name={name} subtitle={subtitle} goBackEnabled={true} navigationEnabled={false} navigation={navigation}/>
+        {/*Header generico que debe ser reutilizado en casi todas las vistas */}
+        <Header name={'Acciones'} 
+                subtitle={'Crear perfíl de Acciones'}
+                goBackEnabled={true}
+                goBackNavigationName={'Grid'}
+                navigationEnabled={true}
+                navigation={this.props.navigationValue}
+                toggleFormHeader={this.props.toggleForm}
+                gridHeader={false}
+            />
             <View style={styles.Form}>
                 <Card>
                     <Card.Title 
@@ -59,37 +79,16 @@ render(){
                     <Card.Content>
                     <KeyboardAvoidingView>
 
-                    <Text>Seleccionar una vistas</Text>
-                            <Picker
-                                selectedValue={this.state.IdVista}
-                                style={{height: 50, width: 200}}
-                                onValueChange={(itemValue, itemIndex) =>
-                                    this.setState({IdVista: itemValue})
-                                }>
-                                <Picker.Item label="Rol 1" value="1" />
-                                <Picker.Item label="Rol 2" value="2" />
-                            </Picker>
-
+               
                         <TextInput
                             style={styles.Input}
                             mode='flat'
-                            label='Nombre Del Control'
-                            value={this.state.NombreControl}
-                            onChangeText={(NombreControl)=> this.setState({NombreControl})}
+                            label='Nombre Acciones'
+                            value={this.state.NombreAcciones}
+                            onChangeText={(NombreAcciones)=> this.setState({NombreAcciones})}
                         />
                         <Text>{"\n"}</Text>                
-                        <Text>Seleccionar una vistas</Text>
-                            <Picker
-                                selectedValue={this.state.IdVista}
-                                style={{height: 50, width: 200}}
-                                onValueChange={(itemValue, itemIndex) =>
-                                    this.setState({IdVista: itemValue})
-                                }>
-                                <Picker.Item label="Rol 1" value="1" />
-                                <Picker.Item label="Rol 2" value="2" />
-                            </Picker>
-
-                        <Text>{"\n"}</Text>  
+                      
                         <TextInput
                             style={styles.Input}
                             mode='flat'
@@ -102,14 +101,14 @@ render(){
                         <Button
                             labelStyle={styles.Button} 
                             mode="contained" 
-                            onPress={this.GuardarRol}
+                            onPress={this.GuardarAcciones}
                         >
                             <Icon 
                                 name="save" 
                                 size={15} 
                                 color="#ffffff" 
                                 style={styles.Icon}
-                            /> <Text>{"\n"}</Text>   
+                            />  
                             Agregar
                         </Button>
                         </KeyboardAvoidingView>
@@ -120,6 +119,72 @@ render(){
         </ScrollView>
     );
     }
+
+
+
+GuardarAcciones  = async () =>{
+
+
+
+    try{
+
+        /********************** Validaciones **********************/
+
+        if(this.state.NombreAcciones ===""){
+            Alert.alert("Debe ingresar el nombre de la accion");
+            return;
+           }
+
+         
+        
+        
+      var fecha = new Date()
+
+        const Insert = {
+
+            NombreAccion:this.state.NombreAcciones,
+            Comentario:this.state.Comentario,
+            Activo:1,
+            FechaCreacion: fecha.toString(),
+            IdEmpresa: 1,
+            IdSucursal:null,
+            FechaModificacion:null,
+            UsuarioCreacion:"system",
+            UsuarioModificacion:null
+        }
+    
+
+        console.log(Insert);
+
+        const response =  await Acciones.create(Insert);
+
+        if(Object.keys(response).length <= 0){
+
+         Alert.alert("Hubo un error en la base de datos");
+
+
+        }
+        else{
+
+ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT);
+this.setState(InitialState);
+        }
+
+    }
+    
+    catch(ex){
+        Alert.alert(ex)
+    Alert.alert("Hubo un error en la aplicacion, favor contartar al soporte");
+
+    }
+    
+
+   
+
+
+
+    
+}
 
 
 }

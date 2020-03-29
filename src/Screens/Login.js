@@ -12,38 +12,89 @@ import Header from '../Components/Header'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Empleados from "../../Models/Empleados"
 import Roles from '../../Models/Roles';
-
+import RolMenu from "../../Models/RolMenu"
 
 //import whatever from '../src'
  export default class Login extends Component{
     constructor(props) {
         super(props);
       
+     
         //this.login = this.login.bind(this);
       }
+
+
       state = { 
         NombreUsuario:"",
         Contrasena:"",
-        successful:false
+        successful:false,
+        Menus:[],
           };
 componentDidMount(){
-
-
    
-    this.props.navigation.navigate("App")
+    //this.LoadAllData();
+    Empleados.createTable();
+   // this.Deletekey();
+ //   this.props.navigation.navigate("App")
 
 }
 
 
-    login(){
-        console.log('exists')
-    }
+LoadAllData = async () =>{
+/*
+    const sqlRol = 'SELECT * FROM Roles'
+    const paramsRol = []
+    const databaseLayerRol = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+    databaseLayerRol.executeSql(sqlRol,paramsRol).then(  ({ rows }) => {
+    console.log(rows)
+     
+    } )
+
+const sqlMenu = 'SELECT * FROM Menu'
+const paramsMenu = []
+const databaseLayerMenu = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+databaseLayerMenu.executeSql(sqlMenu,paramsMenu).then(  ({ rows }) => {
+console.log(rows)
+ 
+} )
+
+
+const sqlRm = 'SELECT * FROM RolMenu'
+const paramsRm = []
+const databaseLayerRm = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+databaseLayerRm.executeSql(sqlRm,paramsRm).then(  ({ rows }) => {
+console.log(rows)
+ 
+} )
+
+*/
+} 
+
+Deletekey = async() =>{
+
+try{
+
+    await AsyncStorage.removeItem('LoggedUser');
+
+}
+catch(ex){
+
+    console.log(ex);
+
+
+}
+
+
+}
+
+
+  
     render(){
         const {name, subtitle, navigation} = this.props
         const { text,enabled, checked } =  this.state
-
 /*
-        const sql = 'SELECT * FROM Empleados'
+
+        const sql = 'SELECT * FROM RolMenu'
         const params = []
         const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
        databaseLayer.executeSql(sql,params).then(  ({ rows }) => {
@@ -105,52 +156,69 @@ componentDidMount(){
 GetLog = async () =>{
 
 try{
-    Empleados.createTable();
-    console.log("Entree");
-    const response  = await Empleados.findBy({contrasena_eq:this.state.Contrasena, NombreUsuario_eq:this.state.NombreUsuario})
-console.log(response);
+    
+const response  = await Empleados.findBy({contrasena_eq:this.state.Contrasena, NombreUsuario_eq:this.state.NombreUsuario})
 
-const {NombrePersona, NombreUsuario, IdRoll} = response
- console.log(`Resultados ${NombrePersona, NombreUsuario, IdRoll}`);
-    if(response ===null || Object.keys(response).length <=0){
+if(response ===null || Object.keys(response).length <=0){
 
 alert("El usuario no existe o contraseña invalida");
 
     }
     else{
-/*
- console.log("here i am");
-        const keys = await AsyncStorage.getAllKeys();
- console.log(keys);
+const {NombrePersona, NombreUsuario, Roll} = response
+const item = await AsyncStorage.getItem('LoggedUser');
 
-const result = await AsyncStorage.multiGet(keys);
-console.log(result);
+if(item ===null){
 
+const rol  = await Roles.findBy({Id_eq:Roll})
+
+const RmenuQuery ={
+    columns: 'IdMenu',
+    where: {
+        RolId_eq: Roll
+
+    },
+    page: 1,
+    limit: 100
+
+}
+
+const Rmenu = await RolMenu.query(RmenuQuery);
+
+
+
+
+console.log(Rmenu)
+ //console.log(rol.NombreRol);
+ /*
+ const sqlRol = 'SELECT ROLM.IdMenu, ME.NombreMenu FROM Rolmenu AS ROLM INNER JOIN MENU AS ME ON ROLM.IdMenu = ME.Id  where RolId =?'
+ const paramsRol = [Roll]
+ const databaseLayerRol = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+ databaseLayerRol.executeSql(sqlRol,paramsRol).then(({ rows }) => {
+// console.log(rows)
+
+
+
+
+ this.setState({Menus:rows})
+
+
+ } )
 */
 
 
-        console.log("paso 1");
-        const item = await AsyncStorage.getItem('LoggedUser');
+ const UserJasonStringy =JSON.stringify({Nombre:NombrePersona, Usuario:NombreUsuario,Roll:Roll, Menus:Rmenu});
+console.log(UserJasonStringy);  
 
-        console.log(item);
-
-         if(item ===null){
-
-            console.log("Paso 2");
-const addAsync = await AsyncStorage.setItem('LoggedUser', JSON.stringify({Nombre:NombrePersona, Usuario:NombreUsuario,Roll:IdRoll}))
-             
-    console.log(addAsync);  
-
-
+const addAsync = await AsyncStorage.setItem('LoggedUser', UserJasonStringy)
+this.props.navigation.navigate("Home")
          }
          else {
 
-            this.props.navigation.navigate('App');
+            this.props.navigation.navigate('Home');
              Alert.alert("El usuario esta logueado!!")
-
+        //await AsyncStorage.removeItem("LoggedUser");
          }
-
-
 
     }
 
@@ -158,14 +226,10 @@ const addAsync = await AsyncStorage.setItem('LoggedUser', JSON.stringify({Nombre
 }
 catch(ex){
 
-
+console.log(ex);
 
 }
     
-
-    
-
-
 }
 
     }

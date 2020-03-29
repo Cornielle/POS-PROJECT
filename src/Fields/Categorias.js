@@ -69,7 +69,16 @@ Descripcion:""
     return(
     
     <ScrollView>
-        <Header name={name}subtitle={subtitle} goBackEnabled={true} navigationEnabled={false} navigation={navigation}></Header>
+        {/*Header generico que debe ser reutilizado en casi todas las vistas */}
+        <Header name={'Categorias'} 
+                subtitle={'Crear perfíl de Categorías'}
+                goBackEnabled={true}
+                goBackNavigationName={'Grid'}
+                navigationEnabled={true}
+                navigation={this.props.navigationValue}
+                toggleFormHeader={this.props.toggleForm}
+                gridHeader={false}
+            />
     <View style={styles.ViewStyle}>
     
     
@@ -78,12 +87,12 @@ Descripcion:""
     
     
     <Card.Title 
-                                style={styles.Card}
-                                title="Categoria" 
-                                subtitle="Todas l" 
-                                left={(props) => <Avatar.Icon {...props} 
-                                icon="account" />} 
-                            />
+        style={styles.Card}
+        title="Categoria" 
+        subtitle="Todas l" 
+        left={(props) => <Avatar.Icon {...props} 
+        icon="account" />} 
+    />
     {}
     <Card.Content>
     <TextInput 
@@ -105,36 +114,20 @@ Descripcion:""
     
      />
    <Button
-                                labelStyle={styles.Button} 
-                                icon="account" 
-                                mode="contained" 
-                                onPress={this.GuardarCategoria}
-                            >-
-                                Guardar
-                            </Button>
-  
+    labelStyle={styles.Button} 
+    icon="account" 
+    mode="contained" 
+    onPress={this.GuardarCategoria}
+    >
+        Guardar
+    </Button>
     </Card.Content>
-    
     </Card>
-    
-    
     </View>
-    
-    
-   
-    
     </View>
-    
-    
-    
     </ScrollView>
-    
     )
-    
-    
     }
-    
-
     Validaciones = () =>{
 
         try {

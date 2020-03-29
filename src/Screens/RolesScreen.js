@@ -50,10 +50,8 @@ NombreRol:"",
 Comentario :""
 }
 render(){
- 
 
     const {name, subtitle, navigation} = this.props
-    const { text,enabled, checked } =  this.state
     return (
         <ScrollView>
         <View style={styles.ViewStyle}>
@@ -138,7 +136,7 @@ const date = new Date();
             Comentario: this.state.Comentario, 
             Activo:1,
             IdEmpresa:1,
-    IdSucursal:0,
+            IdSucursal:0,
             FechaCreacion: '02/01/1993',
             FechaModificacion:null,
             UsuarioCreacion:"system",
@@ -164,10 +162,6 @@ this.setState(InitialState)
         
         }
 }
-
-
-
-
 
 const styles = StyleSheet.create({
     ViewStyle:{

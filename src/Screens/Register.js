@@ -1,4 +1,4 @@
-import React from 'react';
+ import React from 'react';
 import { TextInput, Avatar, Button, Card, RadioButton  } from 'react-native-paper';
 import { StyleSheet, Text, View, ScrollView, Picker,Alert,  ToastAndroid } from 'react-native';
 import {Block} from 'galio-framework'
@@ -12,7 +12,7 @@ import Empleados from '../../Models/Empleados.js'
 import Roles from  '../../Models/Roles'
 
 const InitialState ={
-
+    
     NOMBRE :"", 
     APELLIDO:"",
     NOMBREUSUARIO:"",
@@ -73,7 +73,8 @@ export default class Register extends React.Component{
         Id_gt:0
         },
         page:1,
-        limit:100
+        limit:100,
+        order:"Id ASC"
         
         }
         
@@ -86,72 +87,30 @@ export default class Register extends React.Component{
 
 
   componentDidMount(){
-
-  
     Empleados.createTable();
- this.LoadData();
-
-//console.log(this.state.Roles);
-/*
-    const sql = 'SELECT * FROM Roles'
+    this.LoadData();
+    const sql = 'SELECT * FROM RolMenu'
     const params = []
     const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-   databaseLayer.executeSql(sql, params).then(   ({ rows }) => {
-
-this.setState ({Roles:rows}) ;
-   
-
-    } )
-*/
-// console.log(this.state.Roles);
-
-   /// this.props.navigation.navigate("Login")
-//const DbCreated = await Empleados.createTable();
-
-/*
-    const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-    databaseLayer.executeSql(
-      'SELECT name FROM sqlite_master WHERE type = "table"'
-      ).then(respon =>{console.log(respon)})
-   
-   */
-
-   /*
-  const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-  databaseLayer.executeSql(
-    'SELECT * FROM Empleados'
-    ).then(respon =>{console.log(respon)})
-*/
-   /*
-   const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-   databaseLayer.executeSql(
-     'SELECT * FROM Empleados'
-     ).then(respon =>{console.log("")})
-    */
+    databaseLayer.executeSql(sql, params).then(   ({ rows }) => {
+    console.log(rows);
+    })
 }
-
-
     render(){
-
- 
-     // this.LoadData()
-        const {name, subtitle, navigation} = this.props
-        const { text,enabled, checked } =  this.state
         return (
       
          
             <ScrollView>
-                   
-
             <View style={styles.ViewStyle}>
-
-         
-                {/*Header generico que debe ser reutilizado en casi todas las vistas*/}
-                <Header name={name} 
-                        subtitle={subtitle}
-                        goBackEnabled={true} 
-                        navigationEnabled={false}
-                        navigation={navigation}
+                {/*Header generico que debe ser reutilizado en casi todas las vistas */}
+                <Header name={'Registro'} 
+                        subtitle={'Crear perfil de Usuario'}
+                        goBackEnabled={true}
+                        goBackNavigationName={'Grid'}
+                        navigationEnabled={true}
+                        navigation={this.props.navigationValue}
+                        toggleFormHeader={this.props.toggleForm}
+                        gridHeader={false}
                     />
                 <View style={styles.Form}>
                     <Card>
@@ -266,7 +225,7 @@ this.setState ({Roles:rows}) ;
                                {
                                  
                                        this.state.Roles.map(xo =>(
-                                        <Picker.Item label={xo.NombreRol.toString()} value={xo.NombreRol.toString()} key={xo.Id.toString()} />
+                                        <Picker.Item label={xo.NombreRol.toString()} value={xo.Id} key={xo.Id.toString()} />
                                        
                                        )
                                

@@ -1,30 +1,32 @@
-import { createAppContainer, createSwitchNavigator} from "react-navigation";
+import { createAppContainer} from "react-navigation";
 import { createDrawerNavigator} from "react-navigation-drawer";
-import {createStackNavigator} from 'react-navigation-stack'
 import React from 'react'
 import {View} from 'react-native'
 
 //importando variable que continen la navegacion a los componentes
 import {
   UsersLogin,
-  UsersRegister,
   DashboardHome,
-  CashierManagement,
+  OpeningClosingCash,
   SalesManagement,
   UsersManagement,
   InventoryManagement,
   CategoryManagement,
   ArticulosManagement,
-  Stockmanagement,
+  StockManagement,
   RolesManagement,
   AccionesManagement,
   MenuManagement,
-  ArticulosGridManagement,
+// ArticulosGreedManagemet,
   RolesMenuManagement,
   RolesGridManagement,
+  MenuAccionesManagement,
+  OptionManagement,
+  ProveedoresManagement
+
  
 } from "./src/Screens";
-import { lockToLandscapeLeft } from "react-native-orientation";
+
  
 class AuthLoadingScreen extends React.Component {
   constructor(props) {
@@ -35,7 +37,7 @@ class AuthLoadingScreen extends React.Component {
   // Fetch the token from storage then navigate to our appropriate place
 
 componentDidMount(){
- this.props.navigation.navigate('Auth');
+  this.props.navigation.navigate('Auth');
 }
   
 
@@ -55,38 +57,39 @@ componentDidMount(){
 
 //creando los perfiles de navegacion en el drawer navigation
 const DrawerNavigation = createDrawerNavigator({
-  'Register': {
-    screen: UsersRegister,
+  'Login': {
+    screen: UsersLogin,
     navigationOptions: {
-      title: 'Registro'
+      title: 'Iniciar Sesión'
     }
   },
-
   'Articulos':{
-
     screen:ArticulosManagement,
     navigationOptions:{
       title:"Articulos"
     }
   },
+  'Stock':{
 
-  'Users':{
-    screen: UsersManagement,
+    screen:StockManagement,
+    path:'./src/Component',
     navigationOptions:{
-      title:'Users'
-    
+
+      title:"Stock"
     }
   },
-  'Categorias':{
+
+  'Users':{
     screen: CategoryManagement,
+    path:'./src/Component/',
     navigationOptions:{
       title:'Categorias'
     }
   },
-  'Grid':{
-    screen: ArticulosGridManagement,
+  'Usuarios':{
+    screen: UsersManagement,
     navigationOptions:{
-      title:'Grid'
+      title:'Users'
     }
   },
   'Vistas':{
@@ -107,12 +110,6 @@ const DrawerNavigation = createDrawerNavigator({
     title:'Acciones'
     }      
   },
-  'Login': {
-    screen: UsersLogin,
-    navigationOptions: {
-      title: 'Iniciar Sesión'
-    }
-  },
   'Home': {
     screen: DashboardHome,
     navigationOptions: {
@@ -130,17 +127,35 @@ const DrawerNavigation = createDrawerNavigator({
     navigationOptions:{
     title:"Roles Grid"
     }
+  },
+  'OCCashier': {
+  screen: OpeningClosingCash,
+  navigationOptions:{
+    title:"Apertura/Cierre de caja"
+    }
+  },
+"Menu Acciones":{
+  screen:MenuAccionesManagement,
+  navigationOptions:{
+  title:"Menu Acciones"
   }
-
-});
-
-
+},
+"Proveedores":{
+screen:ProveedoresManagement,
+navigationOptions:{
+      title:"Proveedores"
+    }
+  }
+})
+  export default createAppContainer(DrawerNavigation);
   
 /*
   'Control de Caja': {
     screen: CashierManagement,
     path:'./src/Screens/',
   }, 
+});
+  /*
   'Control de Ventas': {
     screen: SalesManagement,
     path:'./src/Screens/',
@@ -165,12 +180,20 @@ const DrawerNavigation = createDrawerNavigator({
   },
 */
 /*
+});
+
+
 const AuthStack= createStackNavigator({Login:UsersLogin})
+
+
 export default createAppContainer(createSwitchNavigator({
-AuthLoading:AuthLoadingScreen,
+  AuthLoading:AuthLoadingScreen,
 App:DrawerNavigation,
 Auth:AuthStack
+
+
+
 }))
+
 */
-export default createAppContainer(DrawerNavigation);
 
