@@ -7,7 +7,6 @@ import * as SQLite from "expo-sqlite"
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
 import Articulos from '../../Models/Articulos'
 
-
 const styles = StyleSheet.create({
     ViewStyle:{
         backgroundColor:"#f6f6f6",
@@ -26,49 +25,37 @@ const styles = StyleSheet.create({
         color:'#ffffff',
     }
 })
-
-
 export default class Articulo extends React.Component{
-
-constructor(props){
-
-    super(props)
-
-}
-
-state={
-Codigo: "",
-CategoriaId: "",
-Descripcion:"",
-DescripcionPantalla: "",
-NombreArticulo: "",
-CodigoDeBarra:"",
-PrecioCosto:"",
-PrecioVenta:"",
-ProveedoresId:"",
-CatidadExistencia:"",
-MedidaDeVenta:"",
-Categorias:[]
-
-
-
-}
+    constructor(props){
+        super(props)
+    }
+    state={
+    Codigo: "",
+    CategoriaId: "",
+    Descripcion:"",
+    DescripcionPantalla: "",
+    NombreArticulo: "",
+    CodigoDeBarra:"",
+    PrecioCosto:"",
+    PrecioVenta:"",
+    ProveedoresId:"",
+    CatidadExistencia:"",
+    MedidaDeVenta:"",
+    Categorias:[]
+    }
   componentDidMount(){   
     const sql = 'SELECT * FROM Categorias'
     const params = []
     const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-   databaseLayer.executeSql(sql,params).then(  ({ rows }) => {
-
-this.setState ({Categorias:rows}) ;})
-const sql1 =  'SELECT name FROM sqlite_master WHERE type = "table"'
-const params1 = []
-const databaseLayer1 = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-databaseLayer1.executeSql(sql1,params1).then(  ({ rows }) => {
-
-console.log(rows); 
-} )
-
-
+    databaseLayer.executeSql(sql,params).then(({ rows }) => {
+        this.setState ({Categorias:rows}) ;
+    })
+    const sql1 =  'SELECT name FROM sqlite_master WHERE type = "table"'
+    const params1 = []
+    const databaseLayer1 = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+    databaseLayer1.executeSql(sql1,params1).then(  ({ rows }) => {
+        console.log(rows); 
+    } )
 }
 
 render(){
@@ -81,7 +68,16 @@ return(
 <ScrollView>
 <View style={styles.ViewStyle}>
 
-<Header name={name} subtitle={subtitle} goBackEnabled={true} navigationEnabled={false} navigation={navigation} />
+{/*Header generico que debe ser reutilizado en casi todas las vistas */}
+<Header name={'Registro'} 
+    subtitle={'Crear perfil de Usuario'}
+    goBackEnabled={true}
+    goBackNavigationName={'Grid'}
+    navigationEnabled={false}
+    navigation={this.props.navigationValue}
+    toggleFormHeader={this.props.toggleForm}
+    gridHeader={false}
+/>
 <View style={styles.Form}>
 <Card>
 

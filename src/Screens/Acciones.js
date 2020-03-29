@@ -14,7 +14,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import Roles from "../../Models/Roles"
 
 
-export default class AccionesScreen extends React.Component{
+export default class Acciones extends React.Component{
 
 
 constructor(props){
@@ -45,8 +45,16 @@ render(){
     return (
         <ScrollView>
         <View style={styles.ViewStyle}>
-            {/*Header generico que debe ser reutilizado en casi todas las vistas*/}
-            <Header name={name} subtitle={subtitle} goBackEnabled={true} navigationEnabled={false} navigation={navigation}/>
+        {/*Header generico que debe ser reutilizado en casi todas las vistas */}
+        <Header name={'Acciones'} 
+                subtitle={'Crear perfíl de Acciones'}
+                goBackEnabled={true}
+                goBackNavigationName={'Grid'}
+                navigationEnabled={true}
+                navigation={this.props.navigationValue}
+                toggleFormHeader={this.props.toggleForm}
+                gridHeader={false}
+            />
             <View style={styles.Form}>
                 <Card>
                     <Card.Title 

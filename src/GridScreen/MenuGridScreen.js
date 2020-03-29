@@ -7,9 +7,9 @@ import normalize from 'react-native-normalize';
 import HeaderGrid from '../Components/HeaderGrid'
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler';
 import ActionSheet from 'react-native-actionsheet';
-
-import ArticulosFields from '../../src/Fields/Articulos'
-export default class ArticulosGridScreen extends React.Component{
+import Empleados from '../../Models/Empleados'
+import MenuScreen from '../../src/Screens/MenuScreen'
+export default class MenuGridScreen extends React.Component{
     constructor(props) {
         super(props);
         this.LoadEmpleadoData()  
@@ -85,6 +85,7 @@ export default class ArticulosGridScreen extends React.Component{
   }
   async  componentDidMount(){
     const crear = await Empleados.createTable();
+    console.log(crear);
   }
   FillEmpleado = async (id) =>{
     try{
@@ -147,7 +148,6 @@ setModalVisible(visible) {
 }
 render(){
 const {name, subtitle, navigation} = this.props
-console.log(this.props,'En Articulos Grid Screen')
 const {visible} = this.state
 return(
 <View>
@@ -262,7 +262,7 @@ return(
       )
     }
       {this.state.addUser === true  
-        &&(<ArticulosFields navigationValue={this.props.navigation} toggleForm={this._toggleForm}/>)
+        &&(<MenuScreen navigationValue={this.props.navigation} toggleForm={this._toggleForm}/>)
       }
     </View>
     );

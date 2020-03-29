@@ -12,7 +12,7 @@ import Empleados from '../../Models/Empleados.js'
 import Roles from  '../../Models/Roles'
 
 const InitialState ={
-
+    
     NOMBRE :"", 
     APELLIDO:"",
     NOMBREUSUARIO:"",
@@ -85,69 +85,28 @@ export default class Register extends React.Component{
  }
 
 
-  componentDidMount(){
-
-  
-    Empleados.createTable();
- this.LoadData();
-
-//console.log(this.state.Roles);
-/*
-    const sql = 'SELECT * FROM Roles'
-    const params = []
-    const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-   databaseLayer.executeSql(sql, params).then(   ({ rows }) => {
-
-this.setState ({Roles:rows}) ;
-   
-
-    } )
-*/
-// console.log(this.state.Roles);
-
-   /// this.props.navigation.navigate("Login")
-//const DbCreated = await Empleados.createTable();
-
-/*
-    const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-    databaseLayer.executeSql(
-      'SELECT name FROM sqlite_master WHERE type = "table"'
-      ).then(respon =>{console.log(respon)})
-   
-   */
-
-   /*
-  const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-  databaseLayer.executeSql(
-    'SELECT * FROM Empleados'
-    ).then(respon =>{console.log(respon)})
-*/
-   /*
-   const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-   databaseLayer.executeSql(
-     'SELECT * FROM Empleados'
-     ).then(respon =>{console.log("")})
-    */
-}
+    componentDidMount(){
+        Empleados.createTable();
+        this.LoadData();
+    }
 
 
     render(){
-
- 
-     // this.LoadData()
-        const {name, subtitle, navigation} = this.props
+        // const {name, subtitle, navigation} = this.props
         return (
       
          
             <ScrollView>
             <View style={styles.ViewStyle}>
-                {/*Header generico que debe ser reutilizado en casi todas las vistas*/}
-                <Header name={name} 
-                        subtitle={subtitle}
+                {/*Header generico que debe ser reutilizado en casi todas las vistas */}
+                <Header name={'Registro'} 
+                        subtitle={'Crear perfil de Usuario'}
                         goBackEnabled={true}
                         goBackNavigationName={'Grid'}
-                        navigationEnabled={false}
-                        navigation={navigation}
+                        navigationEnabled={true}
+                        navigation={this.props.navigationValue}
+                        toggleFormHeader={this.props.toggleForm}
+                        gridHeader={false}
                     />
                 <View style={styles.Form}>
                     <Card>

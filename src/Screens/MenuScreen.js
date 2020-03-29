@@ -68,8 +68,16 @@ async componentDidMount(){
         return (
             <ScrollView>
             <View style={styles.ViewStyle}>
-                {/*Header generico que debe ser reutilizado en casi todas las vistas*/}
-                <Header name={name} subtitle={subtitle} goBackEnabled={true} navigationEnabled={false} navigation={navigation}/>
+                {/*Header generico que debe ser reutilizado en casi todas las vistas */}
+                <Header name={'Menu'} 
+                        subtitle={'Crear perfil de Menu'}
+                        goBackEnabled={true}
+                        goBackNavigationName={'Grid'}
+                        navigationEnabled={true}
+                        navigation={this.props.navigationValue}
+                        toggleFormHeader={this.props.toggleForm}
+                        gridHeader={false}
+                    />
                 <View style={styles.Form}>
                     <Card>
                         <Card.Title 

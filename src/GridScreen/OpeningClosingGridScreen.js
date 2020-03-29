@@ -1,8 +1,7 @@
 import React from 'react';
 import { ListItem } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Input } from 'react-native-elements';
-import { Badge,Searchbar,Card, TextInput , FAB } from 'react-native-paper'
+import { Searchbar,Card, TextInput , FAB } from 'react-native-paper'
 import  ModalControls from '../Components/ModalControls'
 import { View, StyleSheet, Modal, Text,ScrollView} from 'react-native'
 import normalize from 'react-native-normalize';
@@ -59,10 +58,12 @@ export default class OpeningClosingGridScreen extends React.Component{
     console.log(modalName)
     if(modalName ==='closed'){
       this.setState({modalTitle:'Cierre de Caja'})
-      this.setState({openingVisible:true})
+      this.setState({closedVisible:true})
+    }else if (this.state.optionArray[0] === 'Cerrar caja') {
+      console.log('Debe cerrar la caja antes de aperturar otra')
     } else {
       this.setState({modalTitle:'Apertura de Caja'})
-      this.setState({closeVisible:true})
+      this.setState({openingVisible:true})
     }
   }
   _hideModal = () => {
@@ -127,7 +128,7 @@ export default class OpeningClosingGridScreen extends React.Component{
 _showMenu(index){
   this.setState({index})
   this.state.data[index]['estado']
-  ? this.state.optionArray[0] = 'Cerrar' 
+  ? this.state.optionArray[0] = 'Cerrar caja' 
   : this.state.optionArray[0] = 'Detalle' 
 }
 _makeAction(action){ 
@@ -139,8 +140,6 @@ _makeAction(action){
       this.FillEmpleado(id)
       if(id.estado ===true)
         this._showModal('closed')
-        this.setState({ state: this.state });
-        this.setState({modalTitle:'Cierre de Caja'})
         break
     default:
       break
@@ -201,29 +200,38 @@ return(
     <Card style={styles.Card}>
       <ModalControls modalTitle={this.state.modalTitle? this.state.modalTitle: ''} hideModal={this._hideModal}/>
         <TextInput
-            style={styles.Input}
-            mode='flat'
-            label='Caja:'
-            placeholder=" Ingresar nombre de caja"
-            value={this.state.Empleado.NombrePersona}
-            onChangeText={(NombrePersona)=> this.setState({NombrePersona})}
+          style={styles.Input}
+          mode='flat'
+          label='Monto de Apertura:'
+          keyboardType='numeric'
+          placeholder="Solo numeros decimales y enteros"
+          value={this.state.Empleado.ApellidoPersona}
+          onChangeText={(ApellidoPersona) => this.setState({ ApellidoPersona })}
         />
         <TextInput
-            style={styles.Input}
-            mode='flat'
-            label='Monto de Apertura:'
-            keyboardType='numeric'
-            placeholder="Solo numeros decimales y enteros"
-            value={this.state.Empleado.ApellidoPersona}
-            onChangeText={(ApellidoPersona) => this.setState({ ApellidoPersona })}
+          style={styles.Input}
+          mode='flat'
+          label='Fecha:'
+          disabled={true}
+          value={this.formatAMPM(new Date()) +' '+ new Date().toLocaleDateString('es-ES')}
+          onChangeText={(NombreUsuario) => this.setState({ NombreUsuario })}
         />
         <TextInput
-            style={styles.Input}
-            mode='flat'
-            label='Fecha:'
-            disabled={true}
-            value={this.formatAMPM(new Date()) +' '+ new Date().toLocaleDateString('es-ES')}
-            onChangeText={(NombreUsuario) => this.setState({ NombreUsuario })}
+          style={styles.Input}
+          mode='flat'
+          label='Monto Total:'
+          keyboardType='numeric'
+          placeholder="Solo numeros decimales y enteros"
+          value={this.state.Empleado.ApellidoPersona}
+          onChangeText={(ApellidoPersona) => this.setState({ ApellidoPersona })}
+        />
+        <TextInput
+          style={styles.Input}
+          mode='flat'
+          label='Fecha y hora de Cierre:'
+          disabled={true}
+          value={this.formatAMPM(new Date()) +' '+ new Date().toLocaleDateString('es-ES')}
+          onChangeText={(NombreUsuario) => this.setState({ NombreUsuario })}
         />
     </Card>
   </View>
@@ -256,17 +264,17 @@ return(
             onPress={() => this._showMenu(index)}
             leftAvatar={{ source: { uri: item.avatar_url } }}
             rightAvatar={ 
-              <View>
+              <View> 
                 <Text>Fecha de Apertura:{"\n"}
+                <Icon
+                  name="calendar-check-o"
+                  size={15}
+                  color="rgba(0, 0, 0, .5)"
+                />
                   <Text style={{fontSize:12, color:'rgba(0, 0, 0, .5)'}}>
-                    Fecha de Apertura
+            {" "}Fecha de Apertura
                   </Text>
                 </Text>
-                <Text>Fecha de Cierre:{"\n"}
-                <Text style={{fontSize:12, color:'rgba(0, 0, 0, .5)'}}>
-                  Fecha de Cierre
-                </Text>
-              </Text>
               </View>
             }
             title={item.name}

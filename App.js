@@ -6,7 +6,6 @@ import {View} from 'react-native'
 //importando variable que continen la navegacion a los componentes
 import {
   UsersLogin,
-  UsersRegister,
   DashboardHome,
   OpeningClosingCash,
   SalesManagement,
@@ -18,12 +17,12 @@ import {
   RolesManagement,
   AccionesManagement,
   MenuManagement,
-  ArticulosGridManagement,
+  // ArticulosGridManagement,
   RolesMenuManagement,
   RolesGridManagement,
  
 } from "./src/Screens";
-import { lockToLandscapeLeft } from "react-native-orientation";
+
  
 class AuthLoadingScreen extends React.Component {
   constructor(props) {
@@ -54,10 +53,10 @@ componentDidMount(){
 
 //creando los perfiles de navegacion en el drawer navigation
 const DrawerNavigation = createDrawerNavigator({
-  'Register': {
-    screen: UsersRegister,
+  'Login': {
+    screen: UsersLogin,
     navigationOptions: {
-      title: 'Registro'
+      title: 'Iniciar Sesión'
     }
   },
   'Articulos':{
@@ -66,24 +65,16 @@ const DrawerNavigation = createDrawerNavigator({
       title:"Articulos"
     }
   },
-
-  'Users':{
-    screen: UsersManagement,
-    navigationOptions:{
-      title:'Users'
-    
-    }
-  },
   'Categorias':{
     screen: CategoryManagement,
     navigationOptions:{
       title:'Categorias'
     }
   },
-  'Grid':{
-    screen: ArticulosGridManagement,
+  'Usuarios':{
+    screen: UsersManagement,
     navigationOptions:{
-      title:'Grid'
+      title:'Users'
     }
   },
   'Vistas':{
@@ -103,12 +94,6 @@ const DrawerNavigation = createDrawerNavigator({
     navigationOptions:{
     title:'Acciones'
     }      
-  },
-  'Login': {
-    screen: UsersLogin,
-    navigationOptions: {
-      title: 'Iniciar Sesión'
-    }
   },
   'Home': {
     screen: DashboardHome,

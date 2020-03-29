@@ -4,7 +4,7 @@ import { Appbar } from 'react-native-paper';
 import normalize from 'react-native-normalize';
 import {FontAwesome5} from '@expo/vector-icons';
 export default class MyComponent extends React.Component {
-  _goBack = () => {this.props.toggleFormHeader(false)};
+  _goBack = () => {this.props.navigation.navigate('Login')};
   render() {
 
     // console.log(this.props.navigation.navigate(this.props.goBackNavigationName))
@@ -14,7 +14,6 @@ export default class MyComponent extends React.Component {
           <Appbar.Header>
           {goBackEnabled !== false &&
           <Appbar.BackAction
-            
             onPress={this._goBack}
             color={styles.title.color}
           />}
