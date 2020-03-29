@@ -68,7 +68,7 @@ export const SalesManagement  = ({navigation}) => <Screen navigation={navigation
 export const InventoryManagement = ({navigation}) => <Screen navigation={navigation} name="Manejo de Inventario" />
 export const TableManagement = ({navigation}) => <Screen navigation={navigation} name="Manejo de Mesas" />
 export const TaxReceipt = ({navigation}) => <Screen navigation={navigation} name="Comprobante Fiscal" />
-export const CategoryManagement =({navigation}) => <Categorias navigation ={navigation} subtitle="Categorias" name="Categorias" />
+export const CategoryManagement =({navigation}) => <CategoriasGridScreen navigation ={navigation} subtitle="Categorias" name="Categorias" />
 // export const ArticulosManagemet =({navigation}) => <Articulos navigation={navigation} subtitle="Articulos" name="Articulos del stock" />
 export const StockManagement =({navigation}) => <StockScreen navigation={navigation} subtitle="Stock" name="Stock"  />
 export const RolesManagement = ({navigation}) => <RolesScreen navigation={navigation} subtitle="Roles" name="Roles" />

@@ -69,14 +69,6 @@ const DrawerNavigation = createDrawerNavigator({
       title:"Articulos"
     }
   },
-  'Categorias':{
-    screen: CategoryManagement,
-    path:'./src/Component',
-    navigationOptions:{
-
-      title:"Categorias"
-    }
-  },
   'Stock':{
 
     screen:StockManagement,
@@ -88,7 +80,7 @@ const DrawerNavigation = createDrawerNavigator({
   },
 
   'Users':{
-    screen: UsersManagement,
+    screen: CategoryManagement,
     path:'./src/Component/',
     navigationOptions:{
       title:'Categorias'
