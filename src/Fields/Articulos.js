@@ -1,6 +1,7 @@
 import React from 'react'
-import{TextInput, Avatar, Button, Card} from 'react-native-paper'
-import {StyleSheet, Text, View, ScrollView,Picker,Alert} from 'react-native'
+import{TextInput, Avatar, Button, Card, RadioButton} from 'react-native-paper'
+import {StyleSheet, Text, View, ScrollView,Picker,Alert,ToastAndroid} from 'react-native'
+import {Block} from 'galio-framework'
 import normalize from 'react-native-normalize';
 import Header from  '../Components/Header'
 import * as SQLite from "expo-sqlite"
@@ -26,24 +27,69 @@ const styles = StyleSheet.create({
     }
 })
 export default class Articulo extends React.Component{
-    constructor(props){
-        super(props)
-    }
-    state={
-    Codigo: "",
-    CategoriaId: "",
-    Descripcion:"",
-    DescripcionPantalla: "",
-    NombreArticulo: "",
-    CodigoDeBarra:"",
-    PrecioCosto:"",
-    PrecioVenta:"",
-    ProveedoresId:"",
-    CatidadExistencia:"",
-    MedidaDeVenta:"",
-    Categorias:[]
-    }
+
+constructor(props){
+
+    super(props)
+
+}
+
+state={
+Proveedores:[],
+
+Codigo: "",
+CategoriaId: "",
+Descripcion:"",
+DescripcionPantalla: "",
+NombreArticulo: "",
+CodigoDeBarra:"",
+PrecioCosto:"",
+PrecioVenta:"",
+ProveedoresId:"",
+CatidadExistencia:"",
+MedidaDeVenta:"",
+Categorias:[]
+
+
+
+}
+
+
+
+  
+
+loadTable = async () => {
+
+
+Articulos.dropTable();
+ Articulos.createTable();
+
+
+ const sqlProvee = `SELECT Id,NombreProveedor FROM Proveedores WHERE Activo =? ORDER BY Id ASC`
+ const paramsProvee = [1];
+ const databaseLayerProvee = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+databaseLayerProvee.executeSql(sqlProvee,paramsProvee).then(  ({ rows }) => {
+
+  this.setState({Proveedores:rows});
+
+  console.log(rows)
+ } )  
+
+
+}
+
   componentDidMount(){   
+
+this.loadTable()
+    const sqlArticulos = 'SELECT * FROM Articulos'
+    const paramsArticulos = []
+    const databaseLayerArticulos = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+   databaseLayerArticulos.executeSql(sqlArticulos,paramsArticulos).then(  ({ rows }) => {
+
+console.log(rows);
+     
+    } )
+
     const sql = 'SELECT * FROM Categorias'
     const params = []
     const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
@@ -56,6 +102,18 @@ export default class Articulo extends React.Component{
     databaseLayer1.executeSql(sql1,params1).then(  ({ rows }) => {
         console.log(rows); 
     } )
+
+    /*
+
+const sql1 =  'SELECT name FROM sqlite_master WHERE type = "table"'
+const params1 = []
+const databaseLayer1 = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+databaseLayer1.executeSql(sql1,params1).then(  ({ rows }) => {
+
+console.log(rows); 
+} )
+
+*/
 }
 
 render(){
@@ -102,7 +160,7 @@ onChangeText={(Codigo) =>this.setState({Codigo:Codigo})}
  <TextInput 
 style={styles.Input}
 model='flat'
-label='Descripcion Articulo'
+label='Nombre a mostrar'
 value={this.state.DescripcionPantalla}
 onChangeText={(DescripcionPantalla) => this.setState({DescripcionPantalla:DescripcionPantalla})}
 
@@ -172,26 +230,31 @@ onChangeText={(CatidadExistencia) => this.setState({CatidadExistencia:CatidadExi
 </Picker>
 
 <Text>Seleccionar una Proveedor:</Text>
-<Picker
-    selectedValue={this.state.ProveedoresId}
-    style={{height: 50, width: 200}}
-    onValueChange={(itemValue, itemIndex) =>
-        this.setState({ProveedoresId: itemValue})
-    }>
+                            <Picker
+                                selectedValue={this.state.ProveedoresId}
+                                style={{height: 50, width: 200}}
+                                onValueChange={(itemValue, itemIndex) =>
+                                    this.setState({ProveedoresId: itemValue})
+                                }>
+                                   {
 
-    <Picker.Item label="Coca cola" value="1" />
-    <Picker.Item label="Rica" value="2" />
-</Picker>
+this.state.Proveedores.map(lol =>(
+    <Picker.Item label={lol.NombreProveedor.toString()} value={lol.Id.toString()}  key={lol.Id.toString()} />
+    ))
+                                   }
+                            </Picker>
+ 
 
+                            <Text>Seleccionar medida :</Text>
+                            <Picker
+                                selectedValue={this.state.MedidaDeVenta}
+                                style={{height: 50, width: 200}}
+                                onValueChange={(itemValue, itemIndex) =>
+                                    this.setState({MedidaDeVenta: itemValue})
+                                }>
+                                   {
 
-<Text>Seleccionar medida :</Text>
-<Picker
-    selectedValue={this.state.MedidaDeVenta}
-    style={{height: 50, width: 200}}
-    onValueChange={(itemValue, itemIndex) =>
-        this.setState({MedidaDeVenta: itemValue})
-    }>
-{this.state.Categorias.map(lol =>(
+this.state.Categorias.map(lol =>(
     <Picker.Item label={lol.NombreCategoria.toString()} value={lol.Id.toString()}  key={lol.Id.toString()} />
     ))
 }
@@ -242,7 +305,7 @@ Validaciones = ()=>{
             }
             
             if(this.state.PrecioVenta===""){
-            Alert.alert();
+            Alert.alert("Debe elegir el precio de venta");
             
             
             
@@ -267,14 +330,17 @@ try  {
 console.log("llegue!!1");
 
 //Articulos.dropTable();
-   Articulos.createTable()
-    //this.Validaciones();
+  
+const fecha = new Date();
+
+
+   // this.Validaciones();
     const Insert ={
 
         Codigo: this.state.Codigo,
         CategoriaId: this.state.CategoriaId,
-        DescripcionPantalla: this.state.DescripcionPantalla,
         Descripcion: this.state.Descripcion,
+        DescripcionPantalla: this.state.DescripcionPantalla,
         NombreArticulo: this.state.NombreArticulo,
         CodigoDeBarra: this.state.CodigoDeBarra,
         PrecioCosto: this.state.PrecioCosto,
@@ -283,17 +349,39 @@ console.log("llegue!!1");
         CatidadExistencia:this.state.CatidadExistencia,
         MedidaDeVenta:this.state.MedidaDeVenta,
         Activo:1,
-        FechaCreacion: "2020-02-02",
+        IdEmpresa:1,
+        IdSucursal:1,
+        FechaCreacion: fecha.toString(),
         FechaModificacion:null,
         UsuarioCreacion:"system",
-        UsuarioModificacion:"null"
+        UsuarioModificacion:null
+        
+    
+    
     };
     console.log(Insert);
-    console.log("llegue!!2");
+
+
+    
+    const response = await  Articulos.create(Insert);
+
+    console.log(response);
+
+    if (Object.keys(response).length <=0){
+
+        Alert.alert("Error al insertar en la base de datos");
+        
+        }else{
+
+
+           ToastAndroid.show("Guardado Correctamente!", ToastAndroid.SHORT);
+      }
+
 }
-catch(e){
+catch(ex){
 
 
+    console.log(ex)
 
 }
 

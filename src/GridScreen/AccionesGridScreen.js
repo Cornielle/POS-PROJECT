@@ -8,7 +8,7 @@ import HeaderGrid from '../Components/HeaderGrid'
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler';
 import ActionSheet from 'react-native-actionsheet';
 import Empleados from '../../Models/Empleados'
-import Acciones from '../Screens/Acciones'
+import AccionesScreen from '../Screens/AccionesScreen'
 import MenuScreen from '../../src/Screens/MenuScreen'
 export default class AccionesGridScreen extends React.Component{
     constructor(props) {
@@ -263,7 +263,7 @@ return(
       )
     }
       {this.state.addUser === true  
-        &&(<Acciones navigationValue={this.props.navigation} toggleForm={this._toggleForm}/>)
+        &&(<AccionesScreen navigationValue={this.props.navigation} toggleForm={this._toggleForm}/>)
       }
     </View>
     );

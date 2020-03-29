@@ -13,13 +13,17 @@ import {
   InventoryManagement,
   CategoryManagement,
   ArticulosManagement,
-  Stockmanagement,
+  StockManagement,
   RolesManagement,
   AccionesManagement,
   MenuManagement,
-  // ArticulosGridManagement,
+// ArticulosGreedManagemet,
   RolesMenuManagement,
   RolesGridManagement,
+  MenuAccionesManagement,
+  OptionManagement,
+  ProveedoresManagement
+
  
 } from "./src/Screens";
 
@@ -33,7 +37,7 @@ class AuthLoadingScreen extends React.Component {
   // Fetch the token from storage then navigate to our appropriate place
 
 componentDidMount(){
- this.props.navigation.navigate('Auth');
+  this.props.navigation.navigate('Auth');
 }
   
 
@@ -67,6 +71,25 @@ const DrawerNavigation = createDrawerNavigator({
   },
   'Categorias':{
     screen: CategoryManagement,
+    path:'./src/Component',
+    navigationOptions:{
+
+      title:"Categorias"
+    }
+  },
+  'Stock':{
+
+    screen:StockManagement,
+    path:'./src/Component',
+    navigationOptions:{
+
+      title:"Stock"
+    }
+  },
+
+  'Users':{
+    screen: UsersManagement,
+    path:'./src/Component/',
     navigationOptions:{
       title:'Categorias'
     }
@@ -118,6 +141,26 @@ const DrawerNavigation = createDrawerNavigator({
   navigationOptions:{
     title:"Apertura/Cierre de caja"
     }
+  },
+"Menu Acciones":{
+  screen:MenuAccionesManagement,
+  navigationOptions:{
+  title:"Menu Acciones"
+  }
+},
+"Proveedores":{
+screen:ProveedoresManagement,
+navigationOptions:{
+      title:"Proveedores"
+    }
+  }
+})
+  export default createAppContainer(DrawerNavigation);
+  
+/*
+  'Control de Caja': {
+    screen: CashierManagement,
+    path:'./src/Screens/',
   }, 
 });
   /*
@@ -145,12 +188,20 @@ const DrawerNavigation = createDrawerNavigator({
   },
 */
 /*
+});
+
+
 const AuthStack= createStackNavigator({Login:UsersLogin})
+
+
 export default createAppContainer(createSwitchNavigator({
-AuthLoading:AuthLoadingScreen,
+  AuthLoading:AuthLoadingScreen,
 App:DrawerNavigation,
 Auth:AuthStack
+
+
+
 }))
+
 */
-export default createAppContainer(DrawerNavigation);
 

@@ -9,6 +9,8 @@ import Login  from './Login'
 import CategoriasGridScreen from "../GridScreen/CategoriasGridScreen"
 import Articulos from "../Fields/Articulos"
 import Stock from '../Fields/Stock'
+import Categorias from "./Categorias"
+import StockScreen from './StockScreen'
 import Users  from './Users'
 import RolesScreen from './RolesScreen'
 import AccionesGridScreen  from '../GridScreen/AccionesGridScreen'
@@ -18,6 +20,10 @@ import OpeningClosingGridScreen from "../GridScreen/OpeningClosingGridScreen"
 import RolesMenuScreen from "./RolesMenuSceen"
 import RolesGridScreen  from "../GridScreen/RolesGridScreen"
 import ArticulosGridScreen from "../GridScreen/ArticulosGridScreen";
+import MenuAccionesScreen from "./MenuAccionesScreen" 
+import OptionScreen from "./OptionScreen"
+import ProveedoresScreen from "./ProveedoresScreen"
+
 //import Users from './Users'
 
 // Constantes que contienen la navegacion hacia cada componente en especifico , con sus nombres especificos//
@@ -47,32 +53,33 @@ export const UsersLogin =
             name="Iniciar Sesión"
             />
     </PaperProvider>
-export const CategoryManagement = 
-({navigation}) => 
-        <CategoriasGridScreen 
-            navigation={navigation} 
-            subtitle="Categorias" 
-            name="Categorias" 
-        />
 export const OpeningClosingCash = 
 ({navigation}) => 
     <OpeningClosingGridScreen 
         navigation={navigation} 
         name="Apertura/Cierre de Caja" 
     />
-// export const CashierManagement = ({navigation}) => <Products navigation={navigation} name="Control de Caja" />
-// export const SalesManagement  = ({navigation}) => <Screen navigation={navigation} name="Control de Ventas" />
-// export const InventoryManagement = ({navigation}) => <Screen navigation={navigation} name="Manejo de Inventario" />
-// export const TableManagement = ({navigation}) => <Screen navigation={navigation} name="Manejo de Mesas" />
-// export const TaxReceipt = ({navigation}) => <Screen navigation={navigation} name="Comprobante Fiscal" />
 export const ArticulosManagement =({navigation}) => <ArticulosGridScreen navigation={navigation} subtitle="Articulos" name="Control de Articulos" />
-export const StockManagement =({navigation}) => <Stock navigation={navigation} subtitle="Stock" name="Stock" ></Stock>
+
+
+
+export const CashierManagement = ({navigation}) => <Products navigation={navigation} name="Control de Caja" />
+export const SalesManagement  = ({navigation}) => <Screen navigation={navigation} name="Control de Ventas" />
+export const InventoryManagement = ({navigation}) => <Screen navigation={navigation} name="Manejo de Inventario" />
+export const TableManagement = ({navigation}) => <Screen navigation={navigation} name="Manejo de Mesas" />
+export const TaxReceipt = ({navigation}) => <Screen navigation={navigation} name="Comprobante Fiscal" />
+export const CategoryManagement =({navigation}) => <Categorias navigation ={navigation} subtitle="Categorias" name="Categorias" />
+// export const ArticulosManagemet =({navigation}) => <Articulos navigation={navigation} subtitle="Articulos" name="Articulos del stock" />
+export const StockManagement =({navigation}) => <StockScreen navigation={navigation} subtitle="Stock" name="Stock"  />
 export const RolesManagement = ({navigation}) => <RolesScreen navigation={navigation} subtitle="Roles" name="Roles" />
 export const AccionesManagement = ({navigation}) => <AccionesGridScreen navigation={navigation} subtitle="Control de Acciones" name="Acciones" />
 export const MenuManagement = ({navigation}) => <MenuGridScreen navigation={navigation} subtitle ="Menu" name="Control de Menu" />
 export const UsersManagement = ({navigation}) => <UsersGridScreen navigation={navigation} subtitle="Control de Usuarios" name="Usuarios" />
 export const RolesMenuManagement = ({navigation}) => <RolesMenuScreen navigation={navigation} subtitle="Roles Menu" name="Roles Menu" />
 export const RolesGridManagement = ({navigation}) => <RolesGridScreen navigation={navigation} subtitle="Roles" name="Roles" />
+export const MenuAccionesManagement =({navigation}) => <MenuAccionesScreen navigation={navigation} subtitle="Menu Acciones" name="Menu Acciones" />
+export const OptionManagement = ({navigation}) =><OptionScreen navigation={navigation} subtitle="Opciones" name="Opciones" />
+export const ProveedoresManagement = ({navigation}) => <ProveedoresScreen navigation={navigation} subtitle="Proveedores" name="Proveedores" /> 
 // configuracion del tema por defecto de react native paper
 const theme = {
     ...DefaultTheme,

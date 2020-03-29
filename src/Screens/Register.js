@@ -1,4 +1,4 @@
-import React from 'react';
+ import React from 'react';
 import { TextInput, Avatar, Button, Card, RadioButton  } from 'react-native-paper';
 import { StyleSheet, Text, View, ScrollView, Picker,Alert,  ToastAndroid } from 'react-native';
 import {Block} from 'galio-framework'
@@ -73,7 +73,8 @@ export default class Register extends React.Component{
         Id_gt:0
         },
         page:1,
-        limit:100
+        limit:100,
+        order:"Id ASC"
         
         }
         
@@ -85,14 +86,17 @@ export default class Register extends React.Component{
  }
 
 
-    componentDidMount(){
-        Empleados.createTable();
-        this.LoadData();
-    }
-
-
+  componentDidMount(){
+    Empleados.createTable();
+    this.LoadData();
+    const sql = 'SELECT * FROM RolMenu'
+    const params = []
+    const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+    databaseLayer.executeSql(sql, params).then(   ({ rows }) => {
+    console.log(rows);
+    })
+}
     render(){
-        // const {name, subtitle, navigation} = this.props
         return (
       
          
@@ -221,7 +225,7 @@ export default class Register extends React.Component{
                                {
                                  
                                        this.state.Roles.map(xo =>(
-                                        <Picker.Item label={xo.NombreRol.toString()} value={xo.NombreRol.toString()} key={xo.Id.toString()} />
+                                        <Picker.Item label={xo.NombreRol.toString()} value={xo.Id} key={xo.Id.toString()} />
                                        
                                        )
                                

@@ -15,6 +15,15 @@ import Roles from "../../Models/Roles"
 import Menu from "../../Models/Menu"
 import AwesomeAlert  from  "react-native-awesome-alerts"
 import RolMenu from '../../Models/RolMenu'
+
+
+const InitialState ={  IdMenu:0,
+    RolId:0,
+    Comentario:"",
+    showAlert:true
+}
+
+
 export default class RolesMenuScreen extends React.Component{
 
 
@@ -41,6 +50,7 @@ state={
 async componentDidMount(){
 
 
+ 
      await RolMenu.createTable();
 
 
@@ -50,8 +60,6 @@ async componentDidMount(){
    databaseLayer.executeSql(sql, params).then(   ({ rows }) => {
 
 console.log(rows);
-   
-
     } )
 
 const options = {
@@ -61,6 +69,7 @@ Id_gt:0
 },
 page:1,
 limit:100,
+order:"Id ASC"
 }
 
 const optionsMenu = {
@@ -70,14 +79,15 @@ const optionsMenu = {
     },
     page:1,
     limit:100,
+    order:"Id ASC"
     }
     
 
 
 const Rol = await  Roles.query(options);
 const menu = await Menu.query(optionsMenu);
-console.log(Rol);
-console.log(menu);
+//console.log(Rol);
+//console.log(menu);
 
 this.setState({Roles:Rol,Menu:menu, RolId:Rol[0].Id, IdMenu: menu[0].Id})
 
@@ -126,10 +136,10 @@ return(
                                
                             <Text>Seleccionar el menu</Text>
                             <Picker
-                                selectedValue={this.state.RolId}
+                                selectedValue={this.state.IdMenu}
                                 style={{height: 50, width: 200}}
                                 onValueChange={(itemValue, itemIndex) =>
-                                    this.setState({RolId: itemValue})
+                                    this.setState({IdMenu: itemValue})
                                 }>
                         {
                                  
@@ -146,10 +156,10 @@ return(
                             <Text>{"\n"}</Text>             
                             <Text>Seleccionar el rol</Text>
                             <Picker
-                                selectedValue={this.state.IdMenuPadre}
+                                selectedValue={this.state.RolId}
                                 style={{height: 50, width: 200}}
                                 onValueChange={(itemValue, itemIndex) =>
-                                    this.setState({IdMenuPadre: itemValue})
+                                    this.setState({RolId: itemValue})
                                 }>
                         {
                                  
@@ -163,7 +173,7 @@ return(
                          }
                             </Picker>
 
-                   
+                  
                             <TextInput
                                 style={styles.Input}
                                 mode='flat'
@@ -224,21 +234,25 @@ return;
         RolId:this.state.RolId,
         Comentario:this.state.Comentario,
         Activo:1,
-        FechaCreacion: fecha.toString(),
         IdEmpresa: 1,
         IdSucursal:null,
+        FechaCreacion: fecha.toString(),
         FechaModificacion:null,
         UsuarioCreacion:"system",
         UsuarioModificacion:null
     } 
 
-    console.log(varinsert);
+    console.log(varinsert)
+
  const response = await RolMenu.create(varinsert);
 
+
+  console.log(response);
+  
 if(Object.keys(varinsert).length>0){
 
 ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
-
+//this.setState(InitialState);
 }
 else{
 
@@ -249,8 +263,7 @@ Alert.alert("Ha ocurrido un error!!");
 
 }
 catch(ex){
-
-
+console.log(ex);
 }
 
 
@@ -259,11 +272,6 @@ catch(ex){
 
 
 }
-
-
-
-
-
 
 }
 

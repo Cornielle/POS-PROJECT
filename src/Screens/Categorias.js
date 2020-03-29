@@ -7,7 +7,7 @@ import { TouchableOpacity, FlatList } from 'react-native-gesture-handler';
 import ActionSheet from 'react-native-actionsheet';
 
 
-export default class Categories extends React.Component {
+export default class Categorias extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
