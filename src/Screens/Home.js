@@ -27,9 +27,9 @@ const data = [
 
 export default class Home extends  React.Component{
 
-constructor(props){
+constructor(navigation){
 
-super(props);
+super(navigation);
 
 
 }
@@ -120,7 +120,7 @@ data.Menus.map(x =>{
  
   
     const claves  = sing+inFactory.repeat(idMenues.length);
-    const sql = `SELECT  cast (Id as text) as key, MenuLabel FROM Menu where Id in(${claves})`
+    const sql = `SELECT  cast (Id as text) as key, MenuLabel, NombreMenu FROM Menu where Id in(${claves})`
     const params = idMenues;
     const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
    databaseLayer.executeSql(sql,params).then(  ({ rows }) => {
@@ -147,6 +147,8 @@ console.log(ex)
 ItemSelect = (item) =>{
 
 console.log(item);
+
+this.props.navigation.navigate(item.NombreMenu)
 
 
 }

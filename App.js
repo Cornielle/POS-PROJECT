@@ -15,7 +15,7 @@ import {
   InventoryManagement,
   CategoryManagement,
   ArticulosManagemet,
-  Stockmanagement,
+  StockManagement,
   RolesManagement,
   AccionesManagement,
   MenuManagement,
@@ -23,7 +23,8 @@ ArticulosGreedManagemet,
 RolesMenuManagement,
 RolesGridManagement,
 MenuAccionesManagement,
-OptionManagement
+OptionManagement,
+ProveedoresManagement
 
  
 } from "./src/Screens";
@@ -76,6 +77,16 @@ const DrawerNavigation = createDrawerNavigator({
     navigationOptions:{
 
       title:"Articulos"
+    }
+  },
+
+  'Stock':{
+
+    screen:StockManagement,
+    path:'./src/Component',
+    navigationOptions:{
+
+      title:"Stock"
     }
   },
 
@@ -174,16 +185,19 @@ title:"Menu Acciones"
 
 },
 
-"Opciones Screen":{
-screen:OptionManagement,
+
+
+"Proveedores":{
+screen:ProveedoresManagement,
 navigationOptions:{
 
-  title:"Opciones"
+
+  title:"Proveedores"
 }
 
 
-
 }
+
 
 
 
