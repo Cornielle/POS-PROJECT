@@ -10,7 +10,7 @@ import CategoriasGridScreen from "../GridScreen/CategoriasGridScreen"
 import Articulos from "../Fields/Articulos"
 import Stock from '../Fields/Stock'
 import Categorias from "./Categorias"
-import StockScreen from './StockScreen'
+import StockGridScreen from '../GridScreen/StockGridScreen'
 import Users  from './Users'
 import RolesScreen from './RolesScreen'
 import AccionesGridScreen  from '../GridScreen/AccionesGridScreen'
@@ -70,7 +70,7 @@ export const TableManagement = ({navigation}) => <Screen navigation={navigation}
 export const TaxReceipt = ({navigation}) => <Screen navigation={navigation} name="Comprobante Fiscal" />
 export const CategoryManagement =({navigation}) => <CategoriasGridScreen navigation ={navigation} subtitle="Categorias" name="Categorias" />
 // export const ArticulosManagemet =({navigation}) => <Articulos navigation={navigation} subtitle="Articulos" name="Articulos del stock" />
-export const StockManagement =({navigation}) => <StockScreen navigation={navigation} subtitle="Stock" name="Stock"  />
+export const StockManagement =({navigation}) => <StockGridScreen navigation={navigation} subtitle="Stock" name="Stock"  />
 export const RolesManagement = ({navigation}) => <RolesScreen navigation={navigation} subtitle="Roles" name="Roles" />
 export const AccionesManagement = ({navigation}) => <AccionesGridScreen navigation={navigation} subtitle="Control de Acciones" name="Acciones" />
 export const MenuManagement = ({navigation}) => <MenuGridScreen navigation={navigation} subtitle ="Menu" name="Control de Menu" />

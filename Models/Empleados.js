@@ -1,4 +1,4 @@
-import React from 'react'
+
 import{BaseModel,types} from 'expo-sqlite-orm'
 import * as SQLite from 'expo-sqlite'
 

@@ -31,7 +31,8 @@ static get tableName(){
  static get columnMapping(){
 
 return{
-    Id:{type:types.INTEGER, primary_key:true},
+    // Id:{type:types.INTEGER, primary_key:true},
+    id:{type:types.INTEGER, primary_key:true},
     ArticuloId:{type: types.INTEGER, not_null:true},
     CantidadExistencia:{type:types.INTEGER, not_null:true},
     Activo:{type: types.INTEGER, not_null:true},

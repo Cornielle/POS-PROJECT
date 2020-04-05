@@ -211,14 +211,6 @@ return(
         <TextInput
           style={styles.Input}
           mode='flat'
-          label='Fecha:'
-          disabled={true}
-          value={this.formatAMPM(new Date()) +' '+ new Date().toLocaleDateString('es-ES')}
-          onChangeText={(NombreUsuario) => this.setState({ NombreUsuario })}
-        />
-        <TextInput
-          style={styles.Input}
-          mode='flat'
           label='Monto Total:'
           keyboardType='numeric'
           placeholder="Solo numeros decimales y enteros"
@@ -301,13 +293,6 @@ return(
         destructiveButtonIndex={1}
       />
     </View>
-    <View style={styles.fab}>
-      <FAB
-        icon="plus"
-        color="#fff"
-        onPress={() => this._showModal('opening')} 
-        />
-    </View> 
     </ScrollView>
     );
   } 

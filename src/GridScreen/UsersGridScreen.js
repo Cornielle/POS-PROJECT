@@ -64,24 +64,24 @@ export default class UsersGridScreen extends React.Component{
         page:1,
         limit:30
     }
-  const empleobj = await Empleados.query(options)
-  let arra =[]
-  empleobj.map(x => {
-    const{Id, NombrePersona, Roll, Activo} = x;
-    var objeto  ={
-    key: Id.toString(),
-    name:NombrePersona,
-    avatar_url:'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-    subtitle: Roll,
-    estado: Activo ?true: false
-  }
-  arra.push(objeto)
+    const empleobj = await Empleados.query(options)
+    let arra =[]
+    empleobj.map(x => {
+      const{Id, NombrePersona, Roll, Activo} = x;
+      var objeto  ={
+      key: Id.toString(),
+      name:NombrePersona,
+      avatar_url:'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+      subtitle: Roll,
+      estado: Activo ?true: false
+    }
+    arra.push(objeto)
     });
     this.setState({data:arra})
-
     this.setState({
       filterData:arra
     })
+    console.log(this.state.data)
   }
   async  componentDidMount(){
     const crear = await Empleados.createTable();
