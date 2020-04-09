@@ -8,7 +8,6 @@ export default class ModalControls extends React.Component {
   _goBack = (backDirection) => this.props.navigation.goBack(backDirection);
   render() {
     const { modalTitle } = this.props
-
     return (
         <SafeAreaView>
           <Appbar.Header style={styles.Header } noShadow={true} >
@@ -19,12 +18,17 @@ export default class ModalControls extends React.Component {
           <Appbar.Content 
             color={styles.title.color}
             title={modalTitle} 
-            titleStyle={modalTitle.length>=15? {marginLeft:normalize(41),fontSize:16} : {marginLeft:normalize(61),fontSize:16} }
+            titleStyle={modalTitle.length>15? {marginLeft:normalize(60),fontSize:16} : {marginLeft:normalize(61),fontSize:16} }
             />  
           <TouchableOpacity  
             style={{alignItems: "flex-end",color:'#fff'}} 
           >
-            <Text style={{alignItems: "flex-end", marginLeft:normalize(28),color:'#fff'}}>Guardar</Text>
+            {this.props.isEdit === false && 
+              <Text 
+              style={{alignItems: "flex-end", marginLeft:normalize(28),color:'#fff'}}
+              onPress={()=>this.props.saveEdit()}
+              >Guardar</Text>
+            }
           </TouchableOpacity>
         </Appbar.Header>
       </SafeAreaView>

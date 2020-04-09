@@ -31,7 +31,7 @@ export default class Menu extends BaseModel{
 
 return(
 {
-    Id:{type:types.INTEGER, primary_key:true},
+    id:{type:types.INTEGER, primary_key:true},
     NombreMenu:{type: types.TEXT, not_null:true},
     IdMenuPadre:{type: types.INTEGER, not_null:false},
     MenuLabel:{type:types.TEXT, not_null:true},

@@ -39,7 +39,7 @@ this.props.database.transaction((txn)=>{
      }
      else{
      
-     Alert.alert("Fallo la insercion!!");
+     Alert.alert("Fallo la inserción!!");
      
      
      }

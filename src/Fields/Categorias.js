@@ -1,10 +1,10 @@
 import React from 'react'
 import{TextInput, Avatar, Button, Card, RadioButton} from 'react-native-paper'
-import {StyleSheet, Text, View, ScrollView,Picker,Alert} from 'react-native'
+import {StyleSheet, Text, View, ScrollView,Picker,Alert,ToastAndroid} from 'react-native'
 import {Block} from 'galio-framework'
 import normalize from 'react-native-normalize';
 import Header from  '../Components/Header'
-import Categorias from '../../Models/Categorias.js'
+import Categorias from '../../Models/Categorias'
 import * as SQLite from "expo-sqlite"
 import {BaseModel, types} from 'expo-sqlite-orm'
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
@@ -38,9 +38,6 @@ super(obj)
 
 
  async componentDidMount(){
-
-    
-
 const Created = await Categorias.createTable();
 
 
@@ -150,9 +147,7 @@ Descripcion:""
         databaseLayer.executeSql(
           "SELECT * FROM Categorias where NombreCategoria = 'Adicionales'"
           ).then(respon =>{
-              
-           // console.log(Object.keys(respon.rows).length)
-            
+                         
             if(Object.keys(respon).length <=0){
 
                 Alert.alert(`Ya existe  ${this.state.NombreCategoria} en la base de datos`);
@@ -162,27 +157,30 @@ Descripcion:""
           
         })
         
- //this.Validaciones();
-
-console.log("Estoy aqui esperandote bitch");
-
- const ValInsert ={
-    NombreCategoria: this.state.NombreCategoria,
-    Descripcion: this.state.Descripcion,
-    Activo:1,
-    FechaCreacion: "2020-02-02",
-    FechaModificacion:null,
-    UsuarioCreacion:"system",
-    UsuarioModificacion:"null"
- }
-
-  // const response = await Categorias.create(ValInsert);
-
-//console.log("Respuesta: "+response)
-
+        try{
+            const fecha = new Date();
+            const ValInsert = {
+                NombreCategoria: this.state.NombreCategoria,
+                Descripcion: this.state.Descripcion,
+                Activo:1,
+                FechaCreacion: fecha.toString(),
+                FechaModificacion:"null",
+                UsuarioCreacion:"system",
+                UsuarioModificacion:"null",
+                IdEmpresa:"null",
+                IdSucursal:"null",
+            }
+            const response = await Categorias.create(ValInsert);
+            console.log("Respuesta: ",response)
+            if (Object.keys(response).length <=0){
+                Alert.alert("Error al insertar en la base de datos");
+            }
+            else{
+                ToastAndroid.show("Guardado Correctamente!", ToastAndroid.SHORT);
+            }
+        }
+        catch(ex){
+            console.log(ex, 'what')
+        }
     }
-
-
-
-
 }

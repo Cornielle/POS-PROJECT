@@ -6,16 +6,16 @@ import  ModalControls from '../Components/ModalControls'
 import { View, StyleSheet, Modal, Text, Image,ScrollView, ToastAndroid} from 'react-native'
 import normalize from 'react-native-normalize';
 import HeaderGrid from '../Components/HeaderGrid'
-import Roles from '../../Models/Roles';
+import MenuAcciones from '../../Models/MenuAcciones';
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler';
 import ActionSheet from 'react-native-actionsheet';
-import RolesScreen from '../Screens/RolesScreen';
-export default class RolesGridScreen extends React.Component{
+import MenuAccionesScreen from '../Screens/MenuAccionesScreen';
+export default class AccionesGridScreen extends React.Component{
     constructor(props) {
         super(props);
-        this.LoadRolesData()  
+        this.LoadMenuAccionesData()  
         this.editField = this.editField.bind(this);
-        this._showMenu = this._showRole.bind(this);
+        this._showMenu = this._showAccion.bind(this);
         this.saveEdit = this.saveEdit.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this._toggleForm = this._toggleForm.bind(this);
@@ -42,9 +42,9 @@ export default class RolesGridScreen extends React.Component{
         newData:'',
         text:'',
         editFields:false,
-        Role:{
+        MenuAccion:{
         id:0,
-        NombreRol:'',
+        NombreAccion:'',
         Comentario:'',
         Activo:0,
         FechaCreacion:'',
@@ -57,23 +57,23 @@ export default class RolesGridScreen extends React.Component{
  
   _showModal = () => this.setState({visible:true})
   _hideModal = () => this.setState({visible:false})
-  LoadRolesData = async () =>{
-    const optionsRoles ={
-        columns:`id ,NombreRol, Comentario, FechaCreacion, Activo`,
+  LoadMenuAccionesData = async () =>{
+    const optionsMenuAcciones ={
+        columns:`id ,NombreMenuAccion, Comentario, FechaCreacion, Activo`,
         page:1,
         limit:30
     }    
   
-  const artiobj = await Roles.query(optionsRoles)
+  const artiobj = await MenuMenuAcciones.query(optionsMenuAcciones)
   console.log(artiobj, 'here')
   let arra =[]
   this.state.HoraCreacion = ''
   artiobj.map(x => {
-    const{id, NombreRol,FechaCreacion, Activo, Comentario} = x;
+    const{id, NombreMenuAccion,FechaCreacion, Activo, Comentario} = x;
     let date = FechaCreacion.split(' ');
     var objeto  ={
     key: id,
-    NombreRol:NombreRol,
+    NombreMenuAccion:NombreMenuAccion,
     Comentario:Comentario,  
     FechaCreacion:`${date[2]}/${date[1]}/${date[3]}` ,
     HoraCreacion: date[4][0]+date[4][1] > 11 && date[4][0]+date[4][1] < 23 ? `${ date[4]}PM` :`${ date[4]}AM`,
@@ -89,35 +89,35 @@ export default class RolesGridScreen extends React.Component{
     // console.log(this.state.data)
   }
   async  componentDidMount(){
-    const crear = await Roles.createTable();
-    this.LoadRolesData()  
+    const crear = await MenuAcciones.createTable();
+    this.LoadMenuAccionesData()  
   }
   saveEdit = async () =>{ 
     try{
       const props =  {
-        id: this.state.Role.id,
-        NombreRol: this.state.Role.NombreRol,
-        Activo:this.state.Role.Activo,
-        Comentario:this.state.Role.Comentario
+        id: this.state.MenuAccion.id,
+        NombreMenuAccion: this.state.MenuAccion.NombreMenuAccion,
+        Activo:this.state.MenuAccion.Activo,
+        Comentario:this.state.MenuAccion.Comentario
       }
-      const response = await Roles.update(props)
+      const response = await MenuMenuAcciones.update(props)
       if(Object.keys(response).length <=0){
         ToastAndroid.show("Error al insertar en la base de datos",ToastAndroid.SHORT);
       }else{
         ToastAndroid.show("Guardado Correctamente!", ToastAndroid.SHORT);
         this.state.visible = false
-        this.LoadRolesData()
+        this.LoadMenuAccionesData()
       }
     }
   catch(ex){
         console.log(ex, 'fatal error')
     }
   }
-  FillArticulo = async (id) =>{
+  FillMenuAccion = async (id) =>{
     try{
       const {key} = id;
-      const Role = await Roles.find(key)
-      this.setState({Role})
+      const MenuAccion = await MenuMenuAcciones.find(key)
+      this.setState({MenuAccion})
     }
     catch(ex){
     console.log("Ha ocurrido el siguiente error: "+ex);
@@ -125,7 +125,7 @@ export default class RolesGridScreen extends React.Component{
   }
 
   stateUsers = async (id) =>{ 
-    const savingState= await Roles.find(id)
+    const savingState= await MenuMenuAcciones.find(id)
     savingState.Activo = this.state.data[this.state.index]['estado'] ? 1:0
     savingState.save()
   }
@@ -134,7 +134,7 @@ _toggleForm(addRecord){
     this.setState({addRecord:false})
   }
 }
-_showRole(index){
+_showMenuAccion(index){
   this.setState({index})
   this.state.data[index]['estado']
   ? this.state.optionArray[1] = 'Desactivar' 
@@ -146,9 +146,9 @@ _makeAction(action){
   this.setState({modalTitle:''})
   switch(action){
     case 0:
-      this.FillArticulo(id)
+      this.FillMenuAccion(id)
       this.setState({
-        modalTitle:'Detalles Role',
+        modalTitle:'Detalles MenuAccion',
         editFields:true
       })
       this._showModal()
@@ -159,9 +159,9 @@ _makeAction(action){
       this.stateUsers(id.key)
       break
     case 2:
-      this.FillArticulo(id)
+      this.FillMenuAccion(id)
       this.setState({
-        modalTitle:'Editar Role',
+        modalTitle:'Editar MenuAccion',
         editFields:false
       })
       this._showModal()
@@ -183,13 +183,13 @@ setModalVisible(visible) {
     this.ActionSheet.show();
 }
 editField = (fieldValue, name) =>{
-    if(name==='NombreRol'){
-      this.setState({NombreRol:fieldValue})
-      this.state.Role.NombreRol = fieldValue 
+    if(name==='NombreMenuAccion'){
+      this.setState({NombreMenuAccion:fieldValue})
+      this.state.MenuAccion.NombreMenuAccion = fieldValue 
     }
     else if(name==='Comentario'){
       this.setState({Comentario:fieldValue})
-      this.state.Role.Comentario = fieldValue
+      this.state.MenuAccion.Comentario = fieldValue
     }
 }
 render(){
@@ -223,17 +223,17 @@ return(
         <TextInput
             style={styles.Input}
             mode='flat'
-            label='Nombre del Rol'
-            value={this.state.Role.NombreRol !==null ? this.state.Role.NombreRol : 'Cargando...'}
+            label='Nombre de la MenuAccion'
+            value={this.state.MenuAccion.NombreMenuAccion !==null ? this.state.MenuAccion.NombreMenuAccion : 'Cargando...'}
             disabled={editFields}
             editable={true}
-            onChangeText={(NombreRol)=> this.editField(NombreRol, 'NombreRol')}
+            onChangeText={(NombreMenuAccion)=> this.editField(NombreMenuAccion, 'NombreMenuAccion')}
             />
             <TextInput
               style={styles.Input}
               mode='flat'
               label='Comentario'
-              value={this.state.Role.Comentario !==null ? this.state.Role.Comentario : 'Cargando...'}
+              value={this.state.MenuAccion.Comentario !==null ? this.state.MenuAccion.Comentario : 'Cargando...'}
               disabled={editFields}
               editable={true}
               onChangeText={(Comentario) => this.editField(Comentario,'Comentario')}
@@ -270,7 +270,7 @@ return(
           >
             <ListItem 
               style={{zIndex:-2}}
-              onPress={() => this._showRole(index)}
+              onPress={() => this._showMenuAccion(index)}
               leftAvatar={{ source: { uri: item.avatar_url } }}
               rightAvatar={ 
 
@@ -298,8 +298,8 @@ return(
                 </Text>
               </View>
               }
-              title={item.NombreRol}
-              // subtitle={item.RoleLabel}
+              title={item.NombreMenuAccion}
+              // subtitle={item.MenuAccionLabel}
               bottomDivider
             />
               </TouchableOpacity>
@@ -328,13 +328,13 @@ return(
             color="#fff"
             onPress={() => this.setState({addRecord:true})} 
             />
-          </View> 
+      </View> 
       </ScrollView>
       )
     }
-      {this.state.addRecord === true  
-        &&(<RolesScreen navigationValue={this.props.navigation} toggleForm={this._toggleForm}/>)
-      }
+      {/* {this.state.addRecord === true  
+        &&(<MenuAccionesScreen navigationValue={this.props.navigation} toggleForm={this._toggleForm}/>)
+      } */}
     </View>
     );
   } 

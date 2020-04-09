@@ -1,7 +1,7 @@
 import { createAppContainer} from "react-navigation";
 import { createDrawerNavigator} from "react-navigation-drawer";
 import React from 'react'
-import {View} from 'react-native'
+import { View}  from 'react-native'
 
 //importando variable que continen la navegacion a los componentes
 import {
@@ -23,35 +23,26 @@ import {
   MenuAccionesManagement,
   OptionManagement,
   ProveedoresManagement 
-} from "./src/Screens";
-
  
+} from "./src/Screens";
 class AuthLoadingScreen extends React.Component {
   constructor(props) {
     super(props);
-
   }
-
   // Fetch the token from storage then navigate to our appropriate place
-
 componentDidMount(){
   this.props.navigation.navigate('Auth');
 }
-  
-
   // Render any loading content that you like here
   render() {
-    
     return (
       <View>
         {
         }
-
       </View>
     );
   }
 }
-
 
 //creando los perfiles de navegacion en el drawer navigation
 const DrawerNavigation = createDrawerNavigator({
@@ -68,15 +59,12 @@ const DrawerNavigation = createDrawerNavigator({
     }
   },
   'Stock':{
-
     screen:StockManagement,
     path:'./src/Component',
     navigationOptions:{
-
       title:"Stock"
     }
   },
-
   'Users':{
     screen: CategoryManagement,
     path:'./src/Component/',
@@ -97,7 +85,7 @@ const DrawerNavigation = createDrawerNavigator({
     }
       },
   'Roles':{
-    screen: RolesManagement,
+    screen: RolesGridManagement,
     navigationOptions:{
       title:'Roles'
     }
@@ -120,12 +108,12 @@ const DrawerNavigation = createDrawerNavigator({
     title:"Roles Menu"
     }
   }, 
-  "Roles Grid":{
-    screen:RolesGridManagement, 
-    navigationOptions:{
-    title:"Roles Grid"
-    }
-  },
+  // "Roles Grid":{
+  //   screen:RolesGridManagement, 
+  //   navigationOptions:{
+  //   title:"Roles Grid"
+  //   }
+  // },
   'OCCashier': {
   screen: OpeningClosingCash,
   navigationOptions:{

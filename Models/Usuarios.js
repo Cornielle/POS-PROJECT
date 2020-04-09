@@ -31,7 +31,7 @@ return"Usuarios";
 static get columnMapping(){
 
 return{
-IdEmpleado:{type: types.INTEGER, primary_key:true},
+id:{type: types.INTEGER, primary_key:true},
 Rol:{type: types.INTEGER, not_null:true},
 NombreUsuario:{type: types.TEXT, not_null:true},
 Contrasena:{type:types.TEXT, not_null:true},

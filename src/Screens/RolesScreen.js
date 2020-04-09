@@ -32,19 +32,14 @@ super(props)
 }
 
 componentDidMount(){
-
-
-Roles.createTable();
-
+    // Roles.dropTable();
+    Roles.createTable();
     const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
     databaseLayer.executeSql(
       'SELECT * FROM Roles where NombreRol="administrador" COLLATE NOCASE'
       ).then(respon =>{console.log(respon)})
     
 }
-
-s
-
 state={
 NombreRol:"",
 Comentario :"",
@@ -56,9 +51,17 @@ render(){
     return (
         <ScrollView>
         <View style={styles.ViewStyle}>
-            {/*Header generico que debe ser reutilizado en casi todas las vistas*/}
-            <Header name={name} subtitle={subtitle} goBackEnabled={true} navigationEnabled={false} navigation={navigation}/>
-            <View style={styles.Form}>
+                {/*Header generico que debe ser reutilizado en casi todas las vistas */}
+                <Header name={'Acciones'} 
+                        subtitle={'Crear perfil de Acciones'}
+                        goBackEnabled={true}
+                        goBackNavigationName={'Grid'}
+                        navigationEnabled={true}
+                        navigation={this.props.navigationValue}
+                        toggleFormHeader={this.props.toggleForm}
+                        gridHeader={false}
+                    />
+                <View style={styles.Form}>
                 <Card>
                     <Card.Title 
                         style={styles.Card}
@@ -151,21 +154,19 @@ console.log(this.state.ExistNombre);
             this.Validaciones();
                                                                                                                                                                                                                                                                                           
             
-const date = new Date();
 
- 
-
+    console.log("Entreeee");
+        const fecha = new Date();
         const ValInsert ={
             NombreRol: this.state.NombreRol,
             Comentario: this.state.Comentario, 
             Activo:1,
             IdEmpresa:1,
             IdSucursal:0,
-            FechaCreacion: '02/01/1993',
+            FechaCreacion: fecha.toString(),
             FechaModificacion:null,
             UsuarioCreacion:"system",
             UsuarioModificacion:null
-            
         }
     /*
         console.log(ValInsert);

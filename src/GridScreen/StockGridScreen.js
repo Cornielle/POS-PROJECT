@@ -1,26 +1,26 @@
-import React , { useState } from 'react';
+import React from 'react';
 import { ListItem } from 'react-native-elements'
 import { Badge,Searchbar,Card, TextInput , FAB } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import  ModalControls from '../Components/ModalControls'
-import { View, StyleSheet, Modal, Text, Image,ScrollView, ToastAndroid} from 'react-native'
+import { View, StyleSheet, Modal, Text, Image,ScrollView} from 'react-native'
 import normalize from 'react-native-normalize';
 import HeaderGrid from '../Components/HeaderGrid'
-import Roles from '../../Models/Roles';
+import Stock from '../../Models/Stock';
+import StockScreen from '../Screens/StockScreen';
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler';
 import ActionSheet from 'react-native-actionsheet';
-import RolesScreen from '../Screens/RolesScreen';
-export default class RolesGridScreen extends React.Component{
+export default class StockGridScreen extends React.Component{
     constructor(props) {
         super(props);
-        this.LoadRolesData()  
+        this.LoadArticuloData()  
         this.editField = this.editField.bind(this);
-        this._showMenu = this._showRole.bind(this);
+        this._showMenu = this._showMenu.bind(this);
         this.saveEdit = this.saveEdit.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this._toggleForm = this._toggleForm.bind(this);
-        this.saveEdit = this.saveEdit.bind(this)        
-        this.stateUsers =  this.stateUsers.bind(this)
+        this.saveEdit = this.saveEdit.bind(this);
+        this.stateArticle =  this.stateArticle.bind(this)
       }
       state = { 
         modalVisible:false,
@@ -35,50 +35,52 @@ export default class RolesGridScreen extends React.Component{
           'Editar',
           'Cancel'
         ],
-        render:false,
         addRecord:false,
         modalTitle:'',
         filterData:[],
         newData:'',
         text:'',
+        IdArticulo:"",
         editFields:false,
-        Role:{
-        id:0,
-        NombreRol:'',
-        Comentario:'',
-        Activo:0,
-        FechaCreacion:'',
-        FechaModificacion:'',
-        UsuarioCreacion:'',
-        UsuarioModificacion:''
+        Stock:{
+            id:0,
+            ArticuloId:0,
+            CantidadExistencia:0,
+            Activo:0,
+            IdEmpresa:0,
+            IdSucursal:0,
+            FechaCreacion: '',
+            FechaModificacion:'',
+            UsuarioCreacion:'',
+            UsuarioModificacion:''
         },
     };
-
- 
   _showModal = () => this.setState({visible:true})
   _hideModal = () => this.setState({visible:false})
-  LoadRolesData = async () =>{
-    const optionsRoles ={
-        columns:`id ,NombreRol, Comentario, FechaCreacion, Activo`,
+  LoadArticuloData = async () =>{
+    const options ={
+        columns:`id,ArticuloId,CantidadExistencia,Activo,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,
+         UsuarioCreacion,UsuarioModificacion`,
+        where:{
+        Id_gt:0
+        },
         page:1,
         limit:30
     }    
-  
-  const artiobj = await Roles.query(optionsRoles)
-  console.log(artiobj, 'here')
+  const artiobj = await Articulos.query(options) 
   let arra =[]
   this.state.HoraCreacion = ''
   artiobj.map(x => {
-    const{id, NombreRol,FechaCreacion, Activo, Comentario} = x;
+    const{id, NombreArticulo, PrecioCosto, CantidadExistencia,Activo} = x;
     let date = FechaCreacion.split(' ');
     var objeto  ={
     key: id,
-    NombreRol:NombreRol,
-    Comentario:Comentario,  
+    name:NombreArticulo,
     FechaCreacion:`${date[2]}/${date[1]}/${date[3]}` ,
     HoraCreacion: date[4][0]+date[4][1] > 11 && date[4][0]+date[4][1] < 23 ? `${ date[4]}PM` :`${ date[4]}AM`,
-    avatar_url:'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',  
-    estado: Activo ?true: false  
+    avatar_url:'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+    subtitle: CantidadExistencia,
+    estado: Activo ?true: false
   }
   arra.push(objeto)
     });
@@ -89,52 +91,50 @@ export default class RolesGridScreen extends React.Component{
     // console.log(this.state.data)
   }
   async  componentDidMount(){
-    const crear = await Roles.createTable();
-    this.LoadRolesData()  
+    const crear = await Articulos.createTable();
+    this.LoadArticuloData()  
   }
   saveEdit = async () =>{ 
-    try{
-      const props =  {
-        id: this.state.Role.id,
-        NombreRol: this.state.Role.NombreRol,
-        Activo:this.state.Role.Activo,
-        Comentario:this.state.Role.Comentario
-      }
-      const response = await Roles.update(props)
-      if(Object.keys(response).length <=0){
-        ToastAndroid.show("Error al insertar en la base de datos",ToastAndroid.SHORT);
-      }else{
-        ToastAndroid.show("Guardado Correctamente!", ToastAndroid.SHORT);
-        this.state.visible = false
-        this.LoadRolesData()
-      }
+    const props =  {
+      id:this.state.Stock.id,
+      ArticuloId:this.state.Stock.ArticuloId,
+      CantidadExistencia:this.state.Stock.CantidadExistencia,
+      Activo:this.state.Stock.Activo,
+      IdEmpresa:this.state.Stock.IdEmpresa,
+      IdSucursal:this.state.Stock.IdSucursal,
+      FechaCreacion: this.state.Stock.FechaCreacion,
+      FechaModificacion:this.state.Stock.FechaModificacion,
+      UsuarioCreacion:this.state.Stock.UsuarioCreacion,
+      UsuarioModificacion:this.state.Stock.UsuarioModificacion
+  
     }
-  catch(ex){
-        console.log(ex, 'fatal error')
-    }
+    console.log(props,'checke')
+   const saving = await Articulos.update(props)
   }
+
   FillArticulo = async (id) =>{
     try{
       const {key} = id;
-      const Role = await Roles.find(key)
-      this.setState({Role})
+      const Articulo = await Articulos.find(key)
+      this.setState({Articulo})
     }
     catch(ex){
-    console.log("Ha ocurrido el siguiente error: "+ex);
+    Alert.alert("Ha ocurrido el siguiente error: "+ex);
     }
   }
 
-  stateUsers = async (id) =>{ 
-    const savingState= await Roles.find(id)
+  stateArticle = async (id) =>{ 
+    const savingState= await Articulos.find(id)
     savingState.Activo = this.state.data[this.state.index]['estado'] ? 1:0
     savingState.save()
+    console.log(savingState, 'i can fly on')
   }
 _toggleForm(addRecord){
   if(addRecord===false){
     this.setState({addRecord:false})
   }
 }
-_showRole(index){
+_showMenu(index){
   this.setState({index})
   this.state.data[index]['estado']
   ? this.state.optionArray[1] = 'Desactivar' 
@@ -148,7 +148,7 @@ _makeAction(action){
     case 0:
       this.FillArticulo(id)
       this.setState({
-        modalTitle:'Detalles Role',
+        modalTitle:'Detalles Articulo',
         editFields:true
       })
       this._showModal()
@@ -156,12 +156,12 @@ _makeAction(action){
     case 1:
       this.state.data[this.state.index]['estado'] = !this.state.data[this.state.index]['estado']
       this.setState({ state: this.state });
-      this.stateUsers(id.key)
+      this.stateArticle(id.key)
       break
     case 2:
       this.FillArticulo(id)
       this.setState({
-        modalTitle:'Editar Role',
+        modalTitle:'Editar Articulo',
         editFields:false
       })
       this._showModal()
@@ -179,18 +179,19 @@ handleEnd = () => {
 }
 setModalVisible(visible) {
   this.setState({modalVisible: visible});
-    //To show the Bottom ActionSheetsfsff
     this.ActionSheet.show();
 }
 editField = (fieldValue, name) =>{
-    if(name==='NombreRol'){
-      this.setState({NombreRol:fieldValue})
-      this.state.Role.NombreRol = fieldValue 
-    }
-    else if(name==='Comentario'){
-      this.setState({Comentario:fieldValue})
-      this.state.Role.Comentario = fieldValue
-    }
+
+     if(name==='CantidadExistencia'){
+      this.setState({CantidadExistencia:fieldValue})
+      this.state.Stock.CantidadExistencia = fieldValue
+    } 
+    if(name==='Nombre'){
+      //falta nombre
+      // this.setState({CantidadExistencia:fieldValue})
+      // this.state.Stock.CantidadExistencia = fieldValue
+    } 
 }
 render(){
 const {name, subtitle, navigation} = this.props
@@ -207,8 +208,7 @@ return(
   <ModalControls modalTitle={this.state.modalTitle} hideModal={this._hideModal} isEdit={editFields} saveEdit={this.saveEdit}/>
       <Card.Content  style={styles.cardContent}>
       <View style={styles.Boxone}>
-          <Image style={styles.ImageBox} 
-                 source={{uri:'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg'}}/>
+          <Image style={styles.ImageBox} source={{uri:'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg'}}/>
           <View style={styles.fabIcon}>
           <FAB
             icon="camera"
@@ -218,27 +218,48 @@ return(
             />
           </View> 
       </View>
+      <Card style={styles.cardDescription}>
+        </Card>
       </Card.Content>
-      <View>
         <TextInput
             style={styles.Input}
             mode='flat'
-            label='Nombre del Rol'
-            value={this.state.Role.NombreRol !==null ? this.state.Role.NombreRol : 'Cargando...'}
+            label='Nombre'
+            value={this.state.Stock.Nombre? this.state.Stock.Nombre : 'Cargando...'}
             disabled={editFields}
             editable={true}
-            onChangeText={(NombreRol)=> this.editField(NombreRol, 'NombreRol')}
+            onChangeText={(NombreArticulo)=> this.editField(NombreArticulo, 'NombreArticulo')}
             />
-            <TextInput
+                <TextInput
+            style={styles.Input}
+            mode='flat'
+            label='Cantidad'
+            value={this.state.Stock.CantidadExistencia? this.state.Stock.CantidadExistencia : 'Cargando...'}
+            disabled={editFields}
+            editable={true} />
+
+            {this.state.editFields &&
+            <View>
+                  <TextInput
               style={styles.Input}
               mode='flat'
-              label='Comentario'
-              value={this.state.Role.Comentario !==null ? this.state.Role.Comentario : 'Cargando...'}
+              label='Usuario Creación'
+              value={this.state.Stock.UsuarioCreacion? this.state.Stock.UsuarioCreacion : 'Cargando...'}
               disabled={editFields}
               editable={true}
-              onChangeText={(Comentario) => this.editField(Comentario,'Comentario')}
-            /> 
+              onChangeText={(UsuarioCreacion) => this.editField( UsuarioCreacion, 'UsuarioCreacion')}
+              />
+                  <TextInput
+              style={styles.Input}
+              mode='flat'
+              label='Usuario Modificación'
+              value={this.state.Stock.UsuarioModificacion? this.state.Stock.UsuarioModificacion : 'Cargando...'}
+              disabled={editFields}
+              editable={true}
+              onChangeText={(UsuarioModificacion) => this.editField( UsuarioModificacion,'UsuarioModificacion')}
+              />
             </View>
+            }
         </ScrollView>
     </Card>
   </View>
@@ -259,7 +280,6 @@ return(
     />
       <View style={{zIndex:-2,height:normalize(500)}}>
         <FlatList
-          extraData={this.state}
           data={this.state.filterData}
           keyExtractor={(x,i) => i}
           renderItem={({ item, index }) =>
@@ -270,7 +290,7 @@ return(
           >
             <ListItem 
               style={{zIndex:-2}}
-              onPress={() => this._showRole(index)}
+              onPress={() => this._showMenu(index)}
               leftAvatar={{ source: { uri: item.avatar_url } }}
               rightAvatar={ 
 
@@ -298,8 +318,8 @@ return(
                 </Text>
               </View>
               }
-              title={item.NombreRol}
-              // subtitle={item.RoleLabel}
+              title={item.name}
+              subtitle={item.subtitle}
               bottomDivider
             />
               </TouchableOpacity>
@@ -333,7 +353,7 @@ return(
       )
     }
       {this.state.addRecord === true  
-        &&(<RolesScreen navigationValue={this.props.navigation} toggleForm={this._toggleForm}/>)
+        &&(<StockScreen navigationValue={this.props.navigation} toggleForm={this._toggleForm}/>)
       }
     </View>
     );

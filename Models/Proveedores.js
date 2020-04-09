@@ -32,7 +32,7 @@ static get columnMapping(){
 
 return{
 
-    Id:{type: types.INTEGER, primary_key:true},
+    id:{type: types.INTEGER, primary_key:true},
     EsPersonaFisica:{type: types.TEXT, not_null:false},
     NombreProveedor:{type: types.TEXT, not_null:true},
     RNC:{type: types.Text, not_null:false},

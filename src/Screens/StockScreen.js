@@ -218,12 +218,16 @@ return(
   </Modal>
 
 <View style={styles.ViewStyle}> 
-
- 
-
-
-
-<Header name={name} subtitle={subtitle} goBackEnabled={true} navigationEnabled={false} navigation={navigation} />
+{/*Header generico que debe ser reutilizado en casi todas las vistas */}
+<Header name={'Stock'} 
+    subtitle={'Crear perfil de Stock'}
+    goBackEnabled={true}
+    goBackNavigationName={'Grid'}
+    navigationEnabled={false}
+    navigation={this.props.navigationValue}
+    toggleFormHeader={this.props.toggleForm}
+    gridHeader={false}
+/>
 <View style={styles.ViewStyle}>
 <Card>
 <Card.Title style={styles.Card} title="Stock" subtitle={subtitle} left={(props)=> <Avatar.Icon {...props} icon="account" />}   />

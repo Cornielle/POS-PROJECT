@@ -8,24 +8,6 @@ import * as SQLite from "expo-sqlite"
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
 import Articulos from '../../Models/Articulos'
 
-const styles = StyleSheet.create({
-    ViewStyle:{
-        backgroundColor:"#f6f6f6",
-    },
-    Form: {
-        padding:normalize(15),
-        marginBottom:10,
-    },
-    Input: {
-        color: '#161924',
-        fontSize: 14,
-        fontWeight:"200",
-        backgroundColor:'#FFFFFF',
-    },
-    Button:{
-        color:'#ffffff',
-    }
-})
 export default class Articulo extends React.Component{
 
 constructor(props){
@@ -49,33 +31,18 @@ ProveedoresId:"",
 CatidadExistencia:"",
 MedidaDeVenta:"",
 Categorias:[]
-
-
-
 }
 
-
-
-  
-
 loadTable = async () => {
-
-
-Articulos.dropTable();
+// Articulos.dropTable();
  Articulos.createTable();
-
-
- const sqlProvee = `SELECT Id,NombreProveedor FROM Proveedores WHERE Activo =? ORDER BY Id ASC`
- const paramsProvee = [1];
- const databaseLayerProvee = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-databaseLayerProvee.executeSql(sqlProvee,paramsProvee).then(  ({ rows }) => {
-
+    const sqlProvee = `SELECT id,NombreProveedor FROM Proveedores WHERE Activo =? ORDER BY id ASC`
+    const paramsProvee = [1];
+    const databaseLayerProvee = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+    databaseLayerProvee.executeSql(sqlProvee,paramsProvee).then(  ({ rows }) => {
   this.setState({Proveedores:rows});
-
   console.log(rows)
  } )  
-
-
 }
 
   componentDidMount(){   
@@ -86,7 +53,7 @@ this.loadTable()
     const databaseLayerArticulos = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
    databaseLayerArticulos.executeSql(sqlArticulos,paramsArticulos).then(  ({ rows }) => {
 
-console.log(rows);
+console.log(rows, 'here');
      
     } )
 
@@ -239,7 +206,7 @@ onChangeText={(CatidadExistencia) => this.setState({CatidadExistencia:CatidadExi
                                    {
 
 this.state.Proveedores.map(lol =>(
-    <Picker.Item label={lol.NombreProveedor.toString()} value={lol.Id.toString()}  key={lol.Id.toString()} />
+    <Picker.Item label={lol.NombreProveedor.toString()} value={lol.id.toString()}  key={lol.id.toString()} />
     ))
                                    }
                             </Picker>
@@ -255,7 +222,7 @@ this.state.Proveedores.map(lol =>(
                                    {
 
 this.state.Categorias.map(lol =>(
-    <Picker.Item label={lol.NombreCategoria.toString()} value={lol.Id.toString()}  key={lol.Id.toString()} />
+    <Picker.Item label={lol.NombreCategoria.toString()} value={lol.id.toString()}  key={lol.id.toString()} />
     ))
 }
 </Picker>
@@ -279,7 +246,7 @@ Validaciones = ()=>{
 
     try{
 
-        if(this.state.CategoriaId ===""){
+        if(this.state.CategoriaId ===""){  
 
             Alert.alert("Debe elegir una categoria de producto!");
             return;
@@ -327,14 +294,13 @@ Alert.alert("Ha ocurrido un error:"+ e);
  
 GuardarArticulo = async () =>{
 try  {
-console.log("llegue!!1");
 
-//Articulos.dropTable();
+Articulos.dropTable();
   
 const fecha = new Date();
 
 
-   // this.Validaciones();
+   this.Validaciones();
     const Insert ={
 
         Codigo: this.state.Codigo,
@@ -391,3 +357,22 @@ catch(ex){
 
 
 }
+
+const styles = StyleSheet.create({
+    ViewStyle:{
+        backgroundColor:"#f6f6f6",
+    },
+    Form: {
+        padding:normalize(15),
+        marginBottom:10,
+    },
+    Input: {
+        color: '#161924',
+        fontSize: 14,
+        fontWeight:"200",
+        backgroundColor:'#FFFFFF',
+    },
+    Button:{
+        color:'#ffffff',
+    }
+})
