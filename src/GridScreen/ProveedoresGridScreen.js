@@ -6,16 +6,16 @@ import  ModalControls from '../Components/ModalControls'
 import { View, StyleSheet, Modal, Text, Image,ScrollView, ToastAndroid} from 'react-native'
 import normalize from 'react-native-normalize';
 import HeaderGrid from '../Components/HeaderGrid'
-import Roles from '../../Models/Roles';
+import Proveedores from '../../Models/Proveedores';
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler';
 import ActionSheet from 'react-native-actionsheet';
-import RolesScreen from '../Screens/RolesScreen';
-export default class RolesGridScreen extends React.Component{
+import ProveedoresScreen from '../Screens/ProveedoresScreen';
+export default class ProveedoresGridScreen extends React.Component{
     constructor(props) {
         super(props);
-        this.LoadRolesData()  
+        this.LoadProveedoresData()  
         this.editField = this.editField.bind(this);
-        this._showMenu = this._showRole.bind(this);
+        this._showMenu = this._showProveedor.bind(this);
         this.saveEdit = this.saveEdit.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this._toggleForm = this._toggleForm.bind(this);
@@ -42,10 +42,10 @@ export default class RolesGridScreen extends React.Component{
         newData:'',
         text:'',
         editFields:false,
-        Role:{
+        Proveedor:{
         id:0,
-        NombreRol:'',
-        Comentario:'',
+        NombreProveedor:'',
+        Correo:'',
         Activo:0,
         FechaCreacion:'',
         FechaModificacion:'',
@@ -53,28 +53,26 @@ export default class RolesGridScreen extends React.Component{
         UsuarioModificacion:''
         },
     };
-
- 
   _showModal = () => this.setState({visible:true})
   _hideModal = () => this.setState({visible:false})
-  LoadRolesData = async () =>{
-    const optionsRoles ={
-        columns:`id ,NombreRol, Comentario, FechaCreacion, Activo`,
+  LoadProveedoresData = async () =>{
+    const optionsProveedores ={
+        columns:`id ,NombreProveedor, Correo, FechaCreacion, Activo`,
         page:1,
         limit:30
     }    
   
-  const artiobj = await Roles.query(optionsRoles)
+  const artiobj = await Proveedores.query(optionsProveedores)
   console.log(artiobj, 'here')
   let arra =[]
   this.state.HoraCreacion = ''
   artiobj.map(x => {
-    const{id, NombreRol,FechaCreacion, Activo, Comentario} = x;
+    const{id, NombreProveedor,FechaCreacion, Activo, Correo} = x;
     let date = FechaCreacion.split(' ');
     var objeto  ={
     key: id,
-    NombreRol:NombreRol,
-    Comentario:Comentario,  
+    NombreProveedor:NombreProveedor,
+    Correo:Correo,  
     FechaCreacion:`${date[2]}/${date[1]}/${date[3]}` ,
     HoraCreacion: date[4][0]+date[4][1] > 11 && date[4][0]+date[4][1] < 23 ? `${ date[4]}PM` :`${ date[4]}AM`,
     avatar_url:'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',  
@@ -86,38 +84,37 @@ export default class RolesGridScreen extends React.Component{
     this.setState({
       filterData:arra
     })
-    // console.log(this.state.data)
   }
   async  componentDidMount(){
-    const crear = await Roles.createTable();
-    this.LoadRolesData()  
+    const crear = await Proveedores.createTable();
+    this.LoadProveedoresData();
   }
   saveEdit = async () =>{ 
     try{
       const props =  {
-        id: this.state.Role.id,
-        NombreRol: this.state.Role.NombreRol,
-        Activo:this.state.Role.Activo,
-        Comentario:this.state.Role.Comentario
+        id: this.state.Proveedor.id,
+        NombreProveedor: this.state.Proveedor.NombreProveedor,
+        Activo:this.state.Proveedor.Activo,
+        Comentario:this.state.Proveedor.Comentario
       }
-      const response = await Roles.update(props)
+      const response = await Proveedores.update(props)
       if(Object.keys(response).length <=0){
         ToastAndroid.show("Error al insertar en la base de datos",ToastAndroid.SHORT);
       }else{
         ToastAndroid.show("Guardado Correctamente!", ToastAndroid.SHORT);
         this.state.visible = false
-        this.LoadRolesData()
+        this.LoadProveedoresData()
       }
     }
   catch(ex){
         console.log(ex, 'fatal error')
     }
   }
-  FillArticulo = async (id) =>{
+  FillProveedor = async (id) =>{
     try{
       const {key} = id;
-      const Role = await Roles.find(key)
-      this.setState({Role})
+      const Proveedor = await Proveedores.find(key)
+      this.setState({Proveedor})
     }
     catch(ex){
     console.log("Ha ocurrido el siguiente error: "+ex);
@@ -125,7 +122,7 @@ export default class RolesGridScreen extends React.Component{
   }
 
   stateUsers = async (id) =>{ 
-    const savingState= await Roles.find(id)
+    const savingState= await Proveedores.find(id)
     savingState.Activo = this.state.data[this.state.index]['estado'] ? 1:0
     savingState.save()
   }
@@ -134,7 +131,7 @@ _toggleForm(addRecord){
     this.setState({addRecord:false})
   }
 }
-_showRole(index){
+_showProveedor(index){
   this.setState({index})
   this.state.data[index]['estado']
   ? this.state.optionArray[1] = 'Desactivar' 
@@ -146,9 +143,9 @@ _makeAction(action){
   this.setState({modalTitle:''})
   switch(action){
     case 0:
-      this.FillArticulo(id)
+      this.FillProveedor(id)
       this.setState({
-        modalTitle:'Detalles Role',
+        modalTitle:'Detalles Proveedor',
         editFields:true
       })
       this._showModal()
@@ -159,9 +156,9 @@ _makeAction(action){
       this.stateUsers(id.key)
       break
     case 2:
-      this.FillArticulo(id)
+      this.FillProveedor(id)
       this.setState({
-        modalTitle:'Editar Role',
+        modalTitle:'Editar Proveedor',
         editFields:false
       })
       this._showModal()
@@ -183,13 +180,25 @@ setModalVisible(visible) {
     this.ActionSheet.show();
 }
 editField = (fieldValue, name) =>{
-    if(name==='NombreRol'){
-      this.setState({NombreRol:fieldValue})
-      this.state.Role.NombreRol = fieldValue 
+    if(name==='NombreProveedor'){
+      this.setState({NombreProveedor:fieldValue})
+      this.state.Proveedor.NombreProveedor = fieldValue 
     }
-    else if(name==='Comentario'){
-      this.setState({Comentario:fieldValue})
-      this.state.Role.Comentario = fieldValue
+    else if(name==='Correo'){
+      this.setState({Correo:fieldValue})
+      this.state.Proveedor.Correo = fieldValue
+    }
+    else if(name==='RNC'){
+      this.setState({RNC:fieldValue})
+      this.state.Proveedor.RNC = RNC
+    }
+    else if(name==='Direccion'){
+      this.setState({Direccion:fieldValue})
+      this.state.Proveedor.Direccion = fieldValue
+    }
+    else if(name==='Telefono'){
+      this.setState({Telefono:fieldValue})
+      this.state.Proveedor.Telefono = fieldValue
     }
 }
 render(){
@@ -223,20 +232,47 @@ return(
         <TextInput
             style={styles.Input}
             mode='flat'
-            label='Nombre del Rol'
-            value={this.state.Role.NombreRol !==null ? this.state.Role.NombreRol : 'Cargando...'}
+            label='Nombre del Proveedor'
+            value={this.state.Proveedor.NombreProveedor !==null ? this.state.Proveedor.NombreProveedor : 'Cargando...'}
             disabled={editFields}
             editable={true}
-            onChangeText={(NombreRol)=> this.editField(NombreRol, 'NombreRol')}
+            onChangeText={(NombreProveedor)=> this.editField(NombreProveedor, 'NombreProveedor')}
             />
             <TextInput
               style={styles.Input}
               mode='flat'
-              label='Comentario'
-              value={this.state.Role.Comentario !==null ? this.state.Role.Comentario : 'Cargando...'}
+              label='RNC'
+              value={this.state.Proveedor.RNC !==null ? this.state.Proveedor.RNC : 'Cargando...'}
               disabled={editFields}
               editable={true}
-              onChangeText={(Comentario) => this.editField(Comentario,'Comentario')}
+              onChangeText={(RNC) => this.editField(RNC,'RNC')}
+            /> 
+                        <TextInput
+              style={styles.Input}
+              mode='flat'
+              label='Direccion'
+              value={this.state.Proveedor.Direccion !==null ? this.state.Proveedor.Direccion : 'Cargando...'}
+              disabled={editFields}
+              editable={true}
+              onChangeText={(Direccion) => this.editField(Direccion,'Direccion')}
+            /> 
+                        <TextInput
+              style={styles.Input}
+              mode='flat'
+              label='Correo'
+              value={this.state.Proveedor.Correo !==null ? this.state.Proveedor.Correo : 'Cargando...'}
+              disabled={editFields}
+              editable={true}
+              onChangeText={(Correo) => this.editField(Correo,'Correo')}
+            /> 
+                        <TextInput
+              style={styles.Input}
+              mode='flat'
+              label='Telefono'
+              value={this.state.Proveedor.Telefono !==null ? this.state.Proveedor.Telefono : 'Cargando...'}
+              disabled={editFields}
+              editable={true}
+              onChangeText={(Telefono) => this.editField(Telefono,'Comentario')}
             /> 
             </View>
         </ScrollView>
@@ -270,7 +306,7 @@ return(
           >
             <ListItem 
               style={{zIndex:-2}}
-              onPress={() => this._showRole(index)}
+              onPress={() => this._showProveedor(index)}
               leftAvatar={{ source: { uri: item.avatar_url } }}
               rightAvatar={ 
 
@@ -298,8 +334,8 @@ return(
                 </Text>
               </View>
               }
-              title={item.NombreRol}
-              // subtitle={item.RoleLabel}
+              title={item.NombreProveedor}
+              subtitle={item.Correo}
               bottomDivider
             />
               </TouchableOpacity>
@@ -333,7 +369,7 @@ return(
       )
     }
       {this.state.addRecord === true  
-        &&(<RolesScreen navigationValue={this.props.navigation} toggleForm={this._toggleForm}/>)
+        &&(<ProveedoresScreen navigationValue={this.props.navigation} toggleForm={this._toggleForm}/>)
       }
     </View>
     );

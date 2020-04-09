@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { TextInput, Avatar, Button, Card, RadioButton  } from 'react-native-paper';
 import { StyleSheet, Text, View, ScrollView, Picker,Alert, KeyboardAvoidingView,  ToastAndroid, Platform} from 'react-native';
-import {Block} from 'galio-framework'
 import normalize from 'react-native-normalize';
 import Header from '../Components/Header'
 import * as Filesystem from "expo-file-system"
@@ -13,16 +12,11 @@ import Empleados from '../../Models/Empleados.js'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Roles from "../../Models/Roles"
 import Menu from "../../Models/Menu"
-
 const InitialState ={
-
-
     NombreMenu:"",
     IdMenuPadre:0,
     Comentario:"",
     MenuLabel:"",
-    
-
 }
 
 
@@ -37,8 +31,8 @@ export default class MenuScreen extends React.Component{
 
 
 async componentDidMount(){
-
- await Menu.createTable();
+    // Menu.dropTable();
+    await Menu.createTable();
 
     const sql =   'SELECT * FROM MENU'
     const params = []
@@ -62,10 +56,6 @@ async componentDidMount(){
 
     }
     render(){
-       
-
-        const {name, subtitle, navigation} = this.props
-        const { text,enabled, checked } =  this.state
         return (
             <ScrollView>
             <View style={styles.ViewStyle}>
@@ -116,7 +106,7 @@ async componentDidMount(){
                         {
                                  
                                  this.state.Menu.map(xo =>(
-                                  <Picker.Item label={xo.NombreMenu.toString()} value={xo.Id.toString()} key={xo.Id.toString()} />
+                                  <Picker.Item label={xo.NombreMenu.toString()} value={xo.id.toString()} key={xo.id.toString()} />
                                  
                                  )
                          
@@ -177,8 +167,6 @@ async componentDidMount(){
                 
                 
               var fecha = new Date()
-   
-                console.log("Entree mi loco!!");
                 const Insert = {
                     NombreMenu:this.state.NombreMenu,
                     IdMenuPadre:this.state.IdMenuPadre,
@@ -206,7 +194,7 @@ async componentDidMount(){
                 else{
 
         ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT);
-this.setState(InitialState);
+        this.setState(InitialState);
                 }
 
             }

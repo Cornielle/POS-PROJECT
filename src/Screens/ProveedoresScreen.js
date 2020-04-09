@@ -39,7 +39,7 @@ super();
 
 
     LoadData = async () =>{
-
+//  Proveedores.dropTable()
  Proveedores.createTable();
 
  //const sql = 'PRAGMA table_info(Proveedores);'
@@ -55,7 +55,7 @@ console.log(rows);
     }
     componentDidMount(){
 
-this.LoadData();
+        this.LoadData();
     }
 
     render(){
@@ -66,8 +66,16 @@ this.LoadData();
         return (
             <ScrollView>
             <View style={styles.ViewStyle}>
-                {/*Header generico que debe ser reutilizado en casi todas las vistas*/}
-                <Header name={name} subtitle={subtitle} goBackEnabled={true} navigationEnabled={false} navigation={navigation}/>
+                {/*Header generico que debe ser reutilizado en casi todas las vistas */}
+                <Header name={'Proveedores'} 
+                        subtitle={'Crear perfíl de Proveedores'}
+                        goBackEnabled={true}
+                        goBackNavigationName={'Grid'}
+                        navigationEnabled={true}
+                        navigation={this.props.navigationValue}
+                        toggleFormHeader={this.props.toggleForm}
+                        gridHeader={false}
+                    />
                 <View style={styles.Form}>
                     <Card>
                         <Card.Title 

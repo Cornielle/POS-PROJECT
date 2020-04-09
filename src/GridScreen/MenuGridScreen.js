@@ -1,21 +1,27 @@
-import React from 'react';
+import React , { useState } from 'react';
 import { ListItem } from 'react-native-elements'
 import { Badge,Searchbar,Card, TextInput , FAB } from 'react-native-paper'
+import Icon from 'react-native-vector-icons/FontAwesome';
 import  ModalControls from '../Components/ModalControls'
-import { View, StyleSheet, Modal, Text, Image,ScrollView} from 'react-native'
+import { View, StyleSheet, Modal, Text, Image,ScrollView, ToastAndroid, Picker} from 'react-native'
 import normalize from 'react-native-normalize';
 import HeaderGrid from '../Components/HeaderGrid'
+import Menus from '../../Models/Menu';
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler';
 import ActionSheet from 'react-native-actionsheet';
-import Empleados from '../../Models/Empleados'
-import MenuScreen from '../../src/Screens/MenuScreen'
-export default class MenuGridScreen extends React.Component{
+import Register from '../Screens/Register'
+import MenuScreen from '../Screens/MenuScreen';
+export default class UsersGridScreen extends React.Component{
     constructor(props) {
         super(props);
-        this.LoadEmpleadoData()  
+        this.LoadMenusData()  
+        this.editField = this.editField.bind(this);
         this._showMenu = this._showMenu.bind(this);
+        this.saveEdit = this.saveEdit.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this._toggleForm = this._toggleForm.bind(this);
+        this.saveEdit = this.saveEdit.bind(this)        
+        this.stateUsers =  this.stateUsers.bind(this)
       }
       state = { 
         modalVisible:false,
@@ -25,83 +31,113 @@ export default class MenuGridScreen extends React.Component{
         ModalVisibility:false,
         data:[],
         optionArray: [
-          'Editar',
-          'Activar',
           'Detalle',
+          'Activar',
+          'Editar',
           'Cancel'
         ],
-        addUser:false,
+        render:false,
+        addRecord:false,
         modalTitle:'',
         filterData:[],
         newData:'',
         text:'',
-        IdEmpleado:"",
-        Empleado:{
-          NombrePersona:"",
-          ApellidoPersona:"",
-          NombreUsuario:"",
-          Telefono:"",
-          TipoIdentificacion:"",
-          Identificacion:"",
-          Roll:"",
-          Correo:"",
-          Activo:1,
-          FechaCreacion: "",
-          FechaModificacion:"",
-          UsuarioCreacion:"",
-          UsuarioModificacion:""
-        }
+        editFields:false,
+        Menu:{
+        id:0,
+        NombreMenu:'',
+        IdMenuPadre:0,
+        MenuLabel:'',
+        Comentario:'',
+        Activo:0,
+        IdEmpresa:0,
+        IdSucursal:0,
+        FechaCreacion:'',
+        FechaModificacion:'',
+        UsuarioCreacion:'',
+        UsuarioModificacion:''
+        },
     };
+
  
   _showModal = () => this.setState({visible:true})
   _hideModal = () => this.setState({visible:false})
-  LoadEmpleadoData = async () =>{
-    const options ={
-        columns:'Id,NombrePersona,ApellidoPersona,Identificacion,TipoIdentificacion,NombreUsuario,Telefono,Roll',
-        where:{
-        Id_gt:0
-        },
+  LoadMenusData = async () =>{
+    const optionsMenus ={
+        columns:`id ,MenuLabel, NombreMenu, FechaCreacion, Activo`,
         page:1,
         limit:30
-    }
-  const empleobj = await Empleados.query(options)
+    }    
+  
+  const artiobj = await Menus.query(optionsMenus)
+  console.log(artiobj, 'here')
   let arra =[]
-  empleobj.map(x => {
-    const{Id, NombrePersona, Roll, Activo} = x;
+  this.state.HoraCreacion = ''
+  artiobj.map(x => {
+    const{id, NombreMenu,FechaCreacion, Activo, MenuLabel} = x;
+    let date = FechaCreacion.split(' ');
     var objeto  ={
-    key: Id.toString(),
-    name:NombrePersona,
+    key: id,
+    name:NombreMenu,  
+    FechaCreacion:`${date[2]}/${date[1]}/${date[3]}` ,
+    HoraCreacion: date[4][0]+date[4][1] > 11 && date[4][0]+date[4][1] < 23 ? `${ date[4]}PM` :`${ date[4]}AM`,
     avatar_url:'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-    subtitle: Roll,
-    estado: Activo ?true: false
+    NombreMenu: NombreMenu,
+    MenuLabel:MenuLabel,   
+    estado: Activo ?true: false  
   }
   arra.push(objeto)
     });
     this.setState({data:arra})
-
     this.setState({
       filterData:arra
     })
+    // console.log(this.state.data)
   }
   async  componentDidMount(){
-    const crear = await Empleados.createTable();
-    console.log(crear);
+    const crear = await Menus.createTable();
+    this.LoadMenusData()
   }
-  FillEmpleado = async (id) =>{
+  saveEdit = async () =>{ 
+    try{
+      const props =  {
+        id: this.state.Menu.id,
+        NombreMenu: this.state.Menu.NombreMenu,
+        MenuLabel:this.state.Menu.MenuLabel,
+        Activo:this.state.Menu.Activo
+      }
+      const response = await Menus.update(props)
+      if(Object.keys(response).length <=0){
+        ToastAndroid.show("Error al insertar en la base de datos",ToastAndroid.SHORT);
+      }else{
+        ToastAndroid.show("Guardado Correctamente!", ToastAndroid.SHORT);
+        this.state.visible = false
+        this.LoadMenusData()
+      }
+    }
+  catch(ex){
+        console.log(ex, 'fatal error')
+    }
+  }
+  FillArticulo = async (id) =>{
     try{
       const {key} = id;
-      // console.log(key);
-      const Empleado = await Empleados.find(key)
-      this.setState({Empleado})
-      // console.log(this.state.Empleado);
+      const Menu = await Menus.find(key)
+      this.setState({Menu})
     }
     catch(ex){
-    Alert.alert("Ha ocurrido el siguiente error: "+ex);
+    console.log("Ha ocurrido el siguiente error: "+ex);
     }
   }
-_toggleForm(addUser){
-  if(addUser===false){
-    this.setState({addUser:false})
+
+  stateUsers = async (id) =>{ 
+    const savingState= await Menus.find(id)
+    savingState.Activo = this.state.data[this.state.index]['estado'] ? 1:0
+    savingState.save()
+  }
+_toggleForm(addRecord){
+  if(addRecord===false){
+    this.setState({addRecord:false})
   }
 }
 _showMenu(index){
@@ -116,18 +152,25 @@ _makeAction(action){
   this.setState({modalTitle:''})
   switch(action){
     case 0:
-      this.FillEmpleado(id)
+      this.FillArticulo(id)
+      this.setState({
+        modalTitle:'Detalles Menu',
+        editFields:true
+      })
       this._showModal()
-      this.setState({modalTitle:'Editar Usuario'})
       break
     case 1:
       this.state.data[this.state.index]['estado'] = !this.state.data[this.state.index]['estado']
       this.setState({ state: this.state });
+      this.stateUsers(id.key)
       break
     case 2:
-      this.FillEmpleado(id)
+      this.FillArticulo(id)
+      this.setState({
+        modalTitle:'Editar Menu',
+        editFields:false
+      })
       this._showModal()
-      this.setState({modalTitle:'Detalles Usuario'})
       break
     default:
       break
@@ -136,7 +179,6 @@ _makeAction(action){
 handleSearch = (text) => {
   const filterData = this.state.data.filter(x => String(x.name).includes(text));
   this.setState({ filterData, text})
-  console.log(filterData,'here')
 }
 handleEnd = () => {
   this.setState(state=>{page: this.state.page + 1});
@@ -146,18 +188,29 @@ setModalVisible(visible) {
     //To show the Bottom ActionSheetsfsff
     this.ActionSheet.show();
 }
+editField = (fieldValue, name) =>{
+    if(name==='NombreMenu'){
+      this.setState({NombreMenu:fieldValue})
+      this.state.Menu.NombreMenu = fieldValue 
+    }
+    else if(name==='MenuLabel'){
+      this.setState({MenuLabel:fieldValue})
+      this.state.Menu.MenuLabel = fieldValue
+    }
+}
 render(){
 const {name, subtitle, navigation} = this.props
-const {visible} = this.state
+const {visible, editFields} = this.state
 return(
 <View>
-{ this.state.addUser !== true && (
+{this.state.addRecord !== true && (
   <ScrollView style={{height:800, zIndex:-50}}>
   <View style={{  zIndex:-1}}>
   <Modal visible={visible}>
   <View style={styles.Form}> 
   <Card>
-  <ModalControls modalTitle={this.state.modalTitle} hideModal={this._hideModal}/>
+  <ScrollView >
+  <ModalControls modalTitle={this.state.modalTitle} hideModal={this._hideModal} isEdit={editFields} saveEdit={this.saveEdit}/>
       <Card.Content  style={styles.cardContent}>
       <View style={styles.Boxone}>
           <Image style={styles.ImageBox} source={{uri:'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg'}}/>
@@ -171,30 +224,27 @@ return(
           </View> 
       </View>
       </Card.Content>
+      <View>
         <TextInput
             style={styles.Input}
             mode='flat'
-            label='Nombre'
-            value={this.state.Empleado.NombrePersona}
-            disabled={true}
-            onChangeText={(NombrePersona)=> this.setState({NombrePersona})}
-        />
-        <TextInput
-            style={styles.Input}
-            mode='flat'
-            label='Apellidos'
-            value={this.state.Empleado.ApellidoPersona}
-            onChangeText={(ApellidoPersona) => this.setState({ ApellidoPersona })}
-            disabled={true}
-        />
-        <TextInput
-            style={styles.Input}
-            mode='flat'
-            label='Nombre Usuario'
-            value={this.state.Empleado.NombreUsuario}
-            disabled= {true}
-            onChangeText={(NombreUsuario) => this.setState({ NombreUsuario })}
-        />
+            label='Nombre del Menu'
+            value={this.state.Menu.NombreMenu !==null ? this.state.Menu.NombreMenu : 'Cargando...'}
+            disabled={editFields}
+            editable={true}
+            onChangeText={(NombreMenu)=> this.editField(NombreMenu, 'NombreMenu')}
+            />
+            <TextInput
+              style={styles.Input}
+              mode='flat'
+              label='Nombre de la Etiqueta'
+              value={this.state.Menu.MenuLabel !==null ? this.state.Menu.MenuLabel : 'Cargando...'}
+              disabled={editFields}
+              editable={true}
+              onChangeText={(MenuLabel) => this.editField(MenuLabel,'MenuLabel')}
+            /> 
+            </View>
+        </ScrollView>
     </Card>
   </View>
   </Modal>
@@ -214,6 +264,7 @@ return(
     />
       <View style={{zIndex:-2,height:normalize(500)}}>
         <FlatList
+          extraData={this.state}
           data={this.state.filterData}
           keyExtractor={(x,i) => i}
           renderItem={({ item, index }) =>
@@ -226,9 +277,34 @@ return(
               style={{zIndex:-2}}
               onPress={() => this._showMenu(index)}
               leftAvatar={{ source: { uri: item.avatar_url } }}
-              rightAvatar={ item.estado === true ? <Badge>Activado</Badge> : <Badge>Desactivado</Badge>}
-              title={item.name}
-              subtitle={item.subtitle}
+              rightAvatar={ 
+
+                <View>                 
+                  {item.estado === true ? <Badge>Activado</Badge> : <Badge>Desactivado</Badge>}
+                <Text>Fecha de Creación:{"\n"}
+                <Icon
+                  name="calendar-check-o"
+                  size={15}
+                  color="rgba(0, 0, 0, .5)"
+                />{" "}
+                  <Text style={{fontSize:12, color:'rgba(0, 0, 0, .5)'}}>
+                    {item.FechaCreacion}
+                  </Text>
+                </Text>
+                <Text>Hora de Creación:{"\n"}
+                <Icon
+                  name="clock-o"
+                  size={15}
+                  color="rgba(0, 0, 0, .5)"
+                />{" "}
+                  <Text style={{fontSize:12, color:'rgba(0, 0, 0, .5)'}}>
+                    {item.HoraCreacion}
+                  </Text>
+                </Text>
+              </View>
+              }
+              title={item.NombreMenu}
+              subtitle={item.MenuLabel}
               bottomDivider
             />
               </TouchableOpacity>
@@ -255,13 +331,13 @@ return(
           <FAB
             icon="plus"
             color="#fff"
-            onPress={() => this.setState({addUser:true})} 
+            onPress={() => this.setState({addRecord:true})} 
             />
           </View> 
       </ScrollView>
       )
     }
-      {this.state.addUser === true  
+      {this.state.addRecord === true  
         &&(<MenuScreen navigationValue={this.props.navigation} toggleForm={this._toggleForm}/>)
       }
     </View>
@@ -286,8 +362,8 @@ flex:1,
 fab: {
   position:'absolute',
   top:normalize(550),
-  bottom:10,
-  left:normalize(300),
+  bottom:5,
+  left:normalize(170),
   width:normalize(52),
   zIndex:11
 },
@@ -327,4 +403,12 @@ ImageBox:{
   fabImage: {
     alignItems:'center',
   },
+  cardDescription:{
+    marginBottom:10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation:1
+  }
 });

@@ -25,7 +25,7 @@ static get columnMapping(){
 
 
 return{
-    id:{type:types.INTEGER, primary_key:true},
+    Id:{type:types.INTEGER, primary_key:true},
     NombreCategoria: {type: types.TEXT, not_null:true},
     Descripcion: {type: types.TEXT, not_null:false},
     Activo:{type: types.INTEGER, not_null:true},

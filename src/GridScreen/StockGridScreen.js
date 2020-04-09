@@ -92,6 +92,7 @@ export default class StockGridScreen extends React.Component{
   }
   async  componentDidMount(){
     const crear = await Articulos.createTable();
+    this.LoadArticuloData()  
   }
   saveEdit = async () =>{ 
     const props =  {

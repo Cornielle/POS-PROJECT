@@ -102,6 +102,7 @@ export default class CategoriasGridScreen extends React.Component{
   }
   async  componentDidMount(){
     const crear = await Categorias.createTable();
+    this.LoadCategoriaData() 
   }
   forceUpdateHandle(){
     this.setState({state:this.state})

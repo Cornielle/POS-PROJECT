@@ -101,6 +101,7 @@ export default class OpeningClosingGridScreen extends React.Component{
 
   async  componentDidMount(){
     const crear = await Empleados.createTable();
+    this.LoadEmpleadoData()  
   }
   FillEmpleado = async (id) =>{
     try{

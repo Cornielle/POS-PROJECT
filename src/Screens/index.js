@@ -20,9 +20,10 @@ import OpeningClosingGridScreen from "../GridScreen/OpeningClosingGridScreen"
 import RolesMenuScreen from "./RolesMenuSceen"
 import RolesGridScreen  from "../GridScreen/RolesGridScreen"
 import ArticulosGridScreen from "../GridScreen/ArticulosGridScreen";
-import MenuAccionesScreen from "./MenuAccionesScreen" 
+import AccionesMenuGridScreen from "../GridScreen/MenuGridScreen" 
 import OptionScreen from "./OptionScreen"
-import ProveedoresScreen from "./ProveedoresScreen"
+import ProovedoresGridScreen from "../GridScreen/ProveedoresGridScreen"
+import Acciones from '../../Models/Acciones';
 
 //import Users from './Users'
 
@@ -77,9 +78,9 @@ export const MenuManagement = ({navigation}) => <MenuGridScreen navigation={navi
 export const UsersManagement = ({navigation}) => <UsersGridScreen navigation={navigation} subtitle="Control de Usuarios" name="Usuarios" />
 export const RolesMenuManagement = ({navigation}) => <RolesMenuScreen navigation={navigation} subtitle="Roles Menu" name="Roles Menu" />
 export const RolesGridManagement = ({navigation}) => <RolesGridScreen navigation={navigation} subtitle="Roles" name="Roles" />
-export const MenuAccionesManagement =({navigation}) => <MenuAccionesScreen navigation={navigation} subtitle="Menu Acciones" name="Menu Acciones" />
+export const MenuAccionesManagement =({navigation}) => <AccionesMenuGridScreen navigation={navigation} subtitle="Menu Acciones" name="Menu Acciones" />
 export const OptionManagement = ({navigation}) =><OptionScreen navigation={navigation} subtitle="Opciones" name="Opciones" />
-export const ProveedoresManagement = ({navigation}) => <ProveedoresScreen navigation={navigation} subtitle="Proveedores" name="Proveedores" /> 
+export const ProveedoresManagement = ({navigation}) => <ProovedoresGridScreen navigation={navigation} subtitle="Proveedores" name="Proveedores" /> 
 // configuracion del tema por defecto de react native paper
 const theme = {
     ...DefaultTheme,

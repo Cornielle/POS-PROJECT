@@ -24,14 +24,14 @@ return 'Empleados';
 
 
 return{
-Id:{type: types.INTEGER, primary_key:true},
+id:{type: types.INTEGER, primary_key:true},
 NombrePersona:{type: types.TEXT, not_null:true},
 ApellidoPersona:{type: types.TEXT, not_null:true},
 NombreUsuario:{type:types.TEXT, not_null:true},
 Telefono:{type: types.TEXT, not_null:true},
 TipoIdentificacion:{type: types.TEXT, not_null:true},
 Identificacion: {type: types.TEXT, not_null:true},
-Roll:{type: types.INTEGER, not_null:true},
+Rol:{type: types.INTEGER, not_null:true},
 Correo:{type: types.TEXT, not_null:false},
 Contrasena:{type:types.TEXT, not_null:true},
 Activo:{type: types.INTEGER, not_null:true},

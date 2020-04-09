@@ -9,14 +9,10 @@ import * as SQLite from "expo-sqlite"
 import {BaseModel, types} from 'expo-sqlite-orm'
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Empleados from '../../Models/Empleados.js'
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import Acciones from "../../Models/Acciones"
-import Menu from "../../Models/Menu"
 import  MenuAcciones from '../../Models/MenuAcciones'
 
 const InitialState ={ 
-     IdMenu:0,
+    IdMenu:0,
     IdAccion:0,
     Comentario:"",
 }
@@ -29,8 +25,7 @@ super(obj);
 
 }
 
-async componentDidMount(){
- 
+async componentDidMount(){ 
     MenuAcciones.createTable();
 
     const sql =   'SELECT * FROM Acciones'
@@ -79,8 +74,16 @@ return(
 
     <ScrollView>
     <View style={styles.ViewStyle}>
-        {/*Header generico que debe ser reutilizado en casi todas las vistas*/}
-        <Header name={name} subtitle={subtitle} goBackEnabled={true} navigationEnabled={false} navigation={navigation}/>
+        {/*Header generico que debe ser reutilizado en casi todas las vistas */}
+        <Header name={'Menu Acciones'} 
+                subtitle={'Crear perfíl de Menu Acciones'}
+                goBackEnabled={true}
+                goBackNavigationName={'Grid'}
+                navigationEnabled={true}
+                navigation={this.props.navigationValue}
+                toggleFormHeader={this.props.toggleForm}
+                gridHeader={false}
+            />
         <View style={styles.Form}>
             <Card>
                 <Card.Title 
@@ -102,7 +105,7 @@ return(
                 {
                         
                          this.state.Acciones.map(xo =>(
-                          <Picker.Item label={xo.NombreAccion} value={xo.Id.toString()} key={xo.Id.toString()} />
+                          <Picker.Item label={xo.NombreAccion} value={xo.id.toString()} key={xo.Id.toString()} />
                          
                          )
                  
@@ -122,7 +125,7 @@ return(
                 {
                          
                          this.state.Menu.map(xo =>(
-                          <Picker.Item label={xo.NombreMenu.toString()} value={xo.Id.toString()} key={xo.Id.toString()} />
+                          <Picker.Item label={xo.NombreMenu.toString()} value={xo.id.toString()} key={xo.id.toString()} />
                          
                          )
                  

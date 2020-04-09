@@ -34,7 +34,7 @@ state ={
 }
 
 async componentDidMount(){
-
+    // Acciones.dropTable();
     const sql =   'SELECT * FROM Acciones'
     const params = []
     const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))

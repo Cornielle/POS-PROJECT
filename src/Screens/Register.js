@@ -22,7 +22,7 @@ const InitialState ={
     TIPOIDENTIFICACION:"Cedula",
     IDENTIFICACION:"",
     CORREO:"",
-    ROLL:"Camarero",
+    ROL:"Camarero",
     Roles:[],
     ExistenDatos:false,
     QueDatosExisten:""
@@ -57,7 +57,7 @@ export default class Register extends React.Component{
         TIPOIDENTIFICACION:"Cedula",
         IDENTIFICACION:"",
         CORREO:"",
-        ROLL:"",
+        ROL:"",
         Roles:[],
         ExistenDatos:false,
         QueDatosExisten:""
@@ -87,7 +87,8 @@ export default class Register extends React.Component{
 
 
   componentDidMount(){
-    Empleados.createTable();
+    // Empleados.dropTable();
+    Empleados.createTable(); 
     this.LoadData();
     const sql = 'SELECT * FROM RolMenu'
     const params = []
@@ -217,10 +218,10 @@ export default class Register extends React.Component{
                             <Text>{"\n"}</Text>
                             <Text>Seleccionar un rol:</Text>
                             <Picker
-                                selectedValue={this.state.Roll}
+                                selectedValue={this.state.Rol}
                                 style={{height: 50, width: 200}}
                                 onValueChange={(itemValue, itemIndex) =>
-                                    this.setState({Roll: itemValue})
+                                    this.setState({Rol: itemValue})
                                 }>
                                {
                                  
@@ -319,7 +320,7 @@ return;
 const create  = Empleados.createTable();
 
  
- 
+const fecha = new Date();
 const valInsert={
 
     NombrePersona:this.state.NOMBRE, 
@@ -328,18 +329,21 @@ const valInsert={
     Telefono:this.state.TELEFONO,
     TipoIdentificacion:this.state.TIPOIDENTIFICACION,
     Identificacion:this.state.IDENTIFICACION,
-    Roll:this.state.Roll,
+    Rol:this.state.Rol,
+    IdEmpresa:1,
     Correo: this.state.CORREO,
     Contrasena:this.state.CONTRASENA,
     Activo:1,
-    FechaCreacion: "2020-02-02",
-    FechaModificacion:null,
+    FechaCreacion: fecha.toString(),
+    FechaModificacion:"null",
     UsuarioCreacion:"system",
     UsuarioModificacion:"null"
 }
-console.log(valInsert);
+console.log(valInsert)
 
 const response = await  Empleados.create(valInsert);
+
+console.log(response)
 
 if (Object.keys(response).length <=0){
 

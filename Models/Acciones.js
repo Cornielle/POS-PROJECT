@@ -30,7 +30,7 @@ static get columnMapping(){
 
 return{
 
-Id:{type:types.INTEGER, primary_key:true},
+id:{type:types.INTEGER, primary_key:true},
 NombreAccion:{type:types.TEXT, not_null:true},
 Comentario:{type:types.TEXT, not_null:false},
 Activo:{type: types.INTEGER, not_null:true},

@@ -85,7 +85,7 @@ const DrawerNavigation = createDrawerNavigator({
     }
       },
   'Roles':{
-    screen: RolesManagement,
+    screen: RolesGridManagement,
     navigationOptions:{
       title:'Roles'
     }
@@ -108,12 +108,12 @@ const DrawerNavigation = createDrawerNavigator({
     title:"Roles Menu"
     }
   }, 
-  "Roles Grid":{
-    screen:RolesGridManagement, 
-    navigationOptions:{
-    title:"Roles Grid"
-    }
-  },
+  // "Roles Grid":{
+  //   screen:RolesGridManagement, 
+  //   navigationOptions:{
+  //   title:"Roles Grid"
+  //   }
+  // },
   'OCCashier': {
   screen: OpeningClosingCash,
   navigationOptions:{
