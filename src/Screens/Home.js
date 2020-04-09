@@ -45,38 +45,9 @@ state={
  componentDidMount(){
 this.LoadingD();
 
- // this.AnotherCall();
 }
 
 
-
-
-AnotherCall = () =>{
-
-  /*
-  let result =[];
-  const db = SQLite.openDatabase("PuntoVentaDb.db");
-
-  db.transaction(function(txn){
-
-txn.executeSql("SELECT * FROM Menu",1,(tx,results) => {
-
-var len = results.rows.length;
-
-console.log(len)
-
-result =  results.rows; 
-
-this.sest
-
-})
-
-  })
-
-console.log(this.state.count);
-*/
-
-}
 
 
 
@@ -89,11 +60,7 @@ LoadingD = async() =>{
 try{
 
 
-  const dataMenu=[]
-
-
   const idMenues =[]
-
   const sing ="?"
   let inFactory =",?"
   
@@ -102,23 +69,10 @@ try{
   const data = JSON.parse(Menues);
   
 data.Menus.map(x =>{
-  
-    
- 
     idMenues.push(x.IdMenu)
-  
-  
 })
 
 
-  
-  
- // console.log(idMenues.length);
-    //console.log(sing+inFactory.repeat((idMenues.length-1)));
-
-
- 
-  
     const claves  = sing+inFactory.repeat(idMenues.length);
     const sql = `SELECT  cast (Id as text) as key, MenuLabel, NombreMenu FROM Menu where Id in(${claves})`
     const params = idMenues;
@@ -127,7 +81,6 @@ data.Menus.map(x =>{
 
      this.setState({rows});
 
-     //console.log(rows)
     } )
   
   
@@ -190,7 +143,7 @@ NombreLabel:""
 
         const {rows = []} = this.state;
 
-let kk =[];
+        let kk =[];
 
       rows.map(t =>(kk.push(t) ))
  

@@ -14,7 +14,6 @@ super(obj)
 
  static get database (){
 
-
 return ()=>SQLite.openDatabase("PuntoVentaDb.db");
 
  }
@@ -27,8 +26,6 @@ return ()=>SQLite.openDatabase("PuntoVentaDb.db");
  static get columnMapping (){
 
 return{
-
-
 Id:{type:types.INTEGER, primary_key:true},
 Codigo:{type: types.TEXT, not_null:false},
 CategoriaId: {type: types.int, not_null:true},
@@ -48,8 +45,6 @@ FechaCreacion: {type: types.TEXT, not_null:true},
 FechaModificacion:{type:types.TEXT, not_null:false},
 UsuarioCreacion:{type:types.TEXT, not_null:true},
 UsuarioModificacion:{type:types.TEXT, not_null:false}
-
-
 }
 
 

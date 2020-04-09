@@ -1,5 +1,7 @@
-import {BaseModel, types} from 'expo-sqlite-orm'
-import SQLite from 'expo-sqlite'
+import React from 'react'
+import * as SQLite from 'expo-sqlite'
+import {BaseModel,types} from 'expo-sqlite-orm'
+import { deleteAsync } from 'expo-file-system'
 
 
 
@@ -14,18 +16,15 @@ super(obj)
 
 
 
-static get database (){
+static get database(){
 
-return ()=> SQLite.openDatabase("PuntoVentaDb.db");
-
-
-}
-
-static get tableName(){
-
-    return "Stock";
-}
-
+    return ()=> SQLite.openDatabase("PuntoVentaDb.db");
+    }
+    
+    static get tableName(){
+    return "Stock"
+    
+    }
 
 
  static get columnMapping(){
@@ -41,11 +40,6 @@ return{
     FechaModificacion:{type:types.TEXT, not_null:false},
     UsuarioCreacion:{type:types.TEXT, not_null:true},
     UsuarioModificacion:{type:types.TEXT, not_null:false}
-
-
-
-
-
 }
 
 

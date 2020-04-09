@@ -8,10 +8,9 @@ import Header from  '../Components/Header'
 import * as SQLite from "expo-sqlite"
 import {BaseModel, types} from 'expo-sqlite-orm'   
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
-import ListaCategoria from '../../BindObject/PickerBind'
-import Articulos from '../../Models/Articulos'
-import AwesomeAlert from 'react-native-awesome-alerts';
+
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Stock from '../../Models/Stock';
 
 const styles = StyleSheet.create({
   ViewStyle:{
@@ -48,13 +47,13 @@ const data = [
   // { key: 'K' },
   // { key: 'L' },
 ];
-
+    
 export default class StockScreen extends React.Component {
 
 
-constructor(){
+constructor(props){
 
-super()
+super(props)
 
 }
 
@@ -71,7 +70,9 @@ state={
  }
 
 
-componentDidMount(){
+ componentDidMount (){
+
+
 
 this.LoadData();
 
@@ -81,15 +82,45 @@ selectedItem = (item) =>{
 
   console.log(item);
 
-this.setState({ProveedorSelected:item.NombreProveedor})
+this.setState({ProveedorSelected:item.NombreProveedor,ArticuloId:item.Id }, () =>{
+
   this.ShowModal();
+
+
+})
+
 
 }
 
 
  LoadData = async () =>{
 
+
+
   try{
+
+    const lol=  await Stock.createTable();
+
+    console.log(lol);
+   
+
+
+
+    const sqlStock = "SELECT * FROM Stock"
+    const paramsStock = [];
+    const databaseLayerStock = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+   databaseLayerStock.executeSql(sqlStock,paramsStock).then(  ({ rows }) => {
+
+     console.log(rows)
+    } ) 
+
+/*
+
+*/
+  
+
+
+
     const sql = `SELECT Id,NombreArticulo FROM ARTICULOS WHERE Activo=? ORDER BY Id ASC `
     const params = [1];
     const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
@@ -97,8 +128,10 @@ this.setState({ProveedorSelected:item.NombreProveedor})
   
      this.setState({rows});
   
-     console.log(rows)
+     //console.log(rows)
     } )  
+
+  
 
     const sqlProvee = `SELECT Id,NombreProveedor FROM Proveedores WHERE Activo =? ORDER BY Id ASC`
     const paramsProvee = [1];
@@ -107,12 +140,11 @@ this.setState({ProveedorSelected:item.NombreProveedor})
   
      this.setState({Proveedores:rows});
   
-     console.log(rows)
+    // console.log(rows)
     } )  
 
+ 
 
-
-  
 
   }
 
@@ -198,15 +230,8 @@ return(
 
 <Card.Content>
 
-<TextInput
-                                style={styles.Input}
-                                mode='flat'
-                                label='Nombre'
-                                value={this.state.NOMBRE}
-                                onChangeText={(NOMBRE)=> this.setState({NOMBRE})}
-                            />
-                            <Text>{"\n"}</Text> 
 
+<Text>{"\n"}</Text> 
 
 <View style={{flexDirection:"row", flexWrap:'wrap'}}>
 
@@ -214,7 +239,7 @@ return(
                                 style={styles.Input,{width:230}}
                                 mode='flat'
                                 label='Proveedores'
-                                value={this.state.ProveedorSelected}
+                                value={this.state.ProveedorSelected.toString()}
                                 onChangeText={(ProveedorSelected)=> this.setState({ProveedorSelected})}
                             />
                             <Button
@@ -234,10 +259,20 @@ return(
 </View>
 <Text>{"\n"}</Text> 
 
+
+<TextInput
+                                style={styles.Input}
+                                mode='flat'
+                                label='Existencia'
+                                value={this.state.CantidadExistencia}
+                                onChangeText={(CantidadExistencia)=> this.setState({CantidadExistencia})}
+                            />
+                            <Text>{"\n"}</Text> 
+
 <Button
                                 labelStyle={styles.Button} 
                                 mode="contained" 
-                                onPress={this.ShowModal}
+                                onPress={this.SaveStrock}
                             >
                                 <Icon 
                                     name="save" 
@@ -268,23 +303,51 @@ return(
 
 
 
-  SaveStrock = () =>{
+  SaveStrock = async () =>{
 
-const Varinsert ={
+try{
 
+  const Fecha = new  Date();
+  const Varinsert ={
+  
+  
+    ArticuloId:this.state.ArticuloId,
+    CantidadExistencia:this.state.CantidadExistencia,
+    Activo:1,
+    IdEmpresa:1,
+    IdSucursal:1,
+    FechaCreacion: Fecha.toString(),
+    FechaModificacion:null,
+    UsuarioCreacion:"system",
+    UsuarioModificacion:null
+  
+  }
+  
+  console.log(Varinsert);
+  
+  var response = await Stock.create(Varinsert);
+  console.log("Llegue hasta aqui");
+  console.log(response)
+  if (Object.keys(response).length <=0){
+  
+   Alert.alert("Error al insertar en la base de datos");
+   
+   }
+   else{
+  ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
+  
+  
+  this.setState(InitialState)
+   }
 
-
-  Activo:{type: types.INTEGER, not_null:true},
-  IdEmpresa:{type:types.INTEGER, not_null:true},
-  IdSucursal:{type:types.INTEGER, not_null:false},
-  FechaCreacion: {type: types.TEXT, not_null:true},
-  FechaModificacion:{type:types.TEXT, not_null:false},
-  UsuarioCreacion:{type:types.TEXT, not_null:true},
-  UsuarioModificacion:{type:types.TEXT, not_null:false}
+}
+catch(ex){
 
 
 
 }
+
+
 
 
 

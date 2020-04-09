@@ -66,6 +66,14 @@ export default class Register extends React.Component{
 
  LoadData = async () =>{
 
+    const sqlStock = 'SELECT name FROM sqlite_master WHERE type = "table"'
+    const paramsStock = [];
+    const databaseLayerStock = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+   databaseLayerStock.executeSql(sqlStock,paramsStock).then(  ({ rows }) => {
+
+     console.log(rows)
+    } ) 
+
     var options  ={
 
         columns:'Id,NombreRol,Comentario',

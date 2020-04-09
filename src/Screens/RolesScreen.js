@@ -38,7 +38,7 @@ Roles.createTable();
 
     const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
     databaseLayer.executeSql(
-      'SELECT * FROM Roles'
+      'SELECT * FROM Roles where NombreRol="administrador" COLLATE NOCASE'
       ).then(respon =>{console.log(respon)})
     
 }
@@ -47,7 +47,8 @@ s
 
 state={
 NombreRol:"",
-Comentario :""
+Comentario :"",
+ExistNombre:false
 }
 render(){
 
@@ -107,9 +108,32 @@ render(){
     );
     }
 
-    Validaciones  = () =>{
+    
+verifyExisting= async () =>{
+    console.log("fui invocado")
+    let callbaclproof =""
+    const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+    databaseLayer.executeSql(
+      'SELECT * FROM Roles where NombreRol="administrador" COLLATE NOCASE'
+      ).then(respon =>{
 
 
+  
+if(Object.keys(respon).length > 0){
+
+    this.setState({ExistNombre:true})
+
+  
+}
+})
+
+console.log(this.state.ExistNombre);
+}
+
+    Validaciones  =  () =>{
+
+    
+        this.verifyExisting();
 
         if(this.state.NombreRol === "" ){
         
@@ -129,7 +153,7 @@ render(){
             
 const date = new Date();
 
-    console.log("Entreeee");
+ 
 
         const ValInsert ={
             NombreRol: this.state.NombreRol,
@@ -143,7 +167,7 @@ const date = new Date();
             UsuarioModificacion:null
             
         }
-    
+    /*
         console.log(ValInsert);
        var response = await Roles.create(ValInsert);
 
@@ -159,6 +183,7 @@ ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
 
 this.setState(InitialState)
         }
+        */
         
         }
 }
