@@ -232,12 +232,9 @@ export default class Register extends React.Component{
                                     this.setState({Rol: itemValue})
                                 }>
                                {
-                                 
                                        this.state.Roles.map(xo =>(
-                                        <Picker.Item label={xo.NombreRol.toString()} value={xo.Id} key={xo.Id.toString()} />
-                                       
+                                        <Picker.Item label={xo.NombreRol.toString()} value={xo.id} key={xo.id.toString()} />
                                        )
-                               
                                        )
 
                                }

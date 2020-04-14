@@ -46,12 +46,12 @@ componentDidMount(){
 
 //creando los perfiles de navegacion en el drawer navigation
 const DrawerNavigation = createDrawerNavigator({
-  /*'Login': {
+  'Login': {
     screen: UsersLogin,
     navigationOptions: {
       title: 'Iniciar Sesión'
     }
-  },*/
+  },
   'Articulos':{
     screen:ArticulosManagement,
     navigationOptions:{
