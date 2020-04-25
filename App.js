@@ -22,8 +22,9 @@ import {
   RolesGridManagement,
   MenuAccionesManagement,
   OptionManagement,
-  ProveedoresManagement 
- 
+  ProveedoresManagement,
+  VentasManagement,
+  VentasDummyManagement
 } from "./src/Screens";
 class AuthLoadingScreen extends React.Component {
   constructor(props) {
@@ -96,6 +97,18 @@ const DrawerNavigation = createDrawerNavigator({
     title:'Acciones'
     }      
   },
+  'Ventas':{
+    screen:VentasManagement,
+    navigationOptions:{
+    title:'Ventas'
+    }
+  },
+  'ventasdummy': {
+    screen:VentasDummyManagement,
+    navigationOptions:{
+    title:'ventasdummy'
+    }
+  },
   'Home': {
     screen: DashboardHome,
     navigationOptions: {
@@ -133,7 +146,7 @@ navigationOptions:{
     }
   }
 })
-  export default createAppContainer(DrawerNavigation);
+export default createAppContainer(DrawerNavigation);
   
 /*
   'Control de Caja': {

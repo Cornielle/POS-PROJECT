@@ -23,8 +23,8 @@ import ArticulosGridScreen from "../GridScreen/ArticulosGridScreen";
 import AccionesMenuGridScreen from "../GridScreen/MenuGridScreen" 
 import OptionScreen from "./OptionScreen"
 import ProovedoresGridScreen from "../GridScreen/ProveedoresGridScreen"
-import Acciones from '../../Models/Acciones';
-
+import VentasGridScreen from "../GridScreen/VentasGridScreen";
+import VentasDummyScreen from "./VentasDummyScreen";
 //import Users from './Users'
 
 // Constantes que contienen la navegacion hacia cada componente en especifico , con sus nombres especificos//
@@ -60,10 +60,14 @@ export const OpeningClosingCash =
         navigation={navigation} 
         name="Apertura/Cierre de Caja" 
     />
+
+
+
+
+{/*Experimento Ventas Screen*/}
+export const VentasDummyManagement = ({navigation}) => <VentasDummyScreen navigation={navigation} subtitle="Ventas" name="Control de Ventas" />
+{/*Experimento Ventas Screen*/}
 export const ArticulosManagement =({navigation}) => <ArticulosGridScreen navigation={navigation} subtitle="Articulos" name="Control de Articulos" />
-
-
-
 export const CashierManagement = ({navigation}) => <Products navigation={navigation} name="Control de Caja" />
 export const SalesManagement  = ({navigation}) => <Screen navigation={navigation} name="Control de Ventas" />
 export const InventoryManagement = ({navigation}) => <Screen navigation={navigation} name="Manejo de Inventario" />
@@ -81,6 +85,7 @@ export const RolesGridManagement = ({navigation}) => <RolesGridScreen navigation
 export const MenuAccionesManagement =({navigation}) => <AccionesMenuGridScreen navigation={navigation} subtitle="Menu Acciones" name="Menu Acciones" />
 export const OptionManagement = ({navigation}) =><OptionScreen navigation={navigation} subtitle="Opciones" name="Opciones" />
 export const ProveedoresManagement = ({navigation}) => <ProovedoresGridScreen navigation={navigation} subtitle="Proveedores" name="Proveedores" /> 
+export const VentasManagement =({navigation}) => <VentasGridScreen navigation={navigation} subtitle="Ventas" name="Ventas" />
 // configuracion del tema por defecto de react native paper
 const theme = {
     ...DefaultTheme,
