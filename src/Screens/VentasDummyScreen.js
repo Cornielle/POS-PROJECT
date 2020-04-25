@@ -7,11 +7,13 @@ Right, Button, Footer, FooterTab,Spinner, Tab, Tabs, TabHeading, ScrollableTab} 
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
+import Categorias from '../../Models/Categorias'
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 export default class VentasMain extends React.Component {
   constructor(props) {
-    super(props); 
+    super(props);
+    this.LoadCategoriaData()   
     this.state = {
       isReady: false,
       active: false,
@@ -25,32 +27,62 @@ export default class VentasMain extends React.Component {
       isReady: false,
       searchQuery:'',
       loadingState:false,
-      Articulo:{
+      data:'',
+      Categoria:{
         id:0,
-        Codigo:'',
-        CategoriaId: 0,
-        Descripcion:'',
-        DescripcionPantalla:'',
-        NombreArticulo:'',
-        CodigoDeBarra:'',
-        PrecioCosto:'',
-        PrecioVenta:'',
-        ProveedoresId:'',
-        CatidadExistencia:'',
-        MedidaDeVenta:'',
-        Activo:'',
+        NombreCategoria: '',
+        Descripcion: '',
+        Activo:0,
         IdEmpresa:0,
         IdSucursal:0,
-        FechaCreacion: '',
+        FechaCreacion: 0,
         FechaModificacion:'',
         UsuarioCreacion:'',
         UsuarioModificacion:'',
-        HoraCreacion:''
-        },
+      },
     };
     this._hideModal =  this._hideModal.bind(this);
     this.ventasMain =  this.ventasMain.bind(this);
   }
+  LoadCategoriaData = async () =>{
+    const options ={
+        columns:`id,Descripcion,NombreCategoria,
+        Activo,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,
+         UsuarioCreacion,UsuarioModificacion`,
+        where:{
+        Id_gt:0
+        },
+        page:1,
+        limit:30
+    }    
+
+  
+  const artiobj = await Categorias.query(options) 
+  console.log(artiobj, 'check')
+  let arra =[]
+  this.state.HoraCreacion = ''
+  artiobj.map(x => {
+    const{id, NombreCategoria,FechaCreacion, Activo} = x;
+    let date = FechaCreacion.split(' ');
+    var objeto  ={
+    key: id,
+    name:NombreCategoria,
+    FechaCreacion:`${date[2]}/${date[1]}/${date[3]}` ,
+    HoraCreacion: date[4][0]+date[4][1] > 11 && date[4][0]+date[4][1] < 23 ? `${ date[4]}PM` :`${ date[4]}AM`,
+    avatar_url:'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+    subtitle: ``,
+    estado: Activo ?true: false
+  }
+  arra.push(objeto)
+    });
+    this.setState({data:arra})
+    this.setState({
+      filterData:arra
+    })
+    console.log(this.state.data, 'here')
+  }
+
+
   async componentDidMount() {
     await Font.loadAsync({
       Roboto: require('native-base/Fonts/Roboto.ttf'),
@@ -58,6 +90,7 @@ export default class VentasMain extends React.Component {
       ...Ionicons.font,
     });
     this.setState({ isReady: true });
+
   }
   _hideModal = () => this.setState({ visible: false });
   ventasMain(){
@@ -140,24 +173,24 @@ export default class VentasMain extends React.Component {
         <Card>
             <CardItem>
               <Body>
-                <Text style={{float:'left', fontSize:14,paddingLeft:windowWidth * 0.184}} note numberOfLines={1}>
+                <Text style={{ fontSize:14,paddingLeft:windowWidth * 0.184}} note numberOfLines={1}>
                   Monto Neto:
                 </Text>
-                <Text style={{float:'left', fontSize:14, paddingLeft:windowWidth * 0.184}} note numberOfLines={1}>
+                <Text style={{fontSize:14, paddingLeft:windowWidth * 0.184}} note numberOfLines={1}>
                   ITBIS:
                 </Text>
-                <Text style={{float:'left', fontSize:16, paddingLeft:windowWidth * 0.183}}>
+                <Text style={{fontSize:16, paddingLeft:windowWidth * 0.183}}>
                   Total:
                 </Text>
               </Body>        
               <Body>
-                <Text style={{float:'left', fontSize:14,paddingLeft:windowWidth * 0.004}} note numberOfLines={1}>
+                <Text style={{fontSize:14,paddingLeft:windowWidth * 0.004}} note numberOfLines={1}>
                  RD$ 1,500.00
                 </Text>
-                <Text style={{float:'left', fontSize:14, paddingLeft:windowWidth * 0.004}} note numberOfLines={1}>
+                <Text style={{fontSize:14, paddingLeft:windowWidth * 0.004}} note numberOfLines={1}>
                  RD$ 500.00
                 </Text>
-                <Text style={{float:'left', fontSize:16, paddingLeft:windowWidth * 0.003}}>
+                <Text style={{ fontSize:16, paddingLeft:windowWidth * 0.003}}>
                  RD$ 2.00000000
                 </Text>
               </Body>
