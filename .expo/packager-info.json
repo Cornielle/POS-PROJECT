@@ -1,9 +1,9 @@
 {
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 1189,
-  "expoServerNgrokUrl": "https://fj-g6g.anonymous.pos-projects.exp.direct",
-  "packagerNgrokUrl": "https://packager.fj-g6g.anonymous.pos-projects.exp.direct",
-  "ngrokPid": 1200,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "devToolsPort": 19002
 }
