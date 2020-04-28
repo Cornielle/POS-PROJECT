@@ -13,7 +13,7 @@ import ActionSheet from 'react-native-actionsheet';
 export default class StockGridScreen extends React.Component{
     constructor(props) {
         super(props);
-        this.LoadArticuloData()  
+        this.LoadStockData()  
         this.editField = this.editField.bind(this);
         this._showMenu = this._showMenu.bind(this);
         this.saveEdit = this.saveEdit.bind(this);
@@ -40,7 +40,6 @@ export default class StockGridScreen extends React.Component{
         filterData:[],
         newData:'',
         text:'',
-        IdArticulo:"",
         editFields:false,
         Stock:{
             id:0,
@@ -57,7 +56,7 @@ export default class StockGridScreen extends React.Component{
     };
   _showModal = () => this.setState({visible:true})
   _hideModal = () => this.setState({visible:false})
-  LoadArticuloData = async () =>{
+  LoadStockData = async () =>{
     const options ={
         columns:`id,ArticuloId,CantidadExistencia,Activo,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,
          UsuarioCreacion,UsuarioModificacion`,
@@ -67,15 +66,17 @@ export default class StockGridScreen extends React.Component{
         page:1,
         limit:30
     }    
-  const artiobj = await Articulos.query(options) 
-  let arra =[]
+  const artiobj = await Stock.query(options) 
+
+  console.log(artiobj, 'fecha creacion?')
+  let arra =[]   
   this.state.HoraCreacion = ''
   artiobj.map(x => {
-    const{id, NombreArticulo, PrecioCosto, CantidadExistencia,Activo} = x;
+    const{id, NombreStock, FechaCreacion, CantidadExistencia,Activo} = x;
     let date = FechaCreacion.split(' ');
     var objeto  ={
     key: id,
-    name:NombreArticulo,
+    name:NombreStock,
     FechaCreacion:`${date[2]}/${date[1]}/${date[3]}` ,
     HoraCreacion: date[4][0]+date[4][1] > 11 && date[4][0]+date[4][1] < 23 ? `${ date[4]}PM` :`${ date[4]}AM`,
     avatar_url:'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
@@ -91,8 +92,8 @@ export default class StockGridScreen extends React.Component{
     // console.log(this.state.data)
   }
   async  componentDidMount(){
-    const crear = await Articulos.createTable();
-    this.LoadArticuloData()  
+    const crear = await Stock.createTable();
+    this.LoadStockData()  
   }
   saveEdit = async () =>{ 
     const props =  {
@@ -108,15 +109,14 @@ export default class StockGridScreen extends React.Component{
       UsuarioModificacion:this.state.Stock.UsuarioModificacion
   
     }
-    console.log(props,'checke')
-   const saving = await Articulos.update(props)
+   const saving = await Stock.update(props)
   }
 
-  FillArticulo = async (id) =>{
+  FillStock = async (id) =>{
     try{
       const {key} = id;
-      const Articulo = await Articulos.find(key)
-      this.setState({Articulo})
+      const Articulo = await Stock.find(key)
+      this.setState({Stock})
     }
     catch(ex){
     Alert.alert("Ha ocurrido el siguiente error: "+ex);
@@ -124,7 +124,7 @@ export default class StockGridScreen extends React.Component{
   }
 
   stateArticle = async (id) =>{ 
-    const savingState= await Articulos.find(id)
+    const savingState= await Stock.find(id)
     savingState.Activo = this.state.data[this.state.index]['estado'] ? 1:0
     savingState.save()
     console.log(savingState, 'i can fly on')
@@ -146,9 +146,9 @@ _makeAction(action){
   this.setState({modalTitle:''})
   switch(action){
     case 0:
-      this.FillArticulo(id)
+      this.FillStock(id)
       this.setState({
-        modalTitle:'Detalles Articulo',
+        modalTitle:'Detalles Stock',
         editFields:true
       })
       this._showModal()
@@ -159,9 +159,9 @@ _makeAction(action){
       this.stateArticle(id.key)
       break
     case 2:
-      this.FillArticulo(id)
+      this.FillStock(id)
       this.setState({
-        modalTitle:'Editar Articulo',
+        modalTitle:'Editar Stock',
         editFields:false
       })
       this._showModal()
@@ -188,9 +188,8 @@ editField = (fieldValue, name) =>{
       this.state.Stock.CantidadExistencia = fieldValue
     } 
     if(name==='Nombre'){
-      //falta nombre
-      // this.setState({CantidadExistencia:fieldValue})
-      // this.state.Stock.CantidadExistencia = fieldValue
+      this.setState({CantidadExistencia:fieldValue})
+      this.state.Stock.CantidadExistencia = fieldValue
     } 
 }
 render(){
@@ -228,7 +227,7 @@ return(
             value={this.state.Stock.Nombre? this.state.Stock.Nombre : 'Cargando...'}
             disabled={editFields}
             editable={true}
-            onChangeText={(NombreArticulo)=> this.editField(NombreArticulo, 'NombreArticulo')}
+            onChangeText={(NombreStock)=> this.editField(NombreStock, 'NombreStock')}
             />
                 <TextInput
             style={styles.Input}
@@ -324,8 +323,6 @@ return(
             />
               </TouchableOpacity>
             }
-            // onEndReached={0}
-            // onEndThreshold={0}
           /> 
         </View>
         <ActionSheet

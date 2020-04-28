@@ -58,8 +58,6 @@ export default class CategoriasGridScreen extends React.Component{
           UsuarioModificacion:'',
         },
     };
-
- 
   _showModal = () => this.setState({visible:true})
   _hideModal = () => this.setState({visible:false})
   LoadCategoriaData = async () =>{
@@ -73,15 +71,11 @@ export default class CategoriasGridScreen extends React.Component{
         page:1,
         limit:30
     }    
-
-  
   const artiobj = await Categorias.query(options) 
-  console.log(artiobj, 'check')
   let arra =[]
   this.state.HoraCreacion = ''
   artiobj.map(x => {
     const{id, NombreCategoria,FechaCreacion, Activo} = x;
-    console.log(PrecioCosto,'costo')
     let date = FechaCreacion.split(' ');
     var objeto  ={
     key: id,
@@ -98,7 +92,7 @@ export default class CategoriasGridScreen extends React.Component{
     this.setState({
       filterData:arra
     })
-    // console.log(this.state.data)
+    console.log(this.state.data)
   }
   async  componentDidMount(){
     const crear = await Categorias.createTable();

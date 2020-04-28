@@ -295,7 +295,7 @@ Alert.alert("Ha ocurrido un error:"+ e);
 GuardarArticulo = async () =>{
 try  {
 
-Articulos.dropTable();
+// Articulos.dropTable();
   
 const fecha = new Date();
 

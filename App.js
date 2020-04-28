@@ -7,7 +7,7 @@ import { View}  from 'react-native'
 import {
   UsersLogin,
   DashboardHome,
-  OpeningClosingCash,
+  // OpeningClosingCash,
   SalesManagement,
   UsersManagement,
   InventoryManagement,
@@ -97,16 +97,16 @@ const DrawerNavigation = createDrawerNavigator({
     title:'Acciones'
     }      
   },
-  'Ventas':{
-    screen:VentasManagement,
-    navigationOptions:{
-    title:'Ventas'
-    }
-  },
+  // 'Ventas':{
+  //   screen:VentasManagement,
+  //   navigationOptions:{
+  //   title:'Ventas'
+  //   }
+  // },
   'ventasdummy': {
     screen:VentasDummyManagement,
     navigationOptions:{
-    title:'ventasdummy'
+    title:'Ventas'
     }
   },
   'Home': {
@@ -115,24 +115,24 @@ const DrawerNavigation = createDrawerNavigator({
       title: 'Inicio'
     }
   },
-  "Roles Menu":{
-    screen: RolesMenuManagement,
-    navigationOptions:{
-    title:"Roles Menu"
-    }
-  }, 
+  // "Roles Menu":{
+  //   screen: RolesMenuManagement,
+  //   navigationOptions:{
+  //   title:"Roles Menu"
+  //   }
+  // }, 
   // "Roles Grid":{
   //   screen:RolesGridManagement, 
   //   navigationOptions:{
   //   title:"Roles Grid"
   //   }
   // },
-  'OCCashier': {
-  screen: OpeningClosingCash,
-  navigationOptions:{
-    title:"Apertura/Cierre de caja"
-    }
-  },
+  // 'OCCashier': {
+  // screen: OpeningClosingCash,
+  // navigationOptions:{
+  //   title:"Apertura/Cierre de caja"
+  //   }
+  // },
 "Menu Acciones":{
   screen:MenuAccionesManagement,
   navigationOptions:{

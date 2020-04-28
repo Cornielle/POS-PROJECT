@@ -171,21 +171,17 @@ this.setState({Visible: !this.state.Visible})
 try{
   console.log(item)
   if (item.empty === true || item ===[]) {
-    Alert.alert("Tou vacio");
-            return <View style={[styles.item, styles.itemInvisible]} />;
-  
-          }
+    Alert.alert("vacio");
+      return <View style={[styles.item, styles.itemInvisible]} />;
+  }
 
-          return(
-
-            <TouchableHighlight onPress={() => this.selectedItem(item)} >
-              <View>
-
-        <Text>{item.NombreProveedor}</Text>
-            </View>
-            </TouchableHighlight>
-          )
-      
+  return(
+    <TouchableHighlight onPress={() => this.selectedItem(item)} >
+      <View>
+      <Text>{item.NombreProveedor}</Text>
+      </View>
+      </TouchableHighlight>
+    )
 }
 
 catch(ex){
@@ -240,52 +236,52 @@ return(
 <View style={{flexDirection:"row", flexWrap:'wrap'}}>
 
 <TextInput
-                                style={styles.Input,{width:230}}
-                                mode='flat'
-                                label='Proveedores'
-                                value={this.state.ProveedorSelected.toString()}
-                                onChangeText={(ProveedorSelected)=> this.setState({ProveedorSelected})}
-                            />
-                            <Button
-                                labelStyle={styles.Button} 
-                                mode="contained" 
-                                onPress={this.ShowModal}
-                            >
-                                <Icon 
-                                    name="Selet" 
-                                    size={5} 
-                                    color="#ffffff" 
-                                    style={styles.Icon}
-                                /> <Text>{"  "}</Text>   
-                                Agregar
-                            </Button>
+  style={styles.Input,{width:230}}
+  mode='flat'
+  label='Proveedor'
+  value={this.state.ProveedorSelected.toString()}
+  onChangeText={(ProveedorSelected)=> this.setState({ProveedorSelected})}
+/>
+<Button
+  labelStyle={styles.Button} 
+  mode="contained" 
+  onPress={this.ShowModal}
+>
+  <Icon 
+    name="Selet" 
+    size={5} 
+    color="#ffffff" 
+    style={styles.Icon}
+  /> <Text>{"  "}</Text>   
+  Agregar
+</Button>
 
 </View>
 <Text>{"\n"}</Text> 
 
 
 <TextInput
-                                style={styles.Input}
-                                mode='flat'
-                                label='Existencia'
-                                value={this.state.CantidadExistencia}
-                                onChangeText={(CantidadExistencia)=> this.setState({CantidadExistencia})}
-                            />
-                            <Text>{"\n"}</Text> 
+  style={styles.Input}
+  mode='flat'
+  label='Existencia'
+  value={this.state.CantidadExistencia}
+  onChangeText={(CantidadExistencia)=> this.setState({CantidadExistencia})}
+/>
+<Text>{"\n"}</Text> 
 
 <Button
-                                labelStyle={styles.Button} 
-                                mode="contained" 
-                                onPress={this.SaveStrock}
-                            >
-                                <Icon 
-                                    name="save" 
-                                    size={5} 
-                                    color="#ffffff" 
-                                    style={styles.Icon}
-                                /> <Text>{"  "}</Text>   
-                                Agregar
-                            </Button>
+  labelStyle={styles.Button} 
+  mode="contained" 
+  onPress={this.SaveStrock}
+>
+<Icon 
+  name="save" 
+  size={5} 
+  color="#ffffff" 
+  style={styles.Icon}
+  /> <Text>{"  "}</Text>   
+  Agregar
+</Button>
 
   
 </Card.Content>

@@ -38,6 +38,7 @@ super(obj)
 
 
  async componentDidMount(){
+    //  Categorias.dropTable();
 const Created = await Categorias.createTable();
 
 

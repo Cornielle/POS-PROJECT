@@ -1,13 +1,16 @@
-import React from 'react';
+import * as React from 'react';
 import { Dimensions,StyleSheet,Modal, View} from 'react-native';
-import {TextInput,Searchbar} from 'react-native-paper';
+import {TextInput} from 'react-native-paper';
 import { Container, Header, Content,Title, Icon, List,
 Card, CardItem, ListItem, Thumbnail, Text, Left, Body, 
-Right, Button, Footer, FooterTab,Spinner, Tab, Tabs, TabHeading, ScrollableTab} from 'native-base';
+Right, Button, Footer, FooterTab,Spinner} from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
+import { TabView, SceneMap } from 'react-native-tab-view';
 import Categorias from '../../Models/Categorias'
+import VentasSelectScreen from './VentasSelectScreen'
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 export default class VentasMain extends React.Component {
@@ -25,15 +28,15 @@ export default class VentasMain extends React.Component {
       isCard:true, 
       product:false,
       isReady: false,
-      searchQuery:'',
+      searchQuery:'', 
       loadingState:false,
-      data:'',
+      dataCategorias:'',
       Categoria:{
         id:0,
         NombreCategoria: '',
         Descripcion: '',
         Activo:0,
-        IdEmpresa:0,
+        IdEmpresa:0,  
         IdSucursal:0,
         FechaCreacion: 0,
         FechaModificacion:'',
@@ -43,22 +46,27 @@ export default class VentasMain extends React.Component {
     };
     this._hideModal =  this._hideModal.bind(this);
     this.ventasMain =  this.ventasMain.bind(this);
+    this.categoriesVisible =  this.categoriesVisible.bind(this);
+    this.visibleProducts = this.visibleProducts.bind(this);
+  }
+  categoriesVisible = (value) => {
+    this.setState({
+      product:value
+    })
+  }
+  visibleProducts = () => {
+    this.setState({product:true})
   }
   LoadCategoriaData = async () =>{
     const options ={
-        columns:`id,Descripcion,NombreCategoria,
-        Activo,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,
-         UsuarioCreacion,UsuarioModificacion`,
+        columns:`id,NombreCategoria,FechaCreacion`,
         where:{
         Id_gt:0
         },
         page:1,
         limit:30
     }    
-
-  
   const artiobj = await Categorias.query(options) 
-  console.log(artiobj, 'check')
   let arra =[]
   this.state.HoraCreacion = ''
   artiobj.map(x => {
@@ -66,24 +74,19 @@ export default class VentasMain extends React.Component {
     let date = FechaCreacion.split(' ');
     var objeto  ={
     key: id,
-    name:NombreCategoria,
-    FechaCreacion:`${date[2]}/${date[1]}/${date[3]}` ,
-    HoraCreacion: date[4][0]+date[4][1] > 11 && date[4][0]+date[4][1] < 23 ? `${ date[4]}PM` :`${ date[4]}AM`,
-    avatar_url:'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-    subtitle: ``,
-    estado: Activo ?true: false
+    title:NombreCategoria,
   }
   arra.push(objeto)
     });
-    this.setState({data:arra})
+    this.setState({dataCategorias:arra})
     this.setState({
       filterData:arra
     })
-    console.log(this.state.data, 'here')
   }
 
-
   async componentDidMount() {
+    const crear = await Categorias.createTable();
+    this.LoadCategoriaData() 
     await Font.loadAsync({
       Roboto: require('native-base/Fonts/Roboto.ttf'),
       Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
@@ -99,7 +102,7 @@ export default class VentasMain extends React.Component {
     })
   }
   render() {
-    const { visible, isCash, isCard , product, searchQuery, loadingState } = this.state;
+    const { dataCategorias, visible, isCash, isCard , product, searchQuery, loadingState } = this.state; 
     if (!this.state.isReady) {
       return (
       <Container>
@@ -199,218 +202,23 @@ export default class VentasMain extends React.Component {
             <Footer>
           <FooterTab>
             <Button vertical
-              onPress={()=>this.setState({
-                product:true
-              })}>
+              onPress={()=>this.visibleProducts()}>
               <Icon name="basket" />
               <Text>Articulos</Text>
             </Button>
             <Button vertical
-              onPress={()=>this.setState({
-                visible:true
-              })}>
+              onPress={()=> this.setState({visible:true})}>
               <Icon type="FontAwesome5" name="cash-register" />
               <Text>Pagar</Text>
             </Button>
           </FooterTab>
         </Footer>
       </Content>
-      <Modal  visible={product}>
-      <Container>
-        <Header hasTabs>
-          <Left>
-            <Button
-              onPress={()=>this.setState({
-                product:false
-              })}
-             transparent>
-              <Icon name='arrow-back' /> 
-            </Button>
-          </Left>
-          <Body>
-            <Title style={{fontSize:20}}>Escoger Articulos</Title>
-          </Body>
-        </Header>
-        <Searchbar
-            placeholder="Buscar por Código/Artículo"
-            onChangeText={this._onChangeSearch}
-            value={searchQuery}  
-        />
-        <Tabs renderTabBar={() => <ScrollableTab/>}>
-          <Tab heading={ <TabHeading><Text>No Icon</Text></TabHeading>}>
-          <ListItem thumbnail>
-              <Left>
-                  <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
-              </Left>
-              <Body>  
-                <Text>Barbie Holiday Castaña 2018</Text>     
-                <Text note numberOfLines={1}>Cant: 9999</Text>
-              </Body>
-              <Right>
-              <Text note numberOfLines={1}>RD$ 3,400.00</Text>
-              </Right>
-              <Right>  
-                <TouchableOpacity>     
-                  <Icon name="close"/>
-                </TouchableOpacity>  
-              </Right>
-            </ListItem>
-          </Tab>
-          <Tab heading={ <TabHeading><Text>No Icon</Text></TabHeading>}>
-          <ListItem thumbnail>
-              <Left>
-                  <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
-              </Left>
-              <Body>  
-                <Text>Barbie Holiday Castaña 2018</Text>     
-                <Text note numberOfLines={1}>Cant: 9999</Text>
-              </Body>
-              <Right>
-              <Text note numberOfLines={1}>RD$ 3,400.00</Text>
-              </Right>
-              <Right>  
-                <TouchableOpacity>     
-                  <Icon name="close"/>
-                </TouchableOpacity>  
-              </Right>
-            </ListItem>
-          </Tab>
-          <Tab heading={ <TabHeading><Text>No Icon</Text></TabHeading>}>
-          <ListItem thumbnail>
-              <Left>
-                  <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
-              </Left>
-              <Body>  
-                <Text>Barbie Holiday Castaña 2018</Text>     
-                <Text note numberOfLines={1}>Cant: 9999</Text>
-              </Body>
-              <Right>
-              <Text note numberOfLines={1}>RD$ 3,400.00</Text>
-              </Right>
-              <Right>  
-                <TouchableOpacity>     
-                  <Icon name="close"/>
-                </TouchableOpacity>  
-              </Right>
-            </ListItem>
-          </Tab>
-          <Tab heading={ <TabHeading><Text>No Icon</Text></TabHeading>}>
-          <ListItem thumbnail>
-              <Left>
-                  <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
-              </Left>
-              <Body>  
-                <Text>Barbie Holiday Castaña 2018</Text>     
-                <Text note numberOfLines={1}>Cant: 9999</Text>
-              </Body>
-              <Right>
-              <Text note numberOfLines={1}>RD$ 3,400.00</Text>
-              </Right>
-              <Right>  
-                <TouchableOpacity>     
-                  <Icon name="close"/>
-                </TouchableOpacity>  
-              </Right>
-            </ListItem>
-          </Tab>
-          <Tab heading={ <TabHeading><Text>No Icon</Text></TabHeading>}>
-          <ListItem thumbnail>
-              <Left>
-                  <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
-              </Left>
-              <Body>  
-                <Text>Barbie Holiday Castaña 2018</Text>     
-                <Text note numberOfLines={1}>Cant: 9999</Text>
-              </Body>
-              <Right>
-              <Text note numberOfLines={1}>RD$ 3,400.00</Text>
-              </Right>
-              <Right>  
-                <TouchableOpacity>     
-                  <Icon name="close"/>
-                </TouchableOpacity>  
-              </Right>
-            </ListItem>
-          </Tab>
-          <Tab heading={ <TabHeading><Text>No Icon</Text></TabHeading>}>
-          <ListItem thumbnail>
-              <Left>
-                  <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
-              </Left>
-              <Body>  
-                <Text>Barbie Holiday Castaña 2018</Text>     
-                <Text note numberOfLines={1}>Cant: 9999</Text>
-              </Body>
-              <Right>
-              <Text note numberOfLines={1}>RD$ 3,400.00</Text>
-              </Right>
-              <Right>  
-                <TouchableOpacity>     
-                  <Icon name="close"/>
-                </TouchableOpacity>  
-              </Right>
-            </ListItem>
-          </Tab>
-          <Tab heading={ <TabHeading><Text>No Icon</Text></TabHeading>}>
-          <ListItem thumbnail>
-              <Left>
-                  <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
-              </Left>
-              <Body>  
-                <Text>Barbie Holiday Castaña 2018</Text>     
-                <Text note numberOfLines={1}>Cant: 9999</Text>
-              </Body>
-              <Right>
-              <Text note numberOfLines={1}>RD$ 3,400.00</Text>
-              </Right>
-              <Right>  
-                <TouchableOpacity>     
-                  <Icon name="close"/>
-                </TouchableOpacity>  
-              </Right>
-            </ListItem>
-          </Tab>
-          <Tab heading={ <TabHeading><Text>No Icon</Text></TabHeading>}>
-          <ListItem thumbnail>
-              <Left>
-                  <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
-              </Left>
-              <Body>  
-                <Text>Barbie Holiday Castaña 2018</Text>     
-                <Text note numberOfLines={1}>Cant: 9999</Text>
-              </Body>
-              <Right>
-              <Text note numberOfLines={1}>RD$ 3,400.00</Text>
-              </Right>
-              <Right>  
-                <TouchableOpacity>     
-                  <Icon name="close"/>
-                </TouchableOpacity>  
-              </Right>
-            </ListItem>
-          </Tab>
-          <Tab heading={ <TabHeading><Text>No Icon</Text></TabHeading>}>
-          <ListItem thumbnail>
-              <Left>
-                  <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
-              </Left>
-              <Body>  
-                <Text>Barbie Holiday Castaña 2018</Text>     
-                <Text note numberOfLines={1}>Cant: 9999</Text>
-              </Body>
-              <Right>
-              <Text note numberOfLines={1}>RD$ 3,400.00</Text>
-              </Right>
-              <Right>  
-                <TouchableOpacity>     
-                  <Icon name="close"/>
-                </TouchableOpacity>  
-              </Right>
-            </ListItem>
-          </Tab>
-        </Tabs>
-      </Container>
+      {/*Products Modal Section*/}
+      <Modal visible={product}>
+        <VentasSelectScreen visible={this.categoriesVisible} data={dataCategorias}/>
       </Modal>
+      {/*Payment Modal Section*/}
       <Modal visible={visible}>
       <Header>
           <Left>
@@ -458,7 +266,7 @@ export default class VentasMain extends React.Component {
             padding:25
         }}>
         <Icon style={styles.cashButton}type="FontAwesome5" name="money-bill" />
-          {" "}Efectivo
+          {" "}Efectivo 
         </Text>
       </TouchableOpacity>
       <TouchableOpacity>

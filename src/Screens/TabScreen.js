@@ -1,9 +1,17 @@
 import * as React from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
+import { ScrollView } from 'react-native-gesture-handler';
+import { Text } from 'native-base';
  
 const FirstRoute = () => (
-  <View style={[styles.scene, { backgroundColor: '#ff4081' }]} />
+  <View style={[styles.scene, { backgroundColor: '#ff4081' }]} >
+    <ScrollView horizontal={true}>
+      <Text>
+        testing
+      </Text>
+    </ScrollView>
+  </View>
 );
  
 const SecondRoute = () => (

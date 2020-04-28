@@ -25,6 +25,7 @@ import OptionScreen from "./OptionScreen"
 import ProovedoresGridScreen from "../GridScreen/ProveedoresGridScreen"
 import VentasGridScreen from "../GridScreen/VentasGridScreen";
 import VentasDummyScreen from "./VentasDummyScreen";
+import test from "./VentasSelectScreen";
 //import Users from './Users'
 
 // Constantes que contienen la navegacion hacia cada componente en especifico , con sus nombres especificos//
@@ -54,12 +55,12 @@ export const UsersLogin =
             name="Iniciar Sesión"
             />
     </PaperProvider>
-export const OpeningClosingCash = 
-({navigation}) => 
-    <OpeningClosingGridScreen 
-        navigation={navigation} 
-        name="Apertura/Cierre de Caja" 
-    />
+// export const OpeningClosingCash = 
+// ({navigation}) => 
+//     <OpeningClosingGridScreen 
+//         navigation={navigation} 
+//         name="Apertura/Cierre de Caja" 
+//     />
 
 
 
@@ -85,8 +86,8 @@ export const RolesGridManagement = ({navigation}) => <RolesGridScreen navigation
 export const MenuAccionesManagement =({navigation}) => <AccionesMenuGridScreen navigation={navigation} subtitle="Menu Acciones" name="Menu Acciones" />
 export const OptionManagement = ({navigation}) =><OptionScreen navigation={navigation} subtitle="Opciones" name="Opciones" />
 export const ProveedoresManagement = ({navigation}) => <ProovedoresGridScreen navigation={navigation} subtitle="Proveedores" name="Proveedores" /> 
-export const VentasManagement =({navigation}) => <VentasGridScreen navigation={navigation} subtitle="Ventas" name="Ventas" />
-// configuracion del tema por defecto de react native paper
+// export const VentasManagement =({navigation}) => <VentasGridScreen navigation={navigation} subtitle="Ventas" name="Ventas" />
+// // configuracion del tema por defecto de react native paper
 const theme = {
     ...DefaultTheme,
     roundness: 4,

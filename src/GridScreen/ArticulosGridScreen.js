@@ -110,8 +110,8 @@ export default class ArticulosGridScreen extends React.Component{
     // console.log(this.state.data)
   }
   async  componentDidMount(){
-    const crear = await Articulos.createTable();
-    this.LoadArticuloData()  
+    this.LoadArticuloData() 
+    // const crear = await Articulos.createTable(); 
   }
   forceUpdateHandle(){
     this.setState({state:this.state})

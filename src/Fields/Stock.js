@@ -4,14 +4,6 @@ import {StyleSheet, Text, View, ScrollView,Picker,Alert} from 'react-native'
 import {Block} from 'galio-framework'
 import normalize from 'react-native-normalize';
 import Header from  '../Components/Header'
-
-import * as SQLite from "expo-sqlite"
-import {BaseModel, types} from 'expo-sqlite-orm'
-import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
-import ListaCategoria from '../../BindObject/PickerBind'
-import Articulos from '../../Models/Articulos'
-
-
 const styles = StyleSheet.create({
   ViewStyle:{
       backgroundColor:"#f6f6f6",
@@ -30,9 +22,6 @@ const styles = StyleSheet.create({
       color:'#ffffff',
   }
 })
-
-
-
 export default class Stock extends React.Component {
 
 
@@ -63,20 +52,24 @@ return(
 <View style={styles.Form}>
 
 <Card>
-<Card.Title style={styles.Card} title="Stock" subtitle={subtitle} left={(props)=> <Avatar.Icon {...props} icon="account" />}   />
+  <Card.Title 
+    style={styles.Card} title="Stock" 
+    subtitle={subtitle} left={(props)=> 
+    <Avatar.Icon {...props} icon="account" />}   
+  />
 
-<Card.Content>
+  <Card.Content>
 
-<TextInput
-                                style={styles.Input}
-                                mode='flat'
-                                label='Nombre'
-                                value={this.state.NOMBRE}
-                                onChangeText={(NOMBRE)=> this.setState({NOMBRE})}
-                            />
-                            <Text>{"\n"}</Text> 
+  <TextInput
+    style={styles.Input}
+    mode='flat'
+    label='Nombre'
+    value={this.state.NOMBRE}
+    onChangeText={(NOMBRE)=> this.setState({NOMBRE})}
+  />
+  <Text>{"\n"}</Text> 
 
-</Card.Content>
+  </Card.Content>
 
 
 
