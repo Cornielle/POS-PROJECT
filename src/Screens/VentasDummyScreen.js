@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Dimensions,StyleSheet,Modal, View} from 'react-native';
+import { Dimensions,StyleSheet,Modal, View, ActivityIndicator} from 'react-native';
 import {TextInput} from 'react-native-paper';
 import { Container, Header, Content,Title, Icon, List,
 Card, CardItem, ListItem, Thumbnail, Text, Left, Body, 
@@ -31,6 +31,7 @@ export default class VentasMain extends React.Component {
       searchQuery:'', 
       loadingState:false,
       dataCategorias:'',
+      productLoading:false,
       Categoria:{
         id:0,
         NombreCategoria: '',
@@ -49,13 +50,16 @@ export default class VentasMain extends React.Component {
     this.categoriesVisible =  this.categoriesVisible.bind(this);
     this.visibleProducts = this.visibleProducts.bind(this);
   }
-  categoriesVisible = (value) => {
+  categoriesVisible = (value,loaded) => {
+    console.log(value ,'checkkkkkkk')
     this.setState({
       product:value
     })
   }
   visibleProducts = () => {
-    this.setState({product:true})
+    this.setState({
+      product:true,
+    })
   }
   LoadCategoriaData = async () =>{
     const options ={
@@ -102,7 +106,8 @@ export default class VentasMain extends React.Component {
     })
   }
   render() {
-    const { dataCategorias, visible, isCash, isCard , product, searchQuery, loadingState } = this.state; 
+    const { dataCategorias, visible, isCash, isCard , product, productLoading } = this.state; 
+
     if (!this.state.isReady) {
       return (
       <Container>
@@ -111,6 +116,13 @@ export default class VentasMain extends React.Component {
         </Content>
       </Container>);
     }
+
+    {/*Products Modal Section*/}
+    if (product){
+      return ( 
+        <VentasSelectScreen visible={this.categoriesVisible} data={dataCategorias}/> 
+      )
+      }
     return (
       <Container>
         <Header>
@@ -214,10 +226,6 @@ export default class VentasMain extends React.Component {
           </FooterTab>
         </Footer>
       </Content>
-      {/*Products Modal Section*/}
-      <Modal visible={product}>
-        <VentasSelectScreen visible={this.categoriesVisible} data={dataCategorias}/>
-      </Modal>
       {/*Payment Modal Section*/}
       <Modal visible={visible}>
       <Header>

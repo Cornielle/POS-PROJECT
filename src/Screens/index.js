@@ -62,9 +62,6 @@ export const UsersLogin =
 //         name="Apertura/Cierre de Caja" 
 //     />
 
-
-
-
 {/*Experimento Ventas Screen*/}
 export const VentasDummyManagement = ({navigation}) => <VentasDummyScreen navigation={navigation} subtitle="Ventas" name="Control de Ventas" />
 {/*Experimento Ventas Screen*/}
