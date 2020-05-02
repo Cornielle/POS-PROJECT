@@ -222,7 +222,7 @@ this.state.Proveedores.map(lol =>(
                                    {
 
 this.state.Categorias.map(lol =>(
-    <Picker.Item label={lol.NombreCategoria.toString()} value={lol.id.toString()}  key={lol.id.toString()} />
+    <Picker.Item label={lol.NombreCategoria.toString()} value={lol.id.toString()}  key={lol.id} />
     ))
 }
 </Picker>

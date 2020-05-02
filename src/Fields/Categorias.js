@@ -28,6 +28,10 @@ const styles = StyleSheet.create({
     }
 })
 
+const InitialState ={
+
+  NombreCategoria:"",
+Descripcion:""}
 
 export default class Categoria extends React.Component{
 
@@ -177,6 +181,7 @@ Descripcion:""
             }
             else{
                 ToastAndroid.show("Guardado Correctamente!", ToastAndroid.SHORT);
+                this.setState(InitialState);
             }
         }
         catch(ex){

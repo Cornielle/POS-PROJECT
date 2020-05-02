@@ -81,7 +81,6 @@ export default class CategoriasGridScreen extends React.Component{
   this.state.HoraCreacion = ''
   artiobj.map(x => {
     const{id, NombreCategoria,FechaCreacion, Activo} = x;
-    console.log(PrecioCosto,'costo')
     let date = FechaCreacion.split(' ');
     var objeto  ={
     key: id,
@@ -155,7 +154,7 @@ _toggleForm(addRecord){
     this.setState({addRecord:false})
   }
 }
-_showMenu(index){
+_showMenu(index){``
   this.setState({index})
   this.state.data[index]['estado']
   ? this.state.optionArray[1] = 'Desactivar' 
