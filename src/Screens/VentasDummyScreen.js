@@ -340,7 +340,7 @@ this.state.ListaCategorias.map(elemet =>(
         <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
     </Left>
     <Body>  
-      <Text>Barbie Holiday Castaña 2018</Text>     
+          <Text>{element.DescripcionPantalla}</Text>     
       <Text note numberOfLines={1}>Cant: 9999</Text>
     </Body>
     <Right>
