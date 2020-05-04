@@ -154,7 +154,7 @@ render(){
                     <TextInput
                         style={styles.Input}
                         // keyboardType="numeric"
-                        mode='outline'
+                        mode='outlined'
                         textAlign={'center'}
                         value={this.state.LockModalPass}
                         onChangeText={(LockModalPass) => this.setState({ LockModalPass })} 
@@ -172,7 +172,6 @@ render(){
         <View style={styles.BodyLogin}>
             <TextInput
                 style={styles.Input}
-                mode='flat'
                 label='Monto Apertura'
                 value={this.state.MontoApertura}
                 onChangeText={(MontoApertura) => this.setState({ MontoApertura })}
@@ -366,7 +365,9 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight:"200",
         backgroundColor:'#FFFFFF',
-        textAlign:'center'
+        marginTop:windowHeight * 0.06,
+        width:windowWidth * 0.85,
+        alignSelf:'center',
     },
     Forgot:{
         color:'blue',
