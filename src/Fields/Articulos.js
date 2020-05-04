@@ -8,6 +8,23 @@ import * as SQLite from "expo-sqlite"
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
 import Articulos from '../../Models/Articulos'
 
+const InitialState ={
+    Proveedores:[],
+
+    Codigo: "",
+    CategoriaId: "",
+    Descripcion:"",
+    DescripcionPantalla: "",
+    NombreArticulo: "",
+    CodigoDeBarra:"",
+    PrecioCosto:"",
+    PrecioVenta:"",
+    ProveedoresId:"",
+    CatidadExistencia:"",
+    MedidaDeVenta:"1",
+    Categorias:[]
+
+}
 export default class Articulo extends React.Component{
 
 constructor(props){
@@ -34,14 +51,14 @@ Categorias:[]
 }
 
 loadTable = async () => {
-// Articulos.dropTable();
+ //Articulos.dropTable();
  Articulos.createTable();
     const sqlProvee = `SELECT id,NombreProveedor FROM Proveedores WHERE Activo =? ORDER BY id ASC`
     const paramsProvee = [1];
     const databaseLayerProvee = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
     databaseLayerProvee.executeSql(sqlProvee,paramsProvee).then(  ({ rows }) => {
   this.setState({Proveedores:rows});
-  console.log(rows)
+  //console.log(rows)
  } )  
 }
 
@@ -62,6 +79,7 @@ console.log(rows, 'here');
     const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
     databaseLayer.executeSql(sql,params).then(({ rows }) => {
         this.setState ({Categorias:rows}) ;
+       // console.log(rows);
     })
     const sql1 =  'SELECT name FROM sqlite_master WHERE type = "table"'
     const params1 = []
@@ -192,8 +210,12 @@ onChangeText={(CatidadExistencia) => this.setState({CatidadExistencia:CatidadExi
     onValueChange={(itemValue, itemIndex) =>
         this.setState({CategoriaId: itemValue})
     }>
-    <Picker.Item label="Administrador" value="1" />
-    <Picker.Item label="Invitado" value="2" />
+                                     {
+
+this.state.Categorias.map(lol =>(
+    <Picker.Item label={lol.NombreCategoria.toString()} value={lol.Id.toString()}  key={lol.Id.toString()} />
+    ))
+}
 </Picker>
 
 <Text>Seleccionar una Proveedor:</Text>
@@ -206,7 +228,7 @@ onChangeText={(CatidadExistencia) => this.setState({CatidadExistencia:CatidadExi
                                    {
 
 this.state.Proveedores.map(lol =>(
-    <Picker.Item label={lol.NombreProveedor.toString()} value={lol.id.toString()}  key={lol.id.toString()} />
+    <Picker.Item label={lol.NombreProveedor.toString()} value={lol.id}  key={lol.id} />
     ))
                                    }
                             </Picker>
@@ -219,12 +241,10 @@ this.state.Proveedores.map(lol =>(
                                 onValueChange={(itemValue, itemIndex) =>
                                     this.setState({MedidaDeVenta: itemValue})
                                 }>
-                                   {
-
-this.state.Categorias.map(lol =>(
-    <Picker.Item label={lol.NombreCategoria.toString()} value={lol.id.toString()}  key={lol.id} />
-    ))
-}
+    <Picker.Item label="Unidad" value="1" />
+    <Picker.Item label="Libra" value="2" />
+    <Picker.Item label="Docena" value="3" />
+    <Picker.Item label="Libra" value="4" />
 </Picker>
                 <Button
                     labelStyle={styles.Button} 
@@ -295,12 +315,12 @@ Alert.alert("Ha ocurrido un error:"+ e);
 GuardarArticulo = async () =>{
 try  {
 
-Articulos.dropTable();
+
   
 const fecha = new Date();
 
 
-   this.Validaciones();
+  // this.Validaciones();
     const Insert ={
 
         Codigo: this.state.Codigo,
@@ -341,9 +361,11 @@ const fecha = new Date();
 
 
            ToastAndroid.show("Guardado Correctamente!", ToastAndroid.SHORT);
+
+           this.setState(InitialState)
       }
 
-}
+}   
 catch(ex){
 
 

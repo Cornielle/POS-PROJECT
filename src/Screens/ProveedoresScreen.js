@@ -15,6 +15,18 @@ import Roles from "../../Models/Roles"
 
 import Proveedores from "../../Models/Proveedores"
 
+const InitialState ={
+    EsPersonaFisica:false,
+    NombreProveedor:"",
+    RNC:"",
+    Direccion:"",
+    Telefono:"",
+    correo:""
+
+
+
+}
+
 export default class ProveedoresScreen extends React.Component{
 
 
@@ -216,7 +228,7 @@ console.log(rows);
                         ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
                         
                         
-                       // this.setState(InitialState)
+                       this.setState(InitialState)
                                 }
 
                         }   

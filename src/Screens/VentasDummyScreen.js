@@ -1,5 +1,9 @@
 import React from 'react';
-import { Dimensions,StyleSheet,Modal, View} from 'react-native';
+import { Dimensions,StyleSheet,Modal, View,Alert} from 'react-native';
+import * as Filesystem from "expo-file-system"
+import * as SQLite from "expo-sqlite"
+import {BaseModel, types} from 'expo-sqlite-orm'
+import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
 import {TextInput,Searchbar} from 'react-native-paper';
 import { Container, Header, Content,Title, Icon, List,
 Card, CardItem, ListItem, Thumbnail, Text, Left, Body, 
@@ -7,64 +11,184 @@ Right, Button, Footer, FooterTab,Spinner, Tab, Tabs, TabHeading, ScrollableTab} 
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
+import Categorias from "../../Models/Categorias"
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
+
+
 export default class VentasMain extends React.Component {
+  
   constructor(props) {
     super(props); 
-    this.state = {
-      isReady: false,
-      active: false,
-      visible: false,
-      inputCash:true,
-      inputCredit:false,
-      backgroundColor:'#000000',
-      isCash:false,
-      isCard:true, 
-      product:false,
-      isReady: false,
-      searchQuery:'',
-      loadingState:false,
-      Articulo:{
-        id:0,
-        Codigo:'',
-        CategoriaId: 0,
-        Descripcion:'',
-        DescripcionPantalla:'',
-        NombreArticulo:'',
-        CodigoDeBarra:'',
-        PrecioCosto:'',
-        PrecioVenta:'',
-        ProveedoresId:'',
-        CatidadExistencia:'',
-        MedidaDeVenta:'',
-        Activo:'',
-        IdEmpresa:0,
-        IdSucursal:0,
-        FechaCreacion: '',
-        FechaModificacion:'',
-        UsuarioCreacion:'',
-        UsuarioModificacion:'',
-        HoraCreacion:''
-        },
-    };
+
+
     this._hideModal =  this._hideModal.bind(this);
     this.ventasMain =  this.ventasMain.bind(this);
   }
-  async componentDidMount() {
-    await Font.loadAsync({
-      Roboto: require('native-base/Fonts/Roboto.ttf'),
-      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-      ...Ionicons.font,
-    });
-    this.setState({ isReady: true });
+
+    fontload = async () =>{
+      await Font.loadAsync({
+        Roboto: require('native-base/Fonts/Roboto.ttf'),
+        Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+        ...Ionicons.font,
+      });
+      this.setState({ isReady: true });
+
+
+    }
+ async  componentDidMount() {
+
+  await Categorias.createTable();
+  const sql =   'SELECT Categorias.Id as Id, Categorias.NombreCategoria as NombreCategoria , Articulos.DescripcionPantalla as DescripcionPantalla from Categorias inner join Articulos on Categorias.Id = Articulos.CategoriaId'
+  const params = []
+  const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+ databaseLayer.executeSql(sql, params).then(({ rows }) => {
+  this.setState({ListaCategorias:rows})
+
+  console.log(rows);
+  } )
+ //   this.LoadCategorias();
+this.fontload();
   }
+
+async LoadCategorias(){
+
+try{
+  /*
+  const sql =   'SELECT * from Categorias'
+  const params = []
+  const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+ databaseLayer.executeSql(sql, params).then(({ rows }) => {
+  this.setState({ListaCategorias:rows})
+
+  console.log(rows);
+  } )
+
+  */
+  /*
+
+  let datosCat  = []
+  const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+  databaseLayer.executeSql('SELECT * from Categorias').then(({ rows }) => {
+    this.setState({ListaCategorias:rows})
+  
+ //   console.log(rows);
+    } )
+*/
+
+
+} catch(ex){
+
+
+
+
+}
+
+
+}
+
+
+TabRender =(item) =>{
+
+  if ( typeof item === 'undefined') {
+    Alert.alert("Tou vacio");
+         
+  
+          }
+          else{
+
+            console.log("Vine para irme")
+
+return(
+
+  <View>
+    {
+
+this.state.ListaCategorias.map(elemet =>(
+
+  <Tab heading={ <TabHeading><Text>{elemet.NombreCategoria}</Text></TabHeading>}>
+
+<ListItem thumbnail>
+              <Left>
+                  <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
+              </Left>
+              <Body>  
+                <Text>Barbie Holiday Castaña 2018</Text>     
+                <Text note numberOfLines={1}>Cant: 9999</Text>
+              </Body>
+              <Right>
+              <Text note numberOfLines={1}>RD$ 3,400.00</Text>
+              </Right>
+              <Right>  
+                <TouchableOpacity>     
+                  <Icon name="close"/>
+                </TouchableOpacity>  
+              </Right>
+            </ListItem>
+
+  </Tab>
+  
+  
+            
+  
+                ))
+
+    }
+          
+              </View>
+)
+
+
+          }
+       
+
+}
+
   _hideModal = () => this.setState({ visible: false });
   ventasMain(){
     this.setState({
       product:false
     })
   }
+  state = {
+    ListaCategorias:[],
+    isReady: false,
+    active: false,
+    visible: false,
+    inputCash:true,
+    inputCredit:false,
+    backgroundColor:'#000000',
+    isCash:false,
+    isCard:true, 
+    product:false,
+    isReady: false,
+    searchQuery:'',
+    loadingState:false,
+    Articulo:{
+      id:0,
+      Codigo:'',
+      CategoriaId: 0,
+      Descripcion:'',
+      DescripcionPantalla:'',
+      NombreArticulo:'',
+      CodigoDeBarra:'',
+      PrecioCosto:'',
+      PrecioVenta:'',
+      ProveedoresId:'',
+      CatidadExistencia:'',
+      MedidaDeVenta:'',
+      Activo:'',
+      IdEmpresa:0,
+      IdSucursal:0,
+      FechaCreacion: '',
+      FechaModificacion:'',
+      UsuarioCreacion:'',
+      UsuarioModificacion:'',
+      HoraCreacion:'',
+      
+      },
+  };
+
   render() {
     const { visible, isCash, isCard , product, searchQuery, loadingState } = this.state;
     if (!this.state.isReady) {
@@ -204,101 +328,43 @@ export default class VentasMain extends React.Component {
             value={searchQuery}  
         />
         <Tabs renderTabBar={() => <ScrollableTab/>}>
-          <Tab heading={ <TabHeading><Text>No Icon</Text></TabHeading>}>
-          <ListItem thumbnail>
-              <Left>
-                  <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
-              </Left>
-              <Body>  
-                <Text>Barbie Holiday Castaña 2018</Text>     
-                <Text note numberOfLines={1}>Cant: 9999</Text>
-              </Body>
-              <Right>
-              <Text note numberOfLines={1}>RD$ 3,400.00</Text>
-              </Right>
-              <Right>  
-                <TouchableOpacity>     
-                  <Icon name="close"/>
-                </TouchableOpacity>  
-              </Right>
-            </ListItem>
-          </Tab>
-          <Tab heading={ <TabHeading><Text>No Icon</Text></TabHeading>}>
-          <ListItem thumbnail>
-              <Left>
-                  <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
-              </Left>
-              <Body>  
-                <Text>Barbie Holiday Castaña 2018</Text>     
-                <Text note numberOfLines={1}>Cant: 9999</Text>
-              </Body>
-              <Right>
-              <Text note numberOfLines={1}>RD$ 3,400.00</Text>
-              </Right>
-              <Right>  
-                <TouchableOpacity>     
-                  <Icon name="close"/>
-                </TouchableOpacity>  
-              </Right>
-            </ListItem>
-          </Tab>
-          <Tab heading={ <TabHeading><Text>No Icon</Text></TabHeading>}>
-          <ListItem thumbnail>
-              <Left>
-                  <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
-              </Left>
-              <Body>  
-                <Text>Barbie Holiday Castaña 2018</Text>     
-                <Text note numberOfLines={1}>Cant: 9999</Text>
-              </Body>
-              <Right>
-              <Text note numberOfLines={1}>RD$ 3,400.00</Text>
-              </Right>
-              <Right>  
-                <TouchableOpacity>     
-                  <Icon name="close"/>
-                </TouchableOpacity>  
-              </Right>
-            </ListItem>
-          </Tab>
-          <Tab heading={ <TabHeading><Text>No Icon</Text></TabHeading>}>
-          <ListItem thumbnail>
-              <Left>
-                  <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
-              </Left>
-              <Body>  
-                <Text>Barbie Holiday Castaña 2018</Text>     
-                <Text note numberOfLines={1}>Cant: 9999</Text>
-              </Body>
-              <Right>
-              <Text note numberOfLines={1}>RD$ 3,400.00</Text>
-              </Right>
-              <Right>  
-                <TouchableOpacity>     
-                  <Icon name="close"/>
-                </TouchableOpacity>  
-              </Right>
-            </ListItem>
-          </Tab>
-          <Tab heading={ <TabHeading><Text>No Icon</Text></TabHeading>}>
-          <ListItem thumbnail>
-              <Left>
-                  <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
-              </Left>
-              <Body>  
-                <Text>Barbie Holiday Castaña 2018</Text>     
-                <Text note numberOfLines={1}>Cant: 9999</Text>
-              </Body>
-              <Right>
-              <Text note numberOfLines={1}>RD$ 3,400.00</Text>
-              </Right>
-              <Right>  
-                <TouchableOpacity>     
-                  <Icon name="close"/>
-                </TouchableOpacity>  
-              </Right>
-            </ListItem>
-          </Tab>
+
+          {this.state.ListaCategorias.map(element => (
+
+<Tab heading={ <TabHeading><Text>{element.NombreCategoria}</Text></TabHeading>}>
+<ListItem thumbnail>
+    <Left>
+        <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
+    </Left>
+    <Body>  
+      <Text>Barbie Holiday Castaña 2018</Text>     
+      <Text note numberOfLines={1}>Cant: 9999</Text>
+    </Body>
+    <Right>
+    <Text note numberOfLines={1}>RD$ 3,400.00</Text>
+    </Right>
+    <Right>  
+      <TouchableOpacity>     
+        <Icon name="close"/>
+      </TouchableOpacity>  
+    </Right>
+  </ListItem>
+</Tab>
+
+
+          ))}
+          {/* 
+          {
+//this.state.data !== null ? console.log(this.state.ListaCategorias): console.log("Please Wait!")
+ // console.log(this.state.ListaCategorias) 
+ this.TabRender(this.state.ListaCategorias)
+
+          }
+        */}
+     
+       
+      
+     
           <Tab heading={ <TabHeading><Text>No Icon</Text></TabHeading>}>
           <ListItem thumbnail>
               <Left>

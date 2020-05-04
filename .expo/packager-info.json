@@ -1,9 +1,9 @@
 {
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 14568,
-  "expoServerNgrokUrl": "https://va-8nj.freddymateo02.pos-project.exp.direct",
-  "packagerNgrokUrl": "https://packager.va-8nj.freddymateo02.pos-project.exp.direct",
-  "ngrokPid": 7220,
+  "packagerPid": 17644,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "devToolsPort": 19002
 }
