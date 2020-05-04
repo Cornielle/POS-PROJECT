@@ -344,7 +344,7 @@ const valInsert={
     UsuarioCreacion:"system",
     UsuarioModificacion:"null"
 }
-console.log(valInsert)
+console.log(valInsert, 'check this insert')
 
 const response = await  Empleados.create(valInsert);
 

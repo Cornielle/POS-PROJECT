@@ -26,7 +26,7 @@ return "Caja"
 static get columnMapping(){
 
 return{
-    Id:{type:types.INTEGER, primary_key:true},
+    id:{type:types.INTEGER, primary_key:true},
     MontoApertura:{type:types.FLOAT, not_null:true},
     FechaInicioApertura:{type:types.TEXT, not_null:true},
     UsuarioApertura:{type: types.TEXT, not_null:true},

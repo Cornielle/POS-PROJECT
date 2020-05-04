@@ -1,5 +1,6 @@
-import { createAppContainer} from "react-navigation";
+import { createAppContainer, createSwitchNavigator} from "react-navigation";
 import { createDrawerNavigator} from "react-navigation-drawer";
+import { createStackNavigator } from 'react-navigation-stack';
 import React from 'react'
 import { View}  from 'react-native'
 
@@ -47,12 +48,12 @@ componentDidMount(){
 
 //creando los perfiles de navegacion en el drawer navigation
 const DrawerNavigation = createDrawerNavigator({
-  'Login': {
-    screen: UsersLogin,
-    navigationOptions: {
-      title: 'Iniciar Sesión'
-    }
-  },
+  // 'Login': {
+  //   screen: UsersLogin,
+  //   navigationOptions: {
+  //     title: 'Iniciar Sesión'
+  //   }
+  // },
   'Articulos':{
     screen:ArticulosManagement,
     navigationOptions:{
@@ -146,7 +147,7 @@ navigationOptions:{
     }
   }
 })
-export default createAppContainer(DrawerNavigation);
+// export default createAppContainer(DrawerNavigation);
   
 /*
   'Control de Caja': {
@@ -181,18 +182,24 @@ export default createAppContainer(DrawerNavigation);
 /*
 });
 
+*/
+const  navigationOptions = {
+  title: 'Iniciar Sesión',
+  headerTitleStyle:{textAlign:'center', color:'white'},
+  headerStyle:{backgroundColor:'green'},
+  headerTitleAlign: 'center'
+}
 
-const AuthStack= createStackNavigator({Login:UsersLogin})
-
-
+const AuthStack= createStackNavigator({
+  "Iniciar Sesión":UsersLogin
+},
+{
+  defaultNavigationOptions: 
+    navigationOptions
+  
+})
 export default createAppContainer(createSwitchNavigator({
   AuthLoading:AuthLoadingScreen,
-App:DrawerNavigation,
-Auth:AuthStack
-
-
-
+  App:DrawerNavigation,
+  Auth:AuthStack
 }))
-
-*/
-

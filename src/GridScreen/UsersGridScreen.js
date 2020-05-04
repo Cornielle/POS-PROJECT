@@ -49,6 +49,7 @@ export default class UsersGridScreen extends React.Component{
         id:0,
         Rol:0,
         NombrePersona:'',
+        NombreUsuario:'',
         Contrasena:'',
         Activo:0,
         IdEmpresa:0,
@@ -65,7 +66,7 @@ export default class UsersGridScreen extends React.Component{
   _hideModal = () => this.setState({visible:false})
   LoadUsersData = async () =>{
     const optionsEmpleados ={
-        columns:`id ,Rol, NombrePersona, FechaCreacion, Activo`,
+        columns:`id ,Rol, NombrePersona, FechaCreacion, Activo, Contrasena, NombreUsuario`,
         // where:{
         // Id_gt:0
         // },
@@ -87,16 +88,16 @@ export default class UsersGridScreen extends React.Component{
   this.setState({
     rolArray:rol
   })
-  console.log(this.state.rolArray, 'here')
   let arra =[]
   this.state.HoraCreacion = ''
   artiobj.map(x => {
-    const{id, NombrePersona,FechaCreacion, Activo, Rol} = x;
+    const{id, NombrePersona,FechaCreacion, Activo, Rol, Contrasena, NombreUsuario} = x;
     let date = FechaCreacion.split(' ');
-    console.log( rol[0])
     var objeto  ={
     key: id,
-    name:NombrePersona,  
+    Contrasena:Contrasena,
+    name:NombrePersona,
+    NombreUsuario:NombreUsuario,  
     FechaCreacion:`${date[2]}/${date[1]}/${date[3]}` ,
     HoraCreacion: date[4][0]+date[4][1] > 11 && date[4][0]+date[4][1] < 23 ? `${ date[4]}PM` :`${ date[4]}AM`,
     avatar_url:'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
@@ -121,7 +122,9 @@ export default class UsersGridScreen extends React.Component{
         id: this.state.Empleado.id,
         NombrePersona: this.state.Empleado.NombrePersona,
         Rol:this.state.Empleado.Rol,
-        Activo:this.state.Empleado.Activo
+        Activo:this.state.Empleado.Activo,
+        Contrasena:this.state.Empleado.Contrasena,
+        NombreUsuario:this.state.Empleado.NombreUsuario
       }
       const response = await Empleados.update(props)
       if(Object.keys(response).length <=0){
@@ -214,6 +217,14 @@ editField = (fieldValue, name) =>{
       this.setState({Rol:fieldValue})
       this.state.Empleado.Rol = fieldValue
     }
+    else if(name==='Contrasena'){
+      this.setState({Contrasena:fieldValue})
+      this.state.Empleado.Contrasena = fieldValue
+    }
+    else if(name=== 'NombreUsuario' ){
+      this.setState({NombreUsuario:fieldValue})
+      this.state.Empleado.NombreUsuario = fieldValue
+    }
 }
 render(){
 const {name, subtitle, navigation} = this.props
@@ -259,6 +270,24 @@ return(
               disabled={editFields}
               editable={true}
               onChangeText={(Rol) => this.editField(Rol,'Rol')}
+            />
+            <TextInput
+              style={styles.Input}
+              mode='flat'
+              label='Contraseña'
+              value={this.state.Empleado.Contrasena !==null ? this.state.Empleado.Contrasena : 'Cargando...'}
+              disabled={editFields}
+              editable={true}
+              onChangeText={(Contrasena) => this.editField(Contrasena,'Contraseña')}
+            />
+            <TextInput
+              style={styles.Input}
+              mode='flat'
+              label='NombreUsuario'
+              value={this.state.Empleado.NombreUsuario !==null ? this.state.Empleado.NombreUsuario : 'Cargando...'}
+              disabled={editFields}
+              editable={true}
+              onChangeText={(NombreUsuario) => this.editField(NombreUsuario,'NombreUsuario')}
             />
             </View>
         </ScrollView>
