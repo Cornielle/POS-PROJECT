@@ -149,12 +149,13 @@ render(){
             <Modal visible ={this.state.LockModalVisibility}>
                 <View styles={styles.lockContainer}>
                     <Text style={styles.userName}>
-                        <Text>{this.state.NombreUsuario}</Text> Introduce tu PIN
+                        <Text>{this.state.NombreUsuario}</Text>, Introduce tu PIN
                     </Text>
                     <TextInput
                         style={styles.Input}
                         // keyboardType="numeric"
                         mode='outline'
+                        textAlign={'center'}
                         value={this.state.LockModalPass}
                         onChangeText={(LockModalPass) => this.setState({ LockModalPass })} 
                     />
