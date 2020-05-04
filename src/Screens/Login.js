@@ -52,6 +52,8 @@ import { ThemeConsumer } from 'react-native-elements';
 
           };
   componentDidMount(){
+    const item =  AsyncStorage.removeItem('LoggedUser');
+
     this.verifyLog()
 const fecha  = new Date();
    this.setState({FechaApertura:fecha.toString() })
