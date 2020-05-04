@@ -12,16 +12,18 @@ import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import Categorias from "../../Models/Categorias"
+import NumericInput from 'react-native-numeric-input'
+import { Checkbox } from 'galio-framework';
+
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
+
 
 
 export default class VentasMain extends React.Component {
   
   constructor(props) {
     super(props); 
-
-
     this._hideModal =  this._hideModal.bind(this);
     this.ventasMain =  this.ventasMain.bind(this);
   }
@@ -164,6 +166,7 @@ this.state.ListaCategorias.map(elemet =>(
     isReady: false,
     searchQuery:'',
     loadingState:false,
+    checked:false,
     Articulo:{
       id:0,
       Codigo:'',
@@ -190,7 +193,7 @@ this.state.ListaCategorias.map(elemet =>(
   };
 
   render() {
-    const { visible, isCash, isCard , product, searchQuery, loadingState } = this.state;
+    const { visible, isCash, isCard , product, searchQuery, checked } = this.state;
     if (!this.state.isReady) {
       return (
       <Container>
@@ -405,20 +408,29 @@ this.state.ListaCategorias.map(elemet =>(
           </Tab>
           <Tab heading={ <TabHeading><Text>No Icon</Text></TabHeading>}>
           <ListItem thumbnail>
+            <Left>
+            <Checkbox 
+                  style={{marginRight: windowWidth * 0.02}}
+                  color="#3F51B5"
+                  onPress={()=>this.setState({checked:!checked})}  
+                  initialValue={checked}
+                />
+            </Left>
               <Left>
                   <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
               </Left>
               <Body>  
                 <Text>Barbie Holiday Castaña 2018</Text>     
-                <Text note numberOfLines={1}>Cant: 9999</Text>
+                <Text note numberOfLines={1}>RD$ 3,400.00</Text>
               </Body>
               <Right>
-              <Text note numberOfLines={1}>RD$ 3,400.00</Text>
+              <NumericInput 
+                totalWidth={80} 
+                totalHeight={40}
+                rounded 
+              />
               </Right>
               <Right>  
-                <TouchableOpacity>     
-                  <Icon name="close"/>
-                </TouchableOpacity>  
               </Right>
             </ListItem>
           </Tab>
