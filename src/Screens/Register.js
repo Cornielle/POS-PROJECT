@@ -22,6 +22,8 @@ const InitialState ={
     TIPOIDENTIFICACION:"Cedula",
     IDENTIFICACION:"",
     CORREO:"",
+    PIN:0,
+    PIN2:0,
     ROL:"Camarero",
     Roles:[],
     ExistenDatos:false,
@@ -58,6 +60,8 @@ export default class Register extends React.Component{
         IDENTIFICACION:"",
         CORREO:"",
         ROL:"",
+        PIN:0,
+        PIN2:0,
         Roles:[],
         ExistenDatos:false,
         QueDatosExisten:""
@@ -224,6 +228,24 @@ export default class Register extends React.Component{
                                 onChangeText={CONTRASENA2 => this.setState({ CONTRASENA2 })}
                             />
                             <Text>{"\n"}</Text>
+                            <TextInput
+                                style={styles.Input}
+                                mode='flat'
+                                label='Escribe un PIN'
+                                placeholder={'****'}
+                                value={this.state.PIN}
+                                onChangeText={PIN => this.setState({ PIN })}
+                            />
+                            <Text>{"\n"}</Text>
+                            <TextInput
+                                style={styles.Input}
+                                mode='flat'
+                                label='Escribe el PIN nuevamente'
+                                placeholder={'****'}
+                                value={this.state.PIN2}
+                                onChangeText={PIN2 => this.setState({ PIN2 })}
+                            />
+                            <Text>{"\n"}</Text>
                             <Text>Seleccionar un rol:</Text>
                             <Picker
                                 selectedValue={this.state.Rol}
@@ -314,11 +336,16 @@ return;
        return;
            }
 
-           if(this.state.CONTRASENA !== this.state.CONTRASENA2){
+        if(this.state.PIN !== this.state.PIN2){      
+            Alert.alert("EL PIN no es el mismo");
+            return;
+        }
+
+        if(this.state.CONTRASENA !== this.state.CONTRASENA2){
               
             Alert.alert("La contraseña de verificacion no coinciden");
             return;
-           }
+        }
 
    // this.Validaciones();
 
@@ -342,7 +369,8 @@ const valInsert={
     FechaCreacion: fecha.toString(),
     FechaModificacion:"null",
     UsuarioCreacion:"system",
-    UsuarioModificacion:"null"
+    UsuarioModificacion:"null",
+    PIN:this.state.PIN.toString()
 }
 console.log(valInsert, 'check this insert')
 

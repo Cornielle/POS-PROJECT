@@ -26,6 +26,7 @@ return 'Empleados';
 return{
 id:{type: types.INTEGER, primary_key:true},
 NombrePersona:{type: types.TEXT, not_null:true},
+PIN:{type: types.TEXT, not_null:true},
 ApellidoPersona:{type: types.TEXT, not_null:true},
 NombreUsuario:{type:types.TEXT, not_null:true},
 Telefono:{type: types.TEXT, not_null:true},

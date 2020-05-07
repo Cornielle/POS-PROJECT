@@ -8,10 +8,10 @@ import Empleados from "../../Models/Empleados"
 import Roles from "../../Models/Roles"
 import RolMenu from "../../Models/RolMenu"
 import Caja  from "../../Models/Caja"
+import PinAuth from '../Screens/PinAuth'
 import {Dimensions} from 'react-native';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-
 //import whatever from '../src'
  export default class Login extends Component{
     constructor(props) {
@@ -27,9 +27,8 @@ const windowHeight = Dimensions.get('window').height;
         MontoApertura:0,
         LockModalVisibility:false,
         LockModalPass:"",
-        Unlockpass:""
-             
-
+        Unlockpass:"",
+        PIN:""
           };
   componentDidMount(){
     this.verifyLog()
@@ -88,13 +87,13 @@ verifyLog = async () =>{
 
 try{
    const item = await AsyncStorage.getItem('LoggedUser');
-   console.log(item)
+   console.log(item,'here')
    if(item !==null){
     const JsonUsuario = JSON.parse(item);
     this.setState({
         NombreUsuario: JsonUsuario.Usuario,
         LockModalVisibility:true,
-        Unlockpass:JsonUsuario.Pass
+        Unlockpass:JsonUsuario.PIN
     })
    }
 
@@ -132,7 +131,6 @@ CerrarModal = () =>{
         console.log(ex);
     }
 }
-
 Deletekey = async() =>{
     try{
         await AsyncStorage.removeItem('LoggedUser');
@@ -147,7 +145,11 @@ render(){
     return (
         <View>
             <Modal visible ={this.state.LockModalVisibility}>
-                <View styles={styles.lockContainer}>
+                <PinAuth 
+                    props={this.props}
+                    PIN={this.state.Unlockpass}
+                />
+                {/* <View styles={styles.lockContainer}>
                     <Text style={styles.userName}>
                         <Text>{this.state.NombreUsuario}</Text>, Introduce tu PIN
                     </Text>
@@ -155,14 +157,15 @@ render(){
                         style={styles.Input}
                         // keyboardType="numeric"
                         mode='outlined'
-                        textAlign={'center'}
+                        textAlign={'center'} 
+                        // maxLength={4}
                         value={this.state.LockModalPass}
                         onChangeText={(LockModalPass) => this.setState({ LockModalPass })} 
                     />
-                    {/* <Button onPress={this.LogGoHome} >
+                    <Button onPress={this.LogGoHome} >
                         <Text>Acceder</Text>
-                    </Button> */}
-                </View>
+                    </Button>
+                </View> */}
             </Modal>
 <Modal visible={this.state.ModalCajaVisibility}>
     <View style ={styles.lockContainer}>
@@ -235,8 +238,6 @@ render(){
             </View>
         );
     }
-
-
 ValidateAbrirCaja = () =>{
     if (this.state.MontoApertura ===""){
         Alert.alert("Debe Ingresar un monto para aperturar!");
@@ -276,17 +277,17 @@ AbrirCaja = async () =>{
     console.log(ex)
   }
 }
-
 GetLog = async () =>{
 try{
     const response  = await Empleados.findBy({
-        contrasena_eq:this.state.Contrasena, NombreUsuario_eq:this.state.NombreUsuario
+        contrasena_eq:this.state.Contrasena,
+        NombreUsuario_eq:this.state.NombreUsuario
     })
     if(response ===null || Object.keys(response).length <=0){
         alert("El usuario no existe o contraseña invalida");
     }
     else{
-        const {NombrePersona, NombreUsuario, Rol, Contrasena} = response
+        const {NombrePersona, NombreUsuario, Rol, Contrasena,PIN} = response
         const item = await AsyncStorage.getItem('LoggedUser');
         if(item ===null){
             const rol  = await Roles.findBy({Id_eq:Rol})
@@ -300,9 +301,12 @@ try{
             }
             const Rmenu = await RolMenu.query(RmenuQuery);
             const UserJasonStringy =JSON.stringify({
-                Nombre:NombrePersona,Pass:Contrasena, Usuario:NombreUsuario,Rol:Rol, Menus:Rmenu
+                Nombre:NombrePersona,Pass:Contrasena, Usuario:NombreUsuario,Rol:Rol, Menus:Rmenu,PIN:PIN
             });
-            console.log(UserJasonStringy);  
+            console.log(UserJasonStringy,'Check?');
+            this.setState({
+                PIN: UserJasonStringy.PIN   
+            })  
             const addAsync = await AsyncStorage.setItem('LoggedUser', UserJasonStringy)
             this.props.navigation.navigate("Home")
         }
@@ -354,25 +358,26 @@ const styles = StyleSheet.create({
         height:normalize(700)
     },
     Button:{
-        height:normalize(42),
+        height:windowHeight * 0.06,
+        marginBottom: windowHeight * 1.15
     },
     Form: {
         padding:normalize(15),
-        marginTop:normalize(50)
-    },
+        marginTop:windowHeight * 0.01
+    },  
     Input: {
         color: '#161924',
         fontSize: 14,
         fontWeight:"200",
         backgroundColor:'#FFFFFF',
-        marginTop:windowHeight * 0.06,
+        marginTop:windowHeight * 0.01,
         width:windowWidth * 0.85,
         alignSelf:'center',
     },
     Forgot:{
         color:'blue',
         fontSize:12
-    },
+    },   
     ButtonBlock:{
         alignItems:'center',
     },
