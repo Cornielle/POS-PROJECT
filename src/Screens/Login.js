@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { TextInput, Button, Card,  } from 'react-native-paper';
-import { StyleSheet, Text, View, AsyncStorage, Alert, Modal, ToastAndroid} from 'react-native';
+import { TextInput, Button, Card, Badge  } from 'react-native-paper';
+import { StyleSheet, Text, View, AsyncStorage, Alert, ToastAndroid, Modal} from 'react-native';
+import { Header, Container, Left, Body, Icon, Title, Spinner, Content,
+    ListItem, Thumbnail,Right } from 'native-base';
 import {Block} from 'galio-framework'
 import normalize from 'react-native-normalize';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -10,6 +12,8 @@ import RolMenu from "../../Models/RolMenu"
 import Caja  from "../../Models/Caja"
 import PinAuth from '../Screens/PinAuth'
 import {Dimensions} from 'react-native';
+import IconAwesome from 'react-native-vector-icons/FontAwesome';
+import { SafeAreaView } from 'react-native-safe-area-context';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 //import whatever from '../src'
@@ -28,16 +32,16 @@ const windowHeight = Dimensions.get('window').height;
         LockModalVisibility:false,
         LockModalPass:"",
         Unlockpass:"",
-        PIN:""
+        PIN:"",
+        loading:false
           };
   componentDidMount(){
     this.verifyLog()
     const fecha  = new Date();
-    this.setState({FechaApertura:fecha.toString() })
+    const date = fecha.toString().split(' ')
+    this.setState({FechaApertura:`${date[2]}/${date[1]}/${date[3]}` })
     this.LoadAllData();
-}
-
-
+} 
 LoadAllData = async () =>{
 Caja.createTable();
 /*
@@ -87,7 +91,6 @@ verifyLog = async () =>{
 
 try{
    const item = await AsyncStorage.getItem('LoggedUser');
-   console.log(item,'here')
    if(item !==null){
     const JsonUsuario = JSON.parse(item);
     this.setState({
@@ -141,7 +144,17 @@ Deletekey = async() =>{
 }
 render(){
     const {name, subtitle, navigation} = this.props
-    const { text,enabled, checked } =  this.state
+    const { text,enabled, checked, loading, FechaApertura } =  this.state
+    if(loading === true){
+        return (
+          <Container>
+            <Content>
+            <Spinner color="#3F51B5" style={{ marginTop: windowHeight * 0.4}} />
+            </Content>
+          </Container>
+          );
+        }
+
     return (
         <View>
             <Modal visible ={this.state.LockModalVisibility}>
@@ -149,47 +162,74 @@ render(){
                     props={this.props}
                     PIN={this.state.Unlockpass}
                 />
-                {/* <View styles={styles.lockContainer}>
-                    <Text style={styles.userName}>
-                        <Text>{this.state.NombreUsuario}</Text>, Introduce tu PIN
-                    </Text>
-                    <TextInput
-                        style={styles.Input}
-                        // keyboardType="numeric"
-                        mode='outlined'
-                        textAlign={'center'} 
-                        // maxLength={4}
-                        value={this.state.LockModalPass}
-                        onChangeText={(LockModalPass) => this.setState({ LockModalPass })} 
-                    />
-                    <Button onPress={this.LogGoHome} >
-                        <Text>Acceder</Text>
-                    </Button>
-                </View> */}
             </Modal>
-<Modal visible={this.state.ModalCajaVisibility}>
-    <View style ={styles.lockContainer}>
-        <View style={styles.TimeLb}>
-            <Text>{this.state.FechaApertura }</Text>
-        </View>
-        <View style={styles.BodyLogin}>
-            <TextInput
-                style={styles.Input}
-                label='Monto Apertura'
-                value={this.state.MontoApertura}
-                onChangeText={(MontoApertura) => this.setState({ MontoApertura })}
-            />
-        </View>
-        <Button onPress={this.AbrirCaja} >
-            <Text>Abrir caja</Text>
-        </Button>
-        <View style={styles.footer}>
-            <Button onPress ={this.CerrarModal}>
-                <Text>Cerra</Text>
-            </Button>
-        </View>
-    </View>
-</Modal>
+            <Modal transparent={true}
+                    visible={this.state.ModalCajaVisibility}
+                    >
+                <SafeAreaView style={{backgroundColor:'rgba(0,0,0,0.6)',height:windowHeight * 1.43}}>
+                    <Card style={{
+                        height:windowHeight * 0.43,
+                        marginTop: windowHeight * 0.26,
+                    }}>
+                        <Text style={styles.textModal}>Apertura de Caja</Text>
+                        <TextInput
+                            style={styles.Input}
+                            label='Monto de  Apertura'
+                            value={this.state.MontoApertura}
+                            onChangeText={(MontoApertura) => this.setState({ MontoApertura })}
+                        />
+                        <View>
+                            <Text style={styles.textModal}> 
+                            <IconAwesome
+                                    name="calendar-check-o"
+                                    size={15}
+                                    color="rgba(0, 0, 0, .5)"
+                                />{" "}
+                                Fecha:{" "}
+                                {FechaApertura}
+                            </Text>
+                            <View style={styles.ButtonBlock}>
+                            <Text>
+                            <IconAwesome
+                                    name="user"
+                                    size={15}
+                                    color="rgba(0, 0, 0, .5)"
+                                />
+                                Usuario: {" "} {this.state.NombreUsuario}
+                            </Text>
+                            <Text>{"\n"}</Text>
+                            <Button
+                            onPress={this.AbrirCaja} >
+                                <Text>Abrir caja</Text>
+                            </Button>
+                            {/* <Button
+                            onPress ={this.CerrarModal}>
+                                <Text>Salir</Text>
+                            </Button>    */}
+                            </View>
+                        </View>
+                    </Card>
+                </SafeAreaView>
+            </Modal>
+                    {/* <View style={styles.TimeLb}>
+                        <Text>{this.state.FechaApertura }</Text>
+                    </View>
+                    <View style={styles.BodyLogin}>
+                        <TextInput
+                            style={styles.Input}
+                            label='Monto Apertura'
+                            value={this.state.MontoApertura}
+                            onChangeText={(MontoApertura) => this.setState({ MontoApertura })}
+                        />
+                    </View>
+                    <Button onPress={this.AbrirCaja} >
+                        <Text>Abrir caja</Text>
+                    </Button>
+                    <View style={styles.footer}>
+                        <Button onPress ={this.CerrarModal}>
+                            <Text>Cerra</Text>
+                        </Button>
+                    </View> */}
                 <View style={styles.ViewStyle}>
                     {/*Header generico que debe ser reutilizado en casi todas las vistas*/}
                     {/* <Header name={name} subtitle={subtitle} goBackEnabled={false} navigationEnabled={false} navigation={navigation}/> */}
@@ -241,11 +281,10 @@ render(){
 ValidateAbrirCaja = () =>{
     if (this.state.MontoApertura ===""){
         Alert.alert("Debe Ingresar un monto para aperturar!");
-    }
+    } 
 }
 AbrirCaja = async () =>{
     try {
-    console.log("Entree")
     const fecha  = new Date();
     const InsevCaja={
         MontoApertura:this.state.MontoApertura,
@@ -270,7 +309,9 @@ AbrirCaja = async () =>{
         Alert.alert("Error al insertar en la base de datos");
     }
     else{
-        ToastAndroid.show("Caja abierta satisfactoriamente",ToastAndroid.SHORT)
+        // ToastAndroid.show("Caja abierta satisfactoriamente",ToastAndroid.SHORT)
+        const cashierOpen = await AsyncStorage.setItem('CashierOpen',JSON.stringify({cashier:true}));
+        this.props.navigation.navigate("Home")
     }
 }
   catch(ex){
@@ -287,9 +328,11 @@ try{
         alert("El usuario no existe o contraseña invalida");
     }
     else{
+        this.setState({loading:true})
         const {NombrePersona, NombreUsuario, Rol, Contrasena,PIN} = response
         const item = await AsyncStorage.getItem('LoggedUser');
-        if(item ===null){
+        console.log(item)
+        if(item === null){
             const rol  = await Roles.findBy({Id_eq:Rol})
             const RmenuQuery ={
                 columns: 'IdMenu',
@@ -303,26 +346,32 @@ try{
             const UserJasonStringy =JSON.stringify({
                 Nombre:NombrePersona,Pass:Contrasena, Usuario:NombreUsuario,Rol:Rol, Menus:Rmenu,PIN:PIN
             });
-            console.log(UserJasonStringy,'Check?');
             this.setState({
                 PIN: UserJasonStringy.PIN   
             })  
             const addAsync = await AsyncStorage.setItem('LoggedUser', UserJasonStringy)
-            this.props.navigation.navigate("Home")
+            const getCashierStatus = await AsyncStorage.getItem('CashierOpen');
+            console.log(getCashierStatus,'Check?');
+            if(getCashierStatus=== null){
+                this.setState({ModalCajaVisibility:true})
+            }
+            // this.props.navigation.navigate("Home")
         }
-        else {
-            this.props.navigation.navigate('Home');
-            Alert.alert("El usuario esta logueado!!")
-            this.setState({ModalCajaVisibility:true})
-            //await AsyncStorage.removeItem("LoggedUser");
+            else {
+                // this.props.navigation.navigate('Home');
+                const getCashierStatus = await AsyncStorage.getItem('CashierOpen');
+                console.log(getCashierStatus,'Check?');
+                this.setState({loading:false})
+                if(getCashierStatus=== null){
+                    this.setState({ModalCajaVisibility:true})
+                }
+            }
+
         }
-
-    }
-} catch(ex){
-        console.log(ex);
-    }
-}
-
+    } catch(ex){
+                console.log(ex);
+            }
+        }
     }
 
 const styles = StyleSheet.create({
@@ -338,14 +387,6 @@ const styles = StyleSheet.create({
         flex:1,
         backgroundColor:"#49A695"
     },
-    lockContainer:{
-        flex:1,
-        justifyContent:"center",
-        alignItems:"center",
-        backgroundColor:"#49A695",
-        paddingTop:40
-    },
-
     ModalContainer:{
         flex:1,
         justifyContent:"center",
@@ -386,6 +427,15 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         fontSize:16,
         marginTop:windowHeight * 0.08
+    }, 
+    textModal:{
+        textAlign:'center',
+        marginTop: windowHeight * 0.03,
+        fontSize:14
+    },
+    Badge:{
+        padding:10,
+        borderRadius:15
     }
 })
 

@@ -161,7 +161,7 @@ export default class Categorias extends React.Component {
                 />
             </View>
                 <FAB
-                    icon="plusß"
+                    icon="plus"
                     style={styles.fab}
                     onPress={() => {}}
                     visible={this.state.visible}

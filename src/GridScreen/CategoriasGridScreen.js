@@ -92,7 +92,6 @@ export default class CategoriasGridScreen extends React.Component{
     this.setState({
       filterData:arra
     })
-    console.log(this.state.data)
   }
   async  componentDidMount(){
     const crear = await Categorias.createTable();

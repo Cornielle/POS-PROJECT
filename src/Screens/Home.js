@@ -1,190 +1,84 @@
-import React, { Component } from 'react';
-import { TextInput, Avatar, Button, Card, RadioButton  } from 'react-native-paper';
-import { StyleSheet, Text, View,AsyncStorage ,ScrollView, FlatList, Picker,Alert, KeyboardAvoidingView, TouchableHighlight,  ToastAndroid, Dimensions,Platform} from 'react-native';
-import {Block} from 'galio-framework'
-import normalize from 'react-native-normalize';
-import Header from '../Components/Header'
-import * as Filesystem from "expo-file-system"
-import * as SQLite from "expo-sqlite"
-import {BaseModel, types} from 'expo-sqlite-orm'
-import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
-import Icon from 'react-native-vector-icons/FontAwesome';
-import Empleados from '../../Models/Empleados.js'
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import Roles from "../../Models/Roles"
-import Menu from "../../Models/Menu"
-import AwesomeAlert  from  "react-native-awesome-alerts"
-import RolMenu from '../../Models/RolMenu'
-import DataMenu from "../Helpers/DataCall"
+import React from 'react';
+import {
+  FlatList,
+  Text,
+  View,
+  Image,
+  TouchableHighlight,
+  StyleSheet
+} from 'react-native';
+import { categories } from '../Data/dataMenuArrays';
 
-const data = [
-    { key: 'A' }, { key: 'B' }, { key: 'C' }, { key: 'D' }, { key: 'E' }, { key: 'F' }, { key: 'G' }, { key: 'H' }, { key: 'I' }, { key: 'J' },
-    // { key: 'K' },
-    // { key: 'L' },
-  ];
-  
- const  numColumns = 3
-
-export default class Home extends  React.Component{
-
-constructor(navigation){
-
-super(navigation);
-
-
+export default class CategoriesScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Categories'
+  };
+  constructor(props) {
+    super(props);
+    console.log(categories,'check')
+  }
+  onPressCategory = item => {
+    const title = item.name;
+    const category = item;
+    this.props.navigation.navigate('RecipesList', { category, title });
+  };
+  renderCategory = ({ item }) => (
+    <TouchableHighlight underlayColor='rgba(73,182,77,1,0.9)' onPress={() => this.onPressCategory(item)}>
+      <View style={styles.categoriesItemContainer}>
+        <Image style={styles.categoriesPhoto} source={require('../img/cart.png')} />
+        <Text style={styles.categoriesName}>{item.name}</Text>
+      </View>
+    </TouchableHighlight>
+  );
+  render() {
+    return (
+      <View>
+        <FlatList
+          data={categories}
+          renderItem={this.renderCategory}
+          keyExtractor={item => `${item.id}`}
+        />
+      </View>
+    );
+  }
 }
-
-
-state={
-
-  
-
-}
-
-
- componentDidMount(){
-this.LoadingD();
-
-}
-
-
-
-
-
-
-
-
-LoadingD = async() =>{
-
-
-try{
-
-
-  const idMenues =[]
-  const sing ="?"
-  let inFactory =",?"
-  
-    const Menues =await AsyncStorage.getItem('LoggedUser');
-   
-  const data = JSON.parse(Menues);
-  
-data.Menus.map(x =>{
-    idMenues.push(x.IdMenu)
-})
-
-
-    const claves  = sing+inFactory.repeat(idMenues.length);
-    const sql = `SELECT  cast (Id as text) as key, MenuLabel, NombreMenu FROM Menu where Id in(${claves})`
-    const params = idMenues;
-    const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-   databaseLayer.executeSql(sql,params).then(  ({ rows }) => {
-
-     this.setState({rows});
-
-    } )
-  
-  
-
-}
-catch(ex){
-
-console.log(ex)
-
-}
-
-
-
-}
-
-
-ItemSelect = (item) =>{
-
-console.log(item);
-
-this.props.navigation.navigate(item.NombreMenu)
-
-
-}
-
-
-state ={
-NombreLabel:""
-}
-
-
-
-
-
-    renderItem = ({ item, index }) => {
-
-  
-        if (item.empty === true || item ===[]) {
-  Alert.alert("Tou vacio");
-          return <View style={[styles.item, styles.itemInvisible]} />;
-
-        }
-     
-        return (
-          <TouchableHighlight onPress={this.ItemSelect.bind(this,item)}>
-          <View
-            style={styles.item}
-          >
-   
-            <Text style={styles.itemText}>{item.MenuLabel}</Text>
-        
-          </View>
-          </TouchableHighlight>
-            
-        );
-      };
-    
-      render() {
-
-
-        const {rows = []} = this.state;
-
-        let kk =[];
-
-      rows.map(t =>(kk.push(t) ))
- 
-        return (
- 
-
-
-
-
-
-  
-
-  <FlatList data={this.state.rows} style={styles.container} renderItem={this.renderItem} />
-
-
-        
-   
-        );
-      }
-
-
-
-}
-
 const styles = StyleSheet.create({
-    container: {
+    categoriesItemContainer: {
       flex: 1,
-      marginVertical: 20,
-    },
-    item: {
-      backgroundColor: '#4D243D',
-      alignItems: 'center',
+      margin: 10,
       justifyContent: 'center',
+      alignItems: 'center',
+      height: 215,
+      borderColor: '#cccccc',
+      borderWidth: 0.5,
+      borderRadius: 20,
+    },
+    categoriesPhoto: {
+      width: '100%',
+      height: 155,
+      borderRadius: 20,
+      borderBottomLeftRadius: 0,
+      borderBottomRightRadius: 0,
+      shadowColor: 'blue',
+      shadowOffset: {
+        width: 0,
+        height: 3
+      },
+      shadowRadius: 5,
+      shadowOpacity: 1.0,
+      elevation: 3
+    },
+    categoriesName: {
       flex: 1,
-      margin: 1,
-      height: Dimensions.get('window').width / numColumns, // approximate a square
+      fontSize: 20,
+      fontWeight: 'bold',
+      textAlign: 'center',
+      color: '#333333',
+      marginTop: 8
     },
-    itemInvisible: {
-      backgroundColor: 'transparent',
-    },
-    itemText: {
-      color: '#fff',
-    },
+    categoriesInfo: {
+      marginTop: 3,
+      marginBottom: 5
+    }
   });
+  
