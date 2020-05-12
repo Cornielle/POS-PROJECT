@@ -46,7 +46,7 @@ loadTable = async () => {
 }
 
   componentDidMount(){   
-
+    // Articulos.dropTable();
 this.loadTable()
     const sqlArticulos = 'SELECT * FROM Articulos'
     const paramsArticulos = []
