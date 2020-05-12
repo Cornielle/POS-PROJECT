@@ -49,14 +49,6 @@ UsuarioCreacion:{type:types.TEXT, not_null:true},
 UsuarioModificacion:{type:types.TEXT, not_null:false}
 }
 
-
-
-
-
-
-
-
-
  }
 
 
