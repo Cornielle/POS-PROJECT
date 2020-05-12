@@ -51,7 +51,7 @@ Categorias:[]
 }
 
 loadTable = async () => {
- //Articulos.dropTable();
+//  Articulos.dropTable();
  Articulos.createTable();
     const sqlProvee = `SELECT id,NombreProveedor FROM Proveedores WHERE Activo =? ORDER BY id ASC`
     const paramsProvee = [1];
@@ -213,7 +213,7 @@ onChangeText={(CatidadExistencia) => this.setState({CatidadExistencia:CatidadExi
                                      {
 
 this.state.Categorias.map(lol =>(
-    <Picker.Item label={lol.NombreCategoria.toString()} value={lol.Id.toString()}  key={lol.Id.toString()} />
+    <Picker.Item label={lol.NombreCategoria.toString()} value={lol.id.toString()}  key={lol.id.toString()} />
     ))
 }
 </Picker>

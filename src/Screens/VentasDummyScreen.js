@@ -33,16 +33,16 @@ export default class VentasMain extends React.Component {
  async  componentDidMount() {
 
   await Categorias.createTable();
-  const sql =   `SELECT Categorias.Id as Id , Articulos.NombreArticulo as NombreArticulo  ,
+  const sql =   `SELECT Categorias.id as id , Articulos.NombreArticulo as NombreArticulo  ,
    Categorias.NombreCategoria as NombreCategoria , Articulos.DescripcionPantalla as DescripcionPantalla,
    Articulos.PrecioVenta as PrecioVenta, 
    Articulos.CatidadExistencia as CantidadExistencia  
-   from Categorias inner join Articulos on Categorias.Id = Articulos.CategoriaId`
+   from Categorias inner join Articulos on Categorias.id = Articulos.CategoriaId`
   const params = []
   const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
   databaseLayer.executeSql(sql, params).then(({ rows }) => {
   this.setState({ListaCategorias:rows})
-
+    
   console.log(rows);
   } )
  //   this.LoadCategorias();
@@ -302,7 +302,6 @@ this.state.ListaCategorias.map(elemet =>(
         <Tabs renderTabBar={() => <ScrollableTab/>}>
         {this.state.ListaCategorias.map(element => (
         <Tab heading={ <TabHeading><Text>{element.NombreCategoria}</Text></TabHeading>}>
-        {element.NombreCategoria !=="" && element.NombreArticulo !=="" && element.NombreArticulo !=="" &&
         <ListItem thumbnail>
             <Left>
             <Checkbox 
@@ -313,11 +312,10 @@ this.state.ListaCategorias.map(elemet =>(
                 />
             </Left>
             <Left>
-              
                 <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
             </Left>
             <Body>  
-                  <Text>{element.NombreArticulo}</Text>     
+              <Text>{element.NombreArticulo}</Text>     
               <Text note numberOfLines={1}>Disponibles: {element.CantidadExistencia}</Text>
               <Text note numberOfLines={1}>Precio: RD$ {element.PrecioVenta}.00</Text>
             </Body>
@@ -329,7 +327,7 @@ this.state.ListaCategorias.map(elemet =>(
                 rounded 
               />
             </Right>
-          </ListItem>}
+          </ListItem>
         </Tab>
           ))}
           <Tab heading={ <TabHeading><Text>No Icon</Text></TabHeading>}>
