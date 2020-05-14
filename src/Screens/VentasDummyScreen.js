@@ -4,7 +4,7 @@ import * as SQLite from "expo-sqlite"
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
 import {TextInput,Searchbar} from 'react-native-paper';
 import { Container, Header, Content,Title, Icon, List,
-Card, CardItem, ListItem, Thumbnail, Text, Left, Body, 
+Card, CardItem, ListItem, Thumbnail, Text, Left, Body, Tab , Tabs,TabHeading,
 Right, Button, Footer, FooterTab,Spinner} from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
