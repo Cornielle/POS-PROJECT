@@ -3,7 +3,7 @@
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerNgrokUrl": "https://eh-pgp.anonymous.pos-projects.exp.direct",
+  "packagerNgrokUrl": "https://packager.eh-pgp.anonymous.pos-projects.exp.direct",
+  "ngrokPid": 71230
 }
