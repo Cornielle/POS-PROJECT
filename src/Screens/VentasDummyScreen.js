@@ -4,8 +4,8 @@ import * as SQLite from "expo-sqlite"
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
 import {TextInput,Searchbar} from 'react-native-paper';
 import { Container, Header, Content,Title, Icon, List,
-Card, CardItem, ListItem, Thumbnail, Text, Left, Body, Tab , Tabs,TabHeading,
-Right, Button, Footer, FooterTab,Spinner} from 'native-base';
+Card, CardItem, ListItem, Thumbnail, Text, Left, Body, 
+Right, Button, Footer, FooterTab,Spinner, Tab, Tabs, TabHeading, ScrollableTab} from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
@@ -29,19 +29,28 @@ export default class VentasMain extends React.Component {
       isCard:true, 
       product:false,
       isReady: false,
-      searchQuery:'', 
+      searchQuery:'',
       loadingState:false,
       checked:false,
       articulosSelected: [],
       categorias:[],
       Articulo:{
         id:0,
-        NombreCategoria: '',
-        Descripcion: '',
-        Activo:0,
-        IdEmpresa:0,  
+        Codigo:'',
+        CategoriaId: 0,
+        Descripcion:'',
+        DescripcionPantalla:'',
+        NombreArticulo:'',
+        CodigoDeBarra:'',
+        PrecioCosto:'',
+        PrecioVenta:'',
+        ProveedoresId:'',
+        CatidadExistencia:'',
+        MedidaDeVenta:'',
+        Activo:'',
+        IdEmpresa:0,
         IdSucursal:0,
-        FechaCreacion: 0,
+        FechaCreacion: '',
         FechaModificacion:'',
         UsuarioCreacion:'',
         UsuarioModificacion:'',
@@ -94,7 +103,6 @@ export default class VentasMain extends React.Component {
       ...Ionicons.font,
     });
     this.setState({ isReady: true });
-
   }
   setSelection(id,selected,item){
     if(selected === true){
@@ -143,13 +151,6 @@ export default class VentasMain extends React.Component {
         </Content>
       </Container>);
     }
-
-    {/*Products Modal Section*/}
-    if (product){
-      return ( 
-        <VentasSelectScreen visible={this.categoriesVisible} data={dataCategorias}/> 
-      )
-      }
     return (
       <Container>
         <Header>
@@ -241,12 +242,16 @@ export default class VentasMain extends React.Component {
             <Footer>
           <FooterTab>
             <Button vertical
-              onPress={()=>this.visibleProducts()}>
+              onPress={()=>this.setState({
+                product:true
+              })}>
               <Icon name="basket" />
               <Text>Articulos</Text>
             </Button>
             <Button vertical
-              onPress={()=> this.setState({visible:true})}>
+              onPress={()=>this.setState({
+                visible:true
+              })}>
               <Icon type="FontAwesome5" name="cash-register" />
               <Text>Pagar</Text>
             </Button>
@@ -365,7 +370,7 @@ export default class VentasMain extends React.Component {
             padding:25
         }}>
         <Icon style={styles.cashButton}type="FontAwesome5" name="money-bill" />
-          {" "}Efectivo 
+          {" "}Efectivo
         </Text>
       </TouchableOpacity>
       <TouchableOpacity>
