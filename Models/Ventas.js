@@ -28,6 +28,9 @@ static get columnMapping(){
 
 return{
     Idventa :{type:types.INTEGER, not_null:true},
+    PrecioNeto:{type: types.FLOAT, not_null:true},
+    PrecioTotal:{type: types.FLOAT, not_null:true},
+    DescuentoAplicado:{type:types.FLOAT, not_null:true},
 
 
     Activo:{type: types.INTEGER, not_null:true},

@@ -81,21 +81,15 @@ try{
 
 } catch(ex){
 
-
-
-
 }
 
 
 }
-
-
 TabRender =(item) =>{
 
   if ( typeof item === 'undefined') {
-    Alert.alert("Tou vacio");
-         
-  
+    Alert.alert("Toy Vacio");
+        
           }
           else{
 
@@ -130,9 +124,7 @@ this.state.ListaCategorias.map(elemet =>(
 
   </Tab>
   
-  
-            
-  
+
                 ))
 
     }
@@ -165,6 +157,7 @@ this.state.ListaCategorias.map(elemet =>(
     product:false,
     isReady: false,
     searchQuery:'',
+    QuantityValue:0,
     loadingState:false,
     checked:false,
     Articulo:{
@@ -192,7 +185,19 @@ this.state.ListaCategorias.map(elemet =>(
       },
   };
 
+
+  CantidadProducto = () =>{
+
+
+
+
+  }
+
+
+
+
   render() {
+    console.log(this.state.QuantityValue);
     const { visible, isCash, isCard , product, searchQuery, checked } = this.state;
     if (!this.state.isReady) {
       return (
@@ -353,8 +358,6 @@ this.state.ListaCategorias.map(elemet =>(
     </Right>
   </ListItem>
 </Tab>
-
-
           ))}
           {/* 
           {
@@ -364,10 +367,6 @@ this.state.ListaCategorias.map(elemet =>(
 
           }
         */}
-     
-       
-      
-     
           <Tab heading={ <TabHeading><Text>No Icon</Text></TabHeading>}>
           <ListItem thumbnail>
               <Left>
@@ -426,7 +425,10 @@ this.state.ListaCategorias.map(elemet =>(
               <Right>
               <NumericInput 
                 totalWidth={80} 
-                totalHeight={40}
+                totalHeight={40}           
+                value={this.state.QuantityValue}
+                editable = {false}
+                onChange ={QuantityValue => this.setState({QuantityValue})}
                 rounded 
               />
               </Right>

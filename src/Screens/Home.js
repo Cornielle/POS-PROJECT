@@ -25,6 +25,8 @@ const data = [
   
  const  numColumns = 3
 
+
+
 export default class Home extends  React.Component{
 
 constructor(navigation){
@@ -43,13 +45,16 @@ state={
 
 
  componentDidMount(){
+
+
+ 
 this.LoadingD();
 
 }
 
 
 
-
+  
 
 
 
@@ -106,14 +111,9 @@ this.props.navigation.navigate(item.NombreMenu)
 
 }
 
-
 state ={
 NombreLabel:""
 }
-
-
-
-
 
     renderItem = ({ item, index }) => {
 
@@ -148,19 +148,7 @@ NombreLabel:""
       rows.map(t =>(kk.push(t) ))
  
         return (
- 
-
-
-
-
-
-  
-
   <FlatList data={this.state.rows} style={styles.container} renderItem={this.renderItem} />
-
-
-        
-   
         );
       }
 
