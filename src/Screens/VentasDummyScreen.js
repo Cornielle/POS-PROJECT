@@ -15,151 +15,119 @@ import { Checkbox } from 'galio-framework';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 export default class VentasMain extends React.Component {
-  
   constructor(props) {
-    super(props); 
+    super(props);
+    this.state = {
+      ListaCategorias:[],
+      isReady: false,
+      active: false,
+      visible: false,
+      inputCash:true,
+      inputCredit:false,
+      backgroundColor:'#000000',
+      isCash:false,
+      isCard:true, 
+      product:false,
+      isReady: false,
+      searchQuery:'',
+      loadingState:false,
+      checked:false,
+      articulosSelected: [],
+      categorias:[],
+      Articulo:{
+        id:0,
+        Codigo:'',
+        CategoriaId: 0,
+        Descripcion:'',
+        DescripcionPantalla:'',
+        NombreArticulo:'',
+        CodigoDeBarra:'',
+        PrecioCosto:'',
+        PrecioVenta:'',
+        ProveedoresId:'',
+        CatidadExistencia:'',
+        MedidaDeVenta:'',
+        Activo:'',
+        IdEmpresa:0,
+        IdSucursal:0,
+        FechaCreacion: '',
+        FechaModificacion:'',
+        UsuarioCreacion:'',
+        UsuarioModificacion:'',
+        HoraCreacion:'',
+        },
+    }
     this._hideModal =  this._hideModal.bind(this);
     this.ventasMain =  this.ventasMain.bind(this);
+    this.setSelection =  this.setSelection.bind(this);
   }
-
-    fontload = async () =>{
-      await Font.loadAsync({
-        Roboto: require('native-base/Fonts/Roboto.ttf'),
-        Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-        ...Ionicons.font,
-      });
-      this.setState({ isReady: true });
-    }
  async  componentDidMount() {
-
   await Categorias.createTable();
-  const sql =   `SELECT Categorias.id as id , Articulos.NombreArticulo as NombreArticulo  ,
+  const sql = `SELECT Categorias.id as id ,Articulos.id as idArticulo, Articulos.NombreArticulo as NombreArticulo,
    Categorias.NombreCategoria as NombreCategoria , Articulos.DescripcionPantalla as DescripcionPantalla,
    Articulos.PrecioVenta as PrecioVenta, 
    Articulos.CatidadExistencia as CantidadExistencia  
-   from Categorias inner join Articulos on Categorias.id = Articulos.CategoriaId`
+   from Categorias inner join Articulos on Categorias.id = Articulos.CategoriaId limit 15`
   const params = []
   const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
   databaseLayer.executeSql(sql, params).then(({ rows }) => {
-  this.setState({ListaCategorias:rows})
-    
-  console.log(rows);
-  } )
- //   this.LoadCategorias();
-this.fontload();
+    let arrayArticulos = []
+    rows.map(item=>{
+      let articulos = {
+        CantidadExistencia: item.CantidadExistencia,
+        DescripcionPantalla: item.DescripcionPantalla,
+        NombreArticulo: item.NombreArticulo,
+        NombreCategoria: item.NombreCategoria,
+        PrecioVenta: item.PrecioVenta,
+        id: item.idArticulo,
+        selected:false,
+        quantitySelected:0
+      }
+      arrayArticulos.push(articulos)
+    })
+    this.setState({
+      articulos:arrayArticulos
+    })  
+  let categorias = [...new Set(rows.map(item => item.NombreCategoria))];
+  this.setState({
+      categorias  
+    })
+  })
+
+    this.fontload();
   }
-
-async LoadCategorias(){
-
-try{
-  /*
-  const sql =   'SELECT * from Categorias'
-  const params = []
-  const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
- databaseLayer.executeSql(sql, params).then(({ rows }) => {
-  this.setState({ListaCategorias:rows})
-
-  console.log(rows);
-  } )
-
-  */
-  /*
-
-  let datosCat  = []
-  const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-  databaseLayer.executeSql('SELECT * from Categorias').then(({ rows }) => {
-    this.setState({ListaCategorias:rows})
-  
- //   console.log(rows);
-    } )
-*/
-
-
-} catch(ex){
-
+  fontload = async () =>{
+    await Font.loadAsync({
+      Roboto: require('native-base/Fonts/Roboto.ttf'),
+      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
+      ...Ionicons.font,
+    });
+    this.setState({ isReady: true });
   }
-}
-TabRender =(item) =>{
-  if ( typeof item === 'undefined') {
-    Alert.alert("Tou vacio");
-          }
-          else{
-            console.log("Vine para irme")
-return(
-      <View>
-    {
-this.state.ListaCategorias.map(elemet =>(
-  <Tab heading={ <TabHeading><Text>{elemet.NombreCategoria}</Text></TabHeading>}>
-<ListItem thumbnail>
-              <Left>
-                  <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
-              </Left>
-              <Body>  
-                <Text>Barbie Holiday Castaña 2018</Text>     
-                <Text note numberOfLines={1}>Cant: 9999</Text>
-              </Body>
-              <Right>
-              <Text note numberOfLines={1}>RD$ 3,400.00</Text>
-              </Right>
-              <Right>  
-                <TouchableOpacity>     
-                  <Icon name="close"/>
-                </TouchableOpacity>  
-              </Right>
-            </ListItem>
-
-  </Tab>
-      ))
+  setSelection(id,selected,item){
+    if(selected === true){
+      if(item.id===id)
+        this.state.articulosSelected.push(item)
+    }else {
+      let newArray = this.state.articulosSelected.filter(element=>element!==item)
+      this.setState({
+        articulosSelected:newArray
+      })
     }
-    </View>)
   }
-}
-
+  setQuantity(id,value){
+    this.state.articulos.map(articulo=>{
+      if(value > 0 && articulo.id === id){
+        articulo.quantitySelected = value
+      }
+    })
+  }
   _hideModal = () => this.setState({ visible: false });
   ventasMain(){
     this.setState({
       product:false
     })
   }
-  state = {
-    ListaCategorias:[],
-    isReady: false,
-    active: false,
-    visible: false,
-    inputCash:true,
-    inputCredit:false,
-    backgroundColor:'#000000',
-    isCash:false,
-    isCard:true, 
-    product:false,
-    isReady: false,
-    searchQuery:'',
-    loadingState:false,
-    checked:false,
-    Articulo:{
-      id:0,
-      Codigo:'',
-      CategoriaId: 0,
-      Descripcion:'',
-      DescripcionPantalla:'',
-      NombreArticulo:'',
-      CodigoDeBarra:'',
-      PrecioCosto:'',
-      PrecioVenta:'',
-      ProveedoresId:'',
-      CatidadExistencia:'',
-      MedidaDeVenta:'',
-      Activo:'',
-      IdEmpresa:0,
-      IdSucursal:0,
-      FechaCreacion: '',
-      FechaModificacion:'',
-      UsuarioCreacion:'',
-      UsuarioModificacion:'',
-      HoraCreacion:'',
-      
-      },
-  };
 
   render() {
     const { visible, isCash, isCard , product, searchQuery, checked } = this.state;
@@ -197,7 +165,7 @@ this.state.ListaCategorias.map(elemet =>(
           <List>
           <ScrollView>
             <ListItem thumbnail>
-              <Left>
+              {/* <Left>
                   <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
               </Left>
               <Body>  
@@ -211,10 +179,10 @@ this.state.ListaCategorias.map(elemet =>(
                 <TouchableOpacity>     
                   <Icon name="close"/>
                 </TouchableOpacity>  
-              </Right>
+              </Right> */}
             </ListItem>
             <ListItem thumbnail>
-              <Left>
+              {/* <Left>
                   <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
               </Left>
               <Body>  
@@ -228,7 +196,7 @@ this.state.ListaCategorias.map(elemet =>(
                 <TouchableOpacity>     
                   <Icon name="close"/>
                 </TouchableOpacity>  
-              </Right>
+              </Right> */}
             </ListItem>
             </ScrollView>
           </List>
@@ -236,24 +204,24 @@ this.state.ListaCategorias.map(elemet =>(
         <Card>
             <CardItem>
               <Body>
-                <Text style={{float:'left', fontSize:14,paddingLeft:windowWidth * 0.184}} note numberOfLines={1}>
+                <Text style={{ fontSize:14,paddingLeft:windowWidth * 0.184}} note numberOfLines={1}>
                   Monto Neto:
                 </Text>
-                <Text style={{float:'left', fontSize:14, paddingLeft:windowWidth * 0.184}} note numberOfLines={1}>
+                <Text style={{ fontSize:14, paddingLeft:windowWidth * 0.184}} note numberOfLines={1}>
                   ITBIS:
                 </Text>
-                <Text style={{float:'left', fontSize:16, paddingLeft:windowWidth * 0.183}}>
+                <Text style={{ fontSize:16, paddingLeft:windowWidth * 0.183}}>
                   Total:
                 </Text>
               </Body>        
               <Body>
-                <Text style={{float:'left', fontSize:14,paddingLeft:windowWidth * 0.004}} note numberOfLines={1}>
+                <Text style={{ fontSize:14,paddingLeft:windowWidth * 0.004}} note numberOfLines={1}>
                  RD$ 1,500.00
                 </Text>
-                <Text style={{float:'left', fontSize:14, paddingLeft:windowWidth * 0.004}} note numberOfLines={1}>
+                <Text style={{ fontSize:14, paddingLeft:windowWidth * 0.004}} note numberOfLines={1}>
                  RD$ 500.00
                 </Text>
-                <Text style={{float:'left', fontSize:16, paddingLeft:windowWidth * 0.003}}>
+                <Text style={{ fontSize:16, paddingLeft:windowWidth * 0.003}}>
                  RD$ 2.00000000
                 </Text>
               </Body>
@@ -300,121 +268,46 @@ this.state.ListaCategorias.map(elemet =>(
             value={searchQuery}  
         />
         <Tabs renderTabBar={() => <ScrollableTab/>}>
-        {this.state.ListaCategorias.map(element => (
-        <Tab heading={ <TabHeading><Text>{element.NombreCategoria}</Text></TabHeading>}>
-        <ListItem thumbnail>
-            <Left>
-            <Checkbox 
-                  style={{marginRight: windowWidth * 0.02}}
-                  color="#3F51B5"
-                  onPress={()=>this.setState({checked:!checked})}  
-                  initialValue={checked}
+        {this.state.categorias.map(element => (
+          <Tab heading={
+            <TabHeading><Text>{element}</Text></TabHeading>
+          }>
+          {this.state.articulos.map(item=>(
+          item.NombreCategoria === element &&(  
+          <ListItem thumbnail>
+              <Left>
+              <View>
+              <Checkbox 
+                    style={{marginRight: windowWidth * 0.02}}
+                    color="#3F51B5"
+                    onChange={(selected)=> {this.setSelection(item.id,selected,item)}}    
+                    initialValue={item.selected}          
+                  />
+                  </View>
+              </Left>
+              <Left>
+                  <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
+              </Left>
+              <Body>  
+                <Text>{item.NombreArticulo}</Text>     
+                <Text note numberOfLines={1}>Disponibles: {item.CantidadExistencia}</Text>
+                <Text note numberOfLines={1}>Precio: RD$ {item.PrecioVenta}.00</Text>
+              </Body>
+              <Right>
+              <NumericInput
+                  totalWidth={80} 
+                  totalHeight={40}
+                  valueType={'real'}
+                  disable={true}
+                  minValue={0}
+                  onChange={(value)=>{this.setQuantity(item.id,value)}}
+                  rounded 
                 />
-            </Left>
-            <Left>
-                <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
-            </Left>
-            <Body>  
-              <Text>{element.NombreArticulo}</Text>     
-              <Text note numberOfLines={1}>Disponibles: {element.CantidadExistencia}</Text>
-              <Text note numberOfLines={1}>Precio: RD$ {element.PrecioVenta}.00</Text>
-            </Body>
-            <Right>  
-            <NumericInput 
-                totalWidth={80} 
-                totalHeight={40}
-                valueType={'real'}
-                rounded 
-              />
-            </Right>
-          </ListItem>
-        </Tab>
+              </Right>
+            </ListItem>)
+            ))}
+          </Tab>
           ))}
-          <Tab heading={ <TabHeading><Text>No Icon</Text></TabHeading>}>
-          <ListItem thumbnail>
-              <Left>
-                  <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
-              </Left>
-              <Body>  
-                <Text>Barbie Holiday Castaña 2018</Text>     
-                <Text note numberOfLines={1}>Cant: 9999</Text>
-              </Body>
-              <Right>
-              <Text note numberOfLines={1}>RD$ 3,400.00</Text>
-              </Right>
-              <Right>  
-                <TouchableOpacity>     
-                  <Icon name="close"/>
-                </TouchableOpacity>  
-              </Right>
-            </ListItem>
-          </Tab>
-          <Tab heading={ <TabHeading><Text>No Icon</Text></TabHeading>}>
-          <ListItem thumbnail>
-              <Left>
-                  <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
-              </Left>
-              <Body>  
-                <Text>Barbie Holiday Castaña 2018</Text>     
-                <Text note numberOfLines={1}>Cant: 9999</Text>
-              </Body>
-              <Right>
-              <Text note numberOfLines={1}>RD$ 3,400.00</Text>
-              </Right>
-              <Right>  
-                <TouchableOpacity>     
-                  <Icon name="close"/>
-                </TouchableOpacity>  
-              </Right>
-            </ListItem>
-          </Tab>
-          <Tab heading={ <TabHeading><Text>No Icon</Text></TabHeading>}>
-          <ListItem thumbnail>
-            <Left>
-            <Checkbox 
-                  style={{marginRight: windowWidth * 0.02}}
-                  color="#3F51B5"
-                  onPress={()=>this.setState({checked:!checked})}  
-                  initialValue={checked}
-                />
-            </Left>
-              <Left>
-                  <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
-              </Left>
-              <Body>  
-                <Text>Barbie Holiday Castaña 2018</Text>     
-                <Text note numberOfLines={1}>RD$ 3,400.00</Text>
-              </Body>
-              <Right>
-              <NumericInput 
-                totalWidth={80} 
-                totalHeight={40}
-                rounded 
-              />
-              </Right>
-              <Right>  
-              </Right>
-            </ListItem>
-          </Tab>
-          <Tab heading={ <TabHeading><Text>No Icon</Text></TabHeading>}>
-          <ListItem thumbnail>
-              <Left>
-                  <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
-              </Left>
-              <Body>  
-                <Text>Barbie Holiday Castaña 2018</Text>     
-                <Text note numberOfLines={1}>Cant: 9999</Text>
-              </Body>
-              <Right>
-              <Text note numberOfLines={1}>RD$ 3,400.00</Text>
-              </Right>
-              <Right>  
-                <TouchableOpacity>     
-                  <Icon name="close"/>
-                </TouchableOpacity>  
-              </Right>
-            </ListItem>
-          </Tab>
         </Tabs>
       </Container>
       </Modal>
