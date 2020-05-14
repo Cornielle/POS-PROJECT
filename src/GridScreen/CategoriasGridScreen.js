@@ -148,7 +148,7 @@ _toggleForm(addRecord){
     this.setState({addRecord:false})
   }
 }
-_showMenu(index){
+_showMenu(index){``
   this.setState({index})
   this.state.data[index]['estado']
   ? this.state.optionArray[1] = 'Desactivar' 

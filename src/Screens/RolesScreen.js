@@ -52,7 +52,7 @@ render(){
         <ScrollView>
         <View style={styles.ViewStyle}>
                 {/*Header generico que debe ser reutilizado en casi todas las vistas */}
-                <Header name={'Acciones'} 
+                <Header name={'Roles De Usuario'} 
                         subtitle={'Crear perfil de Acciones'}
                         goBackEnabled={true}
                         goBackNavigationName={'Grid'}
@@ -113,17 +113,18 @@ render(){
 
     
 verifyExisting= async () =>{
-    console.log("fui invocado")
+ 
     let callbaclproof =""
     const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
     databaseLayer.executeSql(
-      'SELECT * FROM Roles where NombreRol="administrador" COLLATE NOCASE'
+      'SELECT * FROM Roles where NombreRol="Administrador" COLLATE NOCASE'
       ).then(respon =>{
 
 
   
 if(Object.keys(respon).length > 0){
 
+    console.log("si encontre duplicado");
     this.setState({ExistNombre:true})
 
   
@@ -168,8 +169,9 @@ console.log(this.state.ExistNombre);
             UsuarioCreacion:"system",
             UsuarioModificacion:null
         }
-    /*
-        console.log(ValInsert);
+    
+      //  console.log(ValInsert);
+        /*
        var response = await Roles.create(ValInsert);
 
        console.log(response)
@@ -185,6 +187,7 @@ ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
 this.setState(InitialState)
         }
         */
+        
         
         }
 }

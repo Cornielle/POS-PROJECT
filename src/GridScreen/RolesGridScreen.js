@@ -3,7 +3,7 @@ import { ListItem } from 'react-native-elements'
 import { Badge,Searchbar,Card, TextInput , FAB } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import  ModalControls from '../Components/ModalControls'
-import { View, StyleSheet, Modal, Text, Image,ScrollView, ToastAndroid} from 'react-native'
+import { View, StyleSheet, Modal, Text, Image,ScrollView, ToastAndroid,SafeAreaView} from 'react-native'
 import normalize from 'react-native-normalize';
 import HeaderGrid from '../Components/HeaderGrid'
 import Roles from '../../Models/Roles';
@@ -65,7 +65,7 @@ export default class RolesGridScreen extends React.Component{
     }    
   
   const artiobj = await Roles.query(optionsRoles)
-  console.log(artiobj, 'here')
+ // console.log(artiobj, 'here')
   let arra =[]
   this.state.HoraCreacion = ''
   artiobj.map(x => {
@@ -258,10 +258,11 @@ return(
       value={this.state.text}
     />
       <View style={{zIndex:-2,height:normalize(500)}}>
+        
         <FlatList
           extraData={this.state}
           data={this.state.filterData}
-          keyExtractor={(x,i) => i}
+          keyExtractor={(x,i) => i.toString()}
           renderItem={({ item, index }) =>
             <TouchableOpacity
             onPress={() => {
@@ -273,7 +274,6 @@ return(
               onPress={() => this._showRole(index)}
               leftAvatar={{ source: { uri: item.avatar_url } }}
               rightAvatar={ 
-
                 <View>                 
                   {item.estado === true ? <Badge>Activado</Badge> : <Badge>Desactivado</Badge>}
                 <Text>Fecha de Creación:{"\n"}

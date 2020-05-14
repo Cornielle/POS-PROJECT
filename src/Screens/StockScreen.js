@@ -112,6 +112,8 @@ this.setState({ProveedorSelected:item.NombreProveedor,ArticuloId:item.Id }, () =
    databaseLayerStock.executeSql(sqlStock,paramsStock).then(  ({ rows }) => {
 
      console.log(rows)
+
+     
     } ) 
 
 /*

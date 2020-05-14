@@ -30,7 +30,7 @@ return{
 
 id:{type:types.INTEGER, primary_key:true},
 Codigo:{type: types.TEXT, not_null:false},
-CategoriaId: {type: types.int, not_null:true},
+CategoriaId: {type: types.INTEGER, not_null:true},
 Descripcion:{type: types.TEXT, not_null:false},
 DescripcionPantalla:{type: types.TEXT, not_null:true},
 NombreArticulo:{type: types.TEXT, not_null:true},
@@ -48,14 +48,6 @@ FechaModificacion:{type:types.TEXT, not_null:false},
 UsuarioCreacion:{type:types.TEXT, not_null:true},
 UsuarioModificacion:{type:types.TEXT, not_null:false}
 }
-
-
-
-
-
-
-
-
 
  }
 

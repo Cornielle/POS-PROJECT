@@ -1,23 +1,24 @@
-import * as React from 'react';
-import { Dimensions,StyleSheet,Modal, View, ActivityIndicator} from 'react-native';
-import {TextInput} from 'react-native-paper';
+import React from 'react';
+import { Dimensions,StyleSheet,Modal, View,Alert} from 'react-native';
+import * as SQLite from "expo-sqlite"
+import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
+import {TextInput,Searchbar} from 'react-native-paper';
 import { Container, Header, Content,Title, Icon, List,
 Card, CardItem, ListItem, Thumbnail, Text, Left, Body, 
 Right, Button, Footer, FooterTab,Spinner} from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
-import { TabView, SceneMap } from 'react-native-tab-view';
-import Categorias from '../../Models/Categorias'
-import VentasSelectScreen from './VentasSelectScreen'
-
+import Categorias from "../../Models/Categorias"
+import NumericInput from 'react-native-numeric-input'
+import { Checkbox } from 'galio-framework';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 export default class VentasMain extends React.Component {
   constructor(props) {
     super(props);
-    this.LoadCategoriaData()   
     this.state = {
+      ListaCategorias:[],
       isReady: false,
       active: false,
       visible: false,
@@ -30,9 +31,10 @@ export default class VentasMain extends React.Component {
       isReady: false,
       searchQuery:'', 
       loadingState:false,
-      dataCategorias:'',
-      productLoading:false,
-      Categoria:{
+      checked:false,
+      articulosSelected: [],
+      categorias:[],
+      Articulo:{
         id:0,
         NombreCategoria: '',
         Descripcion: '',
@@ -43,54 +45,49 @@ export default class VentasMain extends React.Component {
         FechaModificacion:'',
         UsuarioCreacion:'',
         UsuarioModificacion:'',
-      },
-    };
+        HoraCreacion:'',
+        },
+    }
     this._hideModal =  this._hideModal.bind(this);
     this.ventasMain =  this.ventasMain.bind(this);
-    this.categoriesVisible =  this.categoriesVisible.bind(this);
-    this.visibleProducts = this.visibleProducts.bind(this);
+    this.setSelection =  this.setSelection.bind(this);
   }
-  categoriesVisible = (value,loaded) => {
-    console.log(value ,'checkkkkkkk')
-    this.setState({
-      product:value
+ async  componentDidMount() {
+  await Categorias.createTable();
+  const sql = `SELECT Categorias.id as id ,Articulos.id as idArticulo, Articulos.NombreArticulo as NombreArticulo,
+   Categorias.NombreCategoria as NombreCategoria , Articulos.DescripcionPantalla as DescripcionPantalla,
+   Articulos.PrecioVenta as PrecioVenta, 
+   Articulos.CatidadExistencia as CantidadExistencia  
+   from Categorias inner join Articulos on Categorias.id = Articulos.CategoriaId limit 15`
+  const params = []
+  const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+  databaseLayer.executeSql(sql, params).then(({ rows }) => {
+    let arrayArticulos = []
+    rows.map(item=>{
+      let articulos = {
+        CantidadExistencia: item.CantidadExistencia,
+        DescripcionPantalla: item.DescripcionPantalla,
+        NombreArticulo: item.NombreArticulo,
+        NombreCategoria: item.NombreCategoria,
+        PrecioVenta: item.PrecioVenta,
+        id: item.idArticulo,
+        selected:false,
+        quantitySelected:0
+      }
+      arrayArticulos.push(articulos)
     })
-  }
-  visibleProducts = () => {
     this.setState({
-      product:true,
+      articulos:arrayArticulos
+    })  
+  let categorias = [...new Set(rows.map(item => item.NombreCategoria))];
+  this.setState({
+      categorias  
     })
-  }
-  LoadCategoriaData = async () =>{
-    const options ={
-        columns:`id,NombreCategoria,FechaCreacion`,
-        where:{
-        Id_gt:0
-        },
-        page:1,
-        limit:30
-    }    
-  const artiobj = await Categorias.query(options) 
-  let arra =[]
-  this.state.HoraCreacion = ''
-  artiobj.map(x => {
-    const{id, NombreCategoria,FechaCreacion, Activo} = x;
-    let date = FechaCreacion.split(' ');
-    var objeto  ={
-    key: id,
-    title:NombreCategoria,
-  }
-  arra.push(objeto)
-    });
-    this.setState({dataCategorias:arra})
-    this.setState({
-      filterData:arra
-    })
-  }
+  })
 
-  async componentDidMount() {
-    const crear = await Categorias.createTable();
-    this.LoadCategoriaData() 
+    this.fontload();
+  }
+  fontload = async () =>{
     await Font.loadAsync({
       Roboto: require('native-base/Fonts/Roboto.ttf'),
       Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
@@ -99,15 +96,45 @@ export default class VentasMain extends React.Component {
     this.setState({ isReady: true });
 
   }
+  setSelection(id,selected,item){
+    if(selected === true){
+      if(item.id===id)
+        this.state.articulosSelected.push(item)
+    }else {
+      let newArray = this.state.articulosSelected.filter(element=>element!==item)
+      this.setState({
+        articulosSelected:newArray
+      })
+    }
+  }
+  setQuantity(id,value){
+    this.state.articulos.map(articulo=>{
+      if(value > 0 && articulo.id === id){
+        articulo.quantitySelected = value
+      }
+    })
+  }
   _hideModal = () => this.setState({ visible: false });
   ventasMain(){
     this.setState({
       product:false
     })
   }
-  render() {
-    const { dataCategorias, visible, isCash, isCard , product, productLoading } = this.state; 
 
+
+  CantidadProducto = () =>{
+
+
+
+
+  }
+
+
+
+
+  render() {
+    console.log(this.state.QuantityValue);
+    const { visible, isCash, isCard , product, searchQuery, checked } = this.state;
     if (!this.state.isReady) {
       return (
       <Container>
@@ -149,7 +176,7 @@ export default class VentasMain extends React.Component {
           <List>
           <ScrollView>
             <ListItem thumbnail>
-              <Left>
+              {/* <Left>
                   <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
               </Left>
               <Body>  
@@ -163,10 +190,10 @@ export default class VentasMain extends React.Component {
                 <TouchableOpacity>     
                   <Icon name="close"/>
                 </TouchableOpacity>  
-              </Right>
+              </Right> */}
             </ListItem>
             <ListItem thumbnail>
-              <Left>
+              {/* <Left>
                   <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
               </Left>
               <Body>  
@@ -180,7 +207,7 @@ export default class VentasMain extends React.Component {
                 <TouchableOpacity>     
                   <Icon name="close"/>
                 </TouchableOpacity>  
-              </Right>
+              </Right> */}
             </ListItem>
             </ScrollView>
           </List>
@@ -191,18 +218,18 @@ export default class VentasMain extends React.Component {
                 <Text style={{ fontSize:14,paddingLeft:windowWidth * 0.184}} note numberOfLines={1}>
                   Monto Neto:
                 </Text>
-                <Text style={{fontSize:14, paddingLeft:windowWidth * 0.184}} note numberOfLines={1}>
+                <Text style={{ fontSize:14, paddingLeft:windowWidth * 0.184}} note numberOfLines={1}>
                   ITBIS:
                 </Text>
-                <Text style={{fontSize:16, paddingLeft:windowWidth * 0.183}}>
+                <Text style={{ fontSize:16, paddingLeft:windowWidth * 0.183}}>
                   Total:
                 </Text>
               </Body>        
               <Body>
-                <Text style={{fontSize:14,paddingLeft:windowWidth * 0.004}} note numberOfLines={1}>
+                <Text style={{ fontSize:14,paddingLeft:windowWidth * 0.004}} note numberOfLines={1}>
                  RD$ 1,500.00
                 </Text>
-                <Text style={{fontSize:14, paddingLeft:windowWidth * 0.004}} note numberOfLines={1}>
+                <Text style={{ fontSize:14, paddingLeft:windowWidth * 0.004}} note numberOfLines={1}>
                  RD$ 500.00
                 </Text>
                 <Text style={{ fontSize:16, paddingLeft:windowWidth * 0.003}}>
@@ -226,7 +253,71 @@ export default class VentasMain extends React.Component {
           </FooterTab>
         </Footer>
       </Content>
-      {/*Payment Modal Section*/}
+      <Modal  visible={product}>
+      <Container>
+        <Header hasTabs>
+          <Left>
+            <Button
+              onPress={()=>this.setState({
+                product:false
+              })}
+             transparent>
+              <Icon name='arrow-back' /> 
+            </Button>
+          </Left>
+          <Body>
+            <Title style={{fontSize:20}}>Escoger Articulos</Title>
+          </Body>
+        </Header>
+        <Searchbar
+            placeholder="Buscar por Código/Artículo"
+            onChangeText={this._onChangeSearch}
+            value={searchQuery}  
+        />
+        <Tabs renderTabBar={() => <ScrollableTab/>}>
+        {this.state.categorias.map(element => (
+          <Tab heading={
+            <TabHeading><Text>{element}</Text></TabHeading>
+          }>
+          {this.state.articulos.map(item=>(
+          item.NombreCategoria === element &&(  
+          <ListItem thumbnail>
+              <Left>
+              <View>
+              <Checkbox 
+                    style={{marginRight: windowWidth * 0.02}}
+                    color="#3F51B5"
+                    onChange={(selected)=> {this.setSelection(item.id,selected,item)}}    
+                    initialValue={item.selected}          
+                  />
+                  </View>
+              </Left>
+              <Left>
+                  <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
+              </Left>
+              <Body>  
+                <Text>{item.NombreArticulo}</Text>     
+                <Text note numberOfLines={1}>Disponibles: {item.CantidadExistencia}</Text>
+                <Text note numberOfLines={1}>Precio: RD$ {item.PrecioVenta}.00</Text>
+              </Body>
+              <Right>
+              <NumericInput
+                  totalWidth={80} 
+                  totalHeight={40}
+                  valueType={'real'}
+                  disable={true}
+                  minValue={0}
+                  onChange={(value)=>{this.setQuantity(item.id,value)}}
+                  rounded 
+                />
+              </Right>
+            </ListItem>)
+            ))}
+          </Tab>
+          ))}
+        </Tabs>
+      </Container>
+      </Modal>
       <Modal visible={visible}>
       <Header>
           <Left>
