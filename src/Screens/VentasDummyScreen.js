@@ -1,17 +1,17 @@
 import React from 'react';
-import { Dimensions,StyleSheet,Modal, View,Alert} from 'react-native';
+import { Dimensions,StyleSheet,Modal, View,Alert, AsyncStorage} from 'react-native';
 import * as SQLite from "expo-sqlite"
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
-import {TextInput,Searchbar} from 'react-native-paper';
+import {TextInput,Searchbar, FAB} from 'react-native-paper';
+import { Checkbox } from 'galio-framework';
 import { Container, Header, Content,Title, Icon, List,
 Card, CardItem, ListItem, Thumbnail, Text, Left, Body, 
-Right, Button, Footer, FooterTab,Spinner, Tab, Tabs, TabHeading, ScrollableTab} from 'native-base';
+Right, Button, Footer, FooterTab,Spinner, Tab, Tabs,TabHeading, ScrollableTab} from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import Categorias from "../../Models/Categorias"
 import NumericInput from 'react-native-numeric-input'
-import { Checkbox } from 'galio-framework';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 export default class VentasMain extends React.Component {
@@ -58,12 +58,11 @@ export default class VentasMain extends React.Component {
         },
     }
     this._hideModal =  this._hideModal.bind(this);
-    this.ventasMain =  this.ventasMain.bind(this);
-    this.setSelection =  this.setSelection.bind(this);
+    this.setArticulos =  this.setArticulos.bind(this);
   }
- async  componentDidMount() {
-  await Categorias.createTable();
-  const sql = `SELECT Categorias.id as id ,Articulos.id as idArticulo, Articulos.NombreArticulo as NombreArticulo,
+
+   loadData =  async() =>{
+     const sql = `SELECT Categorias.id as id ,Articulos.id as idArticulo, Articulos.NombreArticulo as NombreArticulo,
    Categorias.NombreCategoria as NombreCategoria , Articulos.DescripcionPantalla as DescripcionPantalla,
    Articulos.PrecioVenta as PrecioVenta, 
    Articulos.CatidadExistencia as CantidadExistencia  
@@ -73,7 +72,7 @@ export default class VentasMain extends React.Component {
   databaseLayer.executeSql(sql, params).then(({ rows }) => {
     let arrayArticulos = []
     rows.map(item=>{
-      let articulos = {
+      let articulos = {   
         CantidadExistencia: item.CantidadExistencia,
         DescripcionPantalla: item.DescripcionPantalla,
         NombreArticulo: item.NombreArticulo,
@@ -81,20 +80,23 @@ export default class VentasMain extends React.Component {
         PrecioVenta: item.PrecioVenta,
         id: item.idArticulo,
         selected:false,
-        quantitySelected:0
+        quantitySelected:0,
+        pricePerArticle:0
       }
-      arrayArticulos.push(articulos)
+      arrayArticulos.push(articulos) 
     })
     this.setState({
       articulos:arrayArticulos
-    })  
+    }, this.state.articulos)  
   let categorias = [...new Set(rows.map(item => item.NombreCategoria))];
   this.setState({
       categorias  
     })
   })
-
     this.fontload();
+  }
+  componentDidMount() {
+    this.loadData()
   }
   fontload = async () =>{
     await Font.loadAsync({
@@ -104,45 +106,12 @@ export default class VentasMain extends React.Component {
     });
     this.setState({ isReady: true });
   }
-  setSelection(id,selected,item){
-    if(selected === true){
-      if(item.id===id)
-        this.state.articulosSelected.push(item)
-    }else {
-      let newArray = this.state.articulosSelected.filter(element=>element!==item)
-      this.setState({
-        articulosSelected:newArray
-      })
-    }
-  }
-  setQuantity(id,value){
-    this.state.articulos.map(articulo=>{
-      if(value > 0 && articulo.id === id){
-        articulo.quantitySelected = value
-      }
-    })
-  }
   _hideModal = () => this.setState({ visible: false });
-  ventasMain(){
-    this.setState({
-      product:false
-    })
+  setArticulos = () => {
+    console.log("articulos")
   }
-
-
-  CantidadProducto = () =>{
-
-
-
-
-  }
-
-
-
-
   render() {
-    console.log(this.state.QuantityValue);
-    const { visible, isCash, isCard , product, searchQuery, checked } = this.state;
+    const { visible, isCash, isCard , product, searchQuery, categorias, articulos } = this.state;
     if (!this.state.isReady) {
       return (
       <Container>
@@ -174,45 +143,48 @@ export default class VentasMain extends React.Component {
         </Header>
       <Content>
         <Card style={{height:windowHeight * 0.6536}}>
-          <List>
           <ScrollView>
-            <ListItem thumbnail>
-              {/* <Left>
-                  <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
-              </Left>
-              <Body>  
-                <Text>Barbie Holiday Castaña 2018</Text>     
-                <Text note numberOfLines={1}>Cant: 9999</Text>
-              </Body>
-              <Right>
-              <Text note numberOfLines={1}>RD$ 3,400.00</Text>
-              </Right>
-              <Right>  
-                <TouchableOpacity>     
-                  <Icon name="close"/>
-                </TouchableOpacity>  
-              </Right> */}
-            </ListItem>
-            <ListItem thumbnail>
-              {/* <Left>
-                  <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
-              </Left>
-              <Body>  
-                <Text>Barbie Holiday Castaña 2018</Text>     
-                <Text note numberOfLines={1}>Cant: 9999</Text>
-              </Body>
-              <Right>
-              <Text note numberOfLines={1}>RD$ 3,400.00</Text>
-              </Right>
-              <Right>  
-                <TouchableOpacity>     
-                  <Icon name="close"/>
-                </TouchableOpacity>  
-              </Right> */}
-            </ListItem>
-            </ScrollView>
-          </List>
-        </Card>
+            {categorias.map(element => (
+              articulos.map(item=>(
+              item.selected === true &&(  
+              <ListItem thumbnail>
+                  <Left>
+                    <Checkbox
+                      style={{marginRight:6}}
+                      value={this.state.checked}
+                      onChange={(selected) => {item.selected = selected}}
+                    />
+                  </Left>
+                  <Left>
+                      <Thumbnail circle source={{ 
+                        uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' 
+                      }} />
+                  </Left>
+                  <Body>  
+                    <Text>{item.NombreArticulo}</Text>     
+                    <Text note numberOfLines={1}>Disponibles: {item.CantidadExistencia}</Text>
+                    <Text note numberOfLines={1}>Precio: RD$ {item.PrecioVenta}.00</Text>
+                  </Body>
+                  <Right>
+                  <NumericInput
+                      totalWidth={80} 
+                      totalHeight={40}
+                      valueType={'real'}
+                      disable={true}
+                      minValue={0}
+                      onChange={(quantity) => {
+                        item.quantitySelected = quantity, 
+                        item.pricePerArticle = (item.quantitySelected * item.PrecioVenta),
+                        item.quantityLeft = item.CantidadExistencia - quantity
+                      }}
+                      rounded 
+                    />
+                  </Right>
+                </ListItem>)
+                ))
+              ))}
+              </ScrollView>
+          </Card>
         <Card>
             <CardItem>
               <Body>
@@ -258,70 +230,76 @@ export default class VentasMain extends React.Component {
           </FooterTab>
         </Footer>
       </Content>
-      <Modal  visible={product}>
-      <Container>
-        <Header hasTabs>
-          <Left>
-            <Button
-              onPress={()=>this.setState({
-                product:false
-              })}
-             transparent>
-              <Icon name='arrow-back' /> 
-            </Button>
-          </Left>
-          <Body>
-            <Title style={{fontSize:20}}>Escoger Articulos</Title>
-          </Body>
-        </Header>
-        <Searchbar
-            placeholder="Buscar por Código/Artículo"
-            onChangeText={this._onChangeSearch}
-            value={searchQuery}  
-        />
-        <Tabs renderTabBar={() => <ScrollableTab/>}>
-        {this.state.categorias.map(element => (
-          <Tab heading={
-            <TabHeading><Text>{element}</Text></TabHeading>
-          }>
-          {this.state.articulos.map(item=>(
-          item.NombreCategoria === element &&(  
-          <ListItem thumbnail>
+      <Modal visible={product}>
+          <Container>
+            <Header hasTabs>
               <Left>
-              <View>
-              <Checkbox 
-                    style={{marginRight: windowWidth * 0.02}}
-                    color="#3F51B5"
-                    onChange={(selected)=> {this.setSelection(item.id,selected,item)}}    
-                    initialValue={item.selected}          
-                  />
-                  </View>
+                <Button
+                  onPress={()=>this.setState({
+                    product:false
+                  })}
+                transparent>
+                  <Icon name='arrow-back' /> 
+                </Button>
               </Left>
-              <Left>
-                  <Thumbnail circle source={{ uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' }} />
-              </Left>
-              <Body>  
-                <Text>{item.NombreArticulo}</Text>     
-                <Text note numberOfLines={1}>Disponibles: {item.CantidadExistencia}</Text>
-                <Text note numberOfLines={1}>Precio: RD$ {item.PrecioVenta}.00</Text>
+              <Body>
+                <Title style={{fontSize:20}}>Escoger Articulos</Title>
               </Body>
-              <Right>
-              <NumericInput
-                  totalWidth={80} 
-                  totalHeight={40}
-                  valueType={'real'}
-                  disable={true}
-                  minValue={0}
-                  onChange={(value)=>{this.setQuantity(item.id,value)}}
-                  rounded 
-                />
-              </Right>
-            </ListItem>)
-            ))}
-          </Tab>
-          ))}
-        </Tabs>
-      </Container>
+            </Header>
+            <Searchbar
+                placeholder="Buscar por Código/Artículo"
+                onChangeText={this._onChangeSearch}
+                value={searchQuery}  
+            />
+            <Tabs renderTabBar={() => <ScrollableTab/>}>
+            {this.state.categorias.map(element => (
+              <Tab heading={
+                <TabHeading><Text>{element}</Text></TabHeading>
+              }>
+              {articulos.map(item=>(
+              item.NombreCategoria === element &&(  
+              <ListItem thumbnail>
+                  <Left>
+                    <Checkbox
+                      style={{marginRight:6}}
+                      value={this.state.checked}
+                      onChange={(selected) => {item.selected = selected}}
+                    />
+                  </Left>
+                  <Left>
+                      <Thumbnail circle source={{ 
+                        uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' 
+                      }} />
+                  </Left>
+                  <Body>  
+                    <Text>{item.NombreArticulo}</Text>     
+                    <Text note numberOfLines={1}>Disponibles: {item.CantidadExistencia}</Text>
+                    <Text note numberOfLines={1}>Precio: RD$ {item.PrecioVenta}.00</Text>
+                  </Body>
+                  <Right>
+                  <NumericInput
+                      totalWidth={80} 
+                      totalHeight={40}
+                      valueType={'real'}
+                      disable={true}
+                      minValue={0}
+                      onChange={(quantity) => {
+                        item.quantitySelected = quantity, 
+                        item.pricePerArticle = (item.quantitySelected * item.PrecioVenta),
+                        item.quantityLeft = item.CantidadExistencia - quantity
+                      }}
+                      rounded 
+                    />
+                  </Right>
+                </ListItem>)
+                ))}
+              </Tab>
+              ))}
+            </Tabs>
+            <Button block>
+            <Text onPress={()=>{this.setArticulos()}}>Agregar a Factura</Text>
+          </Button>
+          </Container>
       </Modal>
       <Modal visible={visible}>
       <Header>

@@ -36,8 +36,8 @@ const windowHeight = Dimensions.get('window').height;
         loading:false
           };
   componentDidMount(){
-    const item =  AsyncStorage.getItem('LoggedUser');
-
+    //const item =  AsyncStorage.getItem('LoggedUser');
+    // this.Deletekey()
     this.verifyLog()
     const fecha  = new Date();
     const date = fecha.toString().split(' ')
@@ -139,6 +139,7 @@ CerrarModal = () =>{
 Deletekey = async() =>{
     try{
         await AsyncStorage.removeItem('LoggedUser');
+        await AsyncStorage.removeItem('CashierOpen');
     }
     catch(ex){
         console.log(ex);
@@ -351,15 +352,18 @@ try{
             this.setState({
                 PIN: UserJasonStringy.PIN   
             })  
+            console.log('checking')
             const addAsync = await AsyncStorage.setItem('LoggedUser', UserJasonStringy)
             const getCashierStatus = await AsyncStorage.getItem('CashierOpen');
             console.log(getCashierStatus,'Check?');
             if(getCashierStatus=== null){
+                this.setState({loading:false})
                 this.setState({ModalCajaVisibility:true})
+            } 
+            else{
+                this.props.navigation.navigate("Home")
             }
-            this.props.navigation.navigate("Home")
-        }
-            else {
+        }else {
                 // this.props.navigation.navigate('Home');
                 const getCashierStatus = await AsyncStorage.getItem('CashierOpen');
                 console.log(getCashierStatus,'Check?');
