@@ -60,7 +60,6 @@ export default class VentasMain extends React.Component {
         },
     }
     this._hideModal =  this._hideModal.bind(this);
-    this.setArticulos =  this.setArticulos.bind(this);
     this.goBack = this.goBack.bind(this);
   }
   goBack(){
@@ -70,38 +69,38 @@ export default class VentasMain extends React.Component {
     
   }
 
-   loadData =  async() =>{
-     const sql = `SELECT Categorias.id as id ,Articulos.id as idArticulo, Articulos.NombreArticulo as NombreArticulo,
-   Categorias.NombreCategoria as NombreCategoria , Articulos.DescripcionPantalla as DescripcionPantalla,
-   Articulos.PrecioVenta as PrecioVenta, 
-   Articulos.CatidadExistencia as CantidadExistencia  
-   from Categorias inner join Articulos on Categorias.id = Articulos.CategoriaId limit 15`
-  const params = []
-  const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-  databaseLayer.executeSql(sql, params).then(({ rows }) => {
-    let arrayArticulos = []
-    rows.map(item=>{
-      let articulos = {   
-        CantidadExistencia: item.CantidadExistencia,
-        DescripcionPantalla: item.DescripcionPantalla,
-        NombreArticulo: item.NombreArticulo,
-        NombreCategoria: item.NombreCategoria,
-        PrecioVenta: item.PrecioVenta,
-        id: item.idArticulo,
-        selected:false,
-        quantitySelected:0,
-        pricePerArticle:0
-      }
-      arrayArticulos.push(articulos) 
-    })
+  loadData =  async() =>{
+    const sql = `SELECT Categorias.id as id ,Articulos.id as idArticulo, Articulos.NombreArticulo as NombreArticulo,
+    Categorias.NombreCategoria as NombreCategoria , Articulos.DescripcionPantalla as DescripcionPantalla,
+    Articulos.PrecioVenta as PrecioVenta, 
+    Articulos.CatidadExistencia as CantidadExistencia  
+    from Categorias inner join Articulos on Categorias.id = Articulos.CategoriaId limit 15`
+    const params = []
+    const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+    databaseLayer.executeSql(sql, params).then(({ rows }) => {
+      let arrayArticulos = []
+      rows.map(item=>{
+        let articulos = {   
+          CantidadExistencia: item.CantidadExistencia,
+          DescripcionPantalla: item.DescripcionPantalla,
+          NombreArticulo: item.NombreArticulo,
+          NombreCategoria: item.NombreCategoria,
+          PrecioVenta: item.PrecioVenta,
+          id: item.idArticulo,
+          selected:false,
+          quantitySelected:1,
+          pricePerArticle:item.PrecioVenta
+        }
+        arrayArticulos.push(articulos) 
+      })
+      this.setState({
+        articulos:arrayArticulos
+      })  
+    let categorias = [...new Set(rows.map(item => item.NombreCategoria))];
     this.setState({
-      articulos:arrayArticulos
-    })  
-  let categorias = [...new Set(rows.map(item => item.NombreCategoria))];
-  this.setState({
-      categorias  
+        categorias  
+      })
     })
-  })
     this.fontload();
   }
   componentDidMount(){
@@ -116,9 +115,9 @@ export default class VentasMain extends React.Component {
     this.setState({ isReady: true });
   }
   _hideModal = () => this.setState({ visible: false });
-  setArticulos = () => {
-    console.log("articulos")
-  }
+  // setArticulos = () => {
+  //   console.log("articulos")
+  // }
   render() {
     const { visible, isCash, isCard , product, searchQuery,articulos } = this.state;
     if (!this.state.isReady) {
@@ -269,7 +268,8 @@ export default class VentasMain extends React.Component {
                       totalHeight={40}
                       valueType={'real'}
                       disable={true}
-                      minValue={0}
+                      minValue={1}
+                      initValue={1}
                       onChange={(quantity) => {
                         item.quantitySelected = quantity, 
                         item.pricePerArticle = (item.quantitySelected * item.PrecioVenta),
