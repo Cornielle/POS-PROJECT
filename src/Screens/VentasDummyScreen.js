@@ -32,6 +32,8 @@ export default class VentasMain extends React.Component {
       searchQuery:'',
       loadingState:false,
       checked:false,
+      mainTotal:[],
+      articulos:[],
       articulosSelected: [],
       categorias:[],
       Articulo:{
@@ -59,6 +61,13 @@ export default class VentasMain extends React.Component {
     }
     this._hideModal =  this._hideModal.bind(this);
     this.setArticulos =  this.setArticulos.bind(this);
+    this.goBack = this.goBack.bind(this);
+  }
+  goBack(){
+    this.setState({
+      product:true
+    })
+    
   }
 
    loadData =  async() =>{
@@ -87,7 +96,7 @@ export default class VentasMain extends React.Component {
     })
     this.setState({
       articulos:arrayArticulos
-    }, this.state.articulos)  
+    })  
   let categorias = [...new Set(rows.map(item => item.NombreCategoria))];
   this.setState({
       categorias  
@@ -95,7 +104,7 @@ export default class VentasMain extends React.Component {
   })
     this.fontload();
   }
-  componentDidMount() {
+  componentDidMount(){
     this.loadData()
   }
   fontload = async () =>{
@@ -111,7 +120,7 @@ export default class VentasMain extends React.Component {
     console.log("articulos")
   }
   render() {
-    const { visible, isCash, isCard , product, searchQuery, categorias, articulos } = this.state;
+    const { visible, isCash, isCard , product, searchQuery,articulos } = this.state;
     if (!this.state.isReady) {
       return (
       <Container>
@@ -144,17 +153,9 @@ export default class VentasMain extends React.Component {
       <Content>
         <Card style={{height:windowHeight * 0.6536}}>
           <ScrollView>
-            {categorias.map(element => (
-              articulos.map(item=>(
+              {articulos.map(item=>(
               item.selected === true &&(  
               <ListItem thumbnail>
-                  <Left>
-                    <Checkbox
-                      style={{marginRight:6}}
-                      value={this.state.checked}
-                      onChange={(selected) => {item.selected = selected}}
-                    />
-                  </Left>
                   <Left>
                       <Thumbnail circle source={{ 
                         uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' 
@@ -162,26 +163,12 @@ export default class VentasMain extends React.Component {
                   </Left>
                   <Body>  
                     <Text>{item.NombreArticulo}</Text>     
-                    <Text note numberOfLines={1}>Disponibles: {item.CantidadExistencia}</Text>
-                    <Text note numberOfLines={1}>Precio: RD$ {item.PrecioVenta}.00</Text>
                   </Body>
                   <Right>
-                  <NumericInput
-                      totalWidth={80} 
-                      totalHeight={40}
-                      valueType={'real'}
-                      disable={true}
-                      minValue={0}
-                      onChange={(quantity) => {
-                        item.quantitySelected = quantity, 
-                        item.pricePerArticle = (item.quantitySelected * item.PrecioVenta),
-                        item.quantityLeft = item.CantidadExistencia - quantity
-                      }}
-                      rounded 
-                    />
+                    <Text note numberOfLines={1}>Cantidad: {item.quantitySelected}</Text>
+                    <Text note numberOfLines={1}>Precio: RD$ {item.pricePerArticle}</Text>
                   </Right>
                 </ListItem>)
-                ))
               ))}
               </ScrollView>
           </Card>
@@ -200,7 +187,7 @@ export default class VentasMain extends React.Component {
               </Body>        
               <Body>
                 <Text style={{ fontSize:14,paddingLeft:windowWidth * 0.004}} note numberOfLines={1}>
-                 RD$ 1,500.00
+                    {}
                 </Text>
                 <Text style={{ fontSize:14, paddingLeft:windowWidth * 0.004}} note numberOfLines={1}>
                  RD$ 500.00
@@ -214,9 +201,7 @@ export default class VentasMain extends React.Component {
             <Footer>
           <FooterTab>
             <Button vertical
-              onPress={()=>this.setState({
-                product:true
-              })}>
+              onPress={()=>this.goBack()}>
               <Icon name="basket" />
               <Text>Articulos</Text>
             </Button>
@@ -263,7 +248,9 @@ export default class VentasMain extends React.Component {
                     <Checkbox
                       style={{marginRight:6}}
                       value={this.state.checked}
-                      onChange={(selected) => {item.selected = selected}}
+                      onChange={(selected) => {
+                        item.selected = selected
+                      }}
                     />
                   </Left>
                   <Left>
@@ -296,9 +283,6 @@ export default class VentasMain extends React.Component {
               </Tab>
               ))}
             </Tabs>
-            <Button block>
-            <Text onPress={()=>{this.setArticulos()}}>Agregar a Factura</Text>
-          </Button>
           </Container>
       </Modal>
       <Modal visible={visible}>
