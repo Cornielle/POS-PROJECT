@@ -4,7 +4,7 @@ export const categories = [
     id: 3,
     name: 'Artículos',
     photo_url:
-    'img/cart.jpg'
+    'https://cdn.pixabay.com/photo/2020/04/19/20/49/typewriter-5065594_1280.jpg'
   },
   {
     id: 1,

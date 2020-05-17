@@ -25,7 +25,8 @@ export default class CategoriesScreen extends React.Component {
   renderCategory = ({ item }) => (
     <TouchableHighlight underlayColor='rgba(73,182,77,1,0.9)' onPress={() => this.onPressCategory(item)}>
       <View style={styles.categoriesItemContainer}>
-        <Image style={styles.categoriesPhoto} source={require('../img/cart.png')} />
+        {/* <Image style={styles.categoriesPhoto} source={require('../img/cart.png')} /> */}
+        <Image style={styles.categoriesPhoto} source={{uri:item.photo_url}} />
         <Text style={styles.categoriesName}>{item.name}</Text>
       </View>
     </TouchableHighlight>
@@ -48,15 +49,12 @@ const styles = StyleSheet.create({
       margin: 10,
       justifyContent: 'center',
       alignItems: 'center',
-      height: 215,
+      height: 75,
       borderColor: '#cccccc',
-      borderWidth: 0.5,
-      borderRadius: 20,
     },
     categoriesPhoto: {
       width: '100%',
-      height: 155,
-      borderRadius: 20,
+      height: 75,
       borderBottomLeftRadius: 0,
       borderBottomRightRadius: 0,
       shadowColor: 'blue',
