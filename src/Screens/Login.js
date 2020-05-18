@@ -37,12 +37,15 @@ const windowHeight = Dimensions.get('window').height;
           };
   componentDidMount(){
     //const item =  AsyncStorage.getItem('LoggedUser');
-    // this.Deletekey()
+  //this.Deletekey()
     this.verifyLog()
+
+   // RolMenu.createTable()
     const fecha  = new Date();
     const date = fecha.toString().split(' ')
     this.setState({FechaApertura:`${date[2]}/${date[1]}/${date[3]}` })
     this.LoadAllData();
+
 } 
 LoadAllData = async () =>{
 Caja.createTable();
