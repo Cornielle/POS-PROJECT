@@ -1,4 +1,4 @@
- import React from 'react';
+import React from 'react';
 import { TextInput, Avatar, Button, Card, RadioButton  } from 'react-native-paper';
 import { StyleSheet, Text, View, ScrollView, Picker,Alert,  ToastAndroid } from 'react-native';
 import {Block} from 'galio-framework'
@@ -54,11 +54,10 @@ export default class Register extends React.Component{
         APELLIDO:"",
         NOMBREUSUARIO:"",
         TELEFONO:"",
-        CONTRASENA:"",
-        CONTRASENA2:"",
+
         TIPOIDENTIFICACION:"Cedula",
         IDENTIFICACION:"",
-        CORREO:"",
+ 
         ROL:"",
         PIN:0,
         PIN2:0,
@@ -70,6 +69,9 @@ export default class Register extends React.Component{
 
  LoadData = async () =>{
 
+
+    Empleados.createTable();
+    /*
     const sqlStock = 'SELECT name FROM sqlite_master WHERE type = "table"'
     const paramsStock = [];
     const databaseLayerStock = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
@@ -77,6 +79,16 @@ export default class Register extends React.Component{
 
      console.log(rows)
     } ) 
+*/
+
+
+const sqlStock = 'SELECT * from Empleados'
+const paramsStock = [];
+const databaseLayerStock = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+databaseLayerStock.executeSql(sqlStock,paramsStock).then(  ({ rows }) => {
+
+ console.log(rows)
+} ) 
 
     var options  ={
 
@@ -154,14 +166,7 @@ export default class Register extends React.Component{
                                 value={this.state.APELLIDO}
                                 onChangeText={(APELLIDO) => this.setState({ APELLIDO })}
                             />
-                            <Text>{"\n"}</Text>
-                            <TextInput
-                                style={styles.Input}
-                                mode='flat'
-                                label='Nombre Usuario'
-                                value={this.state.NOMBREUSUARIO}
-                                onChangeText={(NOMBREUSUARIO) => this.setState({ NOMBREUSUARIO })}
-                            />
+                        
                             <Text>{"\n"}</Text>
                             <TextInput
                                 style={styles.Input}
@@ -201,32 +206,8 @@ export default class Register extends React.Component{
                                 onChangeText={IDENTIFICACION => this.setState({ IDENTIFICACION })}
                             />
                             <Block row style={{paddingBotton:normalize(15)}} />
-                            <Text>{"\n"}</Text>
-
-                            <TextInput
-                                style={styles.Input}
-                                mode='flat'
-                                label='Correo'
-                                value={this.state.CORREO}
-                                onChangeText={(CORREO) => this.setState({ CORREO })}
-                            />
-                            <Text>{"\n"}</Text>
-
-                            <TextInput
-                                style={styles.Input}
-                                mode='flat'
-                                label='Contraseña'
-                                value={this.state.CONTRASENA}
-                                onChangeText={CONTRASENA => this.setState({ CONTRASENA })}
-                            />
-                            <Text>{"\n"}</Text>
-                            <TextInput
-                                style={styles.Input}
-                                mode='flat'
-                                label='Repetir contraseña'
-                                value={this.state.CONTRASENA2}
-                                onChangeText={CONTRASENA2 => this.setState({ CONTRASENA2 })}
-                            />
+                         
+                         
                             <Text>{"\n"}</Text>
                             <TextInput
                                 style={styles.Input}
@@ -235,6 +216,7 @@ export default class Register extends React.Component{
                                 placeholder={'****'}
                                 value={this.state.PIN}
                                 onChangeText={PIN => this.setState({ PIN })}
+                                keyboardType="numeric"
                             />
                             <Text>{"\n"}</Text>
                             <TextInput
@@ -244,6 +226,7 @@ export default class Register extends React.Component{
                                 placeholder={'****'}
                                 value={this.state.PIN2}
                                 onChangeText={PIN2 => this.setState({ PIN2 })}
+                                keyboardType="numeric"
                             />
                             <Text>{"\n"}</Text>
                             <Text>Seleccionar un rol:</Text>
@@ -292,7 +275,7 @@ export default class Register extends React.Component{
 
  GuardarEmpleado = async ()=>{
 try{
-
+/*
     const sql = 'SELECT * FROM Empleados where NombreUsuario =? or Identificacion =?'
     const params = [this.state.NOMBREUSUARIO, this.state.IDENTIFICACION]
     const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
@@ -314,7 +297,7 @@ if(this.state.ExistenDatos){
 Alert.alert("ya existen datos");
 return;
 }
-
+*/
     
     if(this.state.NOMBRE ===""){
         Alert.alert("El campo nombre no puede estar vacio.");
@@ -326,45 +309,30 @@ return;
             return;
         }
 
-        if(this.state.TELEFONO ===""){
-            Alert.alert("El campo Telefono no puede estar vacio.");
-            return;
-        }
-        
-        if(this.state.IDENTIFICACION===""){
-       Alert.alert("El campo identificacion no puede estar vacio.");
-       return;
-           }
-
         if(this.state.PIN !== this.state.PIN2){      
             Alert.alert("EL PIN no es el mismo");
             return;
         }
 
-        if(this.state.CONTRASENA !== this.state.CONTRASENA2){
-              
-            Alert.alert("La contraseña de verificacion no coinciden");
-            return;
-        }
+    
 
    // this.Validaciones();
 
 const create  = Empleados.createTable();
 
  
+const username = (this.state.NOMBRE+this.state.APELLIDO).toLocaleLowerCase();
 const fecha = new Date();
 const valInsert={
 
     NombrePersona:this.state.NOMBRE, 
     ApellidoPersona:this.state.APELLIDO,
-    NombreUsuario: this.state.NOMBREUSUARIO,
+    NombreUsuario: (this.state.NOMBRE + this.state.APELLIDO).toLocaleLowerCase(),
     Telefono:this.state.TELEFONO,
     TipoIdentificacion:this.state.TIPOIDENTIFICACION,
     Identificacion:this.state.IDENTIFICACION,
     Rol:this.state.Rol,
     IdEmpresa:1,
-    Correo: this.state.CORREO,
-    Contrasena:this.state.CONTRASENA,
     Activo:1,
     FechaCreacion: fecha.toString(),
     FechaModificacion:"null",
@@ -432,3 +400,9 @@ Validaciones = ()=>{
             color:'#ffffff',
         }
     })
+
+
+
+
+
+

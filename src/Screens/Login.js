@@ -36,16 +36,16 @@ const windowHeight = Dimensions.get('window').height;
         loading:false
           };
   componentDidMount(){
+   
+    //Empleados.dropTable();
+      //Empleados.createTable();
     //const item =  AsyncStorage.getItem('LoggedUser');
-  //this.Deletekey()
+    // this.Deletekey()
     this.verifyLog()
-
-   // RolMenu.createTable()
     const fecha  = new Date();
     const date = fecha.toString().split(' ')
     this.setState({FechaApertura:`${date[2]}/${date[1]}/${date[3]}` })
     this.LoadAllData();
-
 } 
 LoadAllData = async () =>{
 Caja.createTable();
@@ -327,15 +327,15 @@ AbrirCaja = async () =>{
 GetLog = async () =>{
 try{
     const response  = await Empleados.findBy({
-        contrasena_eq:this.state.Contrasena,
-        NombreUsuario_eq:this.state.NombreUsuario
+        PIN_eq:this.state.Contrasena,
+        NombreUsuario_eq:this.state.NombreUsuario.toLocaleLowerCase()
     })
     if(response ===null || Object.keys(response).length <=0){
         alert("El usuario no existe o contraseña invalida");
     }
     else{
         this.setState({loading:true})
-        const {NombrePersona, NombreUsuario, Rol, Contrasena,PIN} = response
+        const {NombrePersona, NombreUsuario, Rol,PIN} = response
         const item = await AsyncStorage.getItem('LoggedUser');
         console.log(item)
         if(item === null){
@@ -350,7 +350,7 @@ try{
             }
             const Rmenu = await RolMenu.query(RmenuQuery);
             const UserJasonStringy =JSON.stringify({
-                Nombre:NombrePersona,Pass:Contrasena, Usuario:NombreUsuario,Rol:Rol, Menus:Rmenu,PIN:PIN
+                Nombre:NombrePersona, Usuario:NombreUsuario,Rol:Rol, Menus:Rmenu,PIN:PIN
             });
             this.setState({
                 PIN: UserJasonStringy.PIN   
