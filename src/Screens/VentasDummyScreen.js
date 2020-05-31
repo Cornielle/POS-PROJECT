@@ -341,7 +341,6 @@ export default class VentasMain extends React.Component {
           style={{
             marginTop: windowHeight * 0.08,
             backgroundColor:!isCard? '#6be585' : '#f9f9f9',
-            marginTop: windowHeight * 0.08,
             textAlign:'center',
             padding:25
         }}>

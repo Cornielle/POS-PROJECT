@@ -10,7 +10,6 @@ import Categorias from '../../Models/Categorias';
 import CategoriasField from '../Fields/Categorias'
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler';
 import ActionSheet from 'react-native-actionsheet';
-
 export default class CategoriasGridScreen extends React.Component{
     constructor(props) {
         super(props);
@@ -43,7 +42,7 @@ export default class CategoriasGridScreen extends React.Component{
         filterData:[],
         newData:'',
         text:'',
-        IdArticulo:"",
+        IdCategoria:"",
         editFields:false,
         Categoria:{
           id:0,
@@ -81,7 +80,8 @@ export default class CategoriasGridScreen extends React.Component{
     key: id,
     name:NombreCategoria,
     FechaCreacion:`${date[2]}/${date[1]}/${date[3]}` ,
-    HoraCreacion: date[4][0]+date[4][1] > 11 && date[4][0]+date[4][1] < 23 ? `${ date[4]}PM` :`${ date[4]}AM`,
+    HoraCreacion: date[4][0]+date[4][1] > 11 && date[4][0]+date[4][1] < 23 ? 
+    `${ date[4]}PM` :`${ date[4]}AM`,
     avatar_url:'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
     subtitle: ``,
     estado: Activo ?true: false
@@ -160,7 +160,7 @@ _makeAction(action){
   this.setState({modalTitle:''})
   switch(action){
     case 0:
-      this.FillArticulo(id)
+      this.FillCategoria(id)
       this.setState({
         modalTitle:'Detalles Categoria',
         editFields:true
@@ -173,7 +173,7 @@ _makeAction(action){
       this.stateCategories(id.key)
       break
     case 2:
-      this.FillArticulo(id)
+      this.FillCategoria(id)
       this.setState({
         modalTitle:'Editar Categoria',
         editFields:false
@@ -193,22 +193,27 @@ handleEnd = () => {
 }
 setModalVisible(visible) {
   this.setState({modalVisible: visible});
-    //To show the Bottom ActionSheetsfsff
     this.ActionSheet.show();
 }
 editField = (fieldValue, name) =>{
+
+  console.log(fieldValue,name)
     if(name==='NombreCategoria'){
       this.setState({NombreCategoria:fieldValue})
       this.state.Categoria.NombreCategoria = fieldValue 
     }
-    else if(name==='Codigo'){
-      this.setState({Codigo:fieldValue})
-      this.state.Articulo.Codigo = fieldValue
+    else if(name==='UsuarioCreacion'){
+      this.setState({UsuarioCreacion:fieldValue})
+      this.state.Categoria.UsuarioCreacion = fieldValue
     }
-    else if(name==='CodigoDeBarra'){
-      this.setState({CodigoDeBarra:fieldValue})
-      this.state.Articulo.CodigoDeBarra = fieldValue
-    } 
+    else if(name==='UsuarioModificacion'){
+      this.setState({UsuarioModificacion:fieldValue})
+      this.state.Categoria.UsuarioModificacion = fieldValue
+    }
+    else if(name==='Descripcion'){
+      this.setState({Descripcion:fieldValue})
+      this.state.Categoria.Descripcion = fieldValue
+    }  
 }
 render(){
 const {name, subtitle, navigation} = this.props
@@ -259,27 +264,27 @@ return(
             value={this.state.Categoria.NombreCategoria !==null ? this.state.Categoria.NombreCategoria : 'Cargando...'}
             disabled={editFields}
             editable={true}
-            onChangeText={(NombreCategoria)=> this.editField(NombreCategoria, 'NombreArticulo')}
+            onChangeText={(NombreCategoria)=> this.editField(NombreCategoria, 'NombreCategoria')}
             />
             {this.state.editFields &&
             <View>
-                  <TextInput
-              style={styles.Input}
-              mode='flat'
-              label='Usuario Creación'
-              value={this.state.Categoria.UsuarioCreacion !==null ? this.state.Categoria.UsuarioCreacion : 'Cargando...'}
-              disabled={editFields}
-              editable={true}
-              onChangeText={(UsuarioCreacion) => this.editField( UsuarioCreacion, 'UsuarioCreacion')}
+              <TextInput
+                style={styles.Input}
+                mode='flat'
+                label='Usuario Creación'
+                value={this.state.Categoria.UsuarioCreacion !==null ? this.state.Categoria.UsuarioCreacion : 'Cargando...'}
+                disabled={editFields}
+                editable={true}
+                onChangeText={(UsuarioCreacion) => this.editField( UsuarioCreacion, 'UsuarioCreacion')}
               />
-                  <TextInput
-              style={styles.Input}
-              mode='flat'
-              label='Usuario Modificación'
-              value={this.state.Categoria.UsuarioModificacion !==null ? this.state.Categoria.UsuarioModificacion : 'Cargando...'}
-              disabled={editFields}
-              editable={true}
-              onChangeText={(UsuarioModificacion) => this.editField( UsuarioModificacion,'UsuarioModificacion')}
+              <TextInput
+                style={styles.Input}
+                mode='flat'
+                label='Usuario Modificación'
+                value={this.state.Categoria.UsuarioModificacion !==null ? this.state.Categoria.UsuarioModificacion : 'Cargando...'}
+                disabled={editFields}
+                editable={true}
+                onChangeText={(UsuarioModificacion) => this.editField( UsuarioModificacion,'UsuarioModificacion')}
               />
             </View>
             }

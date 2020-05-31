@@ -36,8 +36,7 @@ const windowHeight = Dimensions.get('window').height;
         loading:false
           };
   componentDidMount(){
-    //const item =  AsyncStorage.getItem('LoggedUser');
-    // this.Deletekey()
+    const item =  AsyncStorage.getItem('LoggedUser');
     this.verifyLog()
     const fecha  = new Date();
     const date = fecha.toString().split(' ')

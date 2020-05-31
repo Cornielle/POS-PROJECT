@@ -16,7 +16,6 @@ import RolesScreen from './RolesScreen'
 import AccionesGridScreen  from '../GridScreen/AccionesGridScreen'
 import MenuGridScreen from '../GridScreen/MenuGridScreen'
 import UsersGridScreen from "../GridScreen/UsersGridScreen"
-import OpeningClosingGridScreen from "../GridScreen/OpeningClosingGridScreen"
 import RolesMenuScreen from "./RolesMenuSceen"
 import RolesGridScreen  from "../GridScreen/RolesGridScreen"
 import ArticulosGridScreen from "../GridScreen/ArticulosGridScreen";
@@ -25,6 +24,7 @@ import OptionScreen from "./OptionScreen"
 import ProovedoresGridScreen from "../GridScreen/ProveedoresGridScreen"
 import VentasGridScreen from "../GridScreen/VentasGridScreen";
 import VentasDummyScreen from "./VentasDummyScreen";
+import CloseCashierGridScreen from "../GridScreen/CloseCashierGridScreen"
 import test from "./VentasSelectScreen";
 //import Users from './Users'
 
@@ -61,6 +61,7 @@ export const UsersLogin =
 //         navigation={navigation} 
 //         name="Apertura/Cierre de Caja" 
 //     />
+export const CloseCashierManagement=({navigation}) => <CloseCashierGridScreen navigation={navigation} subtitle="Cierre de Caja" name="Cierre de Caja" />
 
 {/*Experimento Ventas Screen*/}
 export const VentasDummyManagement = ({navigation}) => <VentasDummyScreen navigation={navigation} subtitle="Ventas" name="Control de Ventas" />

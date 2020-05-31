@@ -8,7 +8,6 @@ import { View}  from 'react-native'
 import {
   UsersLogin,
   DashboardHome,
-  // OpeningClosingCash,
   SalesManagement,
   UsersManagement,
   InventoryManagement,
@@ -18,7 +17,7 @@ import {
   RolesManagement,
   AccionesManagement,
   MenuManagement,
-// ArticulosGreedManagemet,
+  CloseCashierManagement,
   RolesMenuManagement,
   RolesGridManagement,
   MenuAccionesManagement,
@@ -67,7 +66,7 @@ const DrawerNavigation = createDrawerNavigator({
       title:"Stock"
     }
   },
-  'Users':{
+  'Categorias':{
     screen: CategoryManagement,
     path:'./src/Component/',
     navigationOptions:{
@@ -104,7 +103,7 @@ const DrawerNavigation = createDrawerNavigator({
   //   title:'Ventas'
   //   }
   // },
-  'ventasdummy': {
+  'Ventas': {
     screen:VentasDummyManagement,
     navigationOptions:{
     title:'Ventas'
@@ -116,12 +115,12 @@ const DrawerNavigation = createDrawerNavigator({
       title: 'Inicio'
     }
   },
-  // "Roles Menu":{
-  //   screen: RolesMenuManagement,
-  //   navigationOptions:{
-  //   title:"Roles Menu"
-  //   }
-  // }, 
+  "Cierre de Caja":{
+    screen:   CloseCashierManagement,
+    navigationOptions:{
+    title:"Cierre de Caja"
+    }
+  },  
   // "Roles Grid":{
   //   screen:RolesGridManagement, 
   //   navigationOptions:{
@@ -203,3 +202,4 @@ export default createAppContainer(createSwitchNavigator({
   App:DrawerNavigation,
   Auth:AuthStack
 }))
+//CloseCashierGridScreen
