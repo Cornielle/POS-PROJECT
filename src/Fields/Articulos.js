@@ -213,7 +213,7 @@ onChangeText={(CatidadExistencia) => this.setState({CatidadExistencia:CatidadExi
                                      {
 
 this.state.Categorias.map(lol =>(
-    <Picker.Item label={lol.NombreCategoria.toString()} value={lol.id}  key={lol.id} />
+    <Picker.Item label={lol.NombreCategoria.toString()} value={lol.Id.toString()}  key={lol.Id.toString()} />
     ))
 }
 </Picker>

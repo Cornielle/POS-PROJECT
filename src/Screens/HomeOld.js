@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View,AsyncStorage , FlatList,,Alert, TouchableHighlight, Dimensions} from 'react-native';
+import { StyleSheet, Text, View,AsyncStorage , FlatList,Alert, TouchableHighlight, Dimensions} from 'react-native';
 import * as SQLite from "expo-sqlite"
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
 

@@ -10,14 +10,19 @@ Right, Button, Footer, FooterTab,Spinner, Tab, Tabs,TabHeading, ScrollableTab} f
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
+
 import Categorias from "../../Models/Categorias"
 import NumericInput from 'react-native-numeric-input'
 const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
+const windowHeight = Dimensions.get('window').height
+import Ventas from '../../Models/Ventas'
+import VentasDetalle from '../../Models/VentasDetalle'
+
 export default class VentasMain extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      MaxId:0,
       ListaCategorias:[],
       isReady: false,
       active: false,
@@ -74,7 +79,7 @@ export default class VentasMain extends React.Component {
     Categorias.NombreCategoria as NombreCategoria , Articulos.DescripcionPantalla as DescripcionPantalla,
     Articulos.PrecioVenta as PrecioVenta, 
     Articulos.CatidadExistencia as CantidadExistencia  
-    from Categorias inner join Articulos on Categorias.id = Articulos.CategoriaId limit 15`
+    from Categorias inner join Articulos on Categorias.id = Articulos.CategoriaId`
     const params = []
     const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
     databaseLayer.executeSql(sql, params).then(({ rows }) => {
@@ -104,8 +109,171 @@ export default class VentasMain extends React.Component {
     this.fontload();
   }
   componentDidMount(){
+
+    const sqlStock = 'SELECT name FROM sqlite_master WHERE type = "table"'
+const paramsStock = [];
+const databaseLayerStock = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+databaseLayerStock.executeSql(sqlStock,paramsStock).then(  ({ rows }) => {
+
+ console.log(rows)
+} ) 
     this.loadData()
+
+ //Ventas.dropTable();
+ Ventas.createTable();
+  VentasDetalle.createTable();
   }
+
+   Pagar = async () =>{
+
+
+
+try{
+
+
+  const SelectedProduct =[];
+
+  let total =0;
+
+ this.state.articulos.map(item=>{
+   if(item.selected=== true){
+
+total += (item.quantitySelected * item.PrecioVenta);
+SelectedProduct.push(item)
+   }
+
+
+
+
+
+ });
+
+ const fecha = new Date();
+ const ventasItem ={
+   PrecioNeto:total,
+   
+   PrecioTotal:total ,
+   DescuentoAplicado:"10",
+   Activo:1,
+   IdEmpresa:1,
+   IdSucursal:1,
+   FechaCreacion: fecha.toString(),
+   FechaModificacion:null,
+   UsuarioCreacion:"system",
+   UsuarioModificacion:null
+   
+  }
+  //console.log(ventasItem);
+ const ll = await Ventas.create(ventasItem)
+
+ //console.log(ll);
+
+/*
+ const sqlStock = "SELECT * FROM Ventas"
+const paramsStock = [1];
+const databaseLayerStock = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+databaseLayerStock.executeSql(sqlStock,paramsStock).then(  ({ rows }) => {
+
+ console.log(rows)
+} ) 
+
+*/
+
+
+const sql = `SELECT MAX(Id) as Max FROM Ventas`
+const params = []
+const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+databaseLayer.executeSql(sql, params).then(({ rows }) => {
+  let arrayArticulos = []
+  rows.map(item=>{
+    arrayArticulos.push(item) 
+  })
+  
+
+this.setState({
+  MaxId:arrayArticulos[0].Max
+}) 
+
+console.log("Ayoooo")
+},()=>{
+
+
+  console.log("erwrqwerqerqwer");
+  
+  })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+SelectedProduct.map(x =>{
+
+
+const VentasDetalleItem ={
+
+
+ IdArticulo:x.id,
+ PrecioArticulo:x.PrecioVenta,
+ Cantidad:{type:types.FLOAT, not_null:true},
+ IdAperturaCaja:1,
+ IdVenta:{type:types.INTEGER, not_null:true},
+ Activo:{type: types.INTEGER, not_null:true},
+ IdEmpresa:{type:types.INTEGER, not_null:true},
+ IdSucursal:{type:types.INTEGER, not_null:false},
+ FechaCreacion: {type: types.TEXT, not_null:true},
+ FechaModificacion:{type:types.TEXT, not_null:true},
+ UsuarioCreacion:{type:types.TEXT, not_null:true},
+ UsuarioModificacion:{type:types.TEXT, not_null:true}
+
+
+
+
+};
+
+
+
+
+
+
+});
+
+*/
+
+
+}
+
+catch(ex){
+
+console.log(ex);
+
+}
+
+
+
+
+
+   
+
+
+
+
+
+
+
+   }
+
+
   fontload = async () =>{
     await Font.loadAsync({
       Roboto: require('native-base/Fonts/Roboto.ttf'),
@@ -116,7 +284,7 @@ export default class VentasMain extends React.Component {
   }
   _hideModal = () => this.setState({ visible: false });
   // setArticulos = () => {
-  //   console.log("articulos")
+  //   console.lodg("articulos")
   // }
   render() {
     const { visible, isCash, isCard , product, searchQuery,articulos } = this.state;
@@ -349,6 +517,12 @@ export default class VentasMain extends React.Component {
           {" "}Tarjeta
         </Text>
       </TouchableOpacity> 
+
+      <Button Title="Pagar" onPress={this.Pagar}  >
+<Text>Pagar</Text>
+        </Button>
+
+     
       </View>
       </Modal>
     </Container>

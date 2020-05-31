@@ -8,6 +8,8 @@ import {
   StyleSheet
 } from 'react-native';
 import { categories } from '../Data/dataMenuArrays';
+import * as SQLite from "expo-sqlite"
+import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
 
 export default class CategoriesScreen extends React.Component {
   static navigationOptions = {
@@ -17,6 +19,21 @@ export default class CategoriesScreen extends React.Component {
     super(props);
     console.log(categories,'check')
   }
+
+
+componentDidMount(){
+
+  const sqlStock = "SELECT * FROM Caja WHERE Activo=?"
+  const paramsStock = [1];
+  const databaseLayerStock = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+  databaseLayerStock.executeSql(sqlStock,paramsStock).then(  ({ rows }) => {
+  
+   console.log(rows)
+  } ) 
+
+
+}
+
   onPressCategory = item => {
     const title = item.name;
     const category = item;

@@ -5,6 +5,8 @@ import { Header, Container, Left, Body, Icon, Title, Spinner, Content,
     ListItem, Thumbnail,Right } from 'native-base';
 import {Block} from 'galio-framework'
 import normalize from 'react-native-normalize';
+import * as SQLite from "expo-sqlite"
+import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Empleados from "../../Models/Empleados"
 import Roles from "../../Models/Roles"
@@ -22,7 +24,9 @@ const windowHeight = Dimensions.get('window').height;
         super(props);
       }
       state = { 
-          FechaApertura: "",
+  
+        CajaAperturaArray:[],
+        FechaApertura: "",
         NombreUsuario:"",
         Contrasena:"",
         successful:false,
@@ -36,19 +40,37 @@ const windowHeight = Dimensions.get('window').height;
         loading:false
           };
   componentDidMount(){
-   
-    //Empleados.dropTable();
-      //Empleados.createTable();
+  // Caja.dropTable();
+ //Caja.createTable();
+
     //const item =  AsyncStorage.getItem('LoggedUser');
-    // this.Deletekey()
+   //this.Deletekey()
+    this.VerifyCaja();
     this.verifyLog()
     const fecha  = new Date();
     const date = fecha.toString().split(' ')
     this.setState({FechaApertura:`${date[2]}/${date[1]}/${date[3]}` })
     this.LoadAllData();
+
+if(this.state.CajaAperturaArray[0]!== undefined || this.state.CajaAperturaArray[0]!== null){
+
+//console.log("esto es indefinido");
+
+}
+else{
+
+   // console.log(this.state.CajaAperturaArray[0])
+
+  //  this.state.IdAperturaActiva = this.state.CajaAperturaArray[0].Id
+
+
+
+}
+ 
+  
 } 
 LoadAllData = async () =>{
-Caja.createTable();
+//Caja.createTable();
 /*
 const sqlStock = 'SELECT name FROM sqlite_master WHERE type = "table"'
 const paramsStock = [];
@@ -59,7 +81,8 @@ databaseLayerStock.executeSql(sqlStock,paramsStock).then(  ({ rows }) => {
 } ) 
 */
 /*
-const sqlStock = "SELECT * FROM Caja WHERE Activo=?"
+
+const sqlStock = "SELECT * FROM Caja"
 const paramsStock = [1];
 const databaseLayerStock = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
 databaseLayerStock.executeSql(sqlStock,paramsStock).then(  ({ rows }) => {
@@ -92,17 +115,65 @@ databaseLayerStock.executeSql(sqlStock,paramsStock).then(  ({ rows }) => {
 } 
 
 
+ VerifyCaja = async() =>{
+    const sqlStock = "SELECT * FROM Caja WHERE Activo=?"
+    const paramsStock = [1];
+    const databaseLayerStock = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+    databaseLayerStock.executeSql(sqlStock,paramsStock).then(  ({ rows }) => {
+    
+let CajasCount=[];
+
+rows.map(item =>{
+
+
+    CajasCount.push(item);
+
+
+})
+
+
+this.setState({CajaAperturaArray:CajasCount})
+
+  
+    } ) 
+
+
+if (Object.keys(this.state.CajaAperturaArray).length <=1){
+
+Alert.alert("Error fatal en el proceso de caja, favor contactar a cobel technology")
+
+}
+    
+}
+
+ 
+
 verifyLog = async () =>{
 
 try{
    const item = await AsyncStorage.getItem('LoggedUser');
-   if(item !==null){
+
+
+
+ const Cajacount=  Object.keys(this.state.CajaAperturaArray).length;
+
+
+    
+
+        
+   if(item !==null && Cajacount===1){
     const JsonUsuario = JSON.parse(item);
     this.setState({
         NombreUsuario: JsonUsuario.Usuario,
         LockModalVisibility:true,
         Unlockpass:JsonUsuario.PIN
     })
+   }
+   else{
+
+Alert.alert("No hay caja activa");
+
+return;
    }
 
 }
@@ -117,10 +188,10 @@ console.log(ex)
 
 
 LogGoHome = () =>{
-    console.log("Entree")
+ 
     try{
-        console.log(this.state.Unlockpass, 'check navigation')  
-        console.log(this.state.LockModalPass, 'check this')     
+        //console.log(this.state.Unlockpass, 'check navigation')  
+      //  console.log(this.state.LockModalPass, 'check this')     
         if(this.state.Unlockpass === this.state.LockModalPass){
             this.setState({LockModalVisibility:false})
             this.props.navigation.navigate('Home');
@@ -310,12 +381,41 @@ AbrirCaja = async () =>{
         UsuarioCreacion:"system",
         UsuarioModificacion:null
     }
+  
     const response = await Caja.create(InsevCaja);
+    
     if (Object.keys(response).length <=0){
         Alert.alert("Error al insertar en la base de datos");
     }
     else{
         // ToastAndroid.show("Caja abierta satisfactoriamente",ToastAndroid.SHORT)
+
+ 
+       
+        const sqlStock = "SELECT MAX(Id) FROM Caja WHERE Activo=?"
+        const paramsStock = [1];
+        const databaseLayerStock = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+        databaseLayerStock.executeSql(sqlStock,paramsStock).then(  ({ rows }) => {
+        
+
+    
+ 
+    
+    console.log(rows);
+
+    
+    
+ 
+    
+    
+
+    
+      
+        } ) 
+    
+
+        console.log("Id here");
+
         const cashierOpen = await AsyncStorage.setItem('CashierOpen',JSON.stringify({cashier:true}));
         this.props.navigation.navigate("Home")
     }
@@ -337,7 +437,7 @@ try{
         this.setState({loading:true})
         const {NombrePersona, NombreUsuario, Rol,PIN} = response
         const item = await AsyncStorage.getItem('LoggedUser');
-        console.log(item)
+
         if(item === null){
             const rol  = await Roles.findBy({Id_eq:Rol})
             const RmenuQuery ={
@@ -349,16 +449,17 @@ try{
                 limit: 100
             }
             const Rmenu = await RolMenu.query(RmenuQuery);
+            
             const UserJasonStringy =JSON.stringify({
                 Nombre:NombrePersona, Usuario:NombreUsuario,Rol:Rol, Menus:Rmenu,PIN:PIN
             });
             this.setState({
                 PIN: UserJasonStringy.PIN   
             })  
-            console.log('checking')
+          console.log('lleguee hasta aqui')
             const addAsync = await AsyncStorage.setItem('LoggedUser', UserJasonStringy)
             const getCashierStatus = await AsyncStorage.getItem('CashierOpen');
-            console.log(getCashierStatus,'Check?');
+         //   console.log(getCashierStatus,'Check?');
             if(getCashierStatus=== null){
                 this.setState({loading:false})
                 this.setState({ModalCajaVisibility:true})
@@ -368,8 +469,10 @@ try{
             }
         }else {
                 // this.props.navigation.navigate('Home');
+
                 const getCashierStatus = await AsyncStorage.getItem('CashierOpen');
-                console.log(getCashierStatus,'Check?');
+                console.log(getCashierStatus,'Check? mera wow');
+             
                 this.setState({loading:false})
                 if(getCashierStatus=== null){
                     this.setState({ModalCajaVisibility:true})
