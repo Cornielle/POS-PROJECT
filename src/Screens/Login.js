@@ -44,7 +44,7 @@ const windowHeight = Dimensions.get('window').height;
  //Caja.createTable();
 
     //const item =  AsyncStorage.getItem('LoggedUser');
-   //this.Deletekey()
+  // this.Deletekey()
     this.VerifyCaja();
     this.verifyLog()
     const fecha  = new Date();

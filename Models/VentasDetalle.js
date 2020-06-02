@@ -25,7 +25,7 @@ static get database(){
     
     
     return{
-        id :{type:types.INTEGER, not_null:true},
+        id :{type:types.INTEGER, primary_key:true},
         IdArticulo:{type: types.INTEGER, not_null:true},
         PrecioArticulo:{type: types.FLOAT, not_null:true},
         Cantidad:{type:types.FLOAT, not_null:false},

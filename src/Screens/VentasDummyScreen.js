@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions,StyleSheet,Modal, View,Alert, AsyncStorage} from 'react-native';
+import { Dimensions,StyleSheet,Modal, View,Alert, AsyncStorage,ToastAndroid} from 'react-native';
 import * as SQLite from "expo-sqlite"
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
 import {TextInput,Searchbar, FAB} from 'react-native-paper';
@@ -74,6 +74,9 @@ export default class VentasMain extends React.Component {
     
   }
 
+
+
+
   loadData =  async() =>{
     const sql = `SELECT Categorias.id as id ,Articulos.id as idArticulo, Articulos.NombreArticulo as NombreArticulo,
     Categorias.NombreCategoria as NombreCategoria , Articulos.DescripcionPantalla as DescripcionPantalla,
@@ -108,6 +111,9 @@ export default class VentasMain extends React.Component {
     })
     this.fontload();
   }
+
+
+
   componentDidMount(){
 
     const sqlStock = 'SELECT name FROM sqlite_master WHERE type = "table"'
@@ -119,11 +125,64 @@ databaseLayerStock.executeSql(sqlStock,paramsStock).then(  ({ rows }) => {
 } ) 
     this.loadData()
 
- //Ventas.dropTable();
+  //  this.CargaUltimaVenta();
+ //Ventas.dropTable(); 
  Ventas.createTable();
+ //VentasDetalle.dropTable()
   VentasDetalle.createTable();
   }
 
+
+GuardarVentaDetalle = async(VentasDetalleItem) =>{
+
+  try{
+
+
+    console.log("entre a guardar a vendasdetalle");
+    const response =  await  VentasDetalle.create(VentasDetalleItem);
+
+  console.log(response) 
+  
+  
+
+  }
+  catch(ex){
+
+console.log(ex)
+
+  }
+
+}
+
+  CargaUltimaVenta =async ()=>{
+
+    const sql = `SELECT MAX(Id) as Max FROM Ventas`
+    const params = []
+    const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+    databaseLayer.executeSql(sql, params).then(({ rows }) => {
+      let arrayArticulos = []
+      rows.map(item=>{
+        arrayArticulos.push(item) 
+      })
+      
+    
+    this.setState({
+      MaxId:arrayArticulos[0].Max
+    }) 
+ 
+    console.log("10000")
+    }).then(r =>{
+
+
+      console.log("Last Id",this.state.MaxId)
+    });
+    
+
+    
+
+
+
+  }
    Pagar = async () =>{
 
 
@@ -194,61 +253,78 @@ this.setState({
   MaxId:arrayArticulos[0].Max
 }) 
 
-console.log("Ayoooo")
-},()=>{
+console.log("10000")
+}).then(r =>{
 
 
-  console.log("erwrqwerqerqwer");
+  console.log("Last Id",this.state.MaxId)
+
+  let VentasDetalleItem ={
+
+
+    IdArticulo:SelectedProduct[0].id,
+    PrecioArticulo:SelectedProduct[0].PrecioVenta,
+    Cantidad:SelectedProduct[0].quantitySelected,
+    IdAperturaCaja:1,
+    IdVenta:this.state.MaxId,
+    Activo:1,
+      IdEmpresa:1,
+      IdSucursal:1,
+      FechaCreacion: fecha.toString(),
+      FechaModificacion:null,
+      UsuarioCreacion:"system",
+      UsuarioModificacion:null
+   
+   
+   
+   
+   };
   
-  })
+  console.log(VentasDetalleItem)
+  
+   this.GuardarVentaDetalle(VentasDetalleItem);
+
+});
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+//SelectedProduct.map( x =>{
 
 /*
-SelectedProduct.map(x =>{
-
-
-const VentasDetalleItem ={
+let VentasDetalleItem ={
 
 
  IdArticulo:x.id,
  PrecioArticulo:x.PrecioVenta,
- Cantidad:{type:types.FLOAT, not_null:true},
+ Cantidad:x.quantitySelected,
  IdAperturaCaja:1,
- IdVenta:{type:types.INTEGER, not_null:true},
- Activo:{type: types.INTEGER, not_null:true},
- IdEmpresa:{type:types.INTEGER, not_null:true},
- IdSucursal:{type:types.INTEGER, not_null:false},
- FechaCreacion: {type: types.TEXT, not_null:true},
- FechaModificacion:{type:types.TEXT, not_null:true},
- UsuarioCreacion:{type:types.TEXT, not_null:true},
- UsuarioModificacion:{type:types.TEXT, not_null:true}
+ IdVenta:this.state.MaxId,
+ Activo:1,
+   IdEmpresa:1,
+   IdSucursal:1,
+   FechaCreacion: fecha.toString(),
+   FechaModificacion:null,
+   UsuarioCreacion:"system",
+   UsuarioModificacion:null
 
 
 
 
 };
-
-
-
-
-
-
-});
-
 */
+
+
+
+
+//});
+
+
+const sqlStock = "SELECT * FROM VentasDetalle"
+const paramsStock = [];
+const databaseLayerStock = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+databaseLayerStock.executeSql(sqlStock,paramsStock).then(  ({ rows }) => {
+
+ console.log(rows)
+} ) 
 
 
 }
