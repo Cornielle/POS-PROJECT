@@ -36,6 +36,7 @@ return{
     MontoSalidaDeCaja:{types: types.FLOAT, not_null:false},
     UsuarioCierreCaja:{types: types.FLOAT, not_null:false},
     FechaCierreAperturaCaja:{types: types.TEXT, not_null:false },
+   // EstadoCaja:{types:types.INTEGER, not_null:true},
     Activo:{type: types.INTEGER, not_null:true},
     IdEmpresa:{type:types.INTEGER, not_null:true},
     IdSucursal:{type:types.INTEGER, not_null:false},

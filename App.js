@@ -121,6 +121,12 @@ const DrawerNavigation = createDrawerNavigator({
     title:"Cierre de Caja"
     }
   },  
+  "Roles Menu":{
+   screen: RolesMenuManagement,
+    navigationOptions:{
+    title:"Roles Menu"
+    }
+   }, 
   // "Roles Grid":{
   //   screen:RolesGridManagement, 
   //   navigationOptions:{
@@ -146,7 +152,7 @@ navigationOptions:{
     }
   }
 })
-// export default createAppContainer(DrawerNavigation);
+ //export default createAppContainer(DrawerNavigation);
   
 /*
   'Control de Caja': {
@@ -182,6 +188,7 @@ navigationOptions:{
 });
 
 */
+
 const  navigationOptions = {
   title: 'Iniciar Sesión',
   headerTitleStyle:{textAlign:'center', color:'white'},
