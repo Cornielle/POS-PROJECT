@@ -17,7 +17,21 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height
 import Ventas from '../../Models/Ventas'
 import VentasDetalle from '../../Models/VentasDetalle'
-
+import { USBPrinter, NetPrinter, BLEPrinter } from 'react-native-printer';
+ 
+const design = `
+D0004           {<>}           Table #: A1
+------------------------------------------
+[ ] {Espresso}
+    - No sugar, Regular 9oz, Hot
+                              {H3} {R} x 1
+------------------------------------------
+[ ] Blueberry Cheesecake
+    - Slice
+                              {H3} {R} x 1
+ 
+{QR[Where are the aliens?]}
+`;
 export default class VentasMain extends React.Component {
   constructor(props) {
     super(props);
@@ -116,6 +130,9 @@ export default class VentasMain extends React.Component {
 
   componentDidMount(){
 
+    this.scan();
+    this.connectPrint();
+    this.printtest();
     const sqlStock = 'SELECT name FROM sqlite_master WHERE type = "table"'
 const paramsStock = [];
 const databaseLayerStock = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
@@ -183,12 +200,53 @@ console.log(ex)
 
 
   }
+
+  scan = async () =>{
+
+    BLEPrinter.init().then(() =>{
+      BLEPrinter.getDeviceList().then(print =>{
+       // console.log(print);
+       //console.log(print[0].inner_mac_address)
+  this.setState({MacAdd:print[0].inner_mac_address});
+  //console.log(this.state.MacAdd);
+      })
+    });
+  
+  
+  
+  
+  }
+  
+  connectPrint =async () =>{
+    const mac ="00:AA:11:BB:22:CC";
+    BLEPrinter.connectPrinter(mac).then(
+      (printer) => console.log(printer), 
+      error => console.log(error))
+  
+  
+  }
+  
+  
+  
+  printtest= () =>{
+  
+    BLEPrinter.printText(design);
+    BLEPrinter.printText("");
+    BLEPrinter.printText("");
+    BLEPrinter.printText("");
+    BLEPrinter.printText("");
+    BLEPrinter.printText("");
+    BLEPrinter.printText("");
+  }
+
+
    Pagar = async () =>{
 
 
 
 try{
-
+ 
+   
 
   const SelectedProduct =[];
 
@@ -283,7 +341,7 @@ console.log("10000")
   console.log(VentasDetalleItem)
   
    this.GuardarVentaDetalle(VentasDetalleItem);
-
+ 
 });
 
 

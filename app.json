@@ -25,10 +25,12 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
-	,
+    },
     "android": {
       "package": "com.yourcompany.posproject"
-    }
-  }
+    },
+    "entryPoint": "node_modules/expo/AppEntry.js"
+  },
+  "displayName": "POS-PROJECT",
+  "name": "POSPROJ"
 }

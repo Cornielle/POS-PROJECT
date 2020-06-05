@@ -163,15 +163,15 @@ console.log(this.state.ExistNombre);
             Comentario: this.state.Comentario, 
             Activo:1,
             IdEmpresa:1,
-            IdSucursal:0,
+            IdSucursal:1,
             FechaCreacion: fecha.toString(),
             FechaModificacion:null,
             UsuarioCreacion:"system",
             UsuarioModificacion:null
         }
     
-      //  console.log(ValInsert);
-        /*
+        console.log(ValInsert);
+        
        var response = await Roles.create(ValInsert);
 
        console.log(response)
@@ -186,7 +186,7 @@ ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
 
 this.setState(InitialState)
         }
-        */
+        
         
         
         }

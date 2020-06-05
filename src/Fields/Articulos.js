@@ -12,7 +12,7 @@ const InitialState ={
     Proveedores:[],
 
     Codigo: "",
-    CategoriaId: "",
+    CategoriaId: 0,
     Descripcion:"",
     DescripcionPantalla: "",
     NombreArticulo: "",
@@ -37,7 +37,7 @@ state={
 Proveedores:[],
 
 Codigo: "",
-CategoriaId: "",
+CategoriaId: 0,
 Descripcion:"",
 DescripcionPantalla: "",
 NombreArticulo: "",
@@ -87,6 +87,7 @@ console.log(rows, 'here');
     databaseLayer1.executeSql(sql1,params1).then(  ({ rows }) => {
         console.log(rows); 
     } )
+    
 
     /*
 
@@ -139,6 +140,7 @@ style={styles.Input}
 model='flat'
 label='Codigo'
 value={this.state.Codigo}
+keyboardType="numeric"
 onChangeText={(Codigo) =>this.setState({Codigo:Codigo})}
 />
 
@@ -174,6 +176,7 @@ onChangeText ={(NombreArticulo)=>this.setState({NombreArticulo:NombreArticulo})}
 style={styles.Input}
 model='flat'
 label='Codigo de barra'
+keyboardType="numeric"
 value={this.state.CodigoDeBarra}
 onChangeText={(CodigoDeBarra)=>this.setState({CodigoDeBarra:CodigoDeBarra})}
 
@@ -182,6 +185,7 @@ onChangeText={(CodigoDeBarra)=>this.setState({CodigoDeBarra:CodigoDeBarra})}
 style={styles.Input}
 model='flat'
 label='Precido de costo'
+keyboardType="numeric"
 value={this.state.PrecioCosto}
 onChangeText={(PrecioCosto) => this.setState({PrecioCosto:PrecioCosto})}
 
@@ -190,6 +194,7 @@ onChangeText={(PrecioCosto) => this.setState({PrecioCosto:PrecioCosto})}
 style={styles.Input}
 model='flat'
 label='Precio De Venta'
+keyboardType="numeric"
 value={this.state.PrecioVenta}
 onChangeText={(PrecioVenta) => this.setState({PrecioVenta:PrecioVenta})}
 />
@@ -198,6 +203,7 @@ onChangeText={(PrecioVenta) => this.setState({PrecioVenta:PrecioVenta})}
 style={styles.Input}
 model='flat'
 label='Cantidad Existencia'
+keyboardType="numeric"
 value={this.state.CatidadExistencia}
 onChangeText={(CatidadExistencia) => this.setState({CatidadExistencia:CatidadExistencia})}
 />
@@ -212,9 +218,13 @@ onChangeText={(CatidadExistencia) => this.setState({CatidadExistencia:CatidadExi
     }>
                                      {
 
-this.state.Categorias.map(lol =>(
-    <Picker.Item label={lol.NombreCategoria.toString()} value={lol.Id.toString()}  key={lol.Id.toString()} />
-    ))
+this.state.Categorias.map(cat =>(
+
+<Picker.Item label={cat.NombreCategoria.toString()} value={cat.id.toString()}  key={cat.id.toString()} />
+    )
+    
+  
+    )
 }
 </Picker>
 
@@ -227,8 +237,8 @@ this.state.Categorias.map(lol =>(
                                 }>
                                    {
 
-this.state.Proveedores.map(lol =>(
-    <Picker.Item label={lol.NombreProveedor.toString()} value={lol.id}  key={lol.id} />
+this.state.Proveedores.map(prob =>(
+    <Picker.Item label={prob.NombreProveedor.toString()} value={prob.id}  key={prob.id} />
     ))
                                    }
                             </Picker>
