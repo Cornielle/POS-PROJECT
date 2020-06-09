@@ -4,6 +4,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import React from 'react'
 import { View}  from 'react-native'
 
+
 //importando variable que continen la navegacion a los componentes
 import {
   UsersLogin,
@@ -151,6 +152,9 @@ navigationOptions:{
       title:"Proveedores"
     }
   }
+  
+},  {
+  initialRouteName: "Home"
 })
  export default createAppContainer(DrawerNavigation);
   

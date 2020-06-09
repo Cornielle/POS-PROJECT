@@ -132,10 +132,7 @@ db.executeSql("SELECT * FROM Empleados").then((resulst) =>{
     let row = resulst[0].rows.item(i);
     console.log(row)
   }
-
-
 })
-
 
               }).catch((error) =>{
                   console.log("Received error: ", error);

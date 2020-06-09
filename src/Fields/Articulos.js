@@ -4,9 +4,17 @@ import {StyleSheet, Text, View, ScrollView,Picker,Alert,ToastAndroid} from 'reac
 import {Block} from 'galio-framework'
 import normalize from 'react-native-normalize';
 import Header from  '../Components/Header'
-import * as SQLite from "expo-sqlite"
+//import * as SQLite from "expo-sqlite"
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
 import Articulos from '../../Models/Articulos'
+
+import  SQLite  from 'react-native-sqlite-storage';
+SQLite.DEBUG(true);
+SQLite.enablePromise(true);
+const database_name = "PuntoVenta.db";
+const database_version = "1.0";
+const database_displayname = "SQLite React Offline Database";
+const database_size = 200000;
 
 const InitialState ={
     Proveedores:[],
@@ -38,7 +46,6 @@ Proveedores:[],
 
 Codigo: "",
 CategoriaId: 0,
-Descripcion:"",
 DescripcionPantalla: "",
 NombreArticulo: "",
 CodigoDeBarra:"",
@@ -50,9 +57,103 @@ MedidaDeVenta:"",
 Categorias:[]
 }
 
+
+
+LoadData = async () =>{
+
+    let ProveedoresCollection=[];
+
+    let CategoriasCollection=[];
+      //  const sqlStock = 'SELECT name FROM sqlite_master WHERE type = "table"'
+    
+    let  ArticulosCollection=[];
+    
+        let db;
+        return new Promise((resolve) => {
+          console.log("Plugin integrity check ...");
+          SQLite.echoTest()
+.then(() => { SQLite.openDatabase(database_name,database_version,database_displayname,database_size).then(DB => {
+db = DB;console.log("Database OPEN");
+                  db.executeSql("SELECT rowid,NombreProveedor FROM Proveedores WHERE Activo =? ORDER BY rowid ASC"
+                  ,[1]).then((Results) => {
+                      console.log("Database is ready ... executing query ...");
+      console.log("Query completed");
+      var len = Results[0].rows.length;
+     // console.log(len)
+      for (let i = 0; i < len; i++) {
+        let row = Results[0].rows.item(i);
+        ProveedoresCollection.push(row);
+      }
+    console.log(ProveedoresCollection)
+    this.setState({Proveedores:ProveedoresCollection})
+    ProveedoresCollection=[]
+                  }).catch((error) =>{
+                      console.log("Received error: ", error);
+                      console.log("Database not yet ready ... populating data"); 
+                  });
+
+
+                  db.executeSql("SELECT * FROM Articulos"
+                  ,[]).then((Results) => {
+                      console.log("Database is ready ... executing query ...");
+      console.log("Query completed");
+      var len = Results[0].rows.length;
+     // console.log(len)
+      for (let i = 0; i < len; i++) {
+        let row = Results[0].rows.item(i);
+        ArticulosCollection.push(row);
+      }
+    console.log(ArticulosCollection)
+    this.setState({Roles:ArticulosCollection})
+    ArticulosCollection=[]
+                  }).catch((error) =>{
+                      console.log("Received error: ", error);
+                      console.log("Database not yet ready ... populating data"); 
+                  });
+
+
+                  db.executeSql("SELECT * FROM Categorias WHERE Activo =? ORDER BY rowid ASC"
+                  ,[1]).then((Results) => {
+                      console.log("Database is ready ... executing query ...");
+      console.log("Query completed");
+      var len = Results[0].rows.length;
+     // console.log(len)
+      for (let i = 0; i < len; i++) {
+        let row = Results[0].rows.item(i);
+        CategoriasCollection.push(row);
+      }
+    console.log(CategoriasCollection)
+    this.setState({Categorias:CategoriasCollection})
+    CategoriasCollection=[]
+                  }).catch((error) =>{
+                      console.log("Received error: ", error);
+                      console.log("Database not yet ready ... populating data"); 
+                  });
+
+
+                  resolve(db);
+                })
+                .catch(error => {
+                  console.log(error);
+                });
+            })
+            .catch(error => {
+              console.log("echoTest failed - plugin not functional");
+            });
+          });
+      
+        
+      
+           
+     }
+
+
 loadTable = async () => {
-//  Articulos.dropTable();
- Articulos.createTable();
+
+    this.LoadData();
+/*
+
+
     const sqlProvee = `SELECT id,NombreProveedor FROM Proveedores WHERE Activo =? ORDER BY id ASC`
     const paramsProvee = [1];
     const databaseLayerProvee = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
@@ -60,34 +161,81 @@ loadTable = async () => {
   this.setState({Proveedores:rows});
   //console.log(rows)
  } )  
+*/
+
 }
 
+SaveEmp(Model) {
+    console.log("")
+    console.log("")
+    console.log("/****************************************************************************/");
+    console.log("")
+    console.log("")
+    var fecha = new Date();
+    let db;
+    return new Promise((resolve) => {
+      console.log("Plugin integrity check ...");
+      SQLite.echoTest()
+        .then(() => {
+          console.log("Integrity check passed ...");
+          console.log("Opening database ...");
+          SQLite.openDatabase(
+            database_name,
+            database_version,       
+            database_displayname,
+            database_size
+          )
+
+            .then(DB => {
+              db = DB;
+              console.log("Database OPEN"); 
+
+      
+
+
+db.executeSql("INSERT INTO Articulos(Codigo,CategoriaId,DescripcionPantalla,NombreArticulo,CodigoDeBarra,PrecioCosto,PrecioVenta,ProveedoresId,MedidaDeVenta,Activo,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,UsuarioCreacion,UsuarioModificacion) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+              ,[Model.Codigo,Model.CategoriaId,Model.DescripcionPantalla,Model.NombreArticulo,
+                Model.CodigoDeBarra,Model.PrecioCosto,Model.PrecioVenta,Model.ProveedoresId,Model.MedidaDeVenta,Model.Activo,Model.IdEmpresa,Model.IdSucursal,
+                Model.FechaCreacion,Model.FechaModificacion,Model.UsuarioCreacion,Model.UsuarioModificacion]).then(() => {
+                  console.log("Database is ready ... executing query ...");
+                  ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
+
+db.executeSql("SELECT * FROM Articulos").then((resulst) =>{
+
+Console.log(resulst);
+
+/*
+  console.log("Query completed");
+  var len = resulst[0].rows.length;
+  console.log(len)
+  for (let i = 0; i < len; i++) {
+    let row = resulst[0].rows.item(i);
+    console.log(row)
+  }
+
+*/
+})
+
+
+}).catch((error) =>{
+
+});
+          
+            })
+            .catch(error => {
+              console.log(error);
+            });
+        })
+        .catch(error => {
+          console.log("echoTest failed - plugin not functional");
+        });
+      });
+  };
+
+
   componentDidMount(){   
-    // Articulos.dropTable();
+
 this.loadTable()
-    const sqlArticulos = 'SELECT * FROM Articulos'
-    const paramsArticulos = []
-    const databaseLayerArticulos = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-   databaseLayerArticulos.executeSql(sqlArticulos,paramsArticulos).then(  ({ rows }) => {
-
-console.log(rows, 'here');
-     
-    } )
-
-    const sql = 'SELECT * FROM Categorias'
-    const params = []
-    const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-    databaseLayer.executeSql(sql,params).then(({ rows }) => {
-        this.setState ({Categorias:rows}) ;
-       // console.log(rows);
-    })
-    const sql1 =  'SELECT name FROM sqlite_master WHERE type = "table"'
-    const params1 = []
-    const databaseLayer1 = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-    databaseLayer1.executeSql(sql1,params1).then(  ({ rows }) => {
-        console.log(rows); 
-    } )
-    
 
     /*
 
@@ -135,14 +283,7 @@ icon="account" />}
                         />
 
 <Card.Content>
-<TextInput 
-style={styles.Input}
-model='flat'
-label='Codigo'
-value={this.state.Codigo}
-keyboardType="numeric"
-onChangeText={(Codigo) =>this.setState({Codigo:Codigo})}
-/>
+
 
  <TextInput 
 style={styles.Input}
@@ -150,16 +291,6 @@ model='flat'
 label='Nombre a mostrar'
 value={this.state.DescripcionPantalla}
 onChangeText={(DescripcionPantalla) => this.setState({DescripcionPantalla:DescripcionPantalla})}
-
-
- />
-
-<TextInput 
-style={styles.Input}
-model='flat'
-label='Descripcion'
-value={this.state.Descripcion}
-onChangeText={(Descripcion) => this.setState({Descripcion:Descripcion})}
 
 
  />
@@ -220,7 +351,7 @@ onChangeText={(CatidadExistencia) => this.setState({CatidadExistencia:CatidadExi
 
 this.state.Categorias.map(cat =>(
 
-<Picker.Item label={cat.NombreCategoria.toString()} value={cat.id.toString()}  key={cat.id.toString()} />
+<Picker.Item label={cat.NombreCategoria.toString()} value={cat.rowid.toString()}  key={cat.rowid.toString()} />
     )
     
   
@@ -238,7 +369,7 @@ this.state.Categorias.map(cat =>(
                                    {
 
 this.state.Proveedores.map(prob =>(
-    <Picker.Item label={prob.NombreProveedor.toString()} value={prob.id}  key={prob.id} />
+    <Picker.Item label={prob.NombreProveedor.toString()} value={prob.rowid}  key={prob.rowid} />
     ))
                                    }
                             </Picker>
@@ -331,18 +462,16 @@ const fecha = new Date();
 
 
   // this.Validaciones();
-    const Insert ={
+    const Model ={
 
-        Codigo: this.state.Codigo,
+        Codigo: null,
         CategoriaId: this.state.CategoriaId,
-        Descripcion: this.state.Descripcion,
         DescripcionPantalla: this.state.DescripcionPantalla,
         NombreArticulo: this.state.NombreArticulo,
         CodigoDeBarra: this.state.CodigoDeBarra,
         PrecioCosto: this.state.PrecioCosto,
         PrecioVenta:this.state.PrecioVenta,
         ProveedoresId:this.state.ProveedoresId,
-        CatidadExistencia:this.state.CatidadExistencia,
         MedidaDeVenta:this.state.MedidaDeVenta,
         Activo:1,
         IdEmpresa:1,
@@ -355,25 +484,16 @@ const fecha = new Date();
     
     
     };
-    console.log(Insert);
+
 
 
     
-    const response = await  Articulos.create(Insert);
-
-    console.log(response);
-
-    if (Object.keys(response).length <=0){
-
-        Alert.alert("Error al insertar en la base de datos");
-        
-        }else{
 
 
-           ToastAndroid.show("Guardado Correctamente!", ToastAndroid.SHORT);
+
 
            this.setState(InitialState)
-      }
+  
 
 }   
 catch(ex){

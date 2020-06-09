@@ -5,9 +5,15 @@ import {Block} from 'galio-framework'
 import normalize from 'react-native-normalize';
 import Header from  '../Components/Header'
 import Categorias from '../../Models/Categorias'
-import * as SQLite from "expo-sqlite"
 import {BaseModel, types} from 'expo-sqlite-orm'
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
+import  SQLite  from 'react-native-sqlite-storage';
+SQLite.DEBUG(true);
+SQLite.enablePromise(true);
+const database_name = "PuntoVenta.db";
+const database_version = "1.0";
+const database_displayname = "SQLite React Offline Database";
+const database_size = 200000;
 
 const styles = StyleSheet.create({
     ViewStyle:{
@@ -31,7 +37,8 @@ const styles = StyleSheet.create({
 const InitialState ={
 
   NombreCategoria:"",
-Descripcion:""}
+Descripcion:""
+}
 
 export default class Categoria extends React.Component{
 
@@ -40,9 +47,118 @@ super(obj)
 
 }
 
+LoadData = async () =>{
+
+    let RolesCollection=[];
+      //  const sqlStock = 'SELECT name FROM sqlite_master WHERE type = "table"'
+    
+    
+    
+        let db;
+        return new Promise((resolve) => {
+          console.log("Plugin integrity check ...");
+          SQLite.echoTest()
+            .then(() => {
+              console.log("Integrity check passed ...");
+              console.log("Opening database ...");
+              SQLite.openDatabase(
+                database_name,
+                database_version,
+                database_displayname,
+                database_size
+              )
+                .then(DB => {
+                  db = DB;
+                  console.log("Database OPEN");
+                  db.executeSql("SELECT * FROM Categorias"
+                  ,[]).then((Results) => {
+                      console.log("Database is ready ... executing query ...");
+      console.log("Query completed");
+      var len = Results[0].rows.length;
+     // console.log(len)
+      for (let i = 0; i < len; i++) {
+        let row = Results[0].rows.item(i);
+        RolesCollection.push(row);
+      }
+    console.log(RolesCollection)
+    this.setState({Roles:RolesCollection})
+    RolesCollection=[]
+                  }).catch((error) =>{
+                      console.log("Received error: ", error);
+                      console.log("Database not yet ready ... populating data"); 
+                  });
+                  resolve(db);
+                })
+                .catch(error => {
+                  console.log(error);
+                });
+            })
+            .catch(error => {
+              console.log("echoTest failed - plugin not functional");
+            });
+          });
+      
+        
+      
+           
+     }
+
+
+
+     SaveCategoria(Model) {
+        console.log("")
+        console.log("")
+        console.log("/****************************************************************************/");
+        console.log("")
+        console.log("")
+        var fecha = new Date();
+        let db;
+        return new Promise((resolve) => {
+          console.log("Plugin integrity check ...");
+          SQLite.echoTest()
+            .then(() => {
+              console.log("Integrity check passed ...");
+              console.log("Opening database ...");
+              SQLite.openDatabase(
+                database_name,
+                database_version,       
+                database_displayname,
+                database_size
+              )
+    
+                .then(DB => {
+                  db = DB;
+                  console.log("Database OPEN"); 
+                  db.executeSql("INSERT INTO Categorias(NombreCategoria,Descripcion,Activo,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,UsuarioCreacion,UsuarioModificacion) VALUES (?,?,?,?,?,?,?,?,?)"
+                  ,[Model.NombreCategoria,Model.Descripcion,Model.Activo,Model.IdEmpresa,Model.IdSucursal,
+                    Model.FechaCreacion,Model.FechaModificacion,Model.UsuarioCreacion,Model.UsuarioModificacion]).then(() => {
+                      console.log("Database is ready ... executing query ...");
+
+                      ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
+    
+
+    
+    
+    }).catch((error) =>{
+    
+    });
+              
+                })
+                .catch(error => {
+                  console.log(error);
+                });
+            })
+            .catch(error => {
+              console.log("echoTest failed - plugin not functional");
+            });
+          });
+      };
+    
+
 
  async componentDidMount(){
     //  Categorias.dropTable();
+    /*
 const Created = await Categorias.createTable();
 
 
@@ -53,10 +169,10 @@ const sql = 'SELECT * FROM Categorias where NombreCategoria = ?'
 
 const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
 databaseLayer.executeSql(sql,params).then(respon =>{console.log(respon)})
+*/
 
 
-
-
+this.LoadData();
 
  }
 
@@ -147,46 +263,31 @@ Descripcion:""
     }
 
     GuardarCategoria = async () =>{
-  
-        const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-        databaseLayer.executeSql(
-          "SELECT * FROM Categorias where NombreCategoria = 'Adicionales'"
-          ).then(respon =>{
-                         
-            if(Object.keys(respon).length <=0){
 
-                Alert.alert(`Ya existe  ${this.state.NombreCategoria} en la base de datos`);
-               return;
-
-            }
-          
-        })
-        
         try{
             const fecha = new Date();
-            const ValInsert = {
+            const Model = {
                 NombreCategoria: this.state.NombreCategoria,
                 Descripcion: this.state.Descripcion,
                 Activo:1,
                 FechaCreacion: fecha.toString(),
-                FechaModificacion:"null",
+                FechaModificacion:null,
                 UsuarioCreacion:"system",
-                UsuarioModificacion:"null",
-                IdEmpresa:"null",
-                IdSucursal:"null",
+                UsuarioModificacion:null,
+                IdEmpresa:1,
+                IdSucursal:1,
             }
-            const response = await Categorias.create(ValInsert);
-            console.log("Respuesta: ",response)
-            if (Object.keys(response).length <=0){
-                Alert.alert("Error al insertar en la base de datos");
+
+            this.SaveCategoria(Model);
+          
+            this.setState(InitialState);
+               
             }
-            else{
-                ToastAndroid.show("Guardado Correctamente!", ToastAndroid.SHORT);
-                this.setState(InitialState);
-            }
-        }
+       
+        
         catch(ex){
             console.log(ex, 'what')
         }
     }
+
 }

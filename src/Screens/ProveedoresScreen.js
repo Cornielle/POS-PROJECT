@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
-
 import { TextInput, Avatar, Button, Card, RadioButton, Checkbox } from 'react-native-paper';
 import { StyleSheet, Text, View, ScrollView, Picker,Alert, KeyboardAvoidingView,  ToastAndroid, Platform} from 'react-native';
 import {Block} from 'galio-framework'
 import normalize from 'react-native-normalize';
 import Header from '../Components/Header'
 import * as Filesystem from "expo-file-system"
-import * as SQLite from "expo-sqlite"
 import {BaseModel, types} from 'expo-sqlite-orm'
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
 import Icon from 'react-native-vector-icons/FontAwesome';
-
 import Roles from "../../Models/Roles"
-
 import Proveedores from "../../Models/Proveedores"
+
+import  SQLite  from 'react-native-sqlite-storage';
+SQLite.DEBUG(true);
+SQLite.enablePromise(true);
+const database_name = "PuntoVenta.db";
+const database_version = "1.0";
+const database_displayname = "SQLite React Offline Database";
+const database_size = 200000;
 
 const InitialState ={
     EsPersonaFisica:false,
@@ -38,8 +42,6 @@ super();
     }
 
     state ={
-
-       
         EsPersonaFisica:false,
         NombreProveedor:"",
         RNC:"",
@@ -48,20 +50,80 @@ super();
         correo:""
 
     }
+    GuardarProveedores = (Model)=> {
+        console.log("")
+        console.log("")
+        console.log("/****************************************************************************/");
+        console.log("")
+        console.log("")
+        var fecha = new Date();
+        let db;
+        return new Promise((resolve) => {
+          console.log("Plugin integrity check ...");
+          SQLite.echoTest()
+            .then(() => {
+              console.log("Integrity check passed ...");
+              console.log("Opening database ...");
+              SQLite.openDatabase(
+                database_name,
+                database_version,       
+                database_displayname,
+                database_size
+              )
+                .then(DB => {
+                  db = DB;
+                  console.log("Database OPEN");
+                  db.executeSql('INSERT INTO Proveedores(EsPersonaFisica, NombreProveedor'+
+                  ', RNC, Direccion , Telefono , Correo'
+                  +', Activo , IdEmpresa , IdSucursal , FechaCreacion ,FechaModificacion '+
+                  ', UsuarioCreacion ,UsuarioModificacion ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)'
+                  ,[Model.EsPersonaFisica,Model.NombreProveedor,Model.RNC,Model.Direccion,
+                    Model.Telefono,Model.Correo,Model.Activo,Model.IdEmpresa,Model.IdSucursal,
+                    Model.FechaCreacion,Model.FechaModificacion,Model.UsuarioCreacion,Model.UsuarioModificacion]).then(() => {
+                      console.log("Database is ready ... executing query ...");
+                      ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
+    
+    db.executeSql("SELECT * from Proveedores").then((resulst) =>{
+    
+    console.log(resulst);
+    
 
+    /*
+      console.log("Query completed");
+      var len = resulst[0].rows.length;
+      console.log(len)
+      for (let i = 0; i < len; i++) {
+        let row = resulst[0].rows.item(i);
+        console.log(row)
+      }
+    
+    */
+    })
+    
+
+    
+    }).catch((error) =>{
+    console.log("Received error: ", error);
+    console.log("Database not yet ready ... populating data");
+   
+    });
+                
+                })
+                .catch(error => {
+                  console.log(error);
+                });
+            })
+            .catch(error => {
+              console.log("echoTest failed - plugin not functional");
+            });
+          });
+      };
 
     LoadData = async () =>{
 //  Proveedores.dropTable()
- Proveedores.createTable();
+
 
  //const sql = 'PRAGMA table_info(Proveedores);'
- const sql = 'SELECT * FROM Proveedores'
- const params = []
- const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-databaseLayer.executeSql(sql, params).then(   ({ rows }) => {
-
-console.log(rows);
- } )
 
 
     }
@@ -197,7 +259,7 @@ console.log(rows);
     
                            
                         
-                                const ValInsert ={
+                                const Model ={
                                     EsPersonaFisica: this.state.EsPersonaFisica.toString(),
                                     NombreProveedor:this.state.NombreProveedor,
                                     RNC:this.state.RNC,
@@ -214,22 +276,14 @@ console.log(rows);
                                     
                                 }
                             
-                                console.log(ValInsert);
+                                console.log(Model);
                                
-                                const response = await Proveedores.create(ValInsert);
-                        
-                               console.log(response)
-                               if (Object.keys(response).length ===0){
-                        
-                                Alert.alert("Error al insertar en la base de datos");
-                                
-                                }
-                                else{
-                        ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
+                            this.GuardarProveedores(Model);
+                   
                         
                         
                        this.setState(InitialState)
-                                }
+                         
 
                         }   
                         

@@ -101,26 +101,19 @@ let RolesCollection=[];
               db.executeSql("SELECT * FROM Roles"
               ,[]).then((Results) => {
                   console.log("Database is ready ... executing query ...");
-
-
-
   console.log("Query completed");
   var len = Results[0].rows.length;
  // console.log(len)
   for (let i = 0; i < len; i++) {
     let row = Results[0].rows.item(i);
     RolesCollection.push(row);
-
   }
-  console.log(RolesCollection)
+console.log(RolesCollection)
 this.setState({Roles:RolesCollection})
-
 RolesCollection=[]
-
               }).catch((error) =>{
                   console.log("Received error: ", error);
-                  console.log("Database not yet ready ... populating data");
-                
+                  console.log("Database not yet ready ... populating data"); 
               });
               resolve(db);
             })
@@ -142,17 +135,6 @@ RolesCollection=[]
   componentDidMount(){
 
     this.LoadData();
-   /*
-    const sql = 'SELECT * FROM RolMenu'
-    const params = []
-    const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-    databaseLayer.executeSql(sql, params).then(   ({ rows }) => {
-    console.log(rows);
-    })
-    */
-
-
-
 }
 
 
@@ -172,21 +154,22 @@ SaveEmp(Model) {
           console.log("Opening database ...");
           SQLite.openDatabase(
             database_name,
-            database_version,
+            database_version,       
             database_displayname,
             database_size
           )
+
             .then(DB => {
               db = DB;
-              console.log("Database OPEN");
-              db.executeSql("INSERT INTO Empleados VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+              console.log("Database OPEN"); 
+              db.executeSql("INSERT INTO Empleados(NombrePersona,ApellidoPersona,NombreUsuario,Telefono,TipoIdentificacion,Identificacion,Rol,Pin,Activo,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,UsuarioCreacion,UsuarioModificacion) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
               ,[Model.NombrePersona,Model.ApellidoPersona,Model.NombreUsuario,Model.Telefono,
                 Model.TipoIdentificacion,Model.Identificacion,Model.Rol,Model.Pin,Model.Activo,Model.IdEmpresa,Model.IdSucursal,
                 Model.FechaCreacion,Model.FechaModificacion,Model.UsuarioCreacion,Model.UsuarioModificacion]).then(() => {
                   console.log("Database is ready ... executing query ...");
                   ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
 
-db.executeSql("Drop Empleados").then((resulst) =>{
+db.executeSql("SELECT * FROM Empleados").then((resulst) =>{
 
 Console.log(resulst);
 
@@ -204,22 +187,9 @@ Console.log(resulst);
 
 
 }).catch((error) =>{
-console.log("Received error: ", error);
-console.log("Database not yet ready ... populating data");
-db.transaction((tx) => {
- tx.executeSql('CREATE TABLE IF NOT EXISTS Empleados(NombrePersona VARCHAR(500) NOT NULL, ApellidoPersona VARCHAR(500) NOT NULL'+
- ', NombreUsuario VARCHAR(500), Telefono VARCHAR(100), TipoIdentificacion VARCHAR(30), Identificacion VARCHAR(50),'+
- 'Rol VARCHAR(500), Pin VARCHAR(30) NOT NULL '
- +', Activo INTEGER NOT NULL , IdEmpresa INTEGER NOT NULL, IdSucursal INTEGER, FechaCreacion VARCHAR(150) NOT NULL, ,FechaModificacion VARCHAR(150)'+
- ', UsuarioCreacion VARCHAR(100) NOT NULL ,UsuarioModificacion VARCHAR(100))'
- );
-}).then(() => {
-console.log("Table created successfully");
-}).catch(error => {
-console.log(error);
- });
+
 });
-              resolve(db);
+          
             })
             .catch(error => {
               console.log(error);
@@ -445,12 +415,13 @@ const Model={
     Identificacion:this.state.IDENTIFICACION,
     Rol:this.state.Rol,
     IdEmpresa:1,
+    IdSucursal:1,
     Activo:1,
     FechaCreacion: fecha.toString(),
-    FechaModificacion:"null",
+    FechaModificacion:null,
     UsuarioCreacion:"system",
-    UsuarioModificacion:"null",
-    PIN:this.state.PIN.toString()
+    UsuarioModificacion:null,
+    Pin:this.state.PIN.toString()
 }
 console.log(Model, 'check this insert')
 

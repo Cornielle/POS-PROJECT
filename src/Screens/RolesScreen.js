@@ -45,6 +45,53 @@ componentDidMount(){
       'SELECT * FROM Roles where NombreRol="administrador" COLLATE NOCASE'
       ).then(respon =>{console.log(respon)})
     */
+
+   console.log("")
+   console.log("")
+   console.log("/****************************************************************************/");
+   console.log("")
+   console.log("")
+   var fecha = new Date();
+   let db;
+   return new Promise((resolve) => {
+
+     SQLite.echoTest()
+       .then(() => {
+
+         console.log("Opening database ...");
+         SQLite.openDatabase(
+           database_name,
+           database_version,
+           database_displayname,
+           database_size
+         )
+           .then(DB => {
+             db = DB;
+    
+             db.executeSql("SELECT * FROM Roles",[]).then((result) => {
+                 console.log("Database is ready ... executing query ...");
+
+console.log(result);
+
+
+             }).catch((error) =>{
+                 console.log("Received error: ", error);
+
+             });
+      
+           })
+           .catch(error => {
+             console.log(error);
+           });
+       })
+       .catch(error => {
+         console.log("echoTest failed - plugin not functional");
+       });
+     });
+
+
+
+
 }
 state={
 NombreRol:"",
@@ -133,47 +180,20 @@ render(){
             .then(() => {
               console.log("Integrity check passed ...");
               console.log("Opening database ...");
-              SQLite.openDatabase(
-                database_name,
-                database_version,
-                database_displayname,
-                database_size
-              )
+              SQLite.openDatabase( database_name, database_version, database_displayname, database_size)
                 .then(DB => {
                   db = DB;
                   console.log("Database OPEN");
-                  db.executeSql("INSERT INTO Roles VALUES (?,?,?,?,?,?,?,?,?)"
+                  db.executeSql("INSERT INTO Roles(NombreRol,Descripcion,Activo,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,UsuarioCreacion,UsuarioModificacion) VALUES (?,?,?,?,?,?,?,?,?)"
                   ,[ValInsert.NombreRol,ValInsert.Descripcion,1,ValInsert.IdEmpresa,ValInsert.IdSucursal,ValInsert.FechaCreacion,null,ValInsert.UsuarioCreacion,null]).then(() => {
                       console.log("Database is ready ... executing query ...");
                       ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
-    db.executeSql("SELECT * FROM Roles").then((resulst) =>{
-    
-      console.log("Query completed");
-      var len = resulst[0].rows.length;
-     // console.log(len)
-      for (let i = 0; i < len; i++) {
-        let row = resulst[0].rows.item(i);
-        console.log(row)
-      }
-    
-    
-    })
-    
-    
+
                   }).catch((error) =>{
                       console.log("Received error: ", error);
                       console.log("Database not yet ready ... populating data");
-                      db.transaction((tx) => {
-                          tx.executeSql('CREATE TABLE IF NOT EXISTS Roles(NombreRol '+
-                          'VARCHAR(500) NOT NULL, Descripcion VARCHAR(5000), Activo INTEGER NOT NULL ,  IdEmpresa INTEGER NOT NULL, IdSucursal INTEGER,  FechaCreacion VARCHAR(150) NOT NULL'
-                          +',FechaModificacion VARCHAR(150), UsuarioCreacion VARCHAR(100) NOT NULL ,UsuarioModificacion VARCHAR(100))');
-                      }).then(() => {
-                          console.log("Table created successfully");
-                      }).catch(error => {
-                          console.log(error);
-                      });
-                  });
-                  resolve(db);
+            });
+                  //resolve(db);
                 })
                 .catch(error => {
                   console.log(error);
