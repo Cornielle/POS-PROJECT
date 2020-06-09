@@ -4,12 +4,20 @@ import { StyleSheet, Text, View, ScrollView, Picker,Alert,  ToastAndroid } from 
 import {Block} from 'galio-framework'
 import normalize from 'react-native-normalize';
 import Header from '../Components/Header'
-import * as SQLite from "expo-sqlite"
+//import * as SQLite from "expo-sqlite"
+
 import {BaseModel, types} from 'expo-sqlite-orm'
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Empleados from '../../Models/Empleados.js'
 import Roles from  '../../Models/Roles'
+import  SQLite  from 'react-native-sqlite-storage';
+SQLite.DEBUG(true);
+SQLite.enablePromise(true);
+const database_name = "PuntoVenta.db";
+const database_version = "1.0";
+const database_displayname = "SQLite React Offline Database";
+const database_size = 200000;
 
 const InitialState ={
     
@@ -69,58 +77,162 @@ export default class Register extends React.Component{
 
  LoadData = async () =>{
 
-
-    Empleados.createTable();
-    /*
-    const sqlStock = 'SELECT name FROM sqlite_master WHERE type = "table"'
-    const paramsStock = [];
-    const databaseLayerStock = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-   databaseLayerStock.executeSql(sqlStock,paramsStock).then(  ({ rows }) => {
-
-     console.log(rows)
-    } ) 
-*/
+let RolesCollection=[];
+  //  const sqlStock = 'SELECT name FROM sqlite_master WHERE type = "table"'
 
 
-const sqlStock = 'SELECT * from Empleados'
-const paramsStock = [];
-const databaseLayerStock = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-databaseLayerStock.executeSql(sqlStock,paramsStock).then(  ({ rows }) => {
 
- console.log(rows)
-} ) 
+    let db;
+    return new Promise((resolve) => {
+      console.log("Plugin integrity check ...");
+      SQLite.echoTest()
+        .then(() => {
+          console.log("Integrity check passed ...");
+          console.log("Opening database ...");
+          SQLite.openDatabase(
+            database_name,
+            database_version,
+            database_displayname,
+            database_size
+          )
+            .then(DB => {
+              db = DB;
+              console.log("Database OPEN");
+              db.executeSql("SELECT * FROM Roles"
+              ,[]).then((Results) => {
+                  console.log("Database is ready ... executing query ...");
 
-    var options  ={
 
-        columns:'Id,NombreRol,Comentario',
-         where:{
-        Id_gt:0
-        },
-        page:1,
-        limit:100,
-        order:"Id ASC"
-        
-        }
-        
-        const response  = await Roles.query(options);
-        
-        this.setState({Roles:response})
+
+  console.log("Query completed");
+  var len = Results[0].rows.length;
+ // console.log(len)
+  for (let i = 0; i < len; i++) {
+    let row = Results[0].rows.item(i);
+    RolesCollection.push(row);
+
+  }
+  console.log(RolesCollection)
+this.setState({Roles:RolesCollection})
+
+RolesCollection=[]
+
+              }).catch((error) =>{
+                  console.log("Received error: ", error);
+                  console.log("Database not yet ready ... populating data");
+                
+              });
+              resolve(db);
+            })
+            .catch(error => {
+              console.log(error);
+            });
+        })
+        .catch(error => {
+          console.log("echoTest failed - plugin not functional");
+        });
+      });
+  
+    
   
        
  }
 
 
   componentDidMount(){
-    // Empleados.dropTable();
-    Empleados.createTable(); 
+
     this.LoadData();
+   /*
     const sql = 'SELECT * FROM RolMenu'
     const params = []
     const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
     databaseLayer.executeSql(sql, params).then(   ({ rows }) => {
     console.log(rows);
     })
+    */
+
+
+
 }
+
+
+SaveEmp(Model) {
+    console.log("")
+    console.log("")
+    console.log("/****************************************************************************/");
+    console.log("")
+    console.log("")
+    var fecha = new Date();
+    let db;
+    return new Promise((resolve) => {
+      console.log("Plugin integrity check ...");
+      SQLite.echoTest()
+        .then(() => {
+          console.log("Integrity check passed ...");
+          console.log("Opening database ...");
+          SQLite.openDatabase(
+            database_name,
+            database_version,
+            database_displayname,
+            database_size
+          )
+            .then(DB => {
+              db = DB;
+              console.log("Database OPEN");
+              db.executeSql("INSERT INTO Empleados VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+              ,[Model.NombrePersona,Model.ApellidoPersona,Model.NombreUsuario,Model.Telefono,
+                Model.TipoIdentificacion,Model.Identificacion,Model.Rol,Model.Pin,Model.Activo,Model.IdEmpresa,Model.IdSucursal,
+                Model.FechaCreacion,Model.FechaModificacion,Model.UsuarioCreacion,Model.UsuarioModificacion]).then(() => {
+                  console.log("Database is ready ... executing query ...");
+                  ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
+
+db.executeSql("Drop Empleados").then((resulst) =>{
+
+Console.log(resulst);
+
+/*
+  console.log("Query completed");
+  var len = resulst[0].rows.length;
+  console.log(len)
+  for (let i = 0; i < len; i++) {
+    let row = resulst[0].rows.item(i);
+    console.log(row)
+  }
+
+*/
+})
+
+
+}).catch((error) =>{
+console.log("Received error: ", error);
+console.log("Database not yet ready ... populating data");
+db.transaction((tx) => {
+ tx.executeSql('CREATE TABLE IF NOT EXISTS Empleados(NombrePersona VARCHAR(500) NOT NULL, ApellidoPersona VARCHAR(500) NOT NULL'+
+ ', NombreUsuario VARCHAR(500), Telefono VARCHAR(100), TipoIdentificacion VARCHAR(30), Identificacion VARCHAR(50),'+
+ 'Rol VARCHAR(500), Pin VARCHAR(30) NOT NULL '
+ +', Activo INTEGER NOT NULL , IdEmpresa INTEGER NOT NULL, IdSucursal INTEGER, FechaCreacion VARCHAR(150) NOT NULL, ,FechaModificacion VARCHAR(150)'+
+ ', UsuarioCreacion VARCHAR(100) NOT NULL ,UsuarioModificacion VARCHAR(100))'
+ );
+}).then(() => {
+console.log("Table created successfully");
+}).catch(error => {
+console.log(error);
+ });
+});
+              resolve(db);
+            })
+            .catch(error => {
+              console.log(error);
+            });
+        })
+        .catch(error => {
+          console.log("echoTest failed - plugin not functional");
+        });
+      });
+  };
+
+
+
     render(){
         return (
       
@@ -231,14 +343,14 @@ databaseLayerStock.executeSql(sqlStock,paramsStock).then(  ({ rows }) => {
                             <Text>{"\n"}</Text>
                             <Text>Seleccionar un rol:</Text>
                             <Picker
-                                selectedValue={this.state.Rol}
+                                selectedValue={this.state.Rol} 
                                 style={{height: 50, width: 200}}
                                 onValueChange={(itemValue, itemIndex) =>
                                     this.setState({Rol: itemValue})
                                 }>
                                {
                                        this.state.Roles.map(xo =>(
-                                        <Picker.Item label={xo.NombreRol.toString()} value={xo.id} key={xo.id.toString()} />
+                                        <Picker.Item label={xo.NombreRol.toString()} value={xo.id} key={xo.id} />
                                        )
                                        )
 
@@ -318,12 +430,12 @@ return;
 
    // this.Validaciones();
 
-const create  = Empleados.createTable();
+
 
  
 const username = (this.state.NOMBRE+this.state.APELLIDO).toLocaleLowerCase();
 const fecha = new Date();
-const valInsert={
+const Model={
 
     NombrePersona:this.state.NOMBRE, 
     ApellidoPersona:this.state.APELLIDO,
@@ -340,22 +452,11 @@ const valInsert={
     UsuarioModificacion:"null",
     PIN:this.state.PIN.toString()
 }
-console.log(valInsert, 'check this insert')
+console.log(Model, 'check this insert')
 
-const response = await  Empleados.create(valInsert);
 
-console.log(response)
+this.SaveEmp(Model);
 
-if (Object.keys(response).length <=0){
-
-Alert.alert("Error al insertar en la base de datos");
-
-}
-else{
-
-    ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
-   this.reset();
-}
 
 
 }

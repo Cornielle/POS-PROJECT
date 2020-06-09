@@ -193,7 +193,7 @@ const  navigationOptions = {
   title: 'Iniciar Sesión',
   headerTitleStyle:{textAlign:'center', color:'white'},
   headerStyle:{backgroundColor:'green'},
-  headerTitleAlign: 'center'
+  headerTitleAlign: 'center'7
 }
 
 const AuthStack= createStackNavigator({
@@ -210,4 +210,5 @@ export default createAppContainer(createSwitchNavigator({
   Auth:AuthStack
 }))
 */
+
 //CloseCashierGridScreen

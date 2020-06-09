@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { TextInput, Button, Card, Badge  } from 'react-native-paper';
-import { StyleSheet, Text, View, AsyncStorage, Alert, ToastAndroid, Modal} from 'react-native';
-import { Header, Container, Left, Body, Icon, Title, Spinner, Content,
-    ListItem, Thumbnail,Right } from 'native-base';
+import { TextInput, Button, Card,   } from 'react-native-paper';
+import { StyleSheet, Text, View, AsyncStorage, Alert,Modal} from 'react-native';
+import {  Container,  Spinner, Content} from 'native-base';
 import {Block} from 'galio-framework'
 import normalize from 'react-native-normalize';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -16,6 +15,9 @@ import IconAwesome from 'react-native-vector-icons/FontAwesome';
 import { SafeAreaView } from 'react-native-safe-area-context';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
+import { SQLite } from 'expo-sqlite'
+
+import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
 //import whatever from '../src'
  export default class Login extends Component{
     constructor(props) {
@@ -36,16 +38,17 @@ const windowHeight = Dimensions.get('window').height;
         loading:false
           };
   componentDidMount(){
-    const item =  AsyncStorage.getItem('LoggedUser');
-    this.verifyLog()
+      console.log(SQLite)
+    this.verifyLog();
+  //  this.Deletekey();
     const fecha  = new Date();
     const date = fecha.toString().split(' ')
     this.setState({FechaApertura:`${date[2]}/${date[1]}/${date[3]}` })
     this.LoadAllData();
 } 
 LoadAllData = async () =>{
-Caja.createTable();
-/*
+//Caja.createTable();
+
 const sqlStock = 'SELECT name FROM sqlite_master WHERE type = "table"'
 const paramsStock = [];
 const databaseLayerStock = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
@@ -53,7 +56,7 @@ databaseLayerStock.executeSql(sqlStock,paramsStock).then(  ({ rows }) => {
 
  console.log(rows)
 } ) 
-*/
+
 /*
 const sqlStock = "SELECT * FROM Caja WHERE Activo=?"
 const paramsStock = [1];
@@ -326,9 +329,11 @@ try{
         contrasena_eq:this.state.Contrasena,
         NombreUsuario_eq:this.state.NombreUsuario
     })
+    console.log(response);
     if(response ===null || Object.keys(response).length <=0){
         alert("El usuario no existe o contraseña invalida");
     }
+    /*
     else{
         this.setState({loading:true})
         const {NombrePersona, NombreUsuario, Rol, Contrasena,PIN} = response
@@ -373,6 +378,7 @@ try{
             }
 
         }
+        */
     } catch(ex){
                 console.log(ex);
             }

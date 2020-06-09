@@ -4,15 +4,20 @@ import { StyleSheet, Text, View, ScrollView, Picker,Alert, KeyboardAvoidingView,
 import {Block} from 'galio-framework'
 import normalize from 'react-native-normalize';
 import Header from '../Components/Header'
-import * as Filesystem from "expo-file-system"
-import * as SQLite from "expo-sqlite"
 import {BaseModel, types} from 'expo-sqlite-orm'
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Empleados from '../../Models/Empleados.js'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Roles from "../../Models/Roles"
-
+import  SQLite  from 'react-native-sqlite-storage';
+SQLite.DEBUG(true);
+SQLite.enablePromise(true);
+const database_name = "PuntoVenta.db";
+const database_version = "1.0";
+const database_displayname = "SQLite React Offline Database";
+const database_size = 200000;
+//var db = openDatabase({ name: 'PuntoVenta.db' });
 
 const InitialState ={
 
@@ -33,12 +38,13 @@ super(props)
 
 componentDidMount(){
     // Roles.dropTable();
+    /*
     Roles.createTable();
     const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
     databaseLayer.executeSql(
       'SELECT * FROM Roles where NombreRol="administrador" COLLATE NOCASE'
       ).then(respon =>{console.log(respon)})
-    
+    */
 }
 state={
 NombreRol:"",
@@ -110,10 +116,78 @@ render(){
         </ScrollView>
     );
     }
+    initDB(ValInsert) {
 
+
+
+        console.log("")
+        console.log("")
+        console.log("/****************************************************************************/");
+        console.log("")
+        console.log("")
+        var fecha = new Date();
+        let db;
+        return new Promise((resolve) => {
+          console.log("Plugin integrity check ...");
+          SQLite.echoTest()
+            .then(() => {
+              console.log("Integrity check passed ...");
+              console.log("Opening database ...");
+              SQLite.openDatabase(
+                database_name,
+                database_version,
+                database_displayname,
+                database_size
+              )
+                .then(DB => {
+                  db = DB;
+                  console.log("Database OPEN");
+                  db.executeSql("INSERT INTO Roles VALUES (?,?,?,?,?,?,?,?,?)"
+                  ,[ValInsert.NombreRol,ValInsert.Descripcion,1,ValInsert.IdEmpresa,ValInsert.IdSucursal,ValInsert.FechaCreacion,null,ValInsert.UsuarioCreacion,null]).then(() => {
+                      console.log("Database is ready ... executing query ...");
+                      ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
+    db.executeSql("SELECT * FROM Roles").then((resulst) =>{
+    
+      console.log("Query completed");
+      var len = resulst[0].rows.length;
+     // console.log(len)
+      for (let i = 0; i < len; i++) {
+        let row = resulst[0].rows.item(i);
+        console.log(row)
+      }
+    
+    
+    })
+    
+    
+                  }).catch((error) =>{
+                      console.log("Received error: ", error);
+                      console.log("Database not yet ready ... populating data");
+                      db.transaction((tx) => {
+                          tx.executeSql('CREATE TABLE IF NOT EXISTS Roles(NombreRol '+
+                          'VARCHAR(500) NOT NULL, Descripcion VARCHAR(5000), Activo INTEGER NOT NULL ,  IdEmpresa INTEGER NOT NULL, IdSucursal INTEGER,  FechaCreacion VARCHAR(150) NOT NULL'
+                          +',FechaModificacion VARCHAR(150), UsuarioCreacion VARCHAR(100) NOT NULL ,UsuarioModificacion VARCHAR(100))');
+                      }).then(() => {
+                          console.log("Table created successfully");
+                      }).catch(error => {
+                          console.log(error);
+                      });
+                  });
+                  resolve(db);
+                })
+                .catch(error => {
+                  console.log(error);
+                });
+            })
+            .catch(error => {
+              console.log("echoTest failed - plugin not functional");
+            });
+          });
+      };
+     
     
 verifyExisting= async () =>{
- 
+ /*
     let callbaclproof =""
     const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
     databaseLayer.executeSql(
@@ -132,6 +206,7 @@ if(Object.keys(respon).length > 0){
 })
 
 console.log(this.state.ExistNombre);
+*/
 }
 
     Validaciones  =  () =>{
@@ -160,7 +235,7 @@ console.log(this.state.ExistNombre);
         const fecha = new Date();
         const ValInsert ={
             NombreRol: this.state.NombreRol,
-            Comentario: this.state.Comentario, 
+            Descripcion: this.state.Comentario, 
             Activo:1,
             IdEmpresa:1,
             IdSucursal:1,
@@ -172,20 +247,11 @@ console.log(this.state.ExistNombre);
     
         console.log(ValInsert);
         
-       var response = await Roles.create(ValInsert);
-
-       console.log(response)
-       if (Object.keys(response).length <=0){
-
-        Alert.alert("Error al insertar en la base de datos");
-        
-        }
-        else{
-ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
+       this.initDB(ValInsert);
 
 
 this.setState(InitialState)
-        }
+        
         
         
         

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dimensions,StyleSheet,Modal, View,Alert, AsyncStorage,ToastAndroid} from 'react-native';
-import * as SQLite from "expo-sqlite"
+import * as SQLite1 from "expo-sqlite"
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
 import {TextInput,Searchbar, FAB} from 'react-native-paper';
 import { Checkbox } from 'galio-framework';
@@ -17,6 +17,14 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height
 import Ventas from '../../Models/Ventas'
 import VentasDetalle from '../../Models/VentasDetalle'
+import  SQLite  from 'react-native-sqlite-storage';
+SQLite.DEBUG(true);
+SQLite.enablePromise(true);
+const database_name = "PuntoVenta.db";
+const database_version = "1.0";
+const database_displayname = "SQLite React Offline Database";
+const database_size = 200000;
+//var db = openDatabase({ name: 'PuntoVenta.db' });
 import { USBPrinter, NetPrinter, BLEPrinter } from 'react-native-printer';
  
 const design = `
@@ -88,6 +96,131 @@ export default class VentasMain extends React.Component {
     
   }
 
+  initDB() {
+    console.log("")
+    console.log("")
+    console.log("/****************************************************************************/");
+    console.log("")
+    console.log("")
+    var fecha = new Date();
+    let db;
+    return new Promise((resolve) => {
+      console.log("Plugin integrity check ...");
+      SQLite.echoTest()
+        .then(() => {
+          console.log("Integrity check passed ...");
+          console.log("Opening database ...");
+          SQLite.openDatabase(
+            database_name,
+            database_version,
+            database_displayname,
+            database_size
+          )
+            .then(DB => {
+              db = DB;
+              console.log("Database OPEN");
+              db.executeSql("INSERT INTO Categorias VALUES (?,?,?,?,?,?,?,?,?)"
+              ,['Bebidas','Todo tipos',1,1,null,fecha.toString(),null,'system',null]).then(() => {
+                  console.log("Database is ready ... executing query ...");
+
+db.executeSql("SELECT * FROM Empleados").then((resulst) =>{
+
+  console.log("Query completed");
+  var len = resulst[0].rows.length;
+  console.log(len)
+  for (let i = 0; i < len; i++) {
+    let row = resulst[0].rows.item(i);
+    console.log(row)
+  }
+
+
+})
+
+
+              }).catch((error) =>{
+                  console.log("Received error: ", error);
+                  console.log("Database not yet ready ... populating data");
+                  db.transaction((tx) => {
+                      tx.executeSql('CREATE TABLE IF NOT EXISTS Categorias(NombreCategoria '+
+                      'VARCHAR(500) NOT NULL, Descripcion VARCHAR(5000), Activo INTEGER NOT NULL ,  IdEmpresa INTEGER NOT NULL, IdSucursal INTEGER,  FechaCreacion VARCHAR(150) NOT NULL'
+                      +',FechaModificacion VARCHAR(150), UsuarioCreacion VARCHAR(100) NOT NULL ,UsuarioModificacion VARCHAR(100))');
+                  }).then(() => {
+                      console.log("Table created successfully");
+                  }).catch(error => {
+                      console.log(error);
+                  });
+              });
+              resolve(db);
+            })
+            .catch(error => {
+              console.log(error);
+            });
+        })
+        .catch(error => {
+          console.log("echoTest failed - plugin not functional");
+        });
+      });
+  };
+ 
+
+
+  CreateCategoria =()=>{
+    try {
+
+// create database
+
+db.transaction(function(tran){
+
+
+tran.executeSql('CREATE TABLE IF NOT EXISTS Categorias(id INTEGER PRIMARY KEY AUTOINCREMENT, NombreCategoria'+
+'VARCHAR(500) NOT NULL, Descripcion VARCHAR(MAX), Activo INT NOT NULL ,  IdEmpresa INT NOT NULL, IdSucursal INT,  FechaCreacion VARCHAR(150) NOT NULL'
++',FechaModificacion VARCHAR(150), UsuarioCreacion VARCHAR(100) NOT NULL ,UsuarioModificacion VARCHAR(100))',[],(tx, result)=>{
+
+console.log(result)
+
+
+})
+
+});
+
+
+/*
+db.transaction(function(txn){
+  txn.executeSql("SELECT name FROM sqlite_master WHERE type = 'table'",[],function(tx,res){
+  
+    console.log("Tamo aqui")
+  console.log(res);
+  
+  })
+  
+  })
+*/
+
+var fecha = new Date();
+
+      db.transaction(function(txn){
+        txn.executeSql("INSERT INTO Categorias(NombreCategoria,Descripcion,Activo,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,UsuarioCreacion,UsuarioModificacion) "+
+        `values('Postres','Todo tipos',1,1,null,${fecha.toString()},null,'system',null)`,[],function(tx,res){
+        
+          console.log("se inserto")
+        console.log(res);
+        
+        })
+        
+        })
+        
+        
+    }
+    catch(ex){
+
+console.log(ex)
+
+    }
+
+
+
+  }
+  
 
 
 
@@ -98,7 +231,7 @@ export default class VentasMain extends React.Component {
     Articulos.CatidadExistencia as CantidadExistencia  
     from Categorias inner join Articulos on Categorias.id = Articulos.CategoriaId`
     const params = []
-    const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+    const databaseLayer = new DatabaseLayer(async () => SQLite1.openDatabase('PuntoVentaDb.db'))
     databaseLayer.executeSql(sql, params).then(({ rows }) => {
       let arrayArticulos = []
       rows.map(item=>{
@@ -128,11 +261,16 @@ export default class VentasMain extends React.Component {
 
 
 
-  componentDidMount(){
+ componentDidMount(){
 
-    this.scan();
-    this.connectPrint();
-    this.printtest();
+  this.initDB() 
+  // this.CreateCategoria();
+
+  //  this.scan();
+   // this.connectPrint();
+    //this.printtest();
+
+    /*
     const sqlStock = 'SELECT name FROM sqlite_master WHERE type = "table"'
 const paramsStock = [];
 const databaseLayerStock = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
@@ -140,6 +278,7 @@ databaseLayerStock.executeSql(sqlStock,paramsStock).then(  ({ rows }) => {
 
  console.log(rows)
 } ) 
+*/
     this.loadData()
 
   //  this.CargaUltimaVenta();
@@ -175,7 +314,7 @@ console.log(ex)
 
     const sql = `SELECT MAX(Id) as Max FROM Ventas`
     const params = []
-    const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
+    const databaseLayer = new DatabaseLayer(async () => SQLite1.openDatabase('PuntoVentaDb.db'))
     databaseLayer.executeSql(sql, params).then(({ rows }) => {
       let arrayArticulos = []
       rows.map(item=>{
@@ -281,11 +420,12 @@ SelectedProduct.push(item)
    
   }
   //console.log(ventasItem);
+  /*
  const ll = await Ventas.create(ventasItem)
 
- //console.log(ll);
+ console.log(ll);
 
-/*
+
  const sqlStock = "SELECT * FROM Ventas"
 const paramsStock = [1];
 const databaseLayerStock = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
@@ -295,7 +435,7 @@ databaseLayerStock.executeSql(sqlStock,paramsStock).then(  ({ rows }) => {
 } ) 
 
 */
-
+/*
 
 const sql = `SELECT MAX(Id) as Max FROM Ventas`
 const params = []
@@ -375,7 +515,7 @@ let VentasDetalleItem ={
 
 //});
 
-
+/*
 const sqlStock = "SELECT * FROM VentasDetalle"
 const paramsStock = [];
 const databaseLayerStock = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
@@ -384,7 +524,7 @@ databaseLayerStock.executeSql(sqlStock,paramsStock).then(  ({ rows }) => {
  console.log(rows)
 } ) 
 
-
+*/
 }
 
 catch(ex){

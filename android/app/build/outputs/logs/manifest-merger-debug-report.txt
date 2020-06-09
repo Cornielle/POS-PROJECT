@@ -14,6 +14,7 @@ MERGED from [:react-native-gesture-handler] C:\Users\USER\Documents\POS\POS_Proj
 MERGED from [:react-native-orientation] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-orientation\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-reanimated] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-reanimated\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-safe-area-context] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-safe-area-context\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [:react-native-sqlite-storage] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-sqlite-storage\platforms\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-text-input-mask] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-text-input-mask\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-vector-icons] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-vector-icons\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [com.facebook.react:react-native:0.61.5] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-react-native-0.61.5.aar\e5a8eb62a91eed42de5fc37e47177d37\AndroidManifest.xml:2:1-13:12
@@ -292,6 +293,8 @@ MERGED from [:react-native-reanimated] C:\Users\USER\Documents\POS\POS_Project\n
 MERGED from [:react-native-reanimated] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-reanimated\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-safe-area-context] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-safe-area-context\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-safe-area-context] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-safe-area-context\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-sqlite-storage] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-sqlite-storage\platforms\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-sqlite-storage] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-sqlite-storage\platforms\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-text-input-mask] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-text-input-mask\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-text-input-mask] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-text-input-mask\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-vector-icons] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-vector-icons\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
