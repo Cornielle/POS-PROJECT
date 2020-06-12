@@ -96,7 +96,91 @@ export default class VentasMain extends React.Component {
     
   }
 
-  initDB() {
+  loadDatadd =() =>{
+
+
+    console.log("")
+    console.log("")
+
+    console.log("/****************************************************************************/");
+    console.log("")
+    console.log("")
+    var fecha = new Date();
+    let db;
+    return new Promise((resolve) => {
+ 
+      SQLite.echoTest()
+        .then(() => {
+ 
+          console.log("Opening database ...");
+          SQLite.openDatabase(
+            database_name,
+            database_version,
+            database_displayname,
+            database_size
+          )
+            .then(DB => {
+              db = DB;
+     
+              db.executeSql("SELECT Categorias.rowid as id ,Articulos.rowid as idArticulo, Articulos.NombreArticulo as NombreArticulo,Categorias.NombreCategoria as NombreCategoria , Articulos.DescripcionPantalla as DescripcionPantalla,Articulos.PrecioVenta as PrecioVenta, Almacen.CantidadActual as CantidadExistencia  from Categorias inner join Articulos on Categorias.rowid = Articulos.CategoriaId inner join Almacen on Articulos.rowid = Almacen.ArticuloId",[]).then((results) => {
+                  console.log("Database is ready ... executing query ...");
+ 
+console.log(results);
+
+let arrayArticulos = []
+var len = results[0].rows.length;
+
+ for (let i = 0; i < len; i++) {
+
+var item=  results[0].rows.item(i);
+let articulos = {   
+  CantidadExistencia: item.CantidadExistencia,
+  DescripcionPantalla: item.DescripcionPantalla,
+  NombreArticulo: item.NombreArticulo,
+  NombreCategoria: item.NombreCategoria,
+  PrecioVenta: item.PrecioVenta,
+  id: item.idArticulo,
+  selected:false,
+  quantitySelected:1,
+  pricePerArticle:item.PrecioVenta
+}
+arrayArticulos.push(articulos) 
+
+
+ }
+
+
+ let categorias = [...new Set(arrayArticulos.map(item => item.NombreCategoria))];
+ this.setState({
+   categorias  
+ })
+
+ console.log(categorias)
+ this.setState({
+  articulos:arrayArticulos
+})  
+this.fontload();
+ 
+              }).catch((error) =>{
+                  console.log("Received error: ", error);
+ 
+              });
+       
+            })
+            .catch(error => {
+              console.log(error);
+            });
+        })
+        .catch(error => {
+          console.log("echoTest failed - plugin not functional");
+        });
+      });
+ 
+
+
+  }
+
+  GuardarVentas = (Model)=> {
     console.log("")
     console.log("")
     console.log("/****************************************************************************/");
@@ -112,42 +196,38 @@ export default class VentasMain extends React.Component {
           console.log("Opening database ...");
           SQLite.openDatabase(
             database_name,
-            database_version,
+            database_version,       
             database_displayname,
             database_size
           )
             .then(DB => {
               db = DB;
               console.log("Database OPEN");
-              db.executeSql("INSERT INTO Categorias VALUES (?,?,?,?,?,?,?,?,?)"
-              ,['Bebidas','Todo tipos',1,1,null,fecha.toString(),null,'system',null]).then(() => {
+              db.executeSql('INSERT INTO Ventas(PrecioNeto, PrecioTotal'+
+              ', DescuentoAplicado, Itbis'
+              +', Activo , IdEmpresa , IdSucursal , FechaCreacion ,FechaModificacion '+
+              ', UsuarioCreacion ,UsuarioModificacion ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)'
+              ,[Model.EsPersonaFisica,Model.NombreProveedor,Model.RNC,Model.Direccion,
+                Model.Telefono,Model.Correo,Model.Activo,Model.IdEmpresa,Model.IdSucursal,
+                Model.FechaCreacion,Model.FechaModificacion,Model.UsuarioCreacion,Model.UsuarioModificacion]).then(() => {
                   console.log("Database is ready ... executing query ...");
+                  ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
 
-db.executeSql("SELECT * FROM Empleados").then((resulst) =>{
+db.executeSql("SELECT * from Ventas").then((rows) =>{
 
-  console.log("Query completed");
-  var len = resulst[0].rows.length;
-  console.log(len)
-  for (let i = 0; i < len; i++) {
-    let row = resulst[0].rows.item(i);
-    console.log(row)
-  }
+console.log(resulst);
+
+
 })
 
-              }).catch((error) =>{
-                  console.log("Received error: ", error);
-                  console.log("Database not yet ready ... populating data");
-                  db.transaction((tx) => {
-                      tx.executeSql('CREATE TABLE IF NOT EXISTS Categorias(NombreCategoria '+
-                      'VARCHAR(500) NOT NULL, Descripcion VARCHAR(5000), Activo INTEGER NOT NULL ,  IdEmpresa INTEGER NOT NULL, IdSucursal INTEGER,  FechaCreacion VARCHAR(150) NOT NULL'
-                      +',FechaModificacion VARCHAR(150), UsuarioCreacion VARCHAR(100) NOT NULL ,UsuarioModificacion VARCHAR(100))');
-                  }).then(() => {
-                      console.log("Table created successfully");
-                  }).catch(error => {
-                      console.log(error);
-                  });
-              });
-              resolve(db);
+
+
+}).catch((error) =>{
+console.log("Received error: ", error);
+console.log("Database not yet ready ... populating data");
+
+});
+            
             })
             .catch(error => {
               console.log(error);
@@ -158,71 +238,10 @@ db.executeSql("SELECT * FROM Empleados").then((resulst) =>{
         });
       });
   };
- 
-
-
-  CreateCategoria =()=>{
-    try {
-
-// create database
-
-db.transaction(function(tran){
-
-
-tran.executeSql('CREATE TABLE IF NOT EXISTS Categorias(id INTEGER PRIMARY KEY AUTOINCREMENT, NombreCategoria'+
-'VARCHAR(500) NOT NULL, Descripcion VARCHAR(MAX), Activo INT NOT NULL ,  IdEmpresa INT NOT NULL, IdSucursal INT,  FechaCreacion VARCHAR(150) NOT NULL'
-+',FechaModificacion VARCHAR(150), UsuarioCreacion VARCHAR(100) NOT NULL ,UsuarioModificacion VARCHAR(100))',[],(tx, result)=>{
-
-console.log(result)
-
-
-})
-
-});
-
 
 /*
-db.transaction(function(txn){
-  txn.executeSql("SELECT name FROM sqlite_master WHERE type = 'table'",[],function(tx,res){
-  
-    console.log("Tamo aqui")
-  console.log(res);
-  
-  })
-  
-  })
-*/
-
-var fecha = new Date();
-
-      db.transaction(function(txn){
-        txn.executeSql("INSERT INTO Categorias(NombreCategoria,Descripcion,Activo,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,UsuarioCreacion,UsuarioModificacion) "+
-        `values('Postres','Todo tipos',1,1,null,${fecha.toString()},null,'system',null)`,[],function(tx,res){
-        
-          console.log("se inserto")
-        console.log(res);
-        
-        })
-        
-        })
-        
-        
-    }
-    catch(ex){
-
-console.log(ex)
-
-    }
-
-
-
-  }
-  
-
-
-
   loadData =  async() =>{
-    const sql = `SELECT Categorias.id as id ,Articulos.id as idArticulo, Articulos.NombreArticulo as NombreArticulo,
+    const sql = `SELECT Categorias.rowid as id ,Articulos.rowid as idArticulo, Articulos.NombreArticulo as NombreArticulo,
     Categorias.NombreCategoria as NombreCategoria , Articulos.DescripcionPantalla as DescripcionPantalla,
     Articulos.PrecioVenta as PrecioVenta, 
     Articulos.CatidadExistencia as CantidadExistencia  
@@ -256,11 +275,10 @@ console.log(ex)
     this.fontload();
   }
 
-
+*/
 
  componentDidMount(){
 
-  this.initDB() 
   // this.CreateCategoria();
 
   //  this.scan();
@@ -276,36 +294,13 @@ databaseLayerStock.executeSql(sqlStock,paramsStock).then(  ({ rows }) => {
  console.log(rows)
 } ) 
 */
-    this.loadData()
+   this.loadDatadd()
 
   //  this.CargaUltimaVenta();
- //Ventas.dropTable(); 
- Ventas.createTable();
- //VentasDetalle.dropTable()
-  VentasDetalle.createTable();
-  }
-
-
-GuardarVentaDetalle = async(VentasDetalleItem) =>{
-
-  try{
-
-
-    console.log("entre a guardar a vendasdetalle");
-    const response =  await  VentasDetalle.create(VentasDetalleItem);
-
-  console.log(response) 
-  
-  
-
-  }
-  catch(ex){
-
-console.log(ex)
 
   }
 
-}
+
 
   CargaUltimaVenta =async ()=>{
 
@@ -330,11 +325,6 @@ console.log(ex)
       console.log("Last Id",this.state.MaxId)
     });
     
-
-    
-
-
-
   }
 
   scan = async () =>{
@@ -407,6 +397,8 @@ SelectedProduct.push(item)
    
    PrecioTotal:total ,
    DescuentoAplicado:"10",
+   Itbis:18,
+
    Activo:1,
    IdEmpresa:1,
    IdSucursal:1,

@@ -20,14 +20,12 @@ const InitialState ={
     Proveedores:[],
 
     Codigo: "",
-    CategoriaId: 0,
     Descripcion:"",
     DescripcionPantalla: "",
     NombreArticulo: "",
     CodigoDeBarra:"",
     PrecioCosto:"",
     PrecioVenta:"",
-    ProveedoresId:"",
     CatidadExistencia:"",
     MedidaDeVenta:"1",
     Categorias:[]
@@ -147,6 +145,78 @@ db = DB;console.log("Database OPEN");
            
      }
 
+CallAlerts =(DataToDetalle) =>{
+
+
+  console.log("")
+  console.log("")
+  console.log("/****************************************************************************/");
+  console.log("")
+  console.log("")
+
+  let dba;
+  return new Promise((resolve) => {
+    console.log("Plugin integrity check ...");
+    SQLite.echoTest()
+      .then(() => {
+        console.log("Integrity check passed ...");
+        console.log("Opening database ...");
+        SQLite.openDatabase(
+          database_name,
+          database_version,       
+          database_displayname,
+          database_size
+        )
+
+          .then(DB => {
+            dba = DB;
+            console.log("Database OPEN"); 
+
+            console.log("dont know"); 
+
+dba.executeSql('INSERT INTO AlmacenDetalle(AlmacenId,CantidadIngreso,Activo,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,UsuarioCreacion,'+
+'UsuarioModificacion) VALUES (?,?,?,?,?,?,?,?,?)',[DataToDetalle.AlmacId,DataToDetalle.CatidadExistencia,DataToDetalle,DataToDetalle.Activo,DataToDetalle.IdEmpresa,DataToDetalle.IdSucursal,
+  DataToDetalle.FechaCreacion,DataToDetalle.FechaModificacion,DataToDetalle.UsuarioCreacion,DataToDetalle.UsuarioModificacion]).then((result) => {
+                console.log("Database is ready ... executing query ...");
+                
+                ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
+
+
+
+
+/*
+db.executeSql("SELECT * FROM Articulos").then((resulst) =>{
+
+console.log(resulst);
+
+
+console.log("Query completed");
+var len = resulst[0].rows.length;
+console.log(len)
+for (let i = 0; i < len; i++) {
+  let row = resulst[0].rows.item(i);
+  console.log(row)
+}
+
+
+})
+*/
+
+}).catch((error) =>{
+console.log(error)
+});
+        
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      })
+      .catch(error => {
+        console.log("echoTest failed - plugin not functional");
+      });
+    });
+
+}
 
 loadTable = async () => {
 
@@ -165,7 +235,7 @@ loadTable = async () => {
 
 }
 
-SaveEmp(Model) {
+SaveArticulos(Model) {
     console.log("")
     console.log("")
     console.log("/****************************************************************************/");
@@ -196,15 +266,76 @@ SaveEmp(Model) {
 db.executeSql("INSERT INTO Articulos(Codigo,CategoriaId,DescripcionPantalla,NombreArticulo,CodigoDeBarra,PrecioCosto,PrecioVenta,ProveedoresId,MedidaDeVenta,Activo,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,UsuarioCreacion,UsuarioModificacion) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
               ,[Model.Codigo,Model.CategoriaId,Model.DescripcionPantalla,Model.NombreArticulo,
                 Model.CodigoDeBarra,Model.PrecioCosto,Model.PrecioVenta,Model.ProveedoresId,Model.MedidaDeVenta,Model.Activo,Model.IdEmpresa,Model.IdSucursal,
-                Model.FechaCreacion,Model.FechaModificacion,Model.UsuarioCreacion,Model.UsuarioModificacion]).then(() => {
+                Model.FechaCreacion,Model.FechaModificacion,Model.UsuarioCreacion,Model.UsuarioModificacion]).then((result) => {
                   console.log("Database is ready ... executing query ...");
-                  ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
+                  
 
-db.executeSql("SELECT * FROM Articulos").then((resulst) =>{
+              const ArtId=  result[0].insertId;
+              console.log("Id articulo",ArtId )
+console.log("Articulo Inserto Correctamente")
+const fecha = new Date();
+db.executeSql('INSERT INTO Almacen(ArticuloId,'+
+'CantidadActual,Descripcion ,Activo,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,UsuarioCreacion,'+
+ 'UsuarioModificacion) VALUES (?,?,?,?,?,?,?,?,?,?)',[ArtId,Model.CatidadExistencia,Model.Activo,Model.IdEmpresa, Model.IdSucursal,
+  fecha.toString(),Model.FechaModificacion,Model.UsuarioCreacion,Model.UsuarioModificacion]).then((AlmacenResult)=>{
+  
+  const AlmacId=  AlmacenResult[0].insertId;
 
-Console.log(resulst);
+
+  console.log("Id almacen",AlmacId )
+  console.log("Almacen Inserto Correctamente");
+/*
+var DataToDetalle ={
+
+  AlmacId:AlmacId,
+  CantidadIngreso:Model.CatidadExistencia,
+  Activo:Model.Activo,
+  IdEmpresa:Model.IdEmpresa,
+  IdSucursal:Model.IdSucursal,
+  FechaCreacion: fecha.toString(),
+  FechaModificacion:null,
+  UsuarioCreacion:"system",
+  UsuarioModificacion:null
+
+}
+*/
+//  this.CallAlerts(DataToDetalle);
+  
+
+db.executeSql('INSERT INTO AlmacenDetalle(AlmacenId,'+
+'CantidadIngreso ,Activo,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,UsuarioCreacion,'+
+ 'UsuarioModificacion) VALUES (?,?,?,?,?,?,?,?,?)',[ArtId,Model.CatidadExistencia,Model.Activo,Model.IdEmpresa, Model.IdSucursal,
+  fecha.toString(),Model.FechaModificacion,Model.UsuarioCreacion,Model.UsuarioModificacion]).then((AlmacenResult)=>{
+
+    console.log("AlmacenDetalle Inserto Correctamente")
+
+    ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
+
+
+  }).catch((erroralma)=>{
+
+   console.log("No entro")
+
+
+console.log(erroralma)
+
+});
+
+
+ }).catch((error) =>{
+
+
+console.log();
+
+ });
+
 
 /*
+db.executeSql("SELECT * FROM Articulos").then((resulst) =>{
+
+console.log(resulst);
+
+
   console.log("Query completed");
   var len = resulst[0].rows.length;
   console.log(len)
@@ -213,12 +344,12 @@ Console.log(resulst);
     console.log(row)
   }
 
-*/
-})
 
+})
+*/
 
 }).catch((error) =>{
-
+console.log(error)
 });
           
             })
@@ -470,6 +601,7 @@ const fecha = new Date();
         NombreArticulo: this.state.NombreArticulo,
         CodigoDeBarra: this.state.CodigoDeBarra,
         PrecioCosto: this.state.PrecioCosto,
+        CatidadExistencia: this.state.CatidadExistencia,
         PrecioVenta:this.state.PrecioVenta,
         ProveedoresId:this.state.ProveedoresId,
         MedidaDeVenta:this.state.MedidaDeVenta,
@@ -485,8 +617,9 @@ const fecha = new Date();
     
     };
 
+    console.log(Model)
 
-
+this.SaveArticulos(Model);
     
 
 
