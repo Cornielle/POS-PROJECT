@@ -102,7 +102,7 @@ export default class VentasMain extends React.Component {
     console.log("")
     console.log("")
 
-    console.log("/****************************************************************************/");
+    console.log("/*********************************weooo*******************************************/");
     console.log("")
     console.log("")
     var fecha = new Date();
