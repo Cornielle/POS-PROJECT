@@ -1,557 +1,557 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:1:1-48:12
-INJECTED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:1:1-48:12
-INJECTED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:1:1-48:12
-INJECTED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:1:1-48:12
-MERGED from [:expo-permissions] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-permissions\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [:react-native-printer] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-printer\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-17:12
-MERGED from [:react-native-screens] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-screens\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [:unimodules-react-native-adapter] C:\Users\USER\Documents\POS\POS_Project\node_modules\@unimodules\react-native-adapter\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [:react-native-community_masked-view] C:\Users\USER\Documents\POS\POS_Project\node_modules\@react-native-community\masked-view\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
-MERGED from [:react-native-extra-dimensions-android] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-extra-dimensions-android\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [:react-native-gesture-handler] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-gesture-handler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [:react-native-orientation] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-orientation\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [:react-native-reanimated] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-reanimated\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [:react-native-safe-area-context] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-safe-area-context\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
-MERGED from [:react-native-sqlite-storage] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-sqlite-storage\platforms\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [:react-native-text-input-mask] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-text-input-mask\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [:react-native-vector-icons] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-vector-icons\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [com.facebook.react:react-native:0.61.5] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-react-native-0.61.5.aar\e5a8eb62a91eed42de5fc37e47177d37\AndroidManifest.xml:2:1-13:12
-MERGED from [com.google.android.material:material:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\material-1.0.0.aar\005d81596bc0dee0d6afb85c7cde4034\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\appcompat-1.1.0.aar\dc2800f18d49462a649c47c7c0a1a66f\AndroidManifest.xml:17:1-24:12
-MERGED from [:expo-app-loader-provider] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-app-loader-provider\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [:expo-constants] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-constants\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [:expo-error-recovery] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-error-recovery\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [:expo-file-system] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-30:12
-MERGED from [:expo-font] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-font\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [:expo-keep-awake] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-keep-awake\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [:expo-linear-gradient] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-linear-gradient\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [:expo-location] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-21:12
-MERGED from [:expo-sqlite] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-sqlite\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [:expo-web-browser] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-web-browser\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [:unimodules-barcode-scanner-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-barcode-scanner-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [:unimodules-camera-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-camera-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [:unimodules-constants-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-constants-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [:unimodules-face-detector-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-face-detector-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [:unimodules-file-system-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-file-system-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [:unimodules-font-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-font-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [:unimodules-permissions-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-permissions-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [:unimodules-task-manager-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-task-manager-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [:unimodules-core] C:\Users\USER\Documents\POS\POS_Project\node_modules\@unimodules\core\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [:unimodules-image-loader-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-image-loader-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [:unimodules-sensors-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-sensors-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [org.webkit:android-jsc:r245459] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\android-jsc-r245459.aar\544f0d6a6b9d09ee768cb4b1cef566b7\AndroidManifest.xml:2:1-11:12
-MERGED from [androidx.browser:browser:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\browser-1.0.0.aar\cc2ee57913987e735fbbadd201a3dfda\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.transition:transition:1.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\transition-1.1.0.aar\f844b5fb572363c5e965edbbe229b0f2\AndroidManifest.xml:17:1-22:12
-MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-play-services-location-16.0.0.aar\ace41a85c2187cf64f3f278d20c763f8\AndroidManifest.xml:2:1-9:12
-MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-play-services-base-16.0.1.aar\8f1522906ea6c0788922e05fa768db53\AndroidManifest.xml:17:1-29:12
-MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\play-services-places-placereport-16.0.0.aar\ce241f9edff76c633a910cda66feb6c4\AndroidManifest.xml:17:1-24:12
-MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-play-services-tasks-16.0.1.aar\e5e3c14addb69a6ed50493ec5eb36392\AndroidManifest.xml:2:1-9:12
-MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.0.1.aar\1ebc2bb49a9f2efe6768a0d1150597e5\AndroidManifest.xml:17:1-28:12
-MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\legacy-support-v4-1.0.0.aar\0930e89ddbefa3265ca83871db51d467\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.recyclerview:recyclerview:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\recyclerview-1.0.0.aar\4c8f5885fd2ba7ab0c11d7be9ddb31d9\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\legacy-support-core-ui-1.0.0.aar\f745a6972d672947b5b8adba000ceddd\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-1.0.0.aar\0c1f8971ce8b5b9a6bd98c4b6c7dc864\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.media:media:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\media-1.0.0.aar\a7ef1e22bc7c4f4b8818416e26ecf2f6\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\legacy-support-core-utils-1.0.0.aar\5aeca59d416b05a53b3a795d34663c23\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-1.0.0.aar\9676f9c79f91c08ad1984e9d64d2dae7\AndroidManifest.xml:17:1-22:12
-MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-glide-4.9.0.aar\887e64655d242e265f6785f314c42ee2\AndroidManifest.xml:2:1-12:12
-MERGED from [androidx.appcompat:appcompat-resources:1.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\appcompat-resources-1.1.0.aar\82060d333bbac456b94eaf9d33af33b7\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\vectordrawable-animated-1.1.0.aar\92a4ed36959b1cf013e91c69c96dc11d\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\interpolator-1.0.0.aar\fc0f512677d54cfbfb3eeff5f3db1b9a\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\fragment-1.1.0.aar\d0c8804c96a6f714b4101cdf47d6ac04\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\drawerlayout-1.0.0.aar\f284b725741bf49334d58370997099cd\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\viewpager-1.0.0.aar\a1b27985426839eace0c386711beb3df\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-1.0.0.aar\297a4fd46b890e38221cf6a41fdad2ef\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.customview:customview:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\customview-1.0.0.aar\7602331349b4f0ad13c448975315f6f2\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.loader:loader:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\loader-1.0.0.aar\6a50200ffa3e413bb488fb5f9b1beab5\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-1.0.0.aar\c90a2414978e369f5d3902bbd60d9d9d\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.activity:activity:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\activity-1.0.0.aar\d17b8471cfb9cdc1175f10a1e285513a\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\vectordrawable-1.1.0.aar\a4fdabe97d99239e4776f4e1f6ec1aef\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.core:core:1.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\core-1.1.0.aar\f8482ec220b932ceeb2646b79dd712bb\AndroidManifest.xml:17:1-26:12
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\cursoradapter-1.0.0.aar\7fede45b52e6676a74ed85d45e7f52c3\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\cardview-1.0.0.aar\a2b6ea7d5e25a4fd294e515389893875\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\documentfile-1.0.0.aar\5789010ddf5bce5527c5f5a68d42fbf5\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-1.0.0.aar\a53cc92046078178470970c34c9f47e8\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.print:print:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\print-1.0.0.aar\fdad4d11b9fec7e827ec3ed5667ac155\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\versionedparcelable-1.1.0.aar\92c1e932cbc32634628602238ead9410\AndroidManifest.xml:17:1-27:12
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\lifecycle-runtime-2.1.0.aar\7fbd08bb731625e9216f8ddb81fd8fff\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\lifecycle-viewmodel-2.1.0.aar\dc66db78f0d80c7df7ef9fc1ed0c6338\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\savedstate-1.0.0.aar\42ae3ea418f347ae7baa35dae50d98b4\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\lifecycle-livedata-2.0.0.aar\b70301b41813ea1b83ed2a4ac1a62049\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\lifecycle-livedata-core-2.0.0.aar\5c5ae54ad0d999f64812c9402eb3c0a5\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\core-runtime-2.0.0.aar\270f09599728889a35a2c6d22258b53b\AndroidManifest.xml:17:1-22:12
-MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-gifdecoder-4.9.0.aar\9c2723ca8e2b19ab506cc805a9bcf1af\AndroidManifest.xml:2:1-11:12
-MERGED from [com.facebook.fresco:fresco:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\fresco-2.0.0.aar\94db7e8f4ede66526c4bf989b5ca5846\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\imagepipeline-okhttp3-2.0.0.aar\54512cf9514e6e32176f0386580217c6\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:drawee:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\drawee-2.0.0.aar\f649c29f47ac3a26448d51f474bbc078\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\nativeimagefilters-2.0.0.aar\af4a5aa4018736a0ca2c9e10fdcf096c\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:imagepipeline:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\imagepipeline-2.0.0.aar\6f5aaa27844fa463b1c0e2572cb0619a\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\nativeimagetranscoder-2.0.0.aar\c7b0c4b682387bc03fe82fde43bb274d\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\imagepipeline-base-2.0.0.aar\0618f63d0ccf4d8ea6c7b490110c550c\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\soloader-0.6.0.aar\9d8c1b78672609c76d463551d104bb7c\AndroidManifest.xml:2:1-13:12
-MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\3a50262d8d41a8791ee1370adde9184d\AndroidManifest.xml:2:1-30:12
-MERGED from [com.redmadrobot:inputmask:4.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\inputmask-4.1.0.aar\e57d1aede8056d04afd1d0240d9aead6\AndroidManifest.xml:2:1-11:12
-MERGED from [com.facebook.fresco:fbcore:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-fbcore-2.0.0.aar\e5c472dd12192d0e7754db92aa19acbf\AndroidManifest.xml:2:1-9:12
-INJECTED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:1:1-48:12
-INJECTED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:1:1-48:12
-INJECTED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:1:1-48:12
+ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:1:1-48:12
+INJECTED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:1:1-48:12
+INJECTED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:1:1-48:12
+INJECTED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:1:1-48:12
+MERGED from [:expo-permissions] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-permissions/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-printer] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-printer/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-17:12
+MERGED from [:react-native-screens] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-screens/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:unimodules-react-native-adapter] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/@unimodules/react-native-adapter/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-community_masked-view] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/@react-native-community/masked-view/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-9:12
+MERGED from [:react-native-extra-dimensions-android] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-extra-dimensions-android/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-gesture-handler] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-orientation] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-orientation/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-reanimated] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-reanimated/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-safe-area-context] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-safe-area-context/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-9:12
+MERGED from [:react-native-sqlite-storage] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-sqlite-storage/platforms/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-text-input-mask] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-text-input-mask/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-vector-icons] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-vector-icons/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [com.facebook.react:react-native:0.61.5] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/5ed54297820daff11171eed9ba6dc626/AndroidManifest.xml:2:1-13:12
+MERGED from [com.google.android.material:material:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/7db1a37c40b4f86eb5f6cb6d1a59f12e/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/appcompat-1.1.0.aar/a480b5746a9c22c1f18827050aa94cf8/AndroidManifest.xml:17:1-24:12
+MERGED from [:expo-app-loader-provider] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-app-loader-provider/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:expo-constants] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-constants/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:expo-error-recovery] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-error-recovery/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:expo-file-system] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-30:12
+MERGED from [:expo-font] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-font/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:expo-keep-awake] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-keep-awake/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:expo-linear-gradient] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-linear-gradient/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:expo-location] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-location/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-21:12
+MERGED from [:expo-sqlite] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-sqlite/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:expo-web-browser] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-web-browser/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:unimodules-barcode-scanner-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-barcode-scanner-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:unimodules-camera-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-camera-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:unimodules-constants-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-constants-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:unimodules-face-detector-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-face-detector-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:unimodules-file-system-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-file-system-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:unimodules-font-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-font-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:unimodules-permissions-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-permissions-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:unimodules-task-manager-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-task-manager-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:unimodules-core] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/@unimodules/core/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:unimodules-image-loader-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-image-loader-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:unimodules-sensors-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-sensors-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [org.webkit:android-jsc:r245459] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/android-jsc-r245459.aar/117bf044c077d889497724caac6f9983/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.browser:browser:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/browser-1.0.0.aar/da835692555fa131939a1266993d0194/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.transition:transition:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/transition-1.1.0.aar/d23b82befcc9c80d86a1132edf7eb02c/AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.gms:play-services-location:16.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-play-services-location-16.0.0.aar/c4d9bdf35e3b7b701958593bbc47ea79/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-base:16.0.1] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-play-services-base-16.0.1.aar/92824f9cc6343b09873cbd922f82c276/AndroidManifest.xml:17:1-29:12
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/play-services-places-placereport-16.0.0.aar/ad81236fae24d37097e919ae4e3d708c/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-play-services-tasks-16.0.1.aar/a8e2221a6f8f42a2562bf99a83c2df57/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-play-services-basement-16.0.1.aar/0b99a40fcb2393ed3965739570367d81/AndroidManifest.xml:17:1-28:12
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/legacy-support-v4-1.0.0.aar/15d2913a195936430a3db8d8d7afc771/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.recyclerview:recyclerview:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/recyclerview-1.0.0.aar/42436ff10ad1b8f6eb191782856cefdb/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/legacy-support-core-ui-1.0.0.aar/9d6d8c9079df8564217e63f6468ebb01/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-1.0.0.aar/e5ad0b8f7b85ce590ec9e24d5df72a43/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media:media:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/media-1.0.0.aar/cf320e0f3b4b703fb06893335cae9d9f/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/legacy-support-core-utils-1.0.0.aar/506042450cbb66023476ec5c676bd1fd/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-1.0.0.aar/376c947810a9714892048d55b7659ac7/AndroidManifest.xml:17:1-22:12
+MERGED from [com.github.bumptech.glide:glide:4.9.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-glide-4.9.0.aar/4c86d0f3c3f02c519adff6b236985538/AndroidManifest.xml:2:1-12:12
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/appcompat-resources-1.1.0.aar/531fffbc6210bdf3dc84a1a6841c0652/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/vectordrawable-animated-1.1.0.aar/f5f339cb04becd295df0dd8ed45ab756/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/interpolator-1.0.0.aar/17abd78c3cf7d47283d1ce0ad1c48c1c/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.fragment:fragment:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/fragment-1.1.0.aar/0cdf6fbd2b72b8ecb92906d564256b69/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/drawerlayout-1.0.0.aar/4a04766c166faafa14eefd727df0a34f/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/viewpager-1.0.0.aar/45d852090b01b4cd61e92b5ab88e16ba/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-1.0.0.aar/81f30210d4df0c32f23469cb58c67c10/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/customview-1.0.0.aar/de2ea312dea9f73ade5bd0b1ef8e27f3/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/loader-1.0.0.aar/041f48a05550187aa8289ee2cca0a528/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-1.0.0.aar/8c5dd0100f2e9fdeea53ead471ceb2db/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/activity-1.0.0.aar/dc93aa63c2e9f9cc628d8d808654a0f3/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/vectordrawable-1.1.0.aar/91c5d432c2ddb52e4583ff5e0f9ca404/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.core:core:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/core-1.1.0.aar/3ba42d56a57bcd52effc4aa562698c21/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/cursoradapter-1.0.0.aar/f92deb80cd40eb8725bacb7758c4fa54/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/cardview-1.0.0.aar/757a7a56b324c6059879709774e81e35/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/documentfile-1.0.0.aar/3ffe880be9311568f5d906b71586a928/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-1.0.0.aar/c0c844fafeb20681144d107f249a9519/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/print-1.0.0.aar/a5b8d9229210ec70f816a2aef906b02f/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.1.0.aar/813d9174d58dcb7df7677eb14bb4b1a1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/lifecycle-runtime-2.1.0.aar/27c1da5d1358c298ff03338d72d1d151/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/lifecycle-viewmodel-2.1.0.aar/e928a3c2b11c4d7de6f7269e2aba1b35/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/savedstate-1.0.0.aar/9ed09020e1f0b8021180b1a15171b3c8/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-2.0.0.aar/6d3aa9fdebcdca994caabee70808c648/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-core-2.0.0.aar/5d714d5d9144d585b81259b68ac3f8a4/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/core-runtime-2.0.0.aar/c9d7daa2957b1e5059975957427ab0e6/AndroidManifest.xml:17:1-22:12
+MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-gifdecoder-4.9.0.aar/e42ca45f1fa20cf6ce0b35fddc646988/AndroidManifest.xml:2:1-11:12
+MERGED from [com.facebook.fresco:fresco:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/fresco-2.0.0.aar/4292c8bc95032f170d7ab9c72ec5ff37/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/imagepipeline-okhttp3-2.0.0.aar/dfc47bd14cb935c2673e29c29dc779a7/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:drawee:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/drawee-2.0.0.aar/35a52571eb9504d94ae1a71438b7e59c/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/nativeimagefilters-2.0.0.aar/3d36f1b30301e8694ae9a182b8e3a7a9/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/imagepipeline-2.0.0.aar/c21cb695a9655741607de49946b42001/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/nativeimagetranscoder-2.0.0.aar/6ab6b7681fdb95a302122d98daa762e1/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-2.0.0.aar/4de7160dc314d359065d2cc3b6f66506/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.soloader:soloader:0.6.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/soloader-0.6.0.aar/3d5eaa0e4d456ac49e47ecc08e8194ff/AndroidManifest.xml:2:1-13:12
+MERGED from [io.nlopez.smartlocation:library:3.2.11] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-library-3.2.11.aar/891dfbd952acc2b9d9d406b6842f4b6a/AndroidManifest.xml:2:1-30:12
+MERGED from [com.redmadrobot:inputmask:4.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/inputmask-4.1.0.aar/6991c52cf60a1351ef5fd400d0c138a8/AndroidManifest.xml:2:1-11:12
+MERGED from [com.facebook.fresco:fbcore:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-fbcore-2.0.0.aar/f037dc8e02ba1af28aa1c4e02075cec0/AndroidManifest.xml:2:1-9:12
+INJECTED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:1:1-48:12
+INJECTED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:1:1-48:12
+INJECTED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:1:1-48:12
 	package
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:2:5-26
-		INJECTED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:2:5-26
+		INJECTED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml
 	android:versionName
-		INJECTED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:1:1-48:12
-		INJECTED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml
+		INJECTED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:1:1-48:12
+		INJECTED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml
 	android:versionCode
-		INJECTED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:1:1-48:12
-		INJECTED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml
+		INJECTED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:1:1-48:12
+		INJECTED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml
 	xmlns:android
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:1:11-69
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:1:11-69
 uses-permission#android.permission.INTERNET
-ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:4:5-67
-MERGED from [:react-native-printer] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-printer\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-67
-MERGED from [:react-native-printer] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-printer\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-67
-MERGED from [:expo-file-system] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-67
-MERGED from [:expo-file-system] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-67
+ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:4:5-67
+MERGED from [:react-native-printer] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-printer/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:5-67
+MERGED from [:react-native-printer] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-printer/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:5-67
+MERGED from [:expo-file-system] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:5-67
+MERGED from [:expo-file-system] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:5-67
 	android:name
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:4:22-64
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:4:22-64
 uses-permission#android.permission.SYSTEM_ALERT_WINDOW
-ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:5:5-77
+ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:5:5-77
 	android:name
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:5:22-75
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:5:22-75
 uses-permission#android.permission.MANAGE_DOCUMENTS
-ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:8:5-75
+ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:8:5-75
 	android:name
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:8:22-72
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:8:22-72
 uses-permission#android.permission.READ_INTERNAL_STORAGE
-ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:9:5-80
+ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:9:5-80
 	android:name
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:9:22-77
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:9:22-77
 uses-permission#android.permission.READ_PHONE_STATE
-ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:10:5-75
+ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:10:5-75
 	android:name
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:10:22-72
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:10:22-72
 uses-permission#android.permission.USE_FINGERPRINT
-ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:11:5-74
+ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:11:5-74
 	android:name
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:11:22-71
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:11:22-71
 uses-permission#android.permission.VIBRATE
-ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:12:5-66
+ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:12:5-66
 	android:name
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:12:22-63
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:12:22-63
 uses-permission#android.permission.MODIFY_AUDIO_SETTINGS
-ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:13:5-80
+ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:13:5-80
 	android:name
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:13:22-77
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:13:22-77
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
-ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:16:5-81
-MERGED from [:expo-location] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-81
-MERGED from [:expo-location] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-81
-MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\3a50262d8d41a8791ee1370adde9184d\AndroidManifest.xml:12:5-81
-MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\3a50262d8d41a8791ee1370adde9184d\AndroidManifest.xml:12:5-81
+ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:16:5-81
+MERGED from [:expo-location] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-location/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:5-81
+MERGED from [:expo-location] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-location/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:5-81
+MERGED from [io.nlopez.smartlocation:library:3.2.11] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-library-3.2.11.aar/891dfbd952acc2b9d9d406b6842f4b6a/AndroidManifest.xml:12:5-81
+MERGED from [io.nlopez.smartlocation:library:3.2.11] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-library-3.2.11.aar/891dfbd952acc2b9d9d406b6842f4b6a/AndroidManifest.xml:12:5-81
 	android:name
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:16:22-78
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:16:22-78
 uses-permission#android.permission.ACCESS_FINE_LOCATION
-ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:17:5-79
-MERGED from [:expo-location] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-79
-MERGED from [:expo-location] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-79
-MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\3a50262d8d41a8791ee1370adde9184d\AndroidManifest.xml:14:5-79
-MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\3a50262d8d41a8791ee1370adde9184d\AndroidManifest.xml:14:5-79
+ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:17:5-79
+MERGED from [:expo-location] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-location/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:5-79
+MERGED from [:expo-location] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-location/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:5-79
+MERGED from [io.nlopez.smartlocation:library:3.2.11] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-library-3.2.11.aar/891dfbd952acc2b9d9d406b6842f4b6a/AndroidManifest.xml:14:5-79
+MERGED from [io.nlopez.smartlocation:library:3.2.11] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-library-3.2.11.aar/891dfbd952acc2b9d9d406b6842f4b6a/AndroidManifest.xml:14:5-79
 	android:name
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:17:22-76
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:17:22-76
 uses-permission#android.permission.CAMERA
-ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:18:5-65
+ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:18:5-65
 	android:name
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:18:22-62
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:18:22-62
 uses-permission#android.permission.READ_CONTACTS
-ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:19:5-72
+ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:19:5-72
 	android:name
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:19:22-69
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:19:22-69
 uses-permission#android.permission.READ_CALENDAR
-ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:20:5-72
+ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:20:5-72
 	android:name
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:20:22-69
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:20:22-69
 uses-permission#android.permission.WRITE_CALENDAR
-ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:21:5-73
+ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:21:5-73
 	android:name
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:21:22-70
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:21:22-70
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
-ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:22:5-80
-MERGED from [:expo-file-system] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:5-80
-MERGED from [:expo-file-system] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:5-80
+ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:22:5-80
+MERGED from [:expo-file-system] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:14:5-80
+MERGED from [:expo-file-system] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:14:5-80
 	android:name
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:22:22-77
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:22:22-77
 uses-permission#android.permission.RECORD_AUDIO
-ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:23:5-71
+ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:23:5-71
 	android:name
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:23:22-68
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:23:22-68
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:24:5-81
-MERGED from [:expo-file-system] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:5-81
-MERGED from [:expo-file-system] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:5-81
+ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:24:5-81
+MERGED from [:expo-file-system] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:5-81
+MERGED from [:expo-file-system] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:5-81
 	android:name
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:24:22-78
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:24:22-78
 uses-permission#android.permission.WRITE_SETTINGS
-ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:25:5-73
+ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:25:5-73
 	android:name
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:25:22-70
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:25:22-70
 application
-ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:28:5-46:19
-MERGED from [com.facebook.react:react-native:0.61.5] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-react-native-0.61.5.aar\e5a8eb62a91eed42de5fc37e47177d37\AndroidManifest.xml:11:5-20
-MERGED from [com.facebook.react:react-native:0.61.5] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-react-native-0.61.5.aar\e5a8eb62a91eed42de5fc37e47177d37\AndroidManifest.xml:11:5-20
-MERGED from [com.google.android.material:material:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\material-1.0.0.aar\005d81596bc0dee0d6afb85c7cde4034\AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.material:material:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\material-1.0.0.aar\005d81596bc0dee0d6afb85c7cde4034\AndroidManifest.xml:22:5-20
-MERGED from [:expo-file-system] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:5-28:19
-MERGED from [:expo-file-system] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:5-28:19
-MERGED from [:expo-location] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:5-19:19
-MERGED from [:expo-location] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:5-19:19
-MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-play-services-location-16.0.0.aar\ace41a85c2187cf64f3f278d20c763f8\AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-play-services-location-16.0.0.aar\ace41a85c2187cf64f3f278d20c763f8\AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-play-services-base-16.0.1.aar\8f1522906ea6c0788922e05fa768db53\AndroidManifest.xml:22:5-27:19
-MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-play-services-base-16.0.1.aar\8f1522906ea6c0788922e05fa768db53\AndroidManifest.xml:22:5-27:19
-MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\play-services-places-placereport-16.0.0.aar\ce241f9edff76c633a910cda66feb6c4\AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\play-services-places-placereport-16.0.0.aar\ce241f9edff76c633a910cda66feb6c4\AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-play-services-tasks-16.0.1.aar\e5e3c14addb69a6ed50493ec5eb36392\AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-play-services-tasks-16.0.1.aar\e5e3c14addb69a6ed50493ec5eb36392\AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.0.1.aar\1ebc2bb49a9f2efe6768a0d1150597e5\AndroidManifest.xml:22:5-26:19
-MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.0.1.aar\1ebc2bb49a9f2efe6768a0d1150597e5\AndroidManifest.xml:22:5-26:19
-MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-glide-4.9.0.aar\887e64655d242e265f6785f314c42ee2\AndroidManifest.xml:10:5-20
-MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-glide-4.9.0.aar\887e64655d242e265f6785f314c42ee2\AndroidManifest.xml:10:5-20
-MERGED from [androidx.core:core:1.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\core-1.1.0.aar\f8482ec220b932ceeb2646b79dd712bb\AndroidManifest.xml:24:5-89
-MERGED from [androidx.core:core:1.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\core-1.1.0.aar\f8482ec220b932ceeb2646b79dd712bb\AndroidManifest.xml:24:5-89
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\versionedparcelable-1.1.0.aar\92c1e932cbc32634628602238ead9410\AndroidManifest.xml:24:5-25:19
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\versionedparcelable-1.1.0.aar\92c1e932cbc32634628602238ead9410\AndroidManifest.xml:24:5-25:19
-MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-gifdecoder-4.9.0.aar\9c2723ca8e2b19ab506cc805a9bcf1af\AndroidManifest.xml:9:5-20
-MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-gifdecoder-4.9.0.aar\9c2723ca8e2b19ab506cc805a9bcf1af\AndroidManifest.xml:9:5-20
-MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\soloader-0.6.0.aar\9d8c1b78672609c76d463551d104bb7c\AndroidManifest.xml:11:5-20
-MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\soloader-0.6.0.aar\9d8c1b78672609c76d463551d104bb7c\AndroidManifest.xml:11:5-20
-MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\3a50262d8d41a8791ee1370adde9184d\AndroidManifest.xml:18:5-28:19
-MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\3a50262d8d41a8791ee1370adde9184d\AndroidManifest.xml:18:5-28:19
+ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:28:5-46:19
+MERGED from [com.facebook.react:react-native:0.61.5] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/5ed54297820daff11171eed9ba6dc626/AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.react:react-native:0.61.5] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/5ed54297820daff11171eed9ba6dc626/AndroidManifest.xml:11:5-20
+MERGED from [com.google.android.material:material:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/7db1a37c40b4f86eb5f6cb6d1a59f12e/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/7db1a37c40b4f86eb5f6cb6d1a59f12e/AndroidManifest.xml:22:5-20
+MERGED from [:expo-file-system] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:17:5-28:19
+MERGED from [:expo-file-system] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:17:5-28:19
+MERGED from [:expo-location] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-location/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:15:5-19:19
+MERGED from [:expo-location] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-location/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:15:5-19:19
+MERGED from [com.google.android.gms:play-services-location:16.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-play-services-location-16.0.0.aar/c4d9bdf35e3b7b701958593bbc47ea79/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-location:16.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-play-services-location-16.0.0.aar/c4d9bdf35e3b7b701958593bbc47ea79/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-base:16.0.1] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-play-services-base-16.0.1.aar/92824f9cc6343b09873cbd922f82c276/AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-base:16.0.1] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-play-services-base-16.0.1.aar/92824f9cc6343b09873cbd922f82c276/AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/play-services-places-placereport-16.0.0.aar/ad81236fae24d37097e919ae4e3d708c/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/play-services-places-placereport-16.0.0.aar/ad81236fae24d37097e919ae4e3d708c/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-play-services-tasks-16.0.1.aar/a8e2221a6f8f42a2562bf99a83c2df57/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-play-services-tasks-16.0.1.aar/a8e2221a6f8f42a2562bf99a83c2df57/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-play-services-basement-16.0.1.aar/0b99a40fcb2393ed3965739570367d81/AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-play-services-basement-16.0.1.aar/0b99a40fcb2393ed3965739570367d81/AndroidManifest.xml:22:5-26:19
+MERGED from [com.github.bumptech.glide:glide:4.9.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-glide-4.9.0.aar/4c86d0f3c3f02c519adff6b236985538/AndroidManifest.xml:10:5-20
+MERGED from [com.github.bumptech.glide:glide:4.9.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-glide-4.9.0.aar/4c86d0f3c3f02c519adff6b236985538/AndroidManifest.xml:10:5-20
+MERGED from [androidx.core:core:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/core-1.1.0.aar/3ba42d56a57bcd52effc4aa562698c21/AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/core-1.1.0.aar/3ba42d56a57bcd52effc4aa562698c21/AndroidManifest.xml:24:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.1.0.aar/813d9174d58dcb7df7677eb14bb4b1a1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.1.0.aar/813d9174d58dcb7df7677eb14bb4b1a1/AndroidManifest.xml:24:5-25:19
+MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-gifdecoder-4.9.0.aar/e42ca45f1fa20cf6ce0b35fddc646988/AndroidManifest.xml:9:5-20
+MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-gifdecoder-4.9.0.aar/e42ca45f1fa20cf6ce0b35fddc646988/AndroidManifest.xml:9:5-20
+MERGED from [com.facebook.soloader:soloader:0.6.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/soloader-0.6.0.aar/3d5eaa0e4d456ac49e47ecc08e8194ff/AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.soloader:soloader:0.6.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/soloader-0.6.0.aar/3d5eaa0e4d456ac49e47ecc08e8194ff/AndroidManifest.xml:11:5-20
+MERGED from [io.nlopez.smartlocation:library:3.2.11] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-library-3.2.11.aar/891dfbd952acc2b9d9d406b6842f4b6a/AndroidManifest.xml:18:5-28:19
+MERGED from [io.nlopez.smartlocation:library:3.2.11] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-library-3.2.11.aar/891dfbd952acc2b9d9d406b6842f4b6a/AndroidManifest.xml:18:5-28:19
 	android:appComponentFactory
-		ADDED from [androidx.core:core:1.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\core-1.1.0.aar\f8482ec220b932ceeb2646b79dd712bb\AndroidManifest.xml:24:18-86
+		ADDED from [androidx.core:core:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/core-1.1.0.aar/3ba42d56a57bcd52effc4aa562698c21/AndroidManifest.xml:24:18-86
 	android:label
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:30:7-39
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:30:7-39
 	android:roundIcon
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:32:7-52
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:32:7-52
 	android:icon
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:31:7-41
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:31:7-41
 	android:allowBackup
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:33:7-34
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:33:7-34
 	android:theme
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:34:7-38
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:34:7-38
 	android:name
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:29:7-38
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:29:7-38
 activity#com.posproj.MainActivity
-ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:35:7-44:18
+ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:35:7-44:18
 	android:label
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:37:9-41
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:37:9-41
 	android:windowSoftInputMode
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:39:9-51
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:39:9-51
 	android:configChanges
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:38:9-79
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:38:9-79
 	android:name
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:36:9-37
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:36:9-37
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:40:9-43:25
+ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:40:9-43:25
 action#android.intent.action.MAIN
-ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:41:13-65
+ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:41:13-65
 	android:name
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:41:21-62
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:41:21-62
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:42:13-73
+ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:42:13-73
 	android:name
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:42:23-70
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:42:23-70
 activity#com.facebook.react.devsupport.DevSettingsActivity
-ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:45:7-84
+ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:45:7-84
 	android:name
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml:45:17-81
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:45:17-81
 uses-sdk
-INJECTED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml
-INJECTED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml
-MERGED from [:expo-permissions] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-permissions\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:expo-permissions] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-permissions\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-printer] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-printer\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-printer] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-printer\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-screens] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-screens\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-screens] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-screens\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:unimodules-react-native-adapter] C:\Users\USER\Documents\POS\POS_Project\node_modules\@unimodules\react-native-adapter\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:unimodules-react-native-adapter] C:\Users\USER\Documents\POS\POS_Project\node_modules\@unimodules\react-native-adapter\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-community_masked-view] C:\Users\USER\Documents\POS\POS_Project\node_modules\@react-native-community\masked-view\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
-MERGED from [:react-native-community_masked-view] C:\Users\USER\Documents\POS\POS_Project\node_modules\@react-native-community\masked-view\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
-MERGED from [:react-native-extra-dimensions-android] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-extra-dimensions-android\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-extra-dimensions-android] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-extra-dimensions-android\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-gesture-handler] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-gesture-handler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-gesture-handler] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-gesture-handler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-orientation] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-orientation\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-orientation] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-orientation\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-reanimated] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-reanimated\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-reanimated] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-reanimated\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-safe-area-context] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-safe-area-context\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
-MERGED from [:react-native-safe-area-context] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-safe-area-context\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
-MERGED from [:react-native-sqlite-storage] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-sqlite-storage\platforms\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-sqlite-storage] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-sqlite-storage\platforms\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-text-input-mask] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-text-input-mask\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-text-input-mask] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-text-input-mask\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-vector-icons] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-vector-icons\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-vector-icons] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-vector-icons\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.react:react-native:0.61.5] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-react-native-0.61.5.aar\e5a8eb62a91eed42de5fc37e47177d37\AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.react:react-native:0.61.5] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-react-native-0.61.5.aar\e5a8eb62a91eed42de5fc37e47177d37\AndroidManifest.xml:7:5-9:41
-MERGED from [com.google.android.material:material:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\material-1.0.0.aar\005d81596bc0dee0d6afb85c7cde4034\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.material:material:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\material-1.0.0.aar\005d81596bc0dee0d6afb85c7cde4034\AndroidManifest.xml:20:5-44
-MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\appcompat-1.1.0.aar\dc2800f18d49462a649c47c7c0a1a66f\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\appcompat-1.1.0.aar\dc2800f18d49462a649c47c7c0a1a66f\AndroidManifest.xml:20:5-22:41
-MERGED from [:expo-app-loader-provider] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-app-loader-provider\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:expo-app-loader-provider] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-app-loader-provider\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:expo-constants] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-constants\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:expo-constants] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-constants\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:expo-error-recovery] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-error-recovery\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:expo-error-recovery] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-error-recovery\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:expo-file-system] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-10:41
-MERGED from [:expo-file-system] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-10:41
-MERGED from [:expo-font] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-font\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:expo-font] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-font\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:expo-keep-awake] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-keep-awake\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:expo-keep-awake] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-keep-awake\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:expo-linear-gradient] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-linear-gradient\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:expo-linear-gradient] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-linear-gradient\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:expo-location] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:expo-location] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:expo-sqlite] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-sqlite\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:expo-sqlite] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-sqlite\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:expo-web-browser] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-web-browser\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:expo-web-browser] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-web-browser\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:unimodules-barcode-scanner-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-barcode-scanner-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:unimodules-barcode-scanner-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-barcode-scanner-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:unimodules-camera-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-camera-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:unimodules-camera-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-camera-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:unimodules-constants-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-constants-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:unimodules-constants-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-constants-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:unimodules-face-detector-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-face-detector-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:unimodules-face-detector-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-face-detector-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:unimodules-file-system-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-file-system-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:unimodules-file-system-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-file-system-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:unimodules-font-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-font-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:unimodules-font-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-font-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:unimodules-permissions-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-permissions-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:unimodules-permissions-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-permissions-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:unimodules-task-manager-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-task-manager-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:unimodules-task-manager-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-task-manager-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:unimodules-core] C:\Users\USER\Documents\POS\POS_Project\node_modules\@unimodules\core\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:unimodules-core] C:\Users\USER\Documents\POS\POS_Project\node_modules\@unimodules\core\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:unimodules-image-loader-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-image-loader-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:unimodules-image-loader-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-image-loader-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:unimodules-sensors-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-sensors-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [:unimodules-sensors-interface] C:\Users\USER\Documents\POS\POS_Project\node_modules\unimodules-sensors-interface\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [org.webkit:android-jsc:r245459] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\android-jsc-r245459.aar\544f0d6a6b9d09ee768cb4b1cef566b7\AndroidManifest.xml:7:5-9:41
-MERGED from [org.webkit:android-jsc:r245459] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\android-jsc-r245459.aar\544f0d6a6b9d09ee768cb4b1cef566b7\AndroidManifest.xml:7:5-9:41
-MERGED from [androidx.browser:browser:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\browser-1.0.0.aar\cc2ee57913987e735fbbadd201a3dfda\AndroidManifest.xml:20:5-44
-MERGED from [androidx.browser:browser:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\browser-1.0.0.aar\cc2ee57913987e735fbbadd201a3dfda\AndroidManifest.xml:20:5-44
-MERGED from [androidx.transition:transition:1.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\transition-1.1.0.aar\f844b5fb572363c5e965edbbe229b0f2\AndroidManifest.xml:20:5-44
-MERGED from [androidx.transition:transition:1.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\transition-1.1.0.aar\f844b5fb572363c5e965edbbe229b0f2\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-play-services-location-16.0.0.aar\ace41a85c2187cf64f3f278d20c763f8\AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-location:16.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-play-services-location-16.0.0.aar\ace41a85c2187cf64f3f278d20c763f8\AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-play-services-base-16.0.1.aar\8f1522906ea6c0788922e05fa768db53\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-play-services-base-16.0.1.aar\8f1522906ea6c0788922e05fa768db53\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\play-services-places-placereport-16.0.0.aar\ce241f9edff76c633a910cda66feb6c4\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\play-services-places-placereport-16.0.0.aar\ce241f9edff76c633a910cda66feb6c4\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-play-services-tasks-16.0.1.aar\e5e3c14addb69a6ed50493ec5eb36392\AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-play-services-tasks-16.0.1.aar\e5e3c14addb69a6ed50493ec5eb36392\AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.0.1.aar\1ebc2bb49a9f2efe6768a0d1150597e5\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.0.1.aar\1ebc2bb49a9f2efe6768a0d1150597e5\AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\legacy-support-v4-1.0.0.aar\0930e89ddbefa3265ca83871db51d467\AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\legacy-support-v4-1.0.0.aar\0930e89ddbefa3265ca83871db51d467\AndroidManifest.xml:20:5-44
-MERGED from [androidx.recyclerview:recyclerview:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\recyclerview-1.0.0.aar\4c8f5885fd2ba7ab0c11d7be9ddb31d9\AndroidManifest.xml:20:5-44
-MERGED from [androidx.recyclerview:recyclerview:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\recyclerview-1.0.0.aar\4c8f5885fd2ba7ab0c11d7be9ddb31d9\AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\legacy-support-core-ui-1.0.0.aar\f745a6972d672947b5b8adba000ceddd\AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\legacy-support-core-ui-1.0.0.aar\f745a6972d672947b5b8adba000ceddd\AndroidManifest.xml:20:5-44
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-1.0.0.aar\0c1f8971ce8b5b9a6bd98c4b6c7dc864\AndroidManifest.xml:20:5-44
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-1.0.0.aar\0c1f8971ce8b5b9a6bd98c4b6c7dc864\AndroidManifest.xml:20:5-44
-MERGED from [androidx.media:media:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\media-1.0.0.aar\a7ef1e22bc7c4f4b8818416e26ecf2f6\AndroidManifest.xml:20:5-44
-MERGED from [androidx.media:media:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\media-1.0.0.aar\a7ef1e22bc7c4f4b8818416e26ecf2f6\AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\legacy-support-core-utils-1.0.0.aar\5aeca59d416b05a53b3a795d34663c23\AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\legacy-support-core-utils-1.0.0.aar\5aeca59d416b05a53b3a795d34663c23\AndroidManifest.xml:20:5-44
-MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-1.0.0.aar\9676f9c79f91c08ad1984e9d64d2dae7\AndroidManifest.xml:20:5-44
-MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-1.0.0.aar\9676f9c79f91c08ad1984e9d64d2dae7\AndroidManifest.xml:20:5-44
-MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-glide-4.9.0.aar\887e64655d242e265f6785f314c42ee2\AndroidManifest.xml:6:5-8:41
-MERGED from [com.github.bumptech.glide:glide:4.9.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-glide-4.9.0.aar\887e64655d242e265f6785f314c42ee2\AndroidManifest.xml:6:5-8:41
-MERGED from [androidx.appcompat:appcompat-resources:1.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\appcompat-resources-1.1.0.aar\82060d333bbac456b94eaf9d33af33b7\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.appcompat:appcompat-resources:1.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\appcompat-resources-1.1.0.aar\82060d333bbac456b94eaf9d33af33b7\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\vectordrawable-animated-1.1.0.aar\92a4ed36959b1cf013e91c69c96dc11d\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\vectordrawable-animated-1.1.0.aar\92a4ed36959b1cf013e91c69c96dc11d\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\interpolator-1.0.0.aar\fc0f512677d54cfbfb3eeff5f3db1b9a\AndroidManifest.xml:20:5-44
-MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\interpolator-1.0.0.aar\fc0f512677d54cfbfb3eeff5f3db1b9a\AndroidManifest.xml:20:5-44
-MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\fragment-1.1.0.aar\d0c8804c96a6f714b4101cdf47d6ac04\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\fragment-1.1.0.aar\d0c8804c96a6f714b4101cdf47d6ac04\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\drawerlayout-1.0.0.aar\f284b725741bf49334d58370997099cd\AndroidManifest.xml:20:5-44
-MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\drawerlayout-1.0.0.aar\f284b725741bf49334d58370997099cd\AndroidManifest.xml:20:5-44
-MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\viewpager-1.0.0.aar\a1b27985426839eace0c386711beb3df\AndroidManifest.xml:20:5-44
-MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\viewpager-1.0.0.aar\a1b27985426839eace0c386711beb3df\AndroidManifest.xml:20:5-44
-MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-1.0.0.aar\297a4fd46b890e38221cf6a41fdad2ef\AndroidManifest.xml:20:5-44
-MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-1.0.0.aar\297a4fd46b890e38221cf6a41fdad2ef\AndroidManifest.xml:20:5-44
-MERGED from [androidx.customview:customview:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\customview-1.0.0.aar\7602331349b4f0ad13c448975315f6f2\AndroidManifest.xml:20:5-44
-MERGED from [androidx.customview:customview:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\customview-1.0.0.aar\7602331349b4f0ad13c448975315f6f2\AndroidManifest.xml:20:5-44
-MERGED from [androidx.loader:loader:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\loader-1.0.0.aar\6a50200ffa3e413bb488fb5f9b1beab5\AndroidManifest.xml:20:5-44
-MERGED from [androidx.loader:loader:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\loader-1.0.0.aar\6a50200ffa3e413bb488fb5f9b1beab5\AndroidManifest.xml:20:5-44
-MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-1.0.0.aar\c90a2414978e369f5d3902bbd60d9d9d\AndroidManifest.xml:20:5-44
-MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-1.0.0.aar\c90a2414978e369f5d3902bbd60d9d9d\AndroidManifest.xml:20:5-44
-MERGED from [androidx.activity:activity:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\activity-1.0.0.aar\d17b8471cfb9cdc1175f10a1e285513a\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.activity:activity:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\activity-1.0.0.aar\d17b8471cfb9cdc1175f10a1e285513a\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\vectordrawable-1.1.0.aar\a4fdabe97d99239e4776f4e1f6ec1aef\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\vectordrawable-1.1.0.aar\a4fdabe97d99239e4776f4e1f6ec1aef\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.core:core:1.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\core-1.1.0.aar\f8482ec220b932ceeb2646b79dd712bb\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.core:core:1.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\core-1.1.0.aar\f8482ec220b932ceeb2646b79dd712bb\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\cursoradapter-1.0.0.aar\7fede45b52e6676a74ed85d45e7f52c3\AndroidManifest.xml:20:5-44
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\cursoradapter-1.0.0.aar\7fede45b52e6676a74ed85d45e7f52c3\AndroidManifest.xml:20:5-44
-MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\cardview-1.0.0.aar\a2b6ea7d5e25a4fd294e515389893875\AndroidManifest.xml:20:5-44
-MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\cardview-1.0.0.aar\a2b6ea7d5e25a4fd294e515389893875\AndroidManifest.xml:20:5-44
-MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\documentfile-1.0.0.aar\5789010ddf5bce5527c5f5a68d42fbf5\AndroidManifest.xml:20:5-44
-MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\documentfile-1.0.0.aar\5789010ddf5bce5527c5f5a68d42fbf5\AndroidManifest.xml:20:5-44
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-1.0.0.aar\a53cc92046078178470970c34c9f47e8\AndroidManifest.xml:20:5-44
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-1.0.0.aar\a53cc92046078178470970c34c9f47e8\AndroidManifest.xml:20:5-44
-MERGED from [androidx.print:print:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\print-1.0.0.aar\fdad4d11b9fec7e827ec3ed5667ac155\AndroidManifest.xml:20:5-44
-MERGED from [androidx.print:print:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\print-1.0.0.aar\fdad4d11b9fec7e827ec3ed5667ac155\AndroidManifest.xml:20:5-44
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\versionedparcelable-1.1.0.aar\92c1e932cbc32634628602238ead9410\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\versionedparcelable-1.1.0.aar\92c1e932cbc32634628602238ead9410\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\lifecycle-runtime-2.1.0.aar\7fbd08bb731625e9216f8ddb81fd8fff\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\lifecycle-runtime-2.1.0.aar\7fbd08bb731625e9216f8ddb81fd8fff\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\lifecycle-viewmodel-2.1.0.aar\dc66db78f0d80c7df7ef9fc1ed0c6338\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\lifecycle-viewmodel-2.1.0.aar\dc66db78f0d80c7df7ef9fc1ed0c6338\AndroidManifest.xml:20:5-44
-MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\savedstate-1.0.0.aar\42ae3ea418f347ae7baa35dae50d98b4\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\savedstate-1.0.0.aar\42ae3ea418f347ae7baa35dae50d98b4\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\lifecycle-livedata-2.0.0.aar\b70301b41813ea1b83ed2a4ac1a62049\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\lifecycle-livedata-2.0.0.aar\b70301b41813ea1b83ed2a4ac1a62049\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\lifecycle-livedata-core-2.0.0.aar\5c5ae54ad0d999f64812c9402eb3c0a5\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\lifecycle-livedata-core-2.0.0.aar\5c5ae54ad0d999f64812c9402eb3c0a5\AndroidManifest.xml:20:5-44
-MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\core-runtime-2.0.0.aar\270f09599728889a35a2c6d22258b53b\AndroidManifest.xml:20:5-44
-MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\core-runtime-2.0.0.aar\270f09599728889a35a2c6d22258b53b\AndroidManifest.xml:20:5-44
-MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-gifdecoder-4.9.0.aar\9c2723ca8e2b19ab506cc805a9bcf1af\AndroidManifest.xml:5:5-7:41
-MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-gifdecoder-4.9.0.aar\9c2723ca8e2b19ab506cc805a9bcf1af\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:fresco:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\fresco-2.0.0.aar\94db7e8f4ede66526c4bf989b5ca5846\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:fresco:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\fresco-2.0.0.aar\94db7e8f4ede66526c4bf989b5ca5846\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\imagepipeline-okhttp3-2.0.0.aar\54512cf9514e6e32176f0386580217c6\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\imagepipeline-okhttp3-2.0.0.aar\54512cf9514e6e32176f0386580217c6\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:drawee:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\drawee-2.0.0.aar\f649c29f47ac3a26448d51f474bbc078\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:drawee:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\drawee-2.0.0.aar\f649c29f47ac3a26448d51f474bbc078\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\nativeimagefilters-2.0.0.aar\af4a5aa4018736a0ca2c9e10fdcf096c\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\nativeimagefilters-2.0.0.aar\af4a5aa4018736a0ca2c9e10fdcf096c\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\imagepipeline-2.0.0.aar\6f5aaa27844fa463b1c0e2572cb0619a\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\imagepipeline-2.0.0.aar\6f5aaa27844fa463b1c0e2572cb0619a\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\nativeimagetranscoder-2.0.0.aar\c7b0c4b682387bc03fe82fde43bb274d\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\nativeimagetranscoder-2.0.0.aar\c7b0c4b682387bc03fe82fde43bb274d\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\imagepipeline-base-2.0.0.aar\0618f63d0ccf4d8ea6c7b490110c550c\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\imagepipeline-base-2.0.0.aar\0618f63d0ccf4d8ea6c7b490110c550c\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\soloader-0.6.0.aar\9d8c1b78672609c76d463551d104bb7c\AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\soloader-0.6.0.aar\9d8c1b78672609c76d463551d104bb7c\AndroidManifest.xml:7:5-9:41
-MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\3a50262d8d41a8791ee1370adde9184d\AndroidManifest.xml:8:5-10:41
-MERGED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\3a50262d8d41a8791ee1370adde9184d\AndroidManifest.xml:8:5-10:41
-MERGED from [com.redmadrobot:inputmask:4.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\inputmask-4.1.0.aar\e57d1aede8056d04afd1d0240d9aead6\AndroidManifest.xml:7:5-9:41
-MERGED from [com.redmadrobot:inputmask:4.1.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\inputmask-4.1.0.aar\e57d1aede8056d04afd1d0240d9aead6\AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.fresco:fbcore:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-fbcore-2.0.0.aar\e5c472dd12192d0e7754db92aa19acbf\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:fbcore:2.0.0] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-fbcore-2.0.0.aar\e5c472dd12192d0e7754db92aa19acbf\AndroidManifest.xml:5:5-7:41
-INJECTED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml
-INJECTED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml
+INJECTED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml
+MERGED from [:expo-permissions] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-permissions/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-permissions] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-permissions/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-printer] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-printer/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-printer] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-printer/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-screens] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-screens/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-screens] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-screens/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-react-native-adapter] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/@unimodules/react-native-adapter/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-react-native-adapter] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/@unimodules/react-native-adapter/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-community_masked-view] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/@react-native-community/masked-view/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-community_masked-view] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/@react-native-community/masked-view/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-extra-dimensions-android] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-extra-dimensions-android/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-extra-dimensions-android] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-extra-dimensions-android/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-gesture-handler] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-gesture-handler] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-orientation] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-orientation/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-orientation] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-orientation/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-reanimated] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-reanimated/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-reanimated] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-reanimated/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-safe-area-context] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-safe-area-context/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-safe-area-context] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-safe-area-context/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-sqlite-storage] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-sqlite-storage/platforms/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-sqlite-storage] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-sqlite-storage/platforms/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-text-input-mask] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-text-input-mask/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-text-input-mask] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-text-input-mask/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-vector-icons] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-vector-icons/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-vector-icons] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-vector-icons/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.61.5] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/5ed54297820daff11171eed9ba6dc626/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.61.5] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/5ed54297820daff11171eed9ba6dc626/AndroidManifest.xml:7:5-9:41
+MERGED from [com.google.android.material:material:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/7db1a37c40b4f86eb5f6cb6d1a59f12e/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/7db1a37c40b4f86eb5f6cb6d1a59f12e/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/appcompat-1.1.0.aar/a480b5746a9c22c1f18827050aa94cf8/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/appcompat-1.1.0.aar/a480b5746a9c22c1f18827050aa94cf8/AndroidManifest.xml:20:5-22:41
+MERGED from [:expo-app-loader-provider] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-app-loader-provider/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-app-loader-provider] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-app-loader-provider/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-constants] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-constants/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-constants] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-constants/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-error-recovery] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-error-recovery/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-error-recovery] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-error-recovery/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-file-system] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:8:5-10:41
+MERGED from [:expo-file-system] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:8:5-10:41
+MERGED from [:expo-font] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-font/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-font] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-font/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-keep-awake] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-keep-awake/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-keep-awake] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-keep-awake/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-linear-gradient] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-linear-gradient/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-linear-gradient] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-linear-gradient/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-location] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-location/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-location] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-location/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-sqlite] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-sqlite/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-sqlite] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-sqlite/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-web-browser] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-web-browser/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:expo-web-browser] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-web-browser/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-barcode-scanner-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-barcode-scanner-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-barcode-scanner-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-barcode-scanner-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-camera-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-camera-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-camera-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-camera-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-constants-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-constants-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-constants-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-constants-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-face-detector-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-face-detector-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-face-detector-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-face-detector-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-file-system-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-file-system-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-file-system-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-file-system-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-font-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-font-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-font-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-font-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-permissions-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-permissions-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-permissions-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-permissions-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-task-manager-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-task-manager-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-task-manager-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-task-manager-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-core] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/@unimodules/core/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-core] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/@unimodules/core/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-image-loader-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-image-loader-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-image-loader-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-image-loader-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-sensors-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-sensors-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:unimodules-sensors-interface] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/unimodules-sensors-interface/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [org.webkit:android-jsc:r245459] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/android-jsc-r245459.aar/117bf044c077d889497724caac6f9983/AndroidManifest.xml:7:5-9:41
+MERGED from [org.webkit:android-jsc:r245459] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/android-jsc-r245459.aar/117bf044c077d889497724caac6f9983/AndroidManifest.xml:7:5-9:41
+MERGED from [androidx.browser:browser:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/browser-1.0.0.aar/da835692555fa131939a1266993d0194/AndroidManifest.xml:20:5-44
+MERGED from [androidx.browser:browser:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/browser-1.0.0.aar/da835692555fa131939a1266993d0194/AndroidManifest.xml:20:5-44
+MERGED from [androidx.transition:transition:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/transition-1.1.0.aar/d23b82befcc9c80d86a1132edf7eb02c/AndroidManifest.xml:20:5-44
+MERGED from [androidx.transition:transition:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/transition-1.1.0.aar/d23b82befcc9c80d86a1132edf7eb02c/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-location:16.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-play-services-location-16.0.0.aar/c4d9bdf35e3b7b701958593bbc47ea79/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-location:16.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-play-services-location-16.0.0.aar/c4d9bdf35e3b7b701958593bbc47ea79/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-base:16.0.1] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-play-services-base-16.0.1.aar/92824f9cc6343b09873cbd922f82c276/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:16.0.1] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-play-services-base-16.0.1.aar/92824f9cc6343b09873cbd922f82c276/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/play-services-places-placereport-16.0.0.aar/ad81236fae24d37097e919ae4e3d708c/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places-placereport:16.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/play-services-places-placereport-16.0.0.aar/ad81236fae24d37097e919ae4e3d708c/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-play-services-tasks-16.0.1.aar/a8e2221a6f8f42a2562bf99a83c2df57/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-play-services-tasks-16.0.1.aar/a8e2221a6f8f42a2562bf99a83c2df57/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-play-services-basement-16.0.1.aar/0b99a40fcb2393ed3965739570367d81/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-play-services-basement-16.0.1.aar/0b99a40fcb2393ed3965739570367d81/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/legacy-support-v4-1.0.0.aar/15d2913a195936430a3db8d8d7afc771/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/legacy-support-v4-1.0.0.aar/15d2913a195936430a3db8d8d7afc771/AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/recyclerview-1.0.0.aar/42436ff10ad1b8f6eb191782856cefdb/AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/recyclerview-1.0.0.aar/42436ff10ad1b8f6eb191782856cefdb/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/legacy-support-core-ui-1.0.0.aar/9d6d8c9079df8564217e63f6468ebb01/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/legacy-support-core-ui-1.0.0.aar/9d6d8c9079df8564217e63f6468ebb01/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-1.0.0.aar/e5ad0b8f7b85ce590ec9e24d5df72a43/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-1.0.0.aar/e5ad0b8f7b85ce590ec9e24d5df72a43/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/media-1.0.0.aar/cf320e0f3b4b703fb06893335cae9d9f/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/media-1.0.0.aar/cf320e0f3b4b703fb06893335cae9d9f/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/legacy-support-core-utils-1.0.0.aar/506042450cbb66023476ec5c676bd1fd/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/legacy-support-core-utils-1.0.0.aar/506042450cbb66023476ec5c676bd1fd/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-1.0.0.aar/376c947810a9714892048d55b7659ac7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-1.0.0.aar/376c947810a9714892048d55b7659ac7/AndroidManifest.xml:20:5-44
+MERGED from [com.github.bumptech.glide:glide:4.9.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-glide-4.9.0.aar/4c86d0f3c3f02c519adff6b236985538/AndroidManifest.xml:6:5-8:41
+MERGED from [com.github.bumptech.glide:glide:4.9.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-glide-4.9.0.aar/4c86d0f3c3f02c519adff6b236985538/AndroidManifest.xml:6:5-8:41
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/appcompat-resources-1.1.0.aar/531fffbc6210bdf3dc84a1a6841c0652/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/appcompat-resources-1.1.0.aar/531fffbc6210bdf3dc84a1a6841c0652/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/vectordrawable-animated-1.1.0.aar/f5f339cb04becd295df0dd8ed45ab756/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/vectordrawable-animated-1.1.0.aar/f5f339cb04becd295df0dd8ed45ab756/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/interpolator-1.0.0.aar/17abd78c3cf7d47283d1ce0ad1c48c1c/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/interpolator-1.0.0.aar/17abd78c3cf7d47283d1ce0ad1c48c1c/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/fragment-1.1.0.aar/0cdf6fbd2b72b8ecb92906d564256b69/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/fragment-1.1.0.aar/0cdf6fbd2b72b8ecb92906d564256b69/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/drawerlayout-1.0.0.aar/4a04766c166faafa14eefd727df0a34f/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/drawerlayout-1.0.0.aar/4a04766c166faafa14eefd727df0a34f/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/viewpager-1.0.0.aar/45d852090b01b4cd61e92b5ab88e16ba/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/viewpager-1.0.0.aar/45d852090b01b4cd61e92b5ab88e16ba/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-1.0.0.aar/81f30210d4df0c32f23469cb58c67c10/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-1.0.0.aar/81f30210d4df0c32f23469cb58c67c10/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/customview-1.0.0.aar/de2ea312dea9f73ade5bd0b1ef8e27f3/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/customview-1.0.0.aar/de2ea312dea9f73ade5bd0b1ef8e27f3/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/loader-1.0.0.aar/041f48a05550187aa8289ee2cca0a528/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/loader-1.0.0.aar/041f48a05550187aa8289ee2cca0a528/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-1.0.0.aar/8c5dd0100f2e9fdeea53ead471ceb2db/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-1.0.0.aar/8c5dd0100f2e9fdeea53ead471ceb2db/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/activity-1.0.0.aar/dc93aa63c2e9f9cc628d8d808654a0f3/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/activity-1.0.0.aar/dc93aa63c2e9f9cc628d8d808654a0f3/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/vectordrawable-1.1.0.aar/91c5d432c2ddb52e4583ff5e0f9ca404/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/vectordrawable-1.1.0.aar/91c5d432c2ddb52e4583ff5e0f9ca404/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/core-1.1.0.aar/3ba42d56a57bcd52effc4aa562698c21/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/core-1.1.0.aar/3ba42d56a57bcd52effc4aa562698c21/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/cursoradapter-1.0.0.aar/f92deb80cd40eb8725bacb7758c4fa54/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/cursoradapter-1.0.0.aar/f92deb80cd40eb8725bacb7758c4fa54/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/cardview-1.0.0.aar/757a7a56b324c6059879709774e81e35/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/cardview-1.0.0.aar/757a7a56b324c6059879709774e81e35/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/documentfile-1.0.0.aar/3ffe880be9311568f5d906b71586a928/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/documentfile-1.0.0.aar/3ffe880be9311568f5d906b71586a928/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-1.0.0.aar/c0c844fafeb20681144d107f249a9519/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-1.0.0.aar/c0c844fafeb20681144d107f249a9519/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/print-1.0.0.aar/a5b8d9229210ec70f816a2aef906b02f/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/print-1.0.0.aar/a5b8d9229210ec70f816a2aef906b02f/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.1.0.aar/813d9174d58dcb7df7677eb14bb4b1a1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.1.0.aar/813d9174d58dcb7df7677eb14bb4b1a1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/lifecycle-runtime-2.1.0.aar/27c1da5d1358c298ff03338d72d1d151/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/lifecycle-runtime-2.1.0.aar/27c1da5d1358c298ff03338d72d1d151/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/lifecycle-viewmodel-2.1.0.aar/e928a3c2b11c4d7de6f7269e2aba1b35/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/lifecycle-viewmodel-2.1.0.aar/e928a3c2b11c4d7de6f7269e2aba1b35/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/savedstate-1.0.0.aar/9ed09020e1f0b8021180b1a15171b3c8/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/savedstate-1.0.0.aar/9ed09020e1f0b8021180b1a15171b3c8/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-2.0.0.aar/6d3aa9fdebcdca994caabee70808c648/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-2.0.0.aar/6d3aa9fdebcdca994caabee70808c648/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-core-2.0.0.aar/5d714d5d9144d585b81259b68ac3f8a4/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-core-2.0.0.aar/5d714d5d9144d585b81259b68ac3f8a4/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/core-runtime-2.0.0.aar/c9d7daa2957b1e5059975957427ab0e6/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/core-runtime-2.0.0.aar/c9d7daa2957b1e5059975957427ab0e6/AndroidManifest.xml:20:5-44
+MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-gifdecoder-4.9.0.aar/e42ca45f1fa20cf6ce0b35fddc646988/AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.bumptech.glide:gifdecoder:4.9.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-gifdecoder-4.9.0.aar/e42ca45f1fa20cf6ce0b35fddc646988/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fresco:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/fresco-2.0.0.aar/4292c8bc95032f170d7ab9c72ec5ff37/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fresco:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/fresco-2.0.0.aar/4292c8bc95032f170d7ab9c72ec5ff37/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/imagepipeline-okhttp3-2.0.0.aar/dfc47bd14cb935c2673e29c29dc779a7/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/imagepipeline-okhttp3-2.0.0.aar/dfc47bd14cb935c2673e29c29dc779a7/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/drawee-2.0.0.aar/35a52571eb9504d94ae1a71438b7e59c/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/drawee-2.0.0.aar/35a52571eb9504d94ae1a71438b7e59c/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/nativeimagefilters-2.0.0.aar/3d36f1b30301e8694ae9a182b8e3a7a9/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/nativeimagefilters-2.0.0.aar/3d36f1b30301e8694ae9a182b8e3a7a9/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/imagepipeline-2.0.0.aar/c21cb695a9655741607de49946b42001/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/imagepipeline-2.0.0.aar/c21cb695a9655741607de49946b42001/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/nativeimagetranscoder-2.0.0.aar/6ab6b7681fdb95a302122d98daa762e1/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/nativeimagetranscoder-2.0.0.aar/6ab6b7681fdb95a302122d98daa762e1/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-2.0.0.aar/4de7160dc314d359065d2cc3b6f66506/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/imagepipeline-base-2.0.0.aar/4de7160dc314d359065d2cc3b6f66506/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.soloader:soloader:0.6.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/soloader-0.6.0.aar/3d5eaa0e4d456ac49e47ecc08e8194ff/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.soloader:soloader:0.6.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/soloader-0.6.0.aar/3d5eaa0e4d456ac49e47ecc08e8194ff/AndroidManifest.xml:7:5-9:41
+MERGED from [io.nlopez.smartlocation:library:3.2.11] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-library-3.2.11.aar/891dfbd952acc2b9d9d406b6842f4b6a/AndroidManifest.xml:8:5-10:41
+MERGED from [io.nlopez.smartlocation:library:3.2.11] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-library-3.2.11.aar/891dfbd952acc2b9d9d406b6842f4b6a/AndroidManifest.xml:8:5-10:41
+MERGED from [com.redmadrobot:inputmask:4.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/inputmask-4.1.0.aar/6991c52cf60a1351ef5fd400d0c138a8/AndroidManifest.xml:7:5-9:41
+MERGED from [com.redmadrobot:inputmask:4.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/inputmask-4.1.0.aar/6991c52cf60a1351ef5fd400d0c138a8/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.fresco:fbcore:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-fbcore-2.0.0.aar/f037dc8e02ba1af28aa1c4e02075cec0/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fbcore:2.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-fbcore-2.0.0.aar/f037dc8e02ba1af28aa1c4e02075cec0/AndroidManifest.xml:5:5-7:41
+INJECTED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml
+INJECTED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml
+		INJECTED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml
-		INJECTED from C:\Users\USER\Documents\POS\POS_Project\android\app\src\main\AndroidManifest.xml
+		INJECTED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml
+		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml
+		INJECTED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml
 uses-permission#android.permission.BLUETOOTH
-ADDED from [:react-native-printer] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-printer\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-68
+ADDED from [:react-native-printer] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-printer/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:5-68
 	android:name
-		ADDED from [:react-native-printer] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-printer\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:22-65
+		ADDED from [:react-native-printer] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-printer/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:12:22-65
 uses-permission#android.permission.BLUETOOTH_ADMIN
-ADDED from [:react-native-printer] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-printer\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:5-74
+ADDED from [:react-native-printer] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-printer/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:5-74
 	android:name
-		ADDED from [:react-native-printer] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-printer\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:22-71
+		ADDED from [:react-native-printer] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-printer/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:22-71
 uses-permission#android.hardware.usb.UsbAccessory
-ADDED from [:react-native-printer] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-printer\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:5-73
+ADDED from [:react-native-printer] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-printer/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:14:5-73
 	android:name
-		ADDED from [:react-native-printer] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-printer\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:22-70
+		ADDED from [:react-native-printer] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-printer/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:14:22-70
 uses-permission#android.permission.ACCESS_WIFI_STATE
-ADDED from [:react-native-printer] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-printer\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:5-76
+ADDED from [:react-native-printer] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-printer/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:15:5-76
 	android:name
-		ADDED from [:react-native-printer] C:\Users\USER\Documents\POS\POS_Project\node_modules\react-native-printer\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:22-73
+		ADDED from [:react-native-printer] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-printer/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:15:22-73
 uses-permission#android.permission.STORAGE
-ADDED from [:expo-file-system] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:5-66
+ADDED from [:expo-file-system] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:15:5-66
 	android:name
-		ADDED from [:expo-file-system] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:22-63
+		ADDED from [:expo-file-system] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:15:22-63
 provider#expo.modules.filesystem.FileSystemFileProvider
-ADDED from [:expo-file-system] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:9-27:20
+ADDED from [:expo-file-system] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:18:9-27:20
 	android:grantUriPermissions
-		ADDED from [:expo-file-system] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:22:13-47
+		ADDED from [:expo-file-system] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:22:13-47
 	android:authorities
-		ADDED from [:expo-file-system] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:20:13-74
+		ADDED from [:expo-file-system] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:20:13-74
 	android:exported
-		ADDED from [:expo-file-system] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:21:13-37
+		ADDED from [:expo-file-system] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:21:13-37
 	tools:replace
-		ADDED from [:expo-file-system] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:23:13-48
+		ADDED from [:expo-file-system] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:23:13-48
 	android:name
-		ADDED from [:expo-file-system] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:13-74
+		ADDED from [:expo-file-system] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:19:13-74
 meta-data#android.support.FILE_PROVIDER_PATHS
-ADDED from [:expo-file-system] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:24:13-26:70
+ADDED from [:expo-file-system] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:24:13-26:70
 	android:resource
-		ADDED from [:expo-file-system] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:26:17-67
+		ADDED from [:expo-file-system] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:26:17-67
 	android:name
-		ADDED from [:expo-file-system] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-file-system\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:25:17-67
+		ADDED from [:expo-file-system] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:25:17-67
 uses-permission#android.permission.FOREGROUND_SERVICE
-ADDED from [:expo-location] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:5-77
+ADDED from [:expo-location] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-location/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:5-77
 	android:name
-		ADDED from [:expo-location] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:22-74
+		ADDED from [:expo-location] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-location/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:13:22-74
 service#expo.modules.location.services.LocationTaskService
-ADDED from [:expo-location] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:16:9-18:40
+ADDED from [:expo-location] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-location/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:16:9-18:40
 	android:exported
-		ADDED from [:expo-location] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:13-37
+		ADDED from [:expo-location] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-location/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:18:13-37
 	android:name
-		ADDED from [:expo-location] C:\Users\USER\Documents\POS\POS_Project\node_modules\expo-location\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:13-78
+		ADDED from [:expo-location] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-location/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:17:13-78
 activity#com.google.android.gms.common.api.GoogleApiActivity
-ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-play-services-base-16.0.1.aar\8f1522906ea6c0788922e05fa768db53\AndroidManifest.xml:23:9-26:75
+ADDED from [com.google.android.gms:play-services-base:16.0.1] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-play-services-base-16.0.1.aar/92824f9cc6343b09873cbd922f82c276/AndroidManifest.xml:23:9-26:75
 	android:exported
-		ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-play-services-base-16.0.1.aar\8f1522906ea6c0788922e05fa768db53\AndroidManifest.xml:25:13-37
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-play-services-base-16.0.1.aar/92824f9cc6343b09873cbd922f82c276/AndroidManifest.xml:25:13-37
 	android:theme
-		ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-play-services-base-16.0.1.aar\8f1522906ea6c0788922e05fa768db53\AndroidManifest.xml:26:13-72
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-play-services-base-16.0.1.aar/92824f9cc6343b09873cbd922f82c276/AndroidManifest.xml:26:13-72
 	android:name
-		ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-play-services-base-16.0.1.aar\8f1522906ea6c0788922e05fa768db53\AndroidManifest.xml:24:13-79
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-play-services-base-16.0.1.aar/92824f9cc6343b09873cbd922f82c276/AndroidManifest.xml:24:13-79
 meta-data#com.google.android.gms.version
-ADDED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.0.1.aar\1ebc2bb49a9f2efe6768a0d1150597e5\AndroidManifest.xml:23:9-25:69
+ADDED from [com.google.android.gms:play-services-basement:16.0.1] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-play-services-basement-16.0.1.aar/0b99a40fcb2393ed3965739570367d81/AndroidManifest.xml:23:9-25:69
 	android:value
-		ADDED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.0.1.aar\1ebc2bb49a9f2efe6768a0d1150597e5\AndroidManifest.xml:25:13-66
+		ADDED from [com.google.android.gms:play-services-basement:16.0.1] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-play-services-basement-16.0.1.aar/0b99a40fcb2393ed3965739570367d81/AndroidManifest.xml:25:13-66
 	android:name
-		ADDED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.0.1.aar\1ebc2bb49a9f2efe6768a0d1150597e5\AndroidManifest.xml:24:13-58
+		ADDED from [com.google.android.gms:play-services-basement:16.0.1] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-play-services-basement-16.0.1.aar/0b99a40fcb2393ed3965739570367d81/AndroidManifest.xml:24:13-58
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\3a50262d8d41a8791ee1370adde9184d\AndroidManifest.xml:13:5-79
+ADDED from [io.nlopez.smartlocation:library:3.2.11] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-library-3.2.11.aar/891dfbd952acc2b9d9d406b6842f4b6a/AndroidManifest.xml:13:5-79
 	android:name
-		ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\3a50262d8d41a8791ee1370adde9184d\AndroidManifest.xml:13:22-76
+		ADDED from [io.nlopez.smartlocation:library:3.2.11] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-library-3.2.11.aar/891dfbd952acc2b9d9d406b6842f4b6a/AndroidManifest.xml:13:22-76
 uses-permission#com.google.android.providers.gsf.permission.READ_GSERVICES
-ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\3a50262d8d41a8791ee1370adde9184d\AndroidManifest.xml:15:5-98
+ADDED from [io.nlopez.smartlocation:library:3.2.11] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-library-3.2.11.aar/891dfbd952acc2b9d9d406b6842f4b6a/AndroidManifest.xml:15:5-98
 	android:name
-		ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\3a50262d8d41a8791ee1370adde9184d\AndroidManifest.xml:15:22-95
+		ADDED from [io.nlopez.smartlocation:library:3.2.11] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-library-3.2.11.aar/891dfbd952acc2b9d9d406b6842f4b6a/AndroidManifest.xml:15:22-95
 uses-permission#com.google.android.gms.permission.ACTIVITY_RECOGNITION
-ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\3a50262d8d41a8791ee1370adde9184d\AndroidManifest.xml:16:5-94
+ADDED from [io.nlopez.smartlocation:library:3.2.11] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-library-3.2.11.aar/891dfbd952acc2b9d9d406b6842f4b6a/AndroidManifest.xml:16:5-94
 	android:name
-		ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\3a50262d8d41a8791ee1370adde9184d\AndroidManifest.xml:16:22-91
+		ADDED from [io.nlopez.smartlocation:library:3.2.11] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-library-3.2.11.aar/891dfbd952acc2b9d9d406b6842f4b6a/AndroidManifest.xml:16:22-91
 service#io.nlopez.smartlocation.activity.providers.ActivityGooglePlayServicesProvider$ActivityRecognitionService
-ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\3a50262d8d41a8791ee1370adde9184d\AndroidManifest.xml:19:9-21:40
+ADDED from [io.nlopez.smartlocation:library:3.2.11] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-library-3.2.11.aar/891dfbd952acc2b9d9d406b6842f4b6a/AndroidManifest.xml:19:9-21:40
 	android:exported
-		ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\3a50262d8d41a8791ee1370adde9184d\AndroidManifest.xml:21:13-37
+		ADDED from [io.nlopez.smartlocation:library:3.2.11] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-library-3.2.11.aar/891dfbd952acc2b9d9d406b6842f4b6a/AndroidManifest.xml:21:13-37
 	android:name
-		ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\3a50262d8d41a8791ee1370adde9184d\AndroidManifest.xml:20:13-132
+		ADDED from [io.nlopez.smartlocation:library:3.2.11] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-library-3.2.11.aar/891dfbd952acc2b9d9d406b6842f4b6a/AndroidManifest.xml:20:13-132
 service#io.nlopez.smartlocation.geofencing.providers.GeofencingGooglePlayServicesProvider$GeofencingService
-ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\3a50262d8d41a8791ee1370adde9184d\AndroidManifest.xml:22:9-24:40
+ADDED from [io.nlopez.smartlocation:library:3.2.11] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-library-3.2.11.aar/891dfbd952acc2b9d9d406b6842f4b6a/AndroidManifest.xml:22:9-24:40
 	android:exported
-		ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\3a50262d8d41a8791ee1370adde9184d\AndroidManifest.xml:24:13-37
+		ADDED from [io.nlopez.smartlocation:library:3.2.11] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-library-3.2.11.aar/891dfbd952acc2b9d9d406b6842f4b6a/AndroidManifest.xml:24:13-37
 	android:name
-		ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\3a50262d8d41a8791ee1370adde9184d\AndroidManifest.xml:23:13-127
+		ADDED from [io.nlopez.smartlocation:library:3.2.11] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-library-3.2.11.aar/891dfbd952acc2b9d9d406b6842f4b6a/AndroidManifest.xml:23:13-127
 service#io.nlopez.smartlocation.geocoding.providers.AndroidGeocodingProvider$AndroidGeocodingService
-ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\3a50262d8d41a8791ee1370adde9184d\AndroidManifest.xml:25:9-27:40
+ADDED from [io.nlopez.smartlocation:library:3.2.11] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-library-3.2.11.aar/891dfbd952acc2b9d9d406b6842f4b6a/AndroidManifest.xml:25:9-27:40
 	android:exported
-		ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\3a50262d8d41a8791ee1370adde9184d\AndroidManifest.xml:27:13-37
+		ADDED from [io.nlopez.smartlocation:library:3.2.11] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-library-3.2.11.aar/891dfbd952acc2b9d9d406b6842f4b6a/AndroidManifest.xml:27:13-37
 	android:name
-		ADDED from [io.nlopez.smartlocation:library:3.2.11] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\jetified-library-3.2.11.aar\3a50262d8d41a8791ee1370adde9184d\AndroidManifest.xml:26:13-120
+		ADDED from [io.nlopez.smartlocation:library:3.2.11] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-library-3.2.11.aar/891dfbd952acc2b9d9d406b6842f4b6a/AndroidManifest.xml:26:13-120

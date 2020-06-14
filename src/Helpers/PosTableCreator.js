@@ -27,18 +27,18 @@ console.log("me llamaron");
               db = DB;
               console.log("Database OPEN");
 
-        /*
+/*
               db.executeSql('DROP TABLE AlmacenDetalle',[]).then(() => {
                 console.log("LA TABLA ROLES HA SIDO CREADA SATISFACTORIAMENTE");
             }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
         db.executeSql('DROP TABLE Articulos',[]).then(() => {
                 console.log("LA TABLA ROLES HA SIDO CREADA SATISFACTORIAMENTE");
             }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
+      */
       db.executeSql('DROP TABLE Almacen',[]).then(() => {
-                  console.log("LA TABLA ROLES HA SIDO CREADA SATISFACTORIAMENTE");
-              }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
+                  console.log("LA TABLA ALMACEN DROPEADA");
+              }).catch((error) =>{      console.log("error al dropear almacen");    });
 
-*/
 
 
 db.executeSql('CREATE TABLE IF NOT EXISTS Roles(rowid integer primary key, NombreRol '+

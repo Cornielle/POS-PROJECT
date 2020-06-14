@@ -1,7 +1,7 @@
-#Sat Jun 06 19:49:59 BOT 2020
-base.0=C\:\\Users\\USER\\Documents\\POS\\POS_Project\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+#Sat Jun 13 12:06:10 AST 2020
+base.0=/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/transforms/dexMerger/debug/0
 path.1=classes.dex
 renamed.1=classes2.dex
 path.0=classes.dex
 renamed.0=classes.dex
-base.1=C\:\\Users\\USER\\Documents\\POS\\POS_Project\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\1
+base.1=/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/transforms/dexMerger/debug/1

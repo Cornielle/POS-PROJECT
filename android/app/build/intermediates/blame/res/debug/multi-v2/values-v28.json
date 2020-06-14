@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\USER\\Documents\\POS\\POS_Project\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v28\\values-v28.xml",
+            "outputFile": "/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v28/values-v28.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\USER\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-1.1.0.aar\\dc2800f18d49462a649c47c7c0a1a66f\\res\\values-v28\\values-v28.xml",
+                    "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/appcompat-1.1.0.aar/a480b5746a9c22c1f18827050aa94cf8/res/values-v28/values-v28.xml",
                     "from": {
                         "startLines": "2,3,4,8",
                         "startColumns": "4,4,4,4",

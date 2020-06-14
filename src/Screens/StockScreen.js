@@ -1,360 +1,262 @@
-import React from 'react'
-import{TextInput, Avatar, Button, Card, RadioButton} from 'react-native-paper'
-import {StyleSheet, Text, View, ScrollView,Picker,Alert,Modal ,TouchableHighlight, FlatList, Dimensions} from 'react-native'
-import {Block} from 'galio-framework'
+import React, {Component, Fragment} from 'react';
+import { TextInput, Avatar, Button, Card } from 'react-native-paper';
+import SearchableDropdown from 'react-native-searchable-dropdown';
+import { StyleSheet, Text, View, ScrollView, Picker,Alert,  ToastAndroid, SafeAreaView } from 'react-native';
 import normalize from 'react-native-normalize';
-import Header from  '../Components/Header'
-
-import * as SQLite from "expo-sqlite"
-import {BaseModel, types} from 'expo-sqlite-orm'   
-import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
-
+import Header from '../Components/Header'
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Stock from '../../Models/Stock';
 
-const styles = StyleSheet.create({
-  ViewStyle:{
-      backgroundColor:"#f6f6f6",
-  },
-  Form: {
-      padding:normalize(15),
-      marginBottom:10,
-  },
-  Input: {
-      color: '#161924',
-      fontSize: 14,
-      fontWeight:"200",
-      backgroundColor:'#FFFFFF',
-  },
-  Button:{
-      color:'#ffffff',
-  },
-ModalContainer:{
-
-flex:1,
-justifyContent:"center",
-alignItems:"center",
-backgroundColor:"blue",
-paddingTop:40
-
-
-
-}
-})
-
-const data = [
-  { key: 'A' }, { key: 'B' }, { key: 'C' }, { key: 'D' }, { key: 'E' }, { key: 'F' }, { key: 'G' }, { key: 'H' }, { key: 'I' }, { key: 'J' },
-  // { key: 'K' },
-  // { key: 'L' },
-];
-    
-export default class StockScreen extends React.Component {
-
-
-constructor(props){
-
-super(props)
-
-}
-
-state={
-  rows:[], 
-  Visible:false,
-  Articulos:[],
-  Proveedores:[],
-   ProveedorSelected:"",
-   ArticuloId:0,
-   CantidadExistencia:0,
-   ProveedorId:0
-
- }
-
-
- componentDidMount (){
-
-
-
-this.LoadData();
-
-}
-
-selectedItem = (item) =>{
-
-  console.log(item);
-
-this.setState({ProveedorSelected:item.NombreProveedor,ArticuloId:item.Id }, () =>{
-
-  this.ShowModal();
-
-
-})
-
-
-}
-
-
- LoadData = async () =>{
-
-
-
-  try{
-
-    const lol=  await Stock.createTable();
-
-    console.log(lol);
-   
-
-
-
-    const sqlStock = "SELECT * FROM Stock"
-    const paramsStock = [];
-    const databaseLayerStock = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-   databaseLayerStock.executeSql(sqlStock,paramsStock).then(  ({ rows }) => {
-
-     console.log(rows)
-
-     
-    } ) 
-
-/*
-
-*/
-  
-
-
-
-    const sql = `SELECT Id,NombreArticulo FROM ARTICULOS WHERE Activo=? ORDER BY Id ASC `
-    const params = [1];
-    const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-   databaseLayer.executeSql(sql,params).then(  ({ rows }) => {
-  
-     this.setState({rows});
-  
-     //console.log(rows)
-    } )  
-
-  
-
-    const sqlProvee = `SELECT Id,NombreProveedor FROM Proveedores WHERE Activo =? ORDER BY Id ASC`
-    const paramsProvee = [1];
-    const databaseLayerProvee = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-   databaseLayerProvee.executeSql(sqlProvee,paramsProvee).then(  ({ rows }) => {
-  
-     this.setState({Proveedores:rows});
-  
-    // console.log(rows)
-    } )  
-
- 
-
-
-  }
-
-  catch(ex){
- console.log(ex);
-
- Alert.alert(ex)
-
-
-  }
- 
- 
-
- }
-
-ShowModal = () =>{
-console.log("entree");
-this.setState({Visible: !this.state.Visible})
-
-
-}
- renderItem = ({item, index}) =>{
-
-try{
-  console.log(item)
-  if (item.empty === true || item ===[]) {
-    Alert.alert("vacio");
-      return <View style={[styles.item, styles.itemInvisible]} />;
-  }
-
-  return(
-    <TouchableHighlight onPress={() => this.selectedItem(item)} >
-      <View>
-      <Text>{item.NombreProveedor}</Text>
-      </View>
-      </TouchableHighlight>
-    )
-}
-
-catch(ex){
-
-  console.log(ex);
-  Alert.alert(ex);
-
-}
-
- }
-
-  render(){
-    const {name, subtitle, navigation} = this.props
-    const { text,enabled, checked } =  this.state
-
-return(
-
-<ScrollView>
-
-
-  
-
-<Modal visible={this.state.Visible}>
-  
-  <View style ={styles.ModalContainer}>
- <FlatList data={this.state.Proveedores} title ="Articulos" renderItem={this.renderItem}  ></FlatList>
-
-  </View>
-  
-  </Modal>
-
-<View style={styles.ViewStyle}> 
-{/*Header generico que debe ser reutilizado en casi todas las vistas */}
-<Header name={'Stock'} 
-    subtitle={'Crear perfil de Stock'}
-    goBackEnabled={true}
-    goBackNavigationName={'Grid'}
-    navigationEnabled={false}
-    navigation={this.props.navigationValue}
-    toggleFormHeader={this.props.toggleForm}
-    gridHeader={false}
-/>
-<View style={styles.ViewStyle}>
-<Card>
-<Card.Title style={styles.Card} title="Stock" subtitle={subtitle} left={(props)=> <Avatar.Icon {...props} icon="account" />}   />
-
-<Card.Content>
-
-
-<Text>{"\n"}</Text> 
-
-<View style={{flexDirection:"row", flexWrap:'wrap'}}>
-
-<TextInput
-  style={styles.Input,{width:230}}
-  mode='flat'
-  label='Proveedor'
-  value={this.state.ProveedorSelected.toString()}
-  onChangeText={(ProveedorSelected)=> this.setState({ProveedorSelected})}
-/>
-<Button
-  labelStyle={styles.Button} 
-  mode="contained" 
-  onPress={this.ShowModal}
->
-  <Icon 
-    name="Selet" 
-    size={5} 
-    color="#ffffff" 
-    style={styles.Icon}
-  /> <Text>{"  "}</Text>   
-  Agregar
-</Button>
-
-</View>
-<Text>{"\n"}</Text> 
-
-
-<TextInput
-  style={styles.Input}
-  mode='flat'
-  label='Existencia'
-  value={this.state.CantidadExistencia}
-  onChangeText={(CantidadExistencia)=> this.setState({CantidadExistencia})}
-/>
-<Text>{"\n"}</Text> 
-
-<Button
-  labelStyle={styles.Button} 
-  mode="contained" 
-  onPress={this.SaveStrock}
->
-<Icon 
-  name="save" 
-  size={5} 
-  color="#ffffff" 
-  style={styles.Icon}
-  /> <Text>{"  "}</Text>   
-  Agregar
-</Button>
-
-  
-</Card.Content>
-
-
-
-</Card>
-
-</View>
-
-
-</View>
-  </ScrollView>
-
-)
-
-
+import  SQLite  from 'react-native-sqlite-storage';
+SQLite.DEBUG(true);
+SQLite.enablePromise(true);
+const database_name = "PuntoVenta.db";
+const database_version = "1.0";
+const database_displayname = "SQLite React Offline Database";
+const database_size = 200000;
+const items= [];
+
+export default class StockScreen extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state= {
+      selectedItem: '',
+      CantidadActual : '',
+      Descripcion : '',
+      IdEmpresa: '',
+      IdSucursal: '',
+      FechaCreacion : '',
+      FechaModificacion : '',
+      UsuarioCreacion : '',
+      UsuarioModificacion : '',
+      articulos : ''
+    }
+    this.insertStock = this.insertStock.bind(this)
+    this.renderSearch = this.renderSearch.bind(this)
   }
 
 
-
-  SaveStrock = async () =>{
-
-try{
-
-  const Fecha = new  Date();
-  const Varinsert ={
-  
-  
-    ArticuloId:this.state.ArticuloId,
-    CantidadExistencia:this.state.CantidadExistencia,
-    Activo:1,
-    IdEmpresa:1,
-    IdSucursal:1,
-    FechaCreacion: Fecha.toString(),
-    FechaModificacion:null,
-    UsuarioCreacion:"system",
-    UsuarioModificacion:null
-  
-  }
-  
-  console.log(Varinsert);
-  
-  var response = await Stock.create(Varinsert);
-  console.log("Llegue hasta aqui");
-  console.log(response)
-  if (Object.keys(response).length <=0){
-  
-   Alert.alert("Error al insertar en la base de datos");
-   
-   }
-   else{
-  ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
-  
-  
-  this.setState(InitialState)
-   }
-
-}
-catch(ex){
-
-
-
-}
-
-
-
-
-
+  /*GET ARTICULOS*/
+  componentDidMount(){
+    let db;
+    new Promise((resolve) => {
+      console.log("Plugin integrity check ...");
+      SQLite.echoTest()
+        .then(() => {
+          console.log("Integrity check passed ...");
+          console.log("Opening database ...");
+          SQLite.openDatabase(
+            database_name,
+            database_version,       
+            database_displayname,
+            database_size
+          )
+          .then(DB => {
+            db = DB;
+            let articulos = [];
+            console.log("Database OPEN");
+            db.executeSql(`SELECT rowid , NombreArticulo FROM Articulos`,[]).then((result) => {
+               for (let i = 0; i < result[0].rows.length; i++) {
+                 let row = result[0].rows.item(i);
+                 items.push(row)
+               }
+               ToastAndroid.show("Cargado Correctamente",ToastAndroid.SHORT)
+               console.log('Articulos Data:',items)
+          }).catch((error) =>{      
+          console.log("Error a cargar datos");  
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    })
+      .catch(error => {
+      console.log("echoTest failed - plugin not functional");
+      });
+    });
   }
 
-}
 
+/*INSERT FUNCTION*/
+insertStock = () =>{
+  const Model={
+    CantidadActual : this.state.CantidadActual,
+    Descripcion : this.state.Descripcion,
+    Activo : 1,
+    IdEmpresa : 1,
+    ArticuloId : this.state.selectedItem.rowid,
+    IdSucursal : 1,
+    FechaCreacion : new Date(),
+    FechaModificacion : null,
+    UsuarioCreacion : 'system',
+    UsuarioModificacion : null
+  }
+  console.log(Model, 'check after post')
+  let db;
+  new Promise((resolve) => {
+    console.log("Plugin integrity check ...");
+    SQLite.echoTest()
+      .then(() => {
+        console.log("Integrity check passed ...");
+        console.log("Opening database ...");
+        SQLite.openDatabase(
+          database_name,
+          database_version,       
+          database_displayname,
+          database_size
+        )
+        .then(DB => {
+          db = DB;
+          console.log("Database OPEN");
+          db.executeSql(`SELECT rowid , CantidadActual FROM Almacen WHERE ArticuloId = ${Model.ArticuloId}`,[]).then((result) => {
+            result.map(item=>{
+              console.log(item.rows.length, 'checkinggg')
+              if(item.rows.length > 0 ){
+                ToastAndroid.show("Articulo ya existente en almacen, favor escoger otro articulo",ToastAndroid.SHORT)
+                return
+              } else {
+                db.executeSql(`INSERT INTO Almacen (ArticuloId,
+                  CantidadActual , Descripcion ,
+                  Activo  , IdEmpresa , IdSucursal , 
+                  FechaCreacion ,FechaModificacion ,
+                  UsuarioCreacion  ,UsuarioModificacion) VALUES (?,?,?,?,?,?,?,?,?,?)`,
+                  [Model.ArticuloId, Model.CantidadActual,Model.Descripcion,Model.Activo,Model.IdEmpresa,
+                  Model.IdSucursal,Model.FechaCreacion.toString(),Model.FechaModificacion,
+                  Model.UsuarioCreacion,Model.UsuarioModificacion]).then(() => {
+                    console.log("Guardado Correctamente");
+                    ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
+                  }).catch((error) =>{      
+                  console.log("ERROR GUARDANDO EN STOCK");  
+                });
+              }
+            })
+          }).catch((error) =>{      
+            console.log("Error a cargar datos", error);  
+          });
+      })
+    })
+  });
+}
+    renderSearch = () =>{
+        return (
+          <>
+            {/* Single */}
+            <SearchableDropdown
+              onItemSelect={(item) => {
+                this.setState({ selectedItem: item }, console.log(item));
+              }}
+              containerStyle={{ padding: 5 }}
+              itemStyle={{
+                padding: 10,
+                marginTop: 2,
+                backgroundColor: '#ddd',
+                borderColor: '#bbb',
+                borderWidth: 1,
+                borderRadius: 5,
+              }}
+              itemTextStyle={{ color: '#222' }}
+              itemsContainerStyle={{ maxHeight: 140 }}
+              items={items}
+              resetValue={false}
+              textInputProps={
+                {
+                  placeholder: "Busca un articulo",
+                  underlineColorAndroid: "transparent",
+                  style: {
+                      padding: 12,
+                      borderWidth: 1,
+                      borderColor: '#ccc',
+                      borderRadius: 5,
+                  },
+                  onTextChange: text => alert(text)
+                }
+              }
+              listProps={
+                {
+                  nestedScrollEnabled: true,
+                }
+              }
+          />
+          </>
+    );
+    }
+    render(){
+        return (
+            // <ScrollView>
+            <SafeAreaView>
+            <View style={styles.ViewStyle}>
+                {/*Header generico que debe ser reutilizado en casi todas las vistas */}
+                <Header name={'Stock'} 
+                        goBackEnabled={true}
+                        goBackNavigationName={'Grid'}
+                        navigationEnabled={true}
+                        navigation={this.props.navigationValue}
+                        toggleFormHeader={this.props.toggleForm}
+                        gridHeader={false}
+                    />
+                <View style={styles.Form}>
+                    <Card>
+                        <Card.Title 
+                            style={styles.Card}
+                            title="Agregar Articulo en Stock" 
+                            left={(props) => <Avatar.Icon {...props} 
+                            icon="account" />} 
+                        />
+                        <Card.Content>
+                        {this.renderSearch()}
+                            <TextInput
+                                style={styles.Input}
+                                mode='flat'
+                                label='Agregar Cantidad'
+                                value={this.state.CantidadActual}
+                                onChangeText={(CantidadActual)=> this.setState({CantidadActual})}
+                            />
+                              <TextInput
+                                style={styles.Input}
+                                mode='flat'
+                                label='Descripcion'
+                                value={this.state.Descripcion}
+                                onChangeText={(Descripcion)=> this.setState({Descripcion})}
+                            />
+                            <Text>{"\n"}</Text>
+                            <Button
+                              labelStyle={styles.Button} 
+                              mode="contained" 
+                              onPress={this.insertStock}
+                            >
+                                <Icon 
+                                    name="save" 
+                                    size={15} 
+                                    color="#ffffff" 
+                                    style={styles.Icon}   
+                                /> <Text>{"  "}</Text>     
+                                Agregar Articulo
+                            </Button>
+                        </Card.Content>
+                    </Card>
+                </View>
+            </View>
+            </SafeAreaView>
+        );
+
+      }
+      // render(){return (this.renderSearch())}
+    }
+    const styles = StyleSheet.create({
+      ViewStyle:{
+          backgroundColor:"#f6f6f6",
+      },
+      Form: {
+          padding:normalize(15),
+          marginBottom:10,
+      },
+      Input: {
+          color: '#161924',
+          fontSize: 14,
+          fontWeight:"200",
+          backgroundColor:'#FFFFFF',
+      },
+      Button:{
+          color:'#ffffff',
+      }
+  })
 
