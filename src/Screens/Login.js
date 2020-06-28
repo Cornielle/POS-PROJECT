@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TextInput, Button, Card,   } from 'react-native-paper';
-import { StyleSheet, Text, View, AsyncStorage, Alert,Modal} from 'react-native';
+import { StyleSheet, Text, View, AsyncStorage, Alert,Modal, ToastAndroid} from 'react-native';
 import {  Container,  Spinner, Content} from 'native-base';
 import {Block} from 'galio-framework'
 import normalize from 'react-native-normalize';
@@ -15,9 +15,15 @@ import IconAwesome from 'react-native-vector-icons/FontAwesome';
 import { SafeAreaView } from 'react-native-safe-area-context';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-import { SQLite } from 'expo-sqlite'
+import  SQLite  from 'react-native-sqlite-storage';
+SQLite.DEBUG(true);
+SQLite.enablePromise(true);
+const database_name = "PuntoVenta.db";
+const database_version = "1.0";
+const database_displayname = "SQLite React Offline Database";
+const database_size = 200000;
 
-import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
+
 //import whatever from '../src'
  export default class Login extends Component{
     constructor(props) {
@@ -34,59 +40,23 @@ import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
         LockModalVisibility:false,
         LockModalPass:"",
         Unlockpass:"",
-        PIN:"",
+        Pin:"",
         loading:false
           };
   componentDidMount(){
       console.log(SQLite)
     this.verifyLog();
-  //  this.Deletekey();
+ //this.Deletekey();
     const fecha  = new Date();
     const date = fecha.toString().split(' ')
     this.setState({FechaApertura:`${date[2]}/${date[1]}/${date[3]}` })
     this.LoadAllData();
 } 
 LoadAllData = async () =>{
-//Caja.createTable();
 
-const sqlStock = 'SELECT name FROM sqlite_master WHERE type = "table"'
-const paramsStock = [];
-const databaseLayerStock = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-databaseLayerStock.executeSql(sqlStock,paramsStock).then(  ({ rows }) => {
 
- console.log(rows)
-} ) 
-
-/*
-const sqlStock = "SELECT * FROM Caja WHERE Activo=?"
-const paramsStock = [1];
-const databaseLayerStock = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-databaseLayerStock.executeSql(sqlStock,paramsStock).then(  ({ rows }) => {
-
- console.log(rows)
-} ) 
-*/
    // const sqlRol = 'PRAGMA table_info(Proveedores);'
 
-
-
- 
-/*
-    Acciones.createTable();
-    Articulos.createTable();
-    Categorias.createTable();
-    Empleados.createTable();
-    Logs.createTable();
-    Menu.createTable();
-    MenuAcciones.createTable();
-    Proveedores.createTable();
-    Roles.createTable();
-    RolMenu.createTable();
-    Stock.createTable();
-    Usuario.createTable();
-    Caja.create();
-
-  */
 
 } 
 
@@ -95,12 +65,12 @@ verifyLog = async () =>{
 
 try{
    const item = await AsyncStorage.getItem('LoggedUser');
-   if(item !==null){
+   if(item !==null&& item !== undefined){
     const JsonUsuario = JSON.parse(item);
     this.setState({
         NombreUsuario: JsonUsuario.Usuario,
         LockModalVisibility:true,
-        Unlockpass:JsonUsuario.PIN
+        Unlockpass:JsonUsuario.Pin
     })
    }
 
@@ -142,6 +112,7 @@ Deletekey = async() =>{
     try{
         await AsyncStorage.removeItem('LoggedUser');
         await AsyncStorage.removeItem('CashierOpen');
+        await AsyncStorage.removeItem('CajaActivaId');
     }
     catch(ex){
         console.log(ex);
@@ -288,10 +259,12 @@ ValidateAbrirCaja = () =>{
         Alert.alert("Debe Ingresar un monto para aperturar!");
     } 
 }
+
+
 AbrirCaja = async () =>{
     try {
     const fecha  = new Date();
-    const InsevCaja={
+    const Model={
         MontoApertura:this.state.MontoApertura,
         FechaInicioApertura:fecha.toString(),
         UsuarioApertura:"system",
@@ -309,31 +282,189 @@ AbrirCaja = async () =>{
         UsuarioCreacion:"system",
         UsuarioModificacion:null
     }
-    const response = await Caja.create(InsevCaja);
-    if (Object.keys(response).length <=0){
-        Alert.alert("Error al insertar en la base de datos");
-    }
-    else{
-        // ToastAndroid.show("Caja abierta satisfactoriamente",ToastAndroid.SHORT)
-        const cashierOpen = await AsyncStorage.setItem('CashierOpen',JSON.stringify({cashier:true}));
-        this.props.navigation.navigate("Home")
-    }
+ 
+    return new Promise((resolve) => {
+
+        SQLite.echoTest()
+          .then(() => {
+   
+            console.log("Opening database ...");
+            SQLite.openDatabase(
+              database_name,
+              database_version,
+              database_displayname,
+              database_size
+            )
+              .then(DB => {
+                db = DB;
+                console.log("Aqui es el fucking lio",db )
+db.executeSql('INSERT INTO Caja (MontoApertura ,FechaInicioApertura, UsuarioApertura , MontoVentaTarjetaCredito ,'+
+'MontoVentaEfectivo , MontoVentaTotal ,MontoSalidaDeCaja,UsuarioCierreCaja ,'+
+                'FechaCierreAperturaCaja '+
+                ', Activo , IdEmpresa , IdSucursal , FechaCreacion ,FechaModificacion '+
+                ', UsuarioCreacion ,UsuarioModificacion ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',[
+                    
+                    Model.MontoApertura,
+                    Model.FechaInicioApertura,
+                    Model.UsuarioApertura,
+                    Model.MontoVentaTarjetaCredito,
+                    Model.MontoVentaEfectivo,
+                    Model.MontoVentaTotal,
+                    Model.MontoSalidaDeCaja,
+                    Model.UsuarioCierreCaja,
+                    Model.FechaCierreAperturaCaja,
+                    Model.Activo,Model.IdEmpresa,Model.IdSucursal,
+                    Model.FechaCreacion,Model.FechaModificacion,Model.UsuarioCreacion,Model.UsuarioModificacion]).then((result) => {
+                    console.log("Database is ready ... executing query ...");
+                    console.log("Se guardo en caja");
+if(result[0].insertId > 0 && result[0].insertId!== undefined ){
+
+console.log("ID activo antes de llegar",result[0].insertId )
+    this.IdCajaActiva(result[0].insertId)
+     this.RedirectHome();
+}
+   
+   
+                }).catch((error) =>{
+                    console.log("Received error: ", error);
+   
+                });
+         
+              })
+              .catch(error => {
+                console.log(error);
+              });
+          })
+          .catch(error => {
+            console.log("echoTest failed - plugin not functional");
+          });
+        });
+   
+ 
+
+    
 }
   catch(ex){
     console.log(ex)
   }
 }
-GetLog = async () =>{
+
+RedirectHome  =  async() =>{
+
+
+    ToastAndroid.show("Caja abierta satisfactoriamente",ToastAndroid.SHORT)
+    const cashierOpen = await AsyncStorage.setItem('CashierOpen',JSON.stringify({cashier:true}));
+    this.props.navigation.navigate("Home")
+
+
+}
+
+IdCajaActiva = async(Id)=>{
+
+console.log("Adentro",Id)
+const IdCaja = await AsyncStorage.setItem("CajaActivaId",JSON.stringify({IdCaja:Id}))
+}
+
+
+AddToCashier = async(result)=>{
+
+    this.setState({loading:true})
+    const {NombrePersona, NombreUsuario, Rol, Contrasena,Pin} = result[0].rows.item(0)
+    const item = await AsyncStorage.getItem('LoggedUser');
+    console.log(item)
+    if(item === null){
+      
+
+
+
+const UserJasonStringy =JSON.stringify({Nombre:NombrePersona,Pass:Contrasena, Usuario:NombreUsuario,Rol:Rol,Pin:Pin});
+this.setState({Pin: UserJasonStringy.Pin})  
+        console.log('checking')
+        const addAsync = await AsyncStorage.setItem('LoggedUser', UserJasonStringy)
+        const getCashierStatus = await AsyncStorage.getItem('CashierOpen');
+        console.log(getCashierStatus,'Check?');
+        if(getCashierStatus=== null){
+            this.setState({loading:false})
+            this.setState({ModalCajaVisibility:true})
+        } 
+        else{
+            this.props.navigation.navigate("Home")
+        }
+    }else {
+            // this.props.navigation.navigate('Home');
+            const getCashierStatus = await AsyncStorage.getItem('CashierOpen');
+            console.log(getCashierStatus,'Check?');
+            this.setState({loading:false})
+            if(getCashierStatus=== null){
+                this.setState({ModalCajaVisibility:true})
+            }
+        }
+
+
+}
+GetLog = () =>{
 try{
+    /*
     const response  = await Empleados.findBy({
         contrasena_eq:this.state.Contrasena,
         NombreUsuario_eq:this.state.NombreUsuario
-    })
-    console.log(response);
-    if(response ===null || Object.keys(response).length <=0){
-        alert("El usuario no existe o contraseña invalida");
-    }
-    /*
+    })*/
+
+    return new Promise( (resolve) => {
+
+        SQLite.echoTest()
+          .then(() => {
+   
+            console.log("Opening database ...");
+SQLite.openDatabase(database_name,
+              database_version,
+              database_displayname,
+              database_size
+            )
+              .then(DB => {
+                db = DB;
+   
+db.executeSql('SELECT * FROM Empleados WHERE Activo =? AND NombreUsuario =? AND Pin =?',[1,this.state.NombreUsuario.toLocaleLowerCase(),this.state.Contrasena]).then((result) => {
+                    console.log("Database is ready ... executing query ...");
+   console.log(result)
+if(result[0].rows.length > 0  ){
+
+
+ this.AddToCashier(result);
+}
+   else{
+    alert("El usuario no existe o contraseña invalida");
+   
+   }
+
+                }).catch((error) =>{
+                    console.log("Received error: ", error);
+   
+                });
+         
+              })
+              .catch(error => {
+                console.log(error);
+              });
+          })
+          .catch(error => {
+            console.log("echoTest failed - plugin not functional");
+          });
+        });
+   
+
+
+
+
+
+
+
+
+
+
+
+/*
+
     else{
         this.setState({loading:true})
         const {NombrePersona, NombreUsuario, Rol, Contrasena,PIN} = response
@@ -378,7 +509,9 @@ try{
             }
 
         }
+
         */
+        
     } catch(ex){
                 console.log(ex);
             }

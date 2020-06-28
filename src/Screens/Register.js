@@ -111,6 +111,25 @@ let RolesCollection=[];
 console.log(RolesCollection)
 this.setState({Roles:RolesCollection})
 RolesCollection=[]
+
+
+db.executeSql("SELECT * FROM Empleados").then((sulst) =>{
+
+    console.log(sulst[0].rows.item(0));
+    
+    /*
+      console.log("Query completed");
+      var len = resulst[0].rows.length;
+      console.log(len)
+      for (let i = 0; i < len; i++) {
+        let row = resulst[0].rows.item(i);
+        console.log(row)
+      }
+    
+    */
+    })
+
+
               }).catch((error) =>{
                   console.log("Received error: ", error);
                   console.log("Database not yet ready ... populating data"); 
@@ -169,25 +188,10 @@ SaveEmp(Model) {
                   console.log("Database is ready ... executing query ...");
                   ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
 
-db.executeSql("SELECT * FROM Empleados").then((resulst) =>{
-
-Console.log(resulst);
-
-/*
-  console.log("Query completed");
-  var len = resulst[0].rows.length;
-  console.log(len)
-  for (let i = 0; i < len; i++) {
-    let row = resulst[0].rows.item(i);
-    console.log(row)
-  }
-
-*/
-})
 
 
 }).catch((error) =>{
-
+console.log(error)
 });
           
             })

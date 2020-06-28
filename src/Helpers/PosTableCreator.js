@@ -27,17 +27,18 @@ console.log("me llamaron");
               db = DB;
               console.log("Database OPEN");
 
-        /*
-              db.executeSql('DROP TABLE AlmacenDetalle',[]).then(() => {
+      
+        
+              db.executeSql('DROP TABLE Caja',[]).then(() => {
                 console.log("LA TABLA ROLES HA SIDO CREADA SATISFACTORIAMENTE");
             }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
+            /*
         db.executeSql('DROP TABLE Articulos',[]).then(() => {
                 console.log("LA TABLA ROLES HA SIDO CREADA SATISFACTORIAMENTE");
             }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
       db.executeSql('DROP TABLE Almacen',[]).then(() => {
                   console.log("LA TABLA ROLES HA SIDO CREADA SATISFACTORIAMENTE");
               }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
-
 */
 
 
@@ -84,7 +85,7 @@ db.executeSql('CREATE TABLE IF NOT EXISTS Articulos(rowid integer primary key,Co
 /*************************************************************************************************/  
 
 
-db.executeSql('CREATE TABLE IF NOT EXISTS Ventas(rowid integer primary key,PrecioNeto REAL NOT NULL, PrecioTotal REAL NOT NULL,'+
+db.executeSql('CREATE TABLE IF NOT EXISTS Ventas(rowid integer primary key,PrecioNeto REAL NOT NULL,                                                REAL NOT NULL,'+
 'DescuentoAplicado REAL , Itbis VARCHAR(1000) NOT NULL'+
 ', Activo INTEGER NOT NULL ,  IdAperturaCaja INTEGER NOT NULL, IdEmpresa INTEGER NOT NULL, IdSucursal INTEGER, FechaCreacion VARCHAR(150) NOT NULL ,FechaModificacion VARCHAR(150)'+
 ', UsuarioCreacion VARCHAR(100) NOT NULL ,UsuarioModificacion VARCHAR(100))',[]).then(() => {
@@ -120,15 +121,26 @@ db.executeSql('CREATE TABLE IF NOT EXISTS AlmacenDetalle(rowid integer primary k
 /*************************************************************************************************/  
 
 
-/**********************************
-db.executeSql('CREATE TABLE IF NOT EXISTS AlmacenDetalle(rowid integer primary key, AlmacenId REAL NOT NULL,'+
-'CantidadInfreso REAL NOT NULL, Descripcion VARCHAR(1000) '+
+
+
+
+db.executeSql('CREATE TABLE IF NOT EXISTS Caja(rowid integer primary key, MontoApertura REAL NOT NULL,'+
+'FechaInicioApertura VARCHAR(150) NOT NULL, UsuarioApertura  VARCHAR(100) NOT NULL, MontoVentaTarjetaCredito REAL,'+
+'MontoVentaEfectivo Real, MontoVentaTotal REAL,MontoSalidaDeCaja Real,UsuarioCierreCaja VARCHAR(100), '+
+'FechaCierreAperturaCaja VARCHAR(150)'+
 ', Activo INTEGER NOT NULL , IdEmpresa INTEGER NOT NULL, IdSucursal INTEGER, FechaCreacion VARCHAR(150) NOT NULL ,FechaModificacion VARCHAR(150)'+
 ', UsuarioCreacion VARCHAR(100) NOT NULL ,UsuarioModificacion VARCHAR(100))',[]).then(() => {
-    console.log("LA TABLA AlmacenDetalle HA SIDO CREADA SATISFACTORIAMENTE");
-}).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABLA AlmacenDetalle");    });
-***************************************************************/  
+    console.log("LA TABLA Caja HA SIDO CREADA SATISFACTORIAMENTE");
+}).catch((error) =>{console.log("ERROR A LA HORA DE CREAR LA TABLA Caja");    });
+/*************************************************************************************************/  
 
+db.executeSql('CREATE TABLE IF NOT EXISTS Catalogo(rowid integer primary key, NombeCatalogo nvarchar(300) NOT NULL,'+
+'Tipo VARCHAR(100) NOT NULL, Valor  VARCHAR(300) NOT NULL'+
+', Activo INTEGER NOT NULL , IdEmpresa INTEGER NOT NULL, IdSucursal INTEGER, FechaCreacion VARCHAR(150) NOT NULL ,FechaModificacion VARCHAR(150)'+
+', UsuarioCreacion VARCHAR(100) NOT NULL ,UsuarioModificacion VARCHAR(100))',[]).then(() => {
+    console.log("LA TABLA Catalogo HA SIDO CREADA SATISFACTORIAMENTE");
+}).catch((error) =>{console.log("ERROR A LA HORA DE CREAR LA TABLA Catalogo");    });
+/*************************************************************************************************/  
 
             })
             .catch(error => {
