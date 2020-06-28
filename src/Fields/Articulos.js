@@ -1,10 +1,8 @@
 import React from 'react'
 import{TextInput, Avatar, Button, Card, RadioButton} from 'react-native-paper'
 import {StyleSheet, Text, View, ScrollView,Picker,Alert,ToastAndroid} from 'react-native'
-import {Block} from 'galio-framework'
 import normalize from 'react-native-normalize';
 import Header from  '../Components/Header'
-//import * as SQLite from "expo-sqlite"
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
 import Articulos from '../../Models/Articulos'
 
@@ -58,20 +56,15 @@ Categorias:[]
 
 
 LoadData = async () =>{
-
     let ProveedoresCollection=[];
-
     let CategoriasCollection=[];
-      //  const sqlStock = 'SELECT name FROM sqlite_master WHERE type = "table"'
-    
     let  ArticulosCollection=[];
-    
         let db;
         return new Promise((resolve) => {
           console.log("Plugin integrity check ...");
           SQLite.echoTest()
-.then(() => { SQLite.openDatabase(database_name,database_version,database_displayname,database_size).then(DB => {
-db = DB;console.log("Database OPEN");
+            .then(() => { SQLite.openDatabase(database_name,database_version,database_displayname,database_size).then(DB => {
+            db = DB;console.log("Database OPEN");
                   db.executeSql("SELECT rowid,NombreProveedor FROM Proveedores WHERE Activo =? ORDER BY rowid ASC"
                   ,[1]).then((Results) => {
                       console.log("Database is ready ... executing query ...");
@@ -89,14 +82,11 @@ db = DB;console.log("Database OPEN");
                       console.log("Received error: ", error);
                       console.log("Database not yet ready ... populating data"); 
                   });
-
-
                   db.executeSql("SELECT * FROM Articulos"
                   ,[]).then((Results) => {
                       console.log("Database is ready ... executing query ...");
       console.log("Query completed");
       var len = Results[0].rows.length;
-     // console.log(len)
       for (let i = 0; i < len; i++) {
         let row = Results[0].rows.item(i);
         ArticulosCollection.push(row);
@@ -108,8 +98,6 @@ db = DB;console.log("Database OPEN");
                       console.log("Received error: ", error);
                       console.log("Database not yet ready ... populating data"); 
                   });
-
-
                   db.executeSql("SELECT * FROM Categorias WHERE Activo =? ORDER BY rowid ASC"
                   ,[1]).then((Results) => {
                       console.log("Database is ready ... executing query ...");
@@ -127,8 +115,6 @@ db = DB;console.log("Database OPEN");
                       console.log("Received error: ", error);
                       console.log("Database not yet ready ... populating data"); 
                   });
-
-
                   resolve(db);
                 })
                 .catch(error => {
@@ -139,21 +125,14 @@ db = DB;console.log("Database OPEN");
               console.log("echoTest failed - plugin not functional");
             });
           });
-      
-        
-      
-           
      }
 
 CallAlerts =(DataToDetalle) =>{
-
-
   console.log("")
   console.log("")
   console.log("/****************************************************************************/");
   console.log("")
   console.log("")
-
   let dba;
   return new Promise((resolve) => {
     console.log("Plugin integrity check ...");
@@ -167,45 +146,18 @@ CallAlerts =(DataToDetalle) =>{
           database_displayname,
           database_size
         )
-
           .then(DB => {
             dba = DB;
             console.log("Database OPEN"); 
-
             console.log("dont know"); 
-
-dba.executeSql('INSERT INTO AlmacenDetalle(AlmacenId,CantidadIngreso,Activo,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,UsuarioCreacion,'+
-'UsuarioModificacion) VALUES (?,?,?,?,?,?,?,?,?)',[DataToDetalle.AlmacId,DataToDetalle.CatidadExistencia,DataToDetalle,DataToDetalle.Activo,DataToDetalle.IdEmpresa,DataToDetalle.IdSucursal,
-  DataToDetalle.FechaCreacion,DataToDetalle.FechaModificacion,DataToDetalle.UsuarioCreacion,DataToDetalle.UsuarioModificacion]).then((result) => {
-                console.log("Database is ready ... executing query ...");
-                
-                ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
-
-
-
-
-/*
-db.executeSql("SELECT * FROM Articulos").then((resulst) =>{
-
-console.log(resulst);
-
-
-console.log("Query completed");
-var len = resulst[0].rows.length;
-console.log(len)
-for (let i = 0; i < len; i++) {
-  let row = resulst[0].rows.item(i);
-  console.log(row)
-}
-
-
-})
-*/
-
-}).catch((error) =>{
-console.log(error)
-});
-        
+            dba.executeSql('INSERT INTO AlmacenDetalle(AlmacenId,CantidadIngreso,Activo,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,UsuarioCreacion,'+
+            'UsuarioModificacion) VALUES (?,?,?,?,?,?,?,?,?)',[DataToDetalle.AlmacId,DataToDetalle.CatidadExistencia,DataToDetalle,DataToDetalle.Activo,DataToDetalle.IdEmpresa,DataToDetalle.IdSucursal,
+              DataToDetalle.FechaCreacion,DataToDetalle.FechaModificacion,DataToDetalle.UsuarioCreacion,DataToDetalle.UsuarioModificacion]).then((result) => {
+              console.log("Database is ready ... executing query ...");
+              ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
+            }).catch((error) =>{
+            console.log(error)
+            });
           })
           .catch(error => {
             console.log(error);
@@ -215,26 +167,10 @@ console.log(error)
         console.log("echoTest failed - plugin not functional");
       });
     });
-
 }
-
 loadTable = async () => {
-
     this.LoadData();
-/*
-
-
-    const sqlProvee = `SELECT id,NombreProveedor FROM Proveedores WHERE Activo =? ORDER BY id ASC`
-    const paramsProvee = [1];
-    const databaseLayerProvee = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-    databaseLayerProvee.executeSql(sqlProvee,paramsProvee).then(  ({ rows }) => {
-  this.setState({Proveedores:rows});
-  //console.log(rows)
- } )  
-*/
-
 }
-
 SaveArticulos(Model) {
     console.log("")
     console.log("")
@@ -255,62 +191,40 @@ SaveArticulos(Model) {
             database_displayname,
             database_size
           )
-
             .then(DB => {
               db = DB;
               console.log("Database OPEN"); 
 
       
-
-
 db.executeSql("INSERT INTO Articulos(Codigo,CategoriaId,DescripcionPantalla,NombreArticulo,CodigoDeBarra,PrecioCosto,PrecioVenta,ProveedoresId,MedidaDeVenta,Activo,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,UsuarioCreacion,UsuarioModificacion) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
               ,[Model.Codigo,Model.CategoriaId,Model.DescripcionPantalla,Model.NombreArticulo,
                 Model.CodigoDeBarra,Model.PrecioCosto,Model.PrecioVenta,Model.ProveedoresId,Model.MedidaDeVenta,Model.Activo,Model.IdEmpresa,Model.IdSucursal,
                 Model.FechaCreacion,Model.FechaModificacion,Model.UsuarioCreacion,Model.UsuarioModificacion]).then((result) => {
                   console.log("Database is ready ... executing query ...");
-                  
-
               const ArtId=  result[0].insertId;
               console.log("Id articulo",ArtId )
 console.log("Articulo Inserto Correctamente")
 const fecha = new Date();
 db.executeSql('INSERT INTO Almacen(ArticuloId,'+
-'CantidadActual,Descripcion ,Activo,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,UsuarioCreacion,'+
- 'UsuarioModificacion) VALUES (?,?,?,?,?,?,?,?,?,?)',[ArtId,Model.CatidadExistencia,Model.Activo,Model.IdEmpresa, Model.IdSucursal,
-  fecha.toString(),Model.FechaModificacion,Model.UsuarioCreacion,Model.UsuarioModificacion]).then((AlmacenResult)=>{
-  
+'CantidadActual,Descripcion,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,UsuarioCreacion,'+
+ 'UsuarioModificacion) VALUES (?,?,?,?,?,?,?,?,?)',[ArtId,Model.CatidadExistencia,Model.DescripcionPantalla,
+  Model.IdEmpresa, Model.IdSucursal,fecha.toString(),Model.FechaModificacion,Model.UsuarioCreacion,
+  Model.UsuarioModificacion])
+  .then((AlmacenResult)=>{
   const AlmacId=  AlmacenResult[0].insertId;
-
-
-  console.log("Id almacen",AlmacId )
+  console.log("Id almacen",AlmacId ) 
   console.log("Almacen Inserto Correctamente");
-/*
-var DataToDetalle ={
-
-  AlmacId:AlmacId,
-  CantidadIngreso:Model.CatidadExistencia,
-  Activo:Model.Activo,
-  IdEmpresa:Model.IdEmpresa,
-  IdSucursal:Model.IdSucursal,
-  FechaCreacion: fecha.toString(),
-  FechaModificacion:null,
-  UsuarioCreacion:"system",
-  UsuarioModificacion:null
-
-}
-*/
-//  this.CallAlerts(DataToDetalle);
-  
+  this.props.toggleForm(false)
 
 db.executeSql('INSERT INTO AlmacenDetalle(AlmacenId,'+
-'CantidadIngreso ,Activo,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,UsuarioCreacion,'+
- 'UsuarioModificacion) VALUES (?,?,?,?,?,?,?,?,?)',[ArtId,Model.CatidadExistencia,Model.Activo,Model.IdEmpresa, Model.IdSucursal,
+'CantidadIngreso ,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,UsuarioCreacion,'+
+ 'UsuarioModificacion) VALUES (?,?,?,?,?,?,?,?)',[ArtId,Model.CatidadExistencia,Model.IdEmpresa, Model.IdSucursal,
   fecha.toString(),Model.FechaModificacion,Model.UsuarioCreacion,Model.UsuarioModificacion]).then((AlmacenResult)=>{
 
     console.log("AlmacenDetalle Inserto Correctamente")
 
     ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
-
+    this.props.toggleForm(false)
 
   }).catch((erroralma)=>{
 
@@ -443,6 +357,7 @@ value={this.state.CodigoDeBarra}
 onChangeText={(CodigoDeBarra)=>this.setState({CodigoDeBarra:CodigoDeBarra})}
 
  />
+ 
  <TextInput 
 style={styles.Input}
 model='flat'
@@ -590,11 +505,8 @@ try  {
 // Articulos.dropTable();
   
 const fecha = new Date();
-
-
   // this.Validaciones();
     const Model ={
-
         Codigo: null,
         CategoriaId: this.state.CategoriaId,
         DescripcionPantalla: this.state.DescripcionPantalla,

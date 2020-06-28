@@ -13,12 +13,11 @@ const database_name = "PuntoVenta.db";
 const database_version = "1.0";
 const database_displayname = "SQLite React Offline Database";
 const database_size = 200000;
-const items= [];
 
 export default class StockScreen extends React.Component{
   constructor(props) {
     super(props);
-    this.state= {
+    this.state = {
       selectedItem: '',
       CantidadActual : '',
       Descripcion : '',
@@ -28,7 +27,9 @@ export default class StockScreen extends React.Component{
       FechaModificacion : '',
       UsuarioCreacion : '',
       UsuarioModificacion : '',
-      articulos : ''
+      articulos : '',
+      disable:'true',
+      items: []
     }
     this.insertStock = this.insertStock.bind(this)
     this.renderSearch = this.renderSearch.bind(this)
@@ -57,10 +58,12 @@ export default class StockScreen extends React.Component{
             db.executeSql(`SELECT rowid , NombreArticulo FROM Articulos`,[]).then((result) => {
                for (let i = 0; i < result[0].rows.length; i++) {
                  let row = result[0].rows.item(i);
-                 items.push(row)
+                 articulos.push(row)
                }
-               ToastAndroid.show("Cargado Correctamente",ToastAndroid.SHORT)
-               console.log('Articulos Data:',items)
+               this.setState({
+                items:articulos
+               })
+               console.log('Articulos Data:',this.state.items.length)
           }).catch((error) =>{      
           console.log("Error a cargar datos");  
         });
@@ -81,13 +84,10 @@ insertStock = () =>{
   const Model={
     CantidadActual : this.state.CantidadActual,
     Descripcion : this.state.Descripcion,
-    Activo : 1,
-    IdEmpresa : 1,
-    ArticuloId : this.state.selectedItem.rowid,
-    IdSucursal : 1,
     FechaCreacion : new Date(),
     FechaModificacion : null,
     UsuarioCreacion : 'system',
+    ArticuloId : this.state.selectedItem.rowid,
     UsuarioModificacion : null
   }
   console.log(Model, 'check after post')
@@ -107,32 +107,25 @@ insertStock = () =>{
         .then(DB => {
           db = DB;
           console.log("Database OPEN");
-          db.executeSql(`SELECT rowid , CantidadActual FROM Almacen WHERE ArticuloId = ${Model.ArticuloId}`,[]).then((result) => {
-            result.map(item=>{
-              console.log(item.rows.length, 'checkinggg')
-              if(item.rows.length > 0 ){
-                ToastAndroid.show("Articulo ya existente en almacen, favor escoger otro articulo",ToastAndroid.SHORT)
-                return
-              } else {
-                db.executeSql(`INSERT INTO Almacen (ArticuloId,
-                  CantidadActual , Descripcion ,
-                  Activo  , IdEmpresa , IdSucursal , 
-                  FechaCreacion ,FechaModificacion ,
-                  UsuarioCreacion  ,UsuarioModificacion) VALUES (?,?,?,?,?,?,?,?,?,?)`,
-                  [Model.ArticuloId, Model.CantidadActual,Model.Descripcion,Model.Activo,Model.IdEmpresa,
-                  Model.IdSucursal,Model.FechaCreacion.toString(),Model.FechaModificacion,
-                  Model.UsuarioCreacion,Model.UsuarioModificacion]).then(() => {
-                    console.log("Guardado Correctamente");
+                db.executeSql(`UPDATE Almacen SET
+                  CantidadActual = ? , Descripcion = ? , FechaCreacion = ? ,FechaModificacion = ? ,
+                  UsuarioCreacion = ?  ,UsuarioModificacion = ? WHERE ArticuloId = ${Model.ArticuloId}`,
+                  [Model.CantidadActual,Model.Descripcion,Model.FechaCreacion.toString(),
+                  Model.FechaModificacion, Model.UsuarioCreacion,Model.UsuarioModificacion]).then(() => {
                     ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
+                    this.setState({
+                      CantidadActual:'',
+                      Descripcion:'',
+                      items: new Array(), 
+                      selectedItem: ''
+                    })
+                    this.props.toggleForm(false)
                   }).catch((error) =>{      
-                  console.log("ERROR GUARDANDO EN STOCK");  
-                });
-              }
+                  console.log("ERROR GUARDANDO EN Almacen", error);  
             })
           }).catch((error) =>{      
             console.log("Error a cargar datos", error);  
           });
-      })
     })
   });
 }
@@ -142,7 +135,10 @@ insertStock = () =>{
             {/* Single */}
             <SearchableDropdown
               onItemSelect={(item) => {
-                this.setState({ selectedItem: item }, console.log(item));
+                this.setState({ 
+                  selectedItem: item,
+                  disable:false
+                 }, console.log(item, 'aca'));
               }}
               containerStyle={{ padding: 5 }}
               itemStyle={{
@@ -155,7 +151,7 @@ insertStock = () =>{
               }}
               itemTextStyle={{ color: '#222' }}
               itemsContainerStyle={{ maxHeight: 140 }}
-              items={items}
+              items={this.state.items}
               resetValue={false}
               textInputProps={
                 {
@@ -167,7 +163,9 @@ insertStock = () =>{
                       borderColor: '#ccc',
                       borderRadius: 5,
                   },
-                  onTextChange: text => alert(text)
+                  onTextChange: () => this.setState({
+                    disable:true
+                  })
                 }
               }
               listProps={
@@ -180,6 +178,7 @@ insertStock = () =>{
     );
     }
     render(){
+      const { items}  =  this.state
         return (
             // <ScrollView>
             <SafeAreaView>
@@ -202,6 +201,9 @@ insertStock = () =>{
                             icon="account" />} 
                         />
                         <Card.Content>
+                          {items.length == 0 && 
+                            (<Text style={{color:'red' ,textAlign:'center'}}> No hay articulos registrados </Text>)
+                          }
                         {this.renderSearch()}
                             <TextInput
                                 style={styles.Input}
@@ -222,12 +224,13 @@ insertStock = () =>{
                               labelStyle={styles.Button} 
                               mode="contained" 
                               onPress={this.insertStock}
+                              disabled={this.state.disable}
                             >
                                 <Icon 
                                     name="save" 
                                     size={15} 
                                     color="#ffffff" 
-                                    style={styles.Icon}   
+                                    style={styles.Icon}
                                 /> <Text>{"  "}</Text>     
                                 Agregar Articulo
                             </Button>

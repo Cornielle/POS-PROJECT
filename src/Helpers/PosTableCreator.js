@@ -27,17 +27,17 @@ console.log("me llamaron");
               db = DB;
               console.log("Database OPEN");
 
-/*
-              db.executeSql('DROP TABLE AlmacenDetalle',[]).then(() => {
-                console.log("LA TABLA ROLES HA SIDO CREADA SATISFACTORIAMENTE");
-            }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
-        db.executeSql('DROP TABLE Articulos',[]).then(() => {
-                console.log("LA TABLA ROLES HA SIDO CREADA SATISFACTORIAMENTE");
-            }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
-      */
-      db.executeSql('DROP TABLE Almacen',[]).then(() => {
-                  console.log("LA TABLA ALMACEN DROPEADA");
-              }).catch((error) =>{      console.log("error al dropear almacen");    });
+
+      //         db.executeSql('DROP TABLE AlmacenDetalle',[]).then(() => {
+      //           console.log("LA TABLA ROLES HA SIDO CREADA SATISFACTORIAMENTE");
+      //       }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
+      //   db.executeSql('DROP TABLE Articulos',[]).then(() => {
+      //           console.log("LA TABLA ROLES HA SIDO CREADA SATISFACTORIAMENTE");
+      //       }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
+      
+      // db.executeSql('DROP TABLE Almacen',[]).then(() => {
+      //             console.log("LA TABLA ALMACEN DROPEADA");
+      //         }).catch((error) =>{      console.log("error al dropear almacen");    });
 
 
 
@@ -102,7 +102,7 @@ db.executeSql('CREATE TABLE IF NOT EXISTS VentasDetalle(rowid integer primary ke
 
 db.executeSql('CREATE TABLE IF NOT EXISTS Almacen(rowid integer primary key, ArticuloId REAL NOT NULL,'+
 'CantidadActual REAL NOT NULL, Descripcion VARCHAR(1000) '+
-', Activo INTEGER NOT NULL , IdEmpresa INTEGER NOT NULL, IdSucursal INTEGER, FechaCreacion VARCHAR(150) ,FechaModificacion VARCHAR(150)'+
+', IdEmpresa INTEGER NOT NULL, IdSucursal INTEGER, FechaCreacion VARCHAR(150) ,FechaModificacion VARCHAR(150)'+
 ', UsuarioCreacion VARCHAR(100) ,UsuarioModificacion VARCHAR(100))',[]).then(() => {
     console.log("LA TABLA Almacen HA SIDO CREADA SATISFACTORIAMENTE");
 }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABLA Almacen");    });
@@ -113,7 +113,7 @@ db.executeSql('CREATE TABLE IF NOT EXISTS Almacen(rowid integer primary key, Art
 
 db.executeSql('CREATE TABLE IF NOT EXISTS AlmacenDetalle(rowid integer primary key, AlmacenId REAL NOT NULL,'+
 'CantidadIngreso REAL NOT NULL'+
-', Activo INTEGER NOT NULL , IdEmpresa INTEGER NOT NULL, IdSucursal INTEGER, FechaCreacion VARCHAR(150) NOT NULL ,FechaModificacion VARCHAR(150)'+
+', IdEmpresa INTEGER NOT NULL, IdSucursal INTEGER, FechaCreacion VARCHAR(150) NOT NULL ,FechaModificacion VARCHAR(150)'+
 ', UsuarioCreacion VARCHAR(100) NOT NULL ,UsuarioModificacion VARCHAR(100))',[]).then(() => {
     console.log("LA TABLA AlmacenDetalle HA SIDO CREADA SATISFACTORIAMENTE");
 }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABLA AlmacenDetalle");    });

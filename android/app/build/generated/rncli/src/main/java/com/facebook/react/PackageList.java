@@ -18,8 +18,12 @@ import com.posproj.R;
 import org.reactnative.maskedview.RNCMaskedViewPackage;
 // react-native-extra-dimensions-android
 import ca.jaysoo.extradimensions.ExtraDimensionsPackage;
+// react-native-fs
+import com.rnfs.RNFSPackage;
 // react-native-gesture-handler
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+// react-native-image-picker
+import com.imagepicker.ImagePickerPackage;
 // react-native-orientation
 import com.github.yamill.orientation.OrientationPackage;
 // react-native-printer
@@ -83,7 +87,9 @@ public class PackageList {
       new MainReactPackage(mConfig),
       new RNCMaskedViewPackage(),
       new ExtraDimensionsPackage(),
+      new RNFSPackage(),
       new RNGestureHandlerPackage(),
+      new ImagePickerPackage(),
       new OrientationPackage(),
       new RNPrinterPackage(),
       new ReanimatedPackage(),

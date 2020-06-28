@@ -10,6 +10,13 @@ import Stock from '../../Models/Stock';
 import StockScreen from '../Screens/StockScreen';
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler';
 import ActionSheet from 'react-native-actionsheet';
+import  SQLite  from 'react-native-sqlite-storage';
+SQLite.DEBUG(true);
+SQLite.enablePromise(true);
+const database_name = "PuntoVenta.db";
+const database_version = "1.0";
+const database_displayname = "SQLite React Offline Database";
+const database_size = 200000;
 export default class StockGridScreen extends React.Component{
     constructor(props) {
         super(props);
@@ -56,43 +63,70 @@ export default class StockGridScreen extends React.Component{
     };
   _showModal = () => this.setState({visible:true})
   _hideModal = () => this.setState({visible:false})
-  LoadStockData = async () =>{
-    const options ={
-        columns:`id,ArticuloId,CantidadExistencia,Activo,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,
-         UsuarioCreacion,UsuarioModificacion`,
-        where:{
-        Id_gt:0
-        },
-        page:1,
-        limit:30
-    }    
-  const artiobj = await Stock.query(options) 
 
-  console.log(artiobj, 'fecha creacion?')
-  let arra =[]   
-  this.state.HoraCreacion = ''
-  artiobj.map(x => {
-    const{id, NombreStock, FechaCreacion, CantidadExistencia,Activo} = x;
-    let date = FechaCreacion.split(' ');
-    var objeto  ={
-    key: id,
-    name:NombreStock,
-    FechaCreacion:`${date[2]}/${date[1]}/${date[3]}` ,
-    HoraCreacion: date[4][0]+date[4][1] > 11 && date[4][0]+date[4][1] < 23 ? `${ date[4]}PM` :`${ date[4]}AM`,
-    avatar_url:'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-    subtitle: CantidadExistencia,
-    estado: Activo ?true: false
-  }
-  arra.push(objeto)
-    });
-    this.setState({data:arra})
-    this.setState({
-      filterData:arra
-    })
-    // console.log(this.state.data)
-  }
+  LoadStockData = async () =>{
+      let db;
+      let artiobj = []
+      let arra =[]
+      new Promise((resolve) => {
+        console.log("Plugin integrity check ...");
+        SQLite.echoTest()
+          .then(() => {
+            console.log("Integrity check passed ...");
+            console.log("Opening database ...");
+            SQLite.openDatabase(
+              database_name,
+              database_version,       
+              database_displayname,
+              database_size
+            ).then(DB => {
+              db = DB;
+              console.log("Database OPEN");
+              db.executeSql(`SELECT * FROM Almacen ORDER BY rowid ASC`,[]).then((result) => {
+                console.log(result)
+                 for (let i = 0; i < result[0].rows.length; i++) {
+                   let row = result[0].rows.item(i);
+                   artiobj.push(row);
+                 }
+                 console.log('Almacen Data:',artiobj)
+                 this.state.HoraCreacion = ''
+                 artiobj.map(x => {
+                  const{id, FechaCreacion, CantidadExistencia,Activo} = x;
+                  console.log(FechaCreacion)
+                  let date = FechaCreacion.split(' ');
+                  var objeto  ={
+                  key: id,
+                  FechaCreacion:`${date[2]}/${date[1]}/${date[3]}` ,
+                  HoraCreacion: date[4][0]+date[4][1] > 11 && date[4][0]+date[4][1] < 23 ? `${ date[4]}PM` :`${ date[4]}AM`,
+                  avatar_url:'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+                  subtitle: CantidadExistencia,
+                  estado: Activo ?true: false
+                 }
+                 arra.push(objeto)
+                 });
+                 this.setState({data:arra})
+                 this.setState({
+                   filterData:arra
+                 })
+                 console.log(this.state.data, 'here in stock')
+            }).catch((error) =>{      
+            console.log("Error a cargar datos", error);  
+          });
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      })
+        .catch(error => {
+        console.log("echoTest failed - plugin not functional");
+        });
+      });
+    }
+
   async  componentDidMount(){
-    const crear = await Stock.createTable();
+    this.setState({
+      state:this.state
+    })
     this.LoadStockData()  
   }
   saveEdit = async () =>{ 
@@ -131,7 +165,10 @@ export default class StockGridScreen extends React.Component{
   }
 _toggleForm(addRecord){
   if(addRecord===false){
-    this.setState({addRecord:false})
+    this.setState({
+      addRecord:false,
+    })
+    this.LoadStockData()  
   }
 }
 _showMenu(index){

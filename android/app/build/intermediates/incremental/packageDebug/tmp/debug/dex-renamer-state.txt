@@ -1,4 +1,4 @@
-#Sat Jun 13 12:06:10 AST 2020
+#Sun Jun 28 11:07:21 AST 2020
 base.0=/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/transforms/dexMerger/debug/0
 path.1=classes.dex
 renamed.1=classes2.dex
