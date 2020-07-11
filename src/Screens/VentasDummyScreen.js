@@ -39,6 +39,7 @@ export default class VentasMain extends React.Component {
       backgroundColor:'#000000',
       isCash:false,
       isCard:true, 
+      IsDeposit:true,
       product:false,
       isReady: false,
       searchQuery:'',
@@ -50,6 +51,7 @@ export default class VentasMain extends React.Component {
       categorias:[],
       MontoTarjeta:0,
       MontoEfectivo:0,
+      MontoTransferencia:0,
       Articulo:{
         id:0,
         Codigo:'',
@@ -141,6 +143,7 @@ getVentasId = async()=>{
 
 try {
 
+
   let ListArticulos = []
   console.log("")
   console.log("")
@@ -164,13 +167,12 @@ try {
           .then(DB => {
             db = DB;
             console.log("Database OPEN");
-            db.executeSql('INSERT INTO Ventas(PrecioNeto, PrecioTotal'+
-            ', DescuentoAplicado, Itbis'
-            +', Activo ,IdAperturaCaja ,IdEmpresa , IdSucursal , FechaCreacion ,FechaModificacion '+
-            ', UsuarioCreacion ,UsuarioModificacion ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)'
-            ,[Model.PrecioNeto,Model.PrecioTotal,Model.DescuentoAplicado,Model.Itbis,
-              Model.Activo,this.state.IdCajaActiva,Model.IdEmpresa,Model.IdSucursal,
-              Model.FechaCreacion,Model.FechaModificacion,Model.UsuarioCreacion,Model.UsuarioModificacion]).then((results) => {
+db.executeSql('INSERT INTO Ventas(PrecioBruto, PrecioNeto, DescuentoAplicado, Itbis,PagoEfectivo,PagoTarjeta,PagoTransferencia,'+
+'Activo ,IdAperturaCaja ,IdEmpresa , IdSucursal , FechaCreacion ,FechaModificacion,'+
+'UsuarioCreacion ,UsuarioModificacion) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)'
+,[Model.PrecioBruto,Model.PrecioTotal,Model.DescuentoAplicado,Model.Itbis,Model.PagoEfectivo,
+  Model.PagoTarjeta,Model.PagoTransferencia,Model.Activo,Model.IdAperturaCaja,Model.IdEmpresa,Model.IdSucursal,
+  Model.FechaCreacion,Model.FechaModificacion,Model.UsuarioCreacion,Model.UsuarioModificacion]).then((results) => {
              //   console.log("Database is ready ... executing query ...");
 
 console.log("Se Inserto Ventas");
@@ -195,12 +197,8 @@ console.log("aqui el item: ",item);
                     //this.setState({ListaArti: ListArticulos})
                     console.log("Received error: ", error);
                     console.log("Database not yet ready ... populating data");
-                    
                     });
-  
               }
-
-
              })
       
              console.log("Lo tenemos aqui", this.state.ListaArti );
@@ -236,14 +234,16 @@ console.log(ex)
 
 ClearValues = ()=>{
 
-this.state.MontoEfectivo ="";
-this.state.MontoTarjeta ="";
+
+  this.setState({MontoEfectivo:"", MontoTarjeta:""})
 this.visible = false;
   
 }
 
 
  componentDidMount(){
+
+this.VerVentas();
 
   this.scan();
  this.getVentasId();
@@ -258,6 +258,34 @@ this.visible = false;
 
   }
 
+  VerVentas = () =>{
+
+
+    var fecha = new Date();
+    let db;
+return new Promise((resolve) => {SQLite.echoTest().then(() => {
+ console.log("Opening database ...");
+SQLite.openDatabase(database_name,database_version,database_displayname,database_size).then(DB => {db = DB;
+db.executeSql("SELECT  * FROM Ventas",[]).then((results) => {
+console.log("Database is ready ... executing query ...");
+ console.log(results);
+
+var len = results[0].rows.length;
+
+ for (let i = 0; i < len; i++) {
+
+
+  console.log("he aqui: ",results[0].rows.item(i));
+ }
+
+
+ }).catch((error) =>{console.log("Received error: ", error);});})
+.catch(error => {console.log(error);});})
+.catch(error => {console.log("echoTest failed - plugin not functional");});});
+
+
+
+  }
 
 
   CargaUltimaVenta =async ()=>{
@@ -380,7 +408,7 @@ CalcMontoFinal = () =>{
 try{
   console.log("Cargando Monto");
 
-let totalAmbos = (this.state.MontoEfectivo+this.state.MontoTarjeta);
+let totalAmbos = (this.state.MontoEfectivo+this.state.MontoTarjeta + this.state.MontoTransferencia);
 
 console.log("totalAmbos: ",totalAmbos)
 console.log("sum: ",this.sum())
@@ -416,18 +444,47 @@ console.log(ex);
 try{
 
 
+
+
+  if(this.state.isCard === true && this.state.isCash===true && this.state.IsDeposit ===true){
+
+Alert.alert("Debe tener al menos 1 metodo de pago seleccionado");
+return;
+
+  }
+
+
+  
+
  if(this.CalcMontoFinal()===0){
 
 
-Alert.alert("La cantidad introduccida es menor que el total a pagar");
+Alert.alert("El monto pagado no puede ser menor al pagar");
 return;
 
  }   else {
+
+  const Caja = await AsyncStorage.getItem("CajaActivaId");
+
+
+  const LoggedUser = await AsyncStorage.getItem('LoggedUser');
+
+  
+ const  sucu =  await AsyncStorage.getItem('SucursalTemp');
+
+ const emp = await AsyncStorage.getItem('EmpresaTemp');
  
+
+  const AperturaUsuario = JSON.parse(LoggedUser);
+  const sucursal = JSON.parse(sucu);
+  const empresa = JSON.parse(emp);
+const CajaActiva = JSON.parse(Caja);
   const SelectedProduct =[];
 
   let total =0;
 
+  const Itbis = 18;
+  const Descuento =0;
  this.state.articulos.map(item=>{
    if(item.selected=== true){
 total += (item.quantitySelected * item.PrecioVenta);
@@ -436,19 +493,26 @@ SelectedProduct.push(item)
 
  });
 
+const porcItbis= ((total*Itbis)/100);
+
+console.log("el precio a introducir",porcItbis);
  this.setState({ListaArti:SelectedProduct})
  const fecha = new Date();
  const ventasItem ={
-   PrecioNeto:total,
-   PrecioTotal:total ,
-   DescuentoAplicado:"10",
-   Itbis:18,
+   PrecioBruto:total,
+   PrecioTotal:(porcItbis+total),
+   DescuentoAplicado:Descuento,
+   PagoEfectivo:this.state.MontoEfectivo,
+   PagoTarjeta:this.state.MontoTarjeta,
+   PagoTransferencia:this.state.MontoTransferencia,
+   Itbis:Itbis,
    Activo:1,
-   IdEmpresa:1,
-   IdSucursal:1,
+   IdAperturaCaja:CajaActiva.IdCaja,
+   IdEmpresa:empresa.Empresa,
+   IdSucursal:sucursal.Sucursal,
    FechaCreacion: fecha.toString(),
    FechaModificacion:null,
-   UsuarioCreacion:"system",
+   UsuarioCreacion:AperturaUsuario.Usuario,
    UsuarioModificacion:null
    
   }
@@ -501,7 +565,7 @@ if( item.selected === true){
   // }
   render() {
 
-    const { visible, isCash, isCard , product, searchQuery,articulos } = this.state;
+    const { visible, isCash, isCard ,IsDeposit, product, searchQuery,articulos } = this.state;
     if (!this.state.isReady) {
       return (
       <Container>
@@ -714,15 +778,25 @@ if( item.selected === true){
             onChangeText={(MontoTarjeta)=> this.setState({MontoTarjeta})}
             keyboardType="numeric"
           />
+
+<TextInput
+            style={styles.Input}
+            mode='flat'
+            label='Monto Transferencia'
+            value={'600'}
+            disabled={IsDeposit}
+            value={this.state.MontoTransferencia}
+            onChangeText={(MontoTransferencia)=> this.setState({MontoTransferencia})}
+            keyboardType="numeric"
+          />
       <TouchableOpacity >
         <Text 
           onPress={()=>{this.setState({isCash:!isCash})}} 
           style={{
-            marginTop: windowHeight * 0.08,
+            marginTop: windowHeight * 0.04,
             backgroundColor:!isCash? '#6be585' : '#f9f9f9',
-            marginTop: windowHeight * 0.08,
             textAlign:'center',
-            padding:25
+            padding:5
         }}>
         <Icon style={styles.cashButton}type="FontAwesome5" name="money-bill" />
           {" "}Efectivo
@@ -732,17 +806,33 @@ if( item.selected === true){
         <Text 
           onPress={()=>{this.setState({isCard:!isCard})}} 
           style={{
-            marginTop: windowHeight * 0.08,
+            marginTop: windowHeight * 0.04,
             backgroundColor:!isCard? '#6be585' : '#f9f9f9',
             textAlign:'center',
-            padding:25
+            padding:5
         }}>
         <Icon style={styles.cashButton}type="FontAwesome5" name="credit-card" />
           {" "}Tarjeta
         </Text>
       </TouchableOpacity> 
 
-      <Button Title="Pagar" onPress={this.Pagar}  >
+      <TouchableOpacity>
+        <Text 
+          onPress={()=>{this.setState({IsDeposit:!IsDeposit})}} 
+          style={{
+            marginTop: windowHeight * 0.04,
+            backgroundColor:!IsDeposit? '#6be585' : '#f9f9f9',
+            textAlign:'center',
+            padding:5,
+            marginBottom: windowHeight * 0.04,
+        }}>
+        <Icon style={styles.cashButton}type="FontAwesome5" name="credit-card" />
+          {" "}Transferencia
+        </Text>
+      </TouchableOpacity> 
+
+
+      <Button Title="Pagar" onPress={this.Pagar} style={{justifyContent:"center"}}  >
 <Text>Pagar</Text>
         </Button>
 
@@ -760,7 +850,7 @@ const styles = StyleSheet.create({
     backgroundColor:'#FFFFFF',
   }, 
   modalBox:{
-    marginTop:60
+    marginTop:15
   },
   modalTitle:{
     textAlign:'center',

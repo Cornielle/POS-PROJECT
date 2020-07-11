@@ -6,13 +6,25 @@ import {
   Image,
   TouchableHighlight,
   StyleSheet,
-  ImageBackground
+  ImageBackground,
+  AsyncStorage
 } from 'react-native';
 import { Card } from 'react-native-paper';
 import { categories } from '../Data/dataMenuArrays';
-import * as SQLite from "expo-sqlite"
-import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
+
+
 import PosTableCreator from '../Helpers/PosTableCreator'
+import axios from 'axios'
+import  SQLite  from 'react-native-sqlite-storage';
+import { getUniqueId, getManufacturer } from 'react-native-device-info';
+import DeviceInfo from 'react-native-device-info';
+SQLite.DEBUG(true);
+SQLite.enablePromise(true);
+const database_name = "PuntoVenta.db";
+const database_version = "1.0";
+const database_displayname = "SQLite React Offline Database";
+const database_size = 200000;
+
 
 export default class CloseCashierGridScreen extends React.Component {
   static navigationOptions = {
@@ -20,11 +32,79 @@ export default class CloseCashierGridScreen extends React.Component {
   };
   constructor(props) {
     super(props);
-    console.log(categories,'check')
+    //`console.log(categories,'check')
+    
   }
+  Deletekey = async() =>{
+    try{
+        await AsyncStorage.removeItem('LoggedUser');
+        await AsyncStorage.removeItem('CashierOpen');
+        await AsyncStorage.removeItem('CajaActivaId');
+
+        await AsyncStorage.removeItem('SucursalTemp');
+
+      await AsyncStorage.removeItem('EmpresaTemp');
+
+      await AsyncStorage.removeItem('DeviceIdTemp');
+      
+        const LoggedUser = await AsyncStorage.getItem('LoggedUser');
+        const CashierOpen = await AsyncStorage.getItem('CashierOpen');
+        const CajaActivaId = await AsyncStorage.getItem('CajaActivaId');
+        const empresa = await AsyncStorage.getItem('EmpresaTemp');
+        const sucursal = await AsyncStorage.getItem('SucursalTemp');
+        const DeviceT = await AsyncStorage.getItem('DeviceIdTemp');
+        console.log("eleme: ", LoggedUser)
+        console.log("eleme: ", CashierOpen)
+        console.log("eleme: ", CajaActivaId)
+        console.log("eleme: ", empresa)
+        console.log("eleme: ", sucursal)
+        console.log("eleme",DeviceT );
+    }
+    catch(ex){
+        console.log(ex);
+    }
+}
+
+
+
+
+DeleteNegocioInfo = async () =>{
+
+
+
+try{
+
+  await AsyncStorage.removeItem('EmpresaTemp');
+  await AsyncStorage.removeItem('SucursalTemp');
+  
+
+}
+catch(ex){
+
+console.log(ex);
+
+
+}
+
+}
+
+ 
+
 
 
 componentDidMount(){
+  //this.Deletekey();
+  axios.get('http://netapi.cobeltec.com/api/WeatherForecast').then(result =>{
+
+
+  //console.log(result)
+
+  });
+
+ // this.ShowDeviceInfo();
+
+  //this.DeleteNegocioInfo();
+ 
 /*
   const sqlStock = "SELECT * FROM Caja WHERE Activo=?"
   const paramsStock = [1];

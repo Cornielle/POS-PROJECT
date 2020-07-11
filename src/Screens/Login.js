@@ -16,6 +16,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 import  SQLite  from 'react-native-sqlite-storage';
+import { getUniqueId, getManufacturer } from 'react-native-device-info';
+import DeviceInfo from 'react-native-device-info';
 SQLite.DEBUG(true);
 SQLite.enablePromise(true);
 const database_name = "PuntoVenta.db";
@@ -47,6 +49,9 @@ const database_size = 200000;
       console.log(SQLite)
     this.verifyLog();
  //this.Deletekey();
+ this.ShowDeviceInfo();
+this.GetNegocioInfo();
+
     const fecha  = new Date();
     const date = fecha.toString().split(' ')
     this.setState({FechaApertura:`${date[2]}/${date[1]}/${date[3]}` })
@@ -61,11 +66,115 @@ LoadAllData = async () =>{
 } 
 
 
+GetNegocioInfo = async() =>{
+
+
+try{
+
+    return new Promise( (resolve) => {
+
+        SQLite.echoTest()
+          .then(() => {
+   
+            console.log("Opening database ...");
+SQLite.openDatabase(database_name,
+              database_version,
+              database_displayname,
+              database_size
+            )
+              .then(DB => {
+                db = DB;
+   
+db.executeSql('SELECT * FROM Catalogo WHERE Activo =? AND NombeCatalogo =? AND NombeCatalogo =?',[1,this.state.NombreUsuario.toLocaleLowerCase(),this.state.Contrasena]).then((result) => {
+                    console.log("Database is ready ... executing query ...");
+   console.log(result)
+if(result[0].rows.length > 0  ){
+
+
+ 
+}
+   else{
+    alert("No he traido datos");
+   
+   }
+
+                }).catch((error) =>{
+                    console.log("Received error: ", error);
+   
+                });
+         
+              })
+              .catch(error => {
+                console.log(error);
+              });
+          })
+          .catch(error => {
+            console.log("echoTest failed - plugin not functional");
+          });
+        });
+   
+
+}catch(ex){
+
+    console.log(ex)
+
+
+}
+
+
+}
+
+ShowDeviceInfo =() =>{
+
+
+    try{
+      DeviceInfo.getAndroidId().then(androidId => {
+        this.SetDeviceId(androidId);
+    //console.log(androidId);
+      });
+    
+    }catch(ex){
+    
+    console.log(ex);
+    
+    }
+    
+    
+    }
+    
+    
+    SetDeviceId = async(androidId) =>{
+    
+    
+      try{
+    
+    await AsyncStorage.setItem("DeviceIdTemp", JSON.stringify({DeviceId:androidId}));
+
+  const device = await AsyncStorage.getItem("DeviceIdTemp");
+
+  console.log(device)
+
+
+      }
+    catch(ex){
+    
+    console.log(ex);
+    
+    }
+    
+    }
+
 verifyLog = async () =>{
 
 try{
+
+    console.log("Estoy en verificar log!");
    const item = await AsyncStorage.getItem('LoggedUser');
+
+   console.log("Este es el valor del log ", item);
    if(item !==null&& item !== undefined){
+console.log("Entre aqui a ver klk");
+
     const JsonUsuario = JSON.parse(item);
     this.setState({
         NombreUsuario: JsonUsuario.Usuario,
@@ -100,6 +209,92 @@ LogGoHome = () =>{
     }
 
 }
+SetDatosCompania = async (Tipo,Valor) =>{
+
+
+    console.log("Entre a datos compania");
+
+if(Tipo==="Empresa")
+ await AsyncStorage.setItem('EmpresaTemp',JSON.stringify({Empresa:Valor}));
+
+if(Tipo==="Sucursal")
+ await AsyncStorage.setItem('SucursalTemp',JSON.stringify({Sucursal:Valor}));
+
+
+ const  sucu =  await AsyncStorage.getItem('SucursalTemp');
+
+const emp = await AsyncStorage.getItem('EmpresaTemp');
+
+
+console.log(sucu);
+
+console.log(emp)
+
+  }
+
+GetNegocioInfo = async() =>{
+
+
+    try{
+    
+        return new Promise( (resolve) => {
+    
+            SQLite.echoTest()
+              .then(() => {
+       
+                console.log("Opening database ...");
+    SQLite.openDatabase(database_name,
+                  database_version,
+                  database_displayname,
+                  database_size
+                )
+                  .then(DB => {
+                    db = DB;
+       
+    db.executeSql('SELECT NombeCatalogo,Tipo,Valor FROM Catalogo WHERE Activo =? AND NombeCatalogo IN (?,?)',[1,'Sucursal','Empresa']).then((result) => {
+                        console.log("Database is ready ... executing query ...");
+      // console.log(result)
+    if(result[0].rows.length > 0  ){
+    
+      for (let index = 0; index < 2; index++) {
+        const element = result[0].rows.item(index)
+        console.log(`elemento no ${index}:`, element) 
+       var  Tipo=  result[0].rows.item(index).NombeCatalogo;
+       var Valor =result[0].rows.item(index).Valor;
+      this.SetDatosCompania(Tipo,Valor);
+      }
+    }
+       else{
+        alert("No he traido datos");
+       
+       }
+    
+                    }).catch((error) =>{
+                        console.log("Received error: ", error);
+       
+                    });
+             
+                  })
+                  .catch(error => {
+                    console.log(error);
+                  });
+              })
+              .catch(error => {
+                console.log("echoTest failed - plugin not functional");
+              });
+            });
+       
+    
+    }catch(ex){
+    
+        console.log(ex)
+    
+    
+    }
+    
+    
+    }
+  
 
 CerrarModal = () =>{
     try {
@@ -113,6 +308,22 @@ Deletekey = async() =>{
         await AsyncStorage.removeItem('LoggedUser');
         await AsyncStorage.removeItem('CashierOpen');
         await AsyncStorage.removeItem('CajaActivaId');
+
+        await AsyncStorage.removeItem('SucursalTemp');
+        await AsyncStorage.removeItem('DeviceIdTemp');
+      
+      await AsyncStorage.removeItem('EmpresaTemp');
+        
+        const LoggedUser = await AsyncStorage.getItem('LoggedUser');
+        const CashierOpen = await AsyncStorage.getItem('CashierOpen');
+        const CajaActivaId = await AsyncStorage.getItem('CajaActivaId');
+        const empresa = await AsyncStorage.getItem('EmpresaTemp');
+        const sucursal = await AsyncStorage.getItem('SucursalTemp');
+        console.log("eleme: ", LoggedUser)
+        console.log("eleme: ", CashierOpen)
+        console.log("eleme: ", CajaActivaId)
+        console.log("eleme: ", empresa)
+        console.log("eleme: ", sucursal)
     }
     catch(ex){
         console.log(ex);

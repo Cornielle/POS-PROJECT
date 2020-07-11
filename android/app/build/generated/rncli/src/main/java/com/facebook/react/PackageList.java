@@ -16,10 +16,14 @@ import com.posproj.R;
 
 // @react-native-community/masked-view
 import org.reactnative.maskedview.RNCMaskedViewPackage;
+// react-native-device-info
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 // react-native-extra-dimensions-android
 import ca.jaysoo.extradimensions.ExtraDimensionsPackage;
 // react-native-gesture-handler
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+// react-native-network-info
+import com.pusherman.networkinfo.RNNetworkInfoPackage;
 // react-native-orientation
 import com.github.yamill.orientation.OrientationPackage;
 // react-native-printer
@@ -82,8 +86,10 @@ public class PackageList {
     return new ArrayList<>(Arrays.<ReactPackage>asList(
       new MainReactPackage(mConfig),
       new RNCMaskedViewPackage(),
+      new RNDeviceInfo(),
       new ExtraDimensionsPackage(),
       new RNGestureHandlerPackage(),
+      new RNNetworkInfoPackage(),
       new OrientationPackage(),
       new RNPrinterPackage(),
       new ReanimatedPackage(),

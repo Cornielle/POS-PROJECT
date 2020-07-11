@@ -25,7 +25,10 @@ import ProovedoresGridScreen from "../GridScreen/ProveedoresGridScreen"
 import VentasGridScreen from "../GridScreen/VentasGridScreen";
 import VentasDummyScreen from "./VentasDummyScreen";
 import CloseCashierGridScreen from "../GridScreen/CloseCashierGridScreen"
+import  SalidaCajaGridScreen from '../GridScreen/SalidaCajaGridScreen';
+import CierreCajaGridScreen from '../GridScreen/CierreCajaGridScreen'
 import test from "./VentasSelectScreen";
+
 //import Users from './Users'
 
 // Constantes que contienen la navegacion hacia cada componente en especifico , con sus nombres especificos//
@@ -84,6 +87,8 @@ export const RolesGridManagement = ({navigation}) => <RolesGridScreen navigation
 export const MenuAccionesManagement =({navigation}) => <AccionesMenuGridScreen navigation={navigation} subtitle="Menu Acciones" name="Menu Acciones" />
 export const OptionManagement = ({navigation}) =><OptionScreen navigation={navigation} subtitle="Opciones" name="Opciones" />
 export const ProveedoresManagement = ({navigation}) => <ProovedoresGridScreen navigation={navigation} subtitle="Proveedores" name="Proveedores" /> 
+export const SalidaCajaManagement =({navigation}) => <SalidaCajaGridScreen navigation={navigation} subtitle="Salida De Caja" name="Salida De Caja" />
+export const CierreCajaManagement =({navigation}) =><CierreCajaGridScreen navigation={navigation} subtitle="Cierre De Caja" name="Cierre De Caja"/>
 // export const VentasManagement =({navigation}) => <VentasGridScreen navigation={navigation} subtitle="Ventas" name="Ventas" />
 // // configuracion del tema por defecto de react native paper
 const theme = {

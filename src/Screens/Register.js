@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextInput, Avatar, Button, Card, RadioButton  } from 'react-native-paper';
-import { StyleSheet, Text, View, ScrollView, Picker,Alert,  ToastAndroid } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Picker,Alert,  ToastAndroid,AsyncStorage } from 'react-native';
 import {Block} from 'galio-framework'
 import normalize from 'react-native-normalize';
 import Header from '../Components/Header'
@@ -77,6 +77,9 @@ export default class Register extends React.Component{
 
  LoadData = async () =>{
 
+   
+const Dispo = await AsyncStorage.getItem('DeviceIdTemp');   
+
 let RolesCollection=[];
   //  const sqlStock = 'SELECT name FROM sqlite_master WHERE type = "table"'
 
@@ -98,7 +101,7 @@ let RolesCollection=[];
             .then(DB => {
               db = DB;
               console.log("Database OPEN");
-              db.executeSql("SELECT * FROM Roles"
+              db.executeSql("SELECT * FROM Roles ORDER BY rowid ASC"
               ,[]).then((Results) => {
                   console.log("Database is ready ... executing query ...");
   console.log("Query completed");
@@ -107,14 +110,17 @@ let RolesCollection=[];
   for (let i = 0; i < len; i++) {
     let row = Results[0].rows.item(i);
     RolesCollection.push(row);
+    this.setState
   }
 console.log(RolesCollection)
 this.setState({Roles:RolesCollection})
+this.setState({ROL:Results[0].rows.item(1)})
 RolesCollection=[]
 
 
 db.executeSql("SELECT * FROM Empleados").then((sulst) =>{
 
+    console.log("DataEmpleado",sulst);
     console.log(sulst[0].rows.item(0));
     
     /*
@@ -181,9 +187,9 @@ SaveEmp(Model) {
             .then(DB => {
               db = DB;
               console.log("Database OPEN"); 
-              db.executeSql("INSERT INTO Empleados(NombrePersona,ApellidoPersona,NombreUsuario,Telefono,TipoIdentificacion,Identificacion,Rol,Pin,Activo,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,UsuarioCreacion,UsuarioModificacion) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+              db.executeSql("INSERT INTO Empleados(NombrePersona,ApellidoPersona,NombreUsuario,Telefono,TipoIdentificacion,Identificacion,Rol,Pin,Activo,IdDispositivo,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,UsuarioCreacion,UsuarioModificacion) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
               ,[Model.NombrePersona,Model.ApellidoPersona,Model.NombreUsuario,Model.Telefono,
-                Model.TipoIdentificacion,Model.Identificacion,Model.Rol,Model.Pin,Model.Activo,Model.IdEmpresa,Model.IdSucursal,
+                Model.TipoIdentificacion,Model.Identificacion,Model.Rol,Model.Pin,Model.Activo,Model.IdDispositivo,Model.IdEmpresa,Model.IdSucursal,
                 Model.FechaCreacion,Model.FechaModificacion,Model.UsuarioCreacion,Model.UsuarioModificacion]).then(() => {
                   console.log("Database is ready ... executing query ...");
                   ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
@@ -361,29 +367,7 @@ console.log(error)
 
  GuardarEmpleado = async ()=>{
 try{
-/*
-    const sql = 'SELECT * FROM Empleados where NombreUsuario =? or Identificacion =?'
-    const params = [this.state.NOMBREUSUARIO, this.state.IDENTIFICACION]
-    const databaseLayer = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-   databaseLayer.executeSql(sql, params).then(   ({ rows }) => {
 
-    const cantidad = Object.keys(rows).length;
-    const {} =  rows;
-
-if(cantidad > 0){
-this.setState ({ExistenDatos:true}) ;
-console.log(this.state.ExistenDatos)
-}
-    } )
-
- 
-console.log(this.state.ExistenDatos)
-if(this.state.ExistenDatos){
-
-Alert.alert("ya existen datos");
-return;
-}
-*/
     
     if(this.state.NOMBRE ===""){
         Alert.alert("El campo nombre no puede estar vacio.");
@@ -404,26 +388,44 @@ return;
 
    // this.Validaciones();
 
+   const LoggedUser = await AsyncStorage.getItem('LoggedUser');
 
+  
+ const  sucu =  await AsyncStorage.getItem('SucursalTemp');
 
+ const emp = await AsyncStorage.getItem('EmpresaTemp');
+ 
+const Dispo = await AsyncStorage.getItem('DeviceIdTemp');
+
+  const AperturaUsuario = JSON.parse(LoggedUser);
+  const sucursal = JSON.parse(sucu);
+  const empresa = JSON.parse(emp);
+  const Dispositivo = JSON.parse(Dispo);
+
+  console.log(AperturaUsuario)
+  console.log(sucursal);
+  console.log(empresa);
+  console.log(Dispositivo);
  
 const username = (this.state.NOMBRE+this.state.APELLIDO).toLocaleLowerCase();
 const fecha = new Date();
 const Model={
-
+ 
     NombrePersona:this.state.NOMBRE, 
     ApellidoPersona:this.state.APELLIDO,
     NombreUsuario: (this.state.NOMBRE + this.state.APELLIDO).toLocaleLowerCase(),
     Telefono:this.state.TELEFONO,
     TipoIdentificacion:this.state.TIPOIDENTIFICACION,
     Identificacion:this.state.IDENTIFICACION,
-    Rol:this.state.Rol,
-    IdEmpresa:1,
-    IdSucursal:1,
+    Rol:this.state.ROL,
+    IdEmpresa:empresa.Empresa,
+    IdSucursal:sucursal.Sucursal,
     Activo:1,
+    IdDispositivo: Dispositivo.DeviceId,
     FechaCreacion: fecha.toString(),
     FechaModificacion:null,
-    UsuarioCreacion:"system",
+    //UsuarioCreacion:AperturaUsuario.Usuario,
+    UsuarioCreacion:"System",
     UsuarioModificacion:null,
     Pin:this.state.PIN.toString()
 }

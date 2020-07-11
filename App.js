@@ -25,7 +25,9 @@ import {
   OptionManagement,
   ProveedoresManagement,
   VentasManagement,
-  VentasDummyManagement
+  VentasDummyManagement,
+  SalidaCajaManagement,
+  CierreCajaManagement
 } from "./src/Screens";
 class AuthLoadingScreen extends React.Component {
   constructor(props) {
@@ -92,12 +94,13 @@ const DrawerNavigation = createDrawerNavigator({
       title:'Roles'
     }
   },
-  'Acciones':{
+ /* 'Acciones':{
     screen: AccionesManagement,
     navigationOptions:{
     title:'Acciones'
     }      
   },
+  */
   // 'Ventas':{
   //   screen:VentasManagement,
   //   navigationOptions:{
@@ -116,16 +119,16 @@ const DrawerNavigation = createDrawerNavigator({
       title: 'Inicio'
     }
   },
-  "Cierre de Caja":{
+ /* "Cierre de Caja":{
     screen:   CloseCashierManagement,
     navigationOptions:{
     title:"Cierre de Caja"
     }
-  },  
-  "Roles Menu":{
-   screen: RolesMenuManagement,
+  },  */
+  "Salida De Caja":{
+   screen: SalidaCajaManagement,
     navigationOptions:{
-    title:"Roles Menu"
+    title:"Salida Caja"
     }
    }, 
   // "Roles Grid":{
@@ -152,11 +155,18 @@ navigationOptions:{
       title:"Proveedores"
     }
   }
+  ,
+"Cierre De Caja":{
+screen:CierreCajaManagement,
+navigationOptions:{
+      title:"Cierre De Caja"
+    }
+  }
   
 },  {
   initialRouteName: "Home"
 })
- //export default createAppContainer(DrawerNavigation);
+ export default createAppContainer(DrawerNavigation);
   
 /*
   'Control de Caja': {
@@ -193,7 +203,7 @@ navigationOptions:{
 
 */
 
-
+/*
 const  navigationOptions = {
   title: 'Iniciar Sesión',
   headerTitleStyle:{textAlign:'center', color:'white'},
@@ -214,6 +224,6 @@ export default createAppContainer(createSwitchNavigator({
   App:DrawerNavigation,
   Auth:AuthStack
 }))
-
+*/
 
 //CloseCashierGridScreen

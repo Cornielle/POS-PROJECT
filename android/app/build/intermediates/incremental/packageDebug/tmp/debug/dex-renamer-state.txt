@@ -1,4 +1,4 @@
-#Sat Jun 06 19:49:59 BOT 2020
+#Thu Jul 02 21:54:13 BOT 2020
 base.0=C\:\\Users\\USER\\Documents\\POS\\POS_Project\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
 path.1=classes.dex
 renamed.1=classes2.dex

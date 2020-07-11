@@ -26,16 +26,17 @@ console.log("me llamaron");
             .then(DB => {
               db = DB;
               console.log("Database OPEN");
+   
+              /* 
+              db.executeSql('DROP TABLE Ventas',[]).then(() => {
+                console.log("LA TABLA Empleados HA SIDO Dropeada SATISFACTORIAMENTE");
+            }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
 
-      
-        
-              db.executeSql('DROP TABLE Caja',[]).then(() => {
+
+        db.executeSql('DROP TABLE SalidaCaja',[]).then(() => {
                 console.log("LA TABLA ROLES HA SIDO CREADA SATISFACTORIAMENTE");
             }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
-            /*
-        db.executeSql('DROP TABLE Articulos',[]).then(() => {
-                console.log("LA TABLA ROLES HA SIDO CREADA SATISFACTORIAMENTE");
-            }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
+                   
       db.executeSql('DROP TABLE Almacen',[]).then(() => {
                   console.log("LA TABLA ROLES HA SIDO CREADA SATISFACTORIAMENTE");
               }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
@@ -53,7 +54,7 @@ db.executeSql('CREATE TABLE IF NOT EXISTS Roles(rowid integer primary key, Nombr
 db.executeSql('CREATE TABLE IF NOT EXISTS Empleados(rowid integer primary key,NombrePersona VARCHAR(500) NOT NULL, ApellidoPersona VARCHAR(500) NOT NULL'+
 ', NombreUsuario VARCHAR(500), Telefono VARCHAR(100), TipoIdentificacion VARCHAR(30), Identificacion VARCHAR(50),'+
 'Rol VARCHAR(500), Pin VARCHAR(30) NOT NULL '
-+', Activo INTEGER NOT NULL , IdEmpresa INTEGER NOT NULL, IdSucursal INTEGER, FechaCreacion VARCHAR(150) NOT NULL ,FechaModificacion VARCHAR(150)'+
++', Activo INTEGER NOT NULL,IdDispositivo nvarchar(100) ,IdEmpresa VARCHAR(100) NOT NULL, IdSucursal VARCHAR(100), FechaCreacion VARCHAR(150) NOT NULL ,FechaModificacion VARCHAR(150)'+
 ', UsuarioCreacion VARCHAR(100) NOT NULL ,UsuarioModificacion VARCHAR(100))',[]).then(() => {
     console.log("LA TABLA Empleados HA SIDO CREADA SATISFACTORIAMENTE");
 }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABLA Empleados");    });
@@ -85,9 +86,10 @@ db.executeSql('CREATE TABLE IF NOT EXISTS Articulos(rowid integer primary key,Co
 /*************************************************************************************************/  
 
 
-db.executeSql('CREATE TABLE IF NOT EXISTS Ventas(rowid integer primary key,PrecioNeto REAL NOT NULL,                                                REAL NOT NULL,'+
-'DescuentoAplicado REAL , Itbis VARCHAR(1000) NOT NULL'+
-', Activo INTEGER NOT NULL ,  IdAperturaCaja INTEGER NOT NULL, IdEmpresa INTEGER NOT NULL, IdSucursal INTEGER, FechaCreacion VARCHAR(150) NOT NULL ,FechaModificacion VARCHAR(150)'+
+db.executeSql('CREATE TABLE IF NOT EXISTS Ventas(rowid integer primary key,PrecioBruto REAL'+
+' ,PrecioNeto REAL ,DescuentoAplicado REAL , Itbis REAL , PagoEfectivo REAL, PagoTarjeta REAL,PagoTransferencia REAL  '+
+', Activo INTEGER NOT NULL , IdAperturaCaja INTEGER NOT NULL, IdEmpresa nvarchar(100) NOT NULL,'+
+' IdSucursal nvarchar(100), FechaCreacion VARCHAR(150) NOT NULL ,FechaModificacion VARCHAR(150)'+
 ', UsuarioCreacion VARCHAR(100) NOT NULL ,UsuarioModificacion VARCHAR(100))',[]).then(() => {
     console.log("LA TABLA Ventas HA SIDO CREADA SATISFACTORIAMENTE");
 }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABLA Ventas");    });
@@ -95,10 +97,10 @@ db.executeSql('CREATE TABLE IF NOT EXISTS Ventas(rowid integer primary key,Preci
 
 db.executeSql('CREATE TABLE IF NOT EXISTS VentasDetalle(rowid integer primary key,IdArticulo INTEGER NOT NULL, PrecioaVenta REAL NOT NULL,'+
 'Cantidad INTEGER, IdVenta INTEGER'+
-', Activo INTEGER NOT NULL , IdAperturaCaja INTEGER NOT NULL, IdEmpresa INTEGER NOT NULL, IdSucursal INTEGER, FechaCreacion VARCHAR(150) NOT NULL ,FechaModificacion VARCHAR(150)'+
+', Activo INTEGER NOT NULL , IdAperturaCaja INTEGER NOT NULL, IdEmpresa nvarchar(100) NOT NULL, IdSucursal nvarchar(100), FechaCreacion VARCHAR(150) NOT NULL ,FechaModificacion VARCHAR(150)'+
 ', UsuarioCreacion VARCHAR(100) NOT NULL ,UsuarioModificacion VARCHAR(100))',[]).then(() => {
     console.log("LA TABLA Ventas HA SIDO CREADA SATISFACTORIAMENTE");
-}).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABLA Ventas");    });
+}).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABLA VentasDetalle");    });
 /*************************************************************************************************/ 
 
 db.executeSql('CREATE TABLE IF NOT EXISTS Almacen(rowid integer primary key, ArticuloId REAL NOT NULL,'+
@@ -136,11 +138,47 @@ db.executeSql('CREATE TABLE IF NOT EXISTS Caja(rowid integer primary key, MontoA
 
 db.executeSql('CREATE TABLE IF NOT EXISTS Catalogo(rowid integer primary key, NombeCatalogo nvarchar(300) NOT NULL,'+
 'Tipo VARCHAR(100) NOT NULL, Valor  VARCHAR(300) NOT NULL'+
-', Activo INTEGER NOT NULL , IdEmpresa INTEGER NOT NULL, IdSucursal INTEGER, FechaCreacion VARCHAR(150) NOT NULL ,FechaModificacion VARCHAR(150)'+
+', Activo INTEGER NOT NULL , FechaCreacion VARCHAR(150) NOT NULL ,FechaModificacion VARCHAR(150)'+
 ', UsuarioCreacion VARCHAR(100) NOT NULL ,UsuarioModificacion VARCHAR(100))',[]).then(() => {
     console.log("LA TABLA Catalogo HA SIDO CREADA SATISFACTORIAMENTE");
 }).catch((error) =>{console.log("ERROR A LA HORA DE CREAR LA TABLA Catalogo");    });
 /*************************************************************************************************/  
+
+
+db.executeSql('CREATE TABLE IF NOT EXISTS SalidaCaja(rowid integer primary key, MontoSalida REAL NOT NULL,'+
+'Razon VARCHAR(100) NOT NULL'+
+', Activo INTEGER NOT NULL ,IdDispositivo nvarchar(100) ,IdAperturaCaja INTEGER NOT NULL, IdEmpresa nvarchar(100) NOT NULL, IdSucursal nvarchar(100),FechaCreacion VARCHAR(150) ,FechaModificacion VARCHAR(150)'+
+', UsuarioCreacion VARCHAR(100)  ,UsuarioModificacion VARCHAR(100))',[]).then(() => {
+    console.log("LA TABLA SalidaCaja HA SIDO CREADA SATISFACTORIAMENTE");
+}).catch((error) =>{console.log("ERROR A LA HORA DE CREAR LA TABLA SalidaCaja");    });
+/*************************************************************************************************/  
+
+
+
+
+/*
+var fecha = new Date();
+console.log(fecha)
+db.executeSql('INSERT INTO Catalogo(NombeCatalogo,'+
+'Tipo , Valor '+
+', Activo  ,  FechaCreacion ,FechaModificacion'+
+', UsuarioCreacion,UsuarioModificacion) VALUES (?,?,?,?,?,?,?,?)',['Sucursal','IdSucursal','5AF6BA55-D947-4607-928C-41EB6151F85D',1,
+fecha.toString(),null,'system',null
+
+]).then(() => {
+    console.log("Se Inserto El catalogo de empresa satisfactoriamente");
+}).catch((error) =>{console.log("ERROR A LA HORA DE INSERTAR EN LA TABLA Catalogo");   
+
+
+
+console.log(error);
+});
+*/
+
+/*************************************************************************************************/  
+
+
+
 
             })
             .catch(error => {

@@ -4,7 +4,7 @@
             "outputFile": "C:\\Users\\USER\\Documents\\POS\\POS_Project\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-bn\\values-bn.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\USER\\.gradle\\caches\\transforms-1\\files-1.1\\jetified-play-services-basement-16.0.1.aar\\1ebc2bb49a9f2efe6768a0d1150597e5\\res\\values-bn\\values.xml",
+                    "source": "C:\\Users\\USER\\.gradle\\caches\\transforms-1\\files-1.1\\jetified-play-services-basement-17.0.0.aar\\ac5cc502d298a60fd37e801c4b53c2c3\\res\\values-bn\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\USER\\.gradle\\caches\\transforms-1\\files-1.1\\jetified-play-services-base-16.0.1.aar\\8f1522906ea6c0788922e05fa768db53\\res\\values-bn\\values.xml",
+                    "source": "C:\\Users\\USER\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-17.0.0.aar\\566f540522434b184406f3bf15789c06\\res\\values-bn\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
