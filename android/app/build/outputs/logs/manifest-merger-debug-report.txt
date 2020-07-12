@@ -7,6 +7,7 @@ INJECTED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/Andro
 MERGED from [:expo-permissions] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-permissions/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-printer] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-printer/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-17:12
 MERGED from [:react-native-screens] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-screens/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-splash-screen] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-splash-screen/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-14:12
 MERGED from [:unimodules-react-native-adapter] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/@unimodules/react-native-adapter/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-community_masked-view] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/@react-native-community/masked-view/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-extra-dimensions-android] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-extra-dimensions-android/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
@@ -19,7 +20,7 @@ MERGED from [:react-native-safe-area-context] /Users/macbookpro/Projects/POS-PRO
 MERGED from [:react-native-sqlite-storage] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-sqlite-storage/platforms/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-text-input-mask] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-text-input-mask/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-vector-icons] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-vector-icons/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
-MERGED from [com.facebook.react:react-native:0.61.5] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/5ed54297820daff11171eed9ba6dc626/AndroidManifest.xml:2:1-13:12
+MERGED from [com.facebook.react:react-native:0.61.5] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/a6e928f202645e1c94f0b3efddd40438/AndroidManifest.xml:2:1-13:12
 MERGED from [com.google.android.material:material:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/7db1a37c40b4f86eb5f6cb6d1a59f12e/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/appcompat-1.1.0.aar/a480b5746a9c22c1f18827050aa94cf8/AndroidManifest.xml:17:1-24:12
 MERGED from [:expo-app-loader-provider] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-app-loader-provider/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
@@ -205,10 +206,12 @@ ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidM
 		ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:26:22-70
 application
 ADDED from /Users/macbookpro/Projects/POS-PROJECTS/android/app/src/main/AndroidManifest.xml:29:5-47:19
+MERGED from [:react-native-splash-screen] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-splash-screen/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:5-12:19
+MERGED from [:react-native-splash-screen] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-splash-screen/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:11:5-12:19
 MERGED from [:react-native-image-picker] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:9:5-19:19
 MERGED from [:react-native-image-picker] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-image-picker/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:9:5-19:19
-MERGED from [com.facebook.react:react-native:0.61.5] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/5ed54297820daff11171eed9ba6dc626/AndroidManifest.xml:11:5-20
-MERGED from [com.facebook.react:react-native:0.61.5] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/5ed54297820daff11171eed9ba6dc626/AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.react:react-native:0.61.5] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/a6e928f202645e1c94f0b3efddd40438/AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.react:react-native:0.61.5] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/a6e928f202645e1c94f0b3efddd40438/AndroidManifest.xml:11:5-20
 MERGED from [com.google.android.material:material:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/7db1a37c40b4f86eb5f6cb6d1a59f12e/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/7db1a37c40b4f86eb5f6cb6d1a59f12e/AndroidManifest.xml:22:5-20
 MERGED from [:expo-file-system] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/expo-file-system/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:17:5-28:19
@@ -285,6 +288,8 @@ MERGED from [:react-native-printer] /Users/macbookpro/Projects/POS-PROJECTS/node
 MERGED from [:react-native-printer] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-printer/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-screens] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-screens/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-screens] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-screens/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-splash-screen] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-splash-screen/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-splash-screen] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-splash-screen/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:unimodules-react-native-adapter] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/@unimodules/react-native-adapter/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:unimodules-react-native-adapter] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/@unimodules/react-native-adapter/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-community_masked-view] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/@react-native-community/masked-view/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-7:41
@@ -309,8 +314,8 @@ MERGED from [:react-native-text-input-mask] /Users/macbookpro/Projects/POS-PROJE
 MERGED from [:react-native-text-input-mask] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-text-input-mask/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-vector-icons] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-vector-icons/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-vector-icons] /Users/macbookpro/Projects/POS-PROJECTS/node_modules/react-native-vector-icons/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.react:react-native:0.61.5] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/5ed54297820daff11171eed9ba6dc626/AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.react:react-native:0.61.5] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/5ed54297820daff11171eed9ba6dc626/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.61.5] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/a6e928f202645e1c94f0b3efddd40438/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.61.5] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/a6e928f202645e1c94f0b3efddd40438/AndroidManifest.xml:7:5-9:41
 MERGED from [com.google.android.material:material:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/7db1a37c40b4f86eb5f6cb6d1a59f12e/AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.material:material:1.0.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/7db1a37c40b4f86eb5f6cb6d1a59f12e/AndroidManifest.xml:20:5-44
 MERGED from [androidx.appcompat:appcompat:1.1.0] /Users/macbookpro/.gradle/caches/transforms-1/files-1.1/appcompat-1.1.0.aar/a480b5746a9c22c1f18827050aa94cf8/AndroidManifest.xml:20:5-22:41

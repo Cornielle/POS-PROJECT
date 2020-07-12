@@ -29,7 +29,7 @@ export default class StockScreen extends React.Component{
       UsuarioModificacion : '',
       articulos : '',
       disable:'true',
-      items: []
+    items: []
     }
     this.insertStock = this.insertStock.bind(this)
     this.renderSearch = this.renderSearch.bind(this)
@@ -53,15 +53,16 @@ export default class StockScreen extends React.Component{
           )
           .then(DB => {
             db = DB;
-            let articulos = [];
+            let stock = [];
             console.log("Database OPEN");
-            db.executeSql(`SELECT rowid , NombreArticulo FROM Articulos`,[]).then((result) => {
+            db.executeSql(`SELECT t1.rowid , NombreArticulo, CantidadActual FROM Articulos as t1 JOIN Almacen as
+             t2 ON t1.rowid =  t2.rowid WHERE t2.Activo = 1`,[]).then((result) => {
                for (let i = 0; i < result[0].rows.length; i++) {
                  let row = result[0].rows.item(i);
-                 articulos.push(row)
+                 stock.push(row)
                }
                this.setState({
-                items:articulos
+                items:stock
                })
                console.log('Articulos Data:',this.state.items.length)
           }).catch((error) =>{      
@@ -81,14 +82,17 @@ export default class StockScreen extends React.Component{
 
 /*INSERT FUNCTION*/
 insertStock = () =>{
+  let updateQty = parseInt(this.state.CantidadActual) + parseInt(this.state.items[0].CantidadActual)
   const Model={
-    CantidadActual : this.state.CantidadActual,
-    Descripcion : this.state.Descripcion,
+    CantidadActual : updateQty,
+    // Descripcion : this.state.Descripcion,
     FechaCreacion : new Date(),
     FechaModificacion : null,
     UsuarioCreacion : 'system',
     ArticuloId : this.state.selectedItem.rowid,
-    UsuarioModificacion : null
+    UsuarioModificacion : null,
+    IdEmpresa:1,
+    IdSucursal:1
   }
   console.log(Model, 'check after post')
   let db;
@@ -108,17 +112,27 @@ insertStock = () =>{
           db = DB;
           console.log("Database OPEN");
                 db.executeSql(`UPDATE Almacen SET
-                  CantidadActual = ? , Descripcion = ? , FechaCreacion = ? ,FechaModificacion = ? ,
+                  CantidadActual = ? ,FechaModificacion = ? ,
                   UsuarioCreacion = ?  ,UsuarioModificacion = ? WHERE ArticuloId = ${Model.ArticuloId}`,
-                  [Model.CantidadActual,Model.Descripcion,Model.FechaCreacion.toString(),
+                  [Model.CantidadActual,
                   Model.FechaModificacion, Model.UsuarioCreacion,Model.UsuarioModificacion]).then(() => {
                     ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
                     this.setState({
                       CantidadActual:'',
-                      Descripcion:'',
+                      // Descripcion:'',
                       items: new Array(), 
                       selectedItem: ''
                     })
+                    db.executeSql('INSERT INTO AlmacenDetalle(AlmacenId,'+
+                    'CantidadIngreso ,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,UsuarioCreacion,'+
+                    'UsuarioModificacion) VALUES (?,?,?,?,?,?,?,?)',[Model.ArticuloId,Model.CantidadActual,Model.IdEmpresa, Model.IdSucursal,
+                      Model.FechaCreacion,Model.FechaModificacion,Model.UsuarioCreacion,Model.UsuarioModificacion]).then((AlmacenResult)=>{
+                       console.log("AlmacenDetalle Inserto Correctamente")
+                       ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
+                       this.props.toggleForm(false)
+                     }).catch((errorStock)=>{
+                       console.log(errorStock)
+                     });
                     this.props.toggleForm(false)
                   }).catch((error) =>{      
                   console.log("ERROR GUARDANDO EN Almacen", error);  
@@ -138,7 +152,7 @@ insertStock = () =>{
                 this.setState({ 
                   selectedItem: item,
                   disable:false
-                 }, console.log(item, 'aca'));
+                 }, console.log(item.NombreArticulo, 'aca'));
               }}
               containerStyle={{ padding: 5 }}
               itemStyle={{
@@ -179,12 +193,13 @@ insertStock = () =>{
     }
     render(){
       const { items}  =  this.state
+      console.log(items, 'checkingGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG')
         return (
             // <ScrollView>
             <SafeAreaView>
             <View style={styles.ViewStyle}>
                 {/*Header generico que debe ser reutilizado en casi todas las vistas */}
-                <Header name={'Stock'} 
+                <Header name={'Almacén'} 
                         goBackEnabled={true}
                         goBackNavigationName={'Grid'}
                         navigationEnabled={true}
@@ -196,29 +211,32 @@ insertStock = () =>{
                     <Card>
                         <Card.Title 
                             style={styles.Card}
-                            title="Agregar Articulo en Stock" 
+                            title="Agregar Articulo en Almacén" 
                             left={(props) => <Avatar.Icon {...props} 
                             icon="account" />} 
                         />
                         <Card.Content>
                           {items.length == 0 && 
-                            (<Text style={{color:'red' ,textAlign:'center'}}> No hay articulos registrados </Text>)
+                            (<Text style={{color:'red' ,textAlign:'center'}}> 
+                              No hay articulos registrados 
+                            </Text>)
                           }
                         {this.renderSearch()}
                             <TextInput
                                 style={styles.Input}
                                 mode='flat'
+                                keyboardType="numeric"
                                 label='Agregar Cantidad'
                                 value={this.state.CantidadActual}
                                 onChangeText={(CantidadActual)=> this.setState({CantidadActual})}
                             />
-                              <TextInput
+                              {/* <TextInput
                                 style={styles.Input}
                                 mode='flat'
                                 label='Descripcion'
                                 value={this.state.Descripcion}
                                 onChangeText={(Descripcion)=> this.setState({Descripcion})}
-                            />
+                            /> */}
                             <Text>{"\n"}</Text>
                             <Button
                               labelStyle={styles.Button} 

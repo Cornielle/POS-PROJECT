@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sat Jun 13 12:06:11 AST 2020
+#Fri Jul 10 23:35:04 AST 2020
 56.path=lib/armeabi-v7a/libreactnativejni.so
 5.base=/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/transforms/mergeJniLibs/debug/0
 42.base=/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/transforms/mergeJniLibs/debug/0

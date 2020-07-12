@@ -61,7 +61,7 @@
     },
     {
         "merged": "/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/res/merged/debug/anim_catalyst_push_up_in.xml.flat",
-        "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/5ed54297820daff11171eed9ba6dc626/res/anim/catalyst_push_up_in.xml"
+        "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/a6e928f202645e1c94f0b3efddd40438/res/anim/catalyst_push_up_in.xml"
     },
     {
         "merged": "/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/res/merged/debug/layout_notification_template_big_media_narrow_custom.xml.flat",
@@ -85,7 +85,7 @@
     },
     {
         "merged": "/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/res/merged/debug/layout_redbox_view.xml.flat",
-        "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/5ed54297820daff11171eed9ba6dc626/res/layout/redbox_view.xml"
+        "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/a6e928f202645e1c94f0b3efddd40438/res/layout/redbox_view.xml"
     },
     {
         "merged": "/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/res/merged/debug/drawable-hdpi-v4_abc_ic_star_half_black_48dp.png.flat",
@@ -105,7 +105,7 @@
     },
     {
         "merged": "/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/res/merged/debug/anim_catalyst_push_up_out.xml.flat",
-        "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/5ed54297820daff11171eed9ba6dc626/res/anim/catalyst_push_up_out.xml"
+        "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/a6e928f202645e1c94f0b3efddd40438/res/anim/catalyst_push_up_out.xml"
     },
     {
         "merged": "/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/res/merged/debug/drawable-anydpi-v21_design_ic_visibility_off.xml.flat",
@@ -193,7 +193,7 @@
     },
     {
         "merged": "/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/res/merged/debug/xml_rn_dev_preferences.xml.flat",
-        "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/5ed54297820daff11171eed9ba6dc626/res/xml/rn_dev_preferences.xml"
+        "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/a6e928f202645e1c94f0b3efddd40438/res/xml/rn_dev_preferences.xml"
     },
     {
         "merged": "/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_text_select_handle_middle_mtrl_light.png.flat",
@@ -313,7 +313,7 @@
     },
     {
         "merged": "/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/res/merged/debug/layout_redbox_item_frame.xml.flat",
-        "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/5ed54297820daff11171eed9ba6dc626/res/layout/redbox_item_frame.xml"
+        "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/a6e928f202645e1c94f0b3efddd40438/res/layout/redbox_item_frame.xml"
     },
     {
         "merged": "/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/res/merged/debug/drawable-xhdpi-v4_abc_ic_star_black_36dp.png.flat",
@@ -397,7 +397,7 @@
     },
     {
         "merged": "/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/res/merged/debug/layout_dev_loading_view.xml.flat",
-        "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/5ed54297820daff11171eed9ba6dc626/res/layout/dev_loading_view.xml"
+        "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/a6e928f202645e1c94f0b3efddd40438/res/layout/dev_loading_view.xml"
     },
     {
         "merged": "/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_text_select_handle_right_mtrl_dark.png.flat",
@@ -501,7 +501,7 @@
     },
     {
         "merged": "/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/res/merged/debug/anim_catalyst_fade_in.xml.flat",
-        "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/5ed54297820daff11171eed9ba6dc626/res/anim/catalyst_fade_in.xml"
+        "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/a6e928f202645e1c94f0b3efddd40438/res/anim/catalyst_fade_in.xml"
     },
     {
         "merged": "/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/res/merged/debug/anim_btn_radio_to_on_mtrl_ring_outer_path_animation.xml.flat",
@@ -817,7 +817,7 @@
     },
     {
         "merged": "/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/res/merged/debug/layout_fps_view.xml.flat",
-        "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/5ed54297820daff11171eed9ba6dc626/res/layout/fps_view.xml"
+        "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/a6e928f202645e1c94f0b3efddd40438/res/layout/fps_view.xml"
     },
     {
         "merged": "/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/res/merged/debug/drawable-mdpi-v4_abc_text_select_handle_middle_mtrl_dark.png.flat",
@@ -1069,7 +1069,7 @@
     },
     {
         "merged": "/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/res/merged/debug/anim_catalyst_slide_down.xml.flat",
-        "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/5ed54297820daff11171eed9ba6dc626/res/anim/catalyst_slide_down.xml"
+        "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/a6e928f202645e1c94f0b3efddd40438/res/anim/catalyst_slide_down.xml"
     },
     {
         "merged": "/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/res/merged/debug/drawable-xxhdpi-v4_abc_ic_star_black_36dp.png.flat",
@@ -1349,7 +1349,7 @@
     },
     {
         "merged": "/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/res/merged/debug/drawable_redbox_top_border_background.xml.flat",
-        "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/5ed54297820daff11171eed9ba6dc626/res/drawable/redbox_top_border_background.xml"
+        "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/a6e928f202645e1c94f0b3efddd40438/res/drawable/redbox_top_border_background.xml"
     },
     {
         "merged": "/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/res/merged/debug/drawable-ldrtl-mdpi-v17_abc_ic_menu_cut_mtrl_alpha.png.flat",
@@ -1393,11 +1393,11 @@
     },
     {
         "merged": "/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/res/merged/debug/anim_catalyst_slide_up.xml.flat",
-        "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/5ed54297820daff11171eed9ba6dc626/res/anim/catalyst_slide_up.xml"
+        "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/a6e928f202645e1c94f0b3efddd40438/res/anim/catalyst_slide_up.xml"
     },
     {
         "merged": "/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/res/merged/debug/layout_redbox_item_title.xml.flat",
-        "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/5ed54297820daff11171eed9ba6dc626/res/layout/redbox_item_title.xml"
+        "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/a6e928f202645e1c94f0b3efddd40438/res/layout/redbox_item_title.xml"
     },
     {
         "merged": "/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/res/merged/debug/drawable-xxxhdpi-v4_abc_btn_radio_to_on_mtrl_000.png.flat",
@@ -2117,7 +2117,7 @@
     },
     {
         "merged": "/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/res/merged/debug/anim_catalyst_fade_out.xml.flat",
-        "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/5ed54297820daff11171eed9ba6dc626/res/anim/catalyst_fade_out.xml"
+        "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/jetified-react-native-0.61.5.aar/a6e928f202645e1c94f0b3efddd40438/res/anim/catalyst_fade_out.xml"
     },
     {
         "merged": "/Users/macbookpro/Projects/POS-PROJECTS/android/app/build/intermediates/res/merged/debug/drawable_ic_mtrl_chip_checked_circle.xml.flat",

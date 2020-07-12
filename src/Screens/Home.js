@@ -52,22 +52,22 @@ PosTableCreator();
       {(item.name === 'Artículos'? 
       <ImageBackground style={styles.absoluteFillObject} source={require(`../img/cart.png`)}>
       </ImageBackground> 
-      : (item.name === 'Stock'? 
+      : (item.name === 'Almacén'? 
       <ImageBackground style={styles.absoluteFillObject} source={require(`../img/stock.png`)}>
       </ImageBackground>  
       : (item.name === 'Categorías'? <ImageBackground style={styles.absoluteFillObject} source={require(`../img/categories.png`)}>
         </ImageBackground> 
       : (item.name === 'Ventas'? <ImageBackground style={styles.absoluteFillObject} source={require(`../img/ventas.png`)}>
         </ImageBackground> 
-      :(item.name === 'Usuarios'? <ImageBackground style={styles.absoluteFillObject} source={require(`../img/usuarios.png`)}>
+      :(item.name === 'Empleados'? <ImageBackground style={styles.absoluteFillObject} source={require(`../img/usuarios.png`)}>
           </ImageBackground> 
-      : (item.name === 'Acciones'? <ImageBackground style={styles.absoluteFillObject} source={require(`../img/acciones.png`)}>
-    </ImageBackground> 
+    //   : (item.name === 'Acciones'? <ImageBackground style={styles.absoluteFillObject} source={require(`../img/acciones.png`)}>
+    // </ImageBackground>
     :(item.name ==='Roles'? <ImageBackground style={styles.absoluteFillObject} source={require(`../img/roles.png`)}>
     </ImageBackground> :
     <ImageBackground style={styles.absoluteFillObject} source={require(`../img/cierrecaja.png`)}>
     </ImageBackground> 
-        ))))))
+        )))))
       )}
       {/* <ImageBackground style={styles.absoluteFillObject} source={require(`../img/cart.png`)}>
         <Text style={styles.menuName}>{item.name}</Text>

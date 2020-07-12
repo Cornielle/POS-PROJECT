@@ -54,17 +54,17 @@ const DrawerNavigation = createDrawerNavigator({
   //     title: 'Iniciar Sesión'
   //   }
   // },
-  'Articulos':{
+  'Artículos':{
     screen:ArticulosManagement,
     navigationOptions:{
-      title:"Articulos"
+      title:"Artículos"
     }
   },
   'Stock':{
     screen:StockManagement,
     path:'./src/Component',
     navigationOptions:{
-      title:"Stock"
+      title:"Almacén"
     }
   },
   'Categorias':{
@@ -77,27 +77,33 @@ const DrawerNavigation = createDrawerNavigator({
   'Usuarios':{
     screen: UsersManagement,
     navigationOptions:{
-      title:'Users'
+      title:'Empleados'
     }
   },
-  'Vistas':{
-    screen: MenuManagement,
+  'Home':{
+    screen:DashboardHome,
     navigationOptions:{
-      title:'Menu'
+    title:'Inicio'
     }
-      },
+  },
+  // 'Vistas':{
+  //   screen: MenuManagement,
+  //   navigationOptions:{
+  //     title:'Menu'
+  //   }
+  //     },
   'Roles':{
     screen: RolesGridManagement,
     navigationOptions:{
       title:'Roles'
     }
   },
-  'Acciones':{
-    screen: AccionesManagement,
-    navigationOptions:{
-    title:'Acciones'
-    }      
-  },
+  // 'Acciones':{
+  //   screen: AccionesManagement,
+  //   navigationOptions:{
+  //   title:'Acciones'
+  //   }      
+  // },
   // 'Ventas':{
   //   screen:VentasManagement,
   //   navigationOptions:{
@@ -110,24 +116,18 @@ const DrawerNavigation = createDrawerNavigator({
     title:'Ventas'
     }
   },
-  'Home': {
-    screen: DashboardHome,
-    navigationOptions: {
-      title: 'Inicio'
-    }
-  },
   "Cierre de Caja":{
     screen:   CloseCashierManagement,
     navigationOptions:{
     title:"Cierre de Caja"
     }
   },  
-  "Roles Menu":{
-   screen: RolesMenuManagement,
-    navigationOptions:{
-    title:"Roles Menu"
-    }
-   }, 
+  // "Roles Menu":{
+  //  screen: RolesMenuManagement,
+  //   navigationOptions:{
+  //   title:"Roles Menu"
+  //   }
+  //  }, 
   // "Roles Grid":{
   //   screen:RolesGridManagement, 
   //   navigationOptions:{
@@ -140,12 +140,12 @@ const DrawerNavigation = createDrawerNavigator({
   //   title:"Apertura/Cierre de caja"
   //   }
   // },
-"Menu Acciones":{
-  screen:MenuAccionesManagement,
-  navigationOptions:{
-  title:"Menu Acciones"
-  }
-},
+// "Menu Acciones":{
+//   screen:MenuAccionesManagement,
+//   navigationOptions:{
+//   title:"Menu Acciones"
+//   }
+// },
 "Proveedores":{
 screen:ProveedoresManagement,
 navigationOptions:{

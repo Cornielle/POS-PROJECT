@@ -1,32 +1,45 @@
 import React from 'react'
-import{TextInput, Avatar, Button, Card, RadioButton} from 'react-native-paper'
-import {StyleSheet, Text, View, ScrollView,Picker,Alert,ToastAndroid} from 'react-native'
+import{TextInput, Avatar, Button, Card} from 'react-native-paper'
+import { ButtonGroup } from 'react-native-elements';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  Picker,
+  Alert,
+  ToastAndroid,
+  Dimensions,
+  KeyboardAvoidingView, 
+  Image
+} from 'react-native'
+import AwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import normalize from 'react-native-normalize';
 import Header from  '../Components/Header'
-import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
-import Articulos from '../../Models/Articulos'
-
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 import  SQLite  from 'react-native-sqlite-storage';
+import ImagePicker from 'react-native-image-picker';
 SQLite.DEBUG(true);
 SQLite.enablePromise(true);
 const database_name = "PuntoVenta.db";
 const database_version = "1.0";
 const database_displayname = "SQLite React Offline Database";
 const database_size = 200000;
-
 const InitialState ={
     Proveedores:[],
 
     Codigo: "",
     Descripcion:"",
-    DescripcionPantalla: "",
+    Abreviatura: "",
     NombreArticulo: "",
     CodigoDeBarra:"",
     PrecioCosto:"",
     PrecioVenta:"",
     CatidadExistencia:"",
     MedidaDeVenta:"1",
-    Categorias:[]
+    Categorias:[],
+    selectedIndex:1
 
 }
 export default class Articulo extends React.Component{
@@ -34,24 +47,43 @@ export default class Articulo extends React.Component{
 constructor(props){
 
     super(props)
-
+    this.state={
+      Proveedores:[],
+      Codigo: "",
+      CategoriaId: 0,
+      Abreviatura: "",
+      NombreArticulo: "",
+      CodigoDeBarra:"",
+      PrecioCosto:"",
+      PrecioVenta:"",
+      ProveedoresId:"",
+      CatidadExistencia:"",
+      MedidaDeVenta:"",
+      Categorias:[],
+      error:false,
+      avatarSource:'',
+      value:'',
+      selectedIndex:1,
+      showAvatar:''
+      }
+      this.updateIndex = this.updateIndex.bind(this)
 }
 
-state={
-Proveedores:[],
+//state={
+//Proveedores:[],
 
-Codigo: "",
-CategoriaId: 0,
-DescripcionPantalla: "",
-NombreArticulo: "",
-CodigoDeBarra:"",
-PrecioCosto:"",
-PrecioVenta:"",
-ProveedoresId:"",
-CatidadExistencia:"",
-MedidaDeVenta:"",
-Categorias:[]
-}
+//Codigo: "",
+//CategoriaId: 0,
+//Abreviatura: "",
+//NombreArticulo: "",
+//CodigoDeBarra:"",
+//PrecioCosto:"",
+//PrecioVenta:"",
+//ProveedoresId:"",
+//CatidadExistencia:"",
+//MedidaDeVenta:"",
+//Categorias:[],
+//}
 
 
 
@@ -75,7 +107,6 @@ LoadData = async () =>{
         let row = Results[0].rows.item(i);
         ProveedoresCollection.push(row);
       }
-    console.log(ProveedoresCollection)
     this.setState({Proveedores:ProveedoresCollection})
     ProveedoresCollection=[]
                   }).catch((error) =>{
@@ -85,15 +116,15 @@ LoadData = async () =>{
                   db.executeSql("SELECT * FROM Articulos"
                   ,[]).then((Results) => {
                       console.log("Database is ready ... executing query ...");
-      console.log("Query completed");
-      var len = Results[0].rows.length;
-      for (let i = 0; i < len; i++) {
-        let row = Results[0].rows.item(i);
-        ArticulosCollection.push(row);
-      }
-    console.log(ArticulosCollection)
-    this.setState({Roles:ArticulosCollection})
-    ArticulosCollection=[]
+                      console.log("Query completed");
+                      var len = Results[0].rows.length;
+                      for (let i = 0; i < len; i++) {
+                        let row = Results[0].rows.item(i);
+                        ArticulosCollection.push(row);
+                      }
+                    console.log(ArticulosCollection)
+                    this.setState({Roles:ArticulosCollection})
+                    ArticulosCollection=[]
                   }).catch((error) =>{
                       console.log("Received error: ", error);
                       console.log("Database not yet ready ... populating data"); 
@@ -126,7 +157,11 @@ LoadData = async () =>{
             });
           });
      }
-
+  updateIndex(selectedIndex) {
+    this.setState({
+      selectedIndex
+    })
+}
 CallAlerts =(DataToDetalle) =>{
   console.log("")
   console.log("")
@@ -194,20 +229,18 @@ SaveArticulos(Model) {
             .then(DB => {
               db = DB;
               console.log("Database OPEN"); 
-
-      
-db.executeSql("INSERT INTO Articulos(Codigo,CategoriaId,DescripcionPantalla,NombreArticulo,CodigoDeBarra,PrecioCosto,PrecioVenta,ProveedoresId,MedidaDeVenta,Activo,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,UsuarioCreacion,UsuarioModificacion) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
-              ,[Model.Codigo,Model.CategoriaId,Model.DescripcionPantalla,Model.NombreArticulo,
+db.executeSql("INSERT INTO Articulos(Codigo,CategoriaId,Descripcion,Abreviatura,NombreArticulo,CodigoDeBarra,PrecioCosto,PrecioVenta,ProveedoresId,MedidaDeVenta,Activo,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,UsuarioCreacion,UsuarioModificacion, Img) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+              ,[Model.Codigo,Model.CategoriaId,Model.Descripcion,Model.Abreviatura,Model.NombreArticulo,
                 Model.CodigoDeBarra,Model.PrecioCosto,Model.PrecioVenta,Model.ProveedoresId,Model.MedidaDeVenta,Model.Activo,Model.IdEmpresa,Model.IdSucursal,
-                Model.FechaCreacion,Model.FechaModificacion,Model.UsuarioCreacion,Model.UsuarioModificacion]).then((result) => {
+                Model.FechaCreacion,Model.FechaModificacion,Model.UsuarioCreacion,Model.UsuarioModificacion,JSON.stringify(Model.Img)]).then((result) => {
                   console.log("Database is ready ... executing query ...");
               const ArtId=  result[0].insertId;
               console.log("Id articulo",ArtId )
 console.log("Articulo Inserto Correctamente")
 const fecha = new Date();
-db.executeSql('INSERT INTO Almacen(ArticuloId,'+
-'CantidadActual,Descripcion,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,UsuarioCreacion,'+
- 'UsuarioModificacion) VALUES (?,?,?,?,?,?,?,?,?)',[ArtId,Model.CatidadExistencia,Model.DescripcionPantalla,
+db.executeSql('INSERT INTO Almacen(ArticuloId,Activo,'+
+'CantidadActual,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,UsuarioCreacion,'+
+ 'UsuarioModificacion) VALUES (?,?,?,?,?,?,?,?,?)',[ArtId,1,Model.CatidadExistencia,
   Model.IdEmpresa, Model.IdSucursal,fecha.toString(),Model.FechaModificacion,Model.UsuarioCreacion,
   Model.UsuarioModificacion])
   .then((AlmacenResult)=>{
@@ -220,27 +253,14 @@ db.executeSql('INSERT INTO AlmacenDetalle(AlmacenId,'+
 'CantidadIngreso ,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,UsuarioCreacion,'+
  'UsuarioModificacion) VALUES (?,?,?,?,?,?,?,?)',[ArtId,Model.CatidadExistencia,Model.IdEmpresa, Model.IdSucursal,
   fecha.toString(),Model.FechaModificacion,Model.UsuarioCreacion,Model.UsuarioModificacion]).then((AlmacenResult)=>{
-
     console.log("AlmacenDetalle Inserto Correctamente")
-
     ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
     this.props.toggleForm(false)
-
-  }).catch((erroralma)=>{
-
-   console.log("No entro")
-
-
-console.log(erroralma)
-
-});
-
-
+  }).catch((errorStock)=>{
+    console.log(errorStock)
+  });
  }).catch((error) =>{
-
-
-console.log();
-
+    console.log(error)
  });
 
 
@@ -296,18 +316,17 @@ console.log(rows);
 }
 
 render(){
+    const buttons = ['Galería', 'Cámara']
     const {name, subtitle, navigation} = this.props
-    const { text,enabled, checked } =  this.state
+    const { selectedIndex } =  this.state
     {
   
 return(
-
 <ScrollView>
 <View style={styles.ViewStyle}>
-
 {/*Header generico que debe ser reutilizado en casi todas las vistas */}
-<Header name={'Registro'} 
-    subtitle={'Crear perfil de Usuario'}
+<Header 
+    name={'Control de Artículos'} 
     goBackEnabled={true}
     goBackNavigationName={'Grid'}
     navigationEnabled={false}
@@ -316,16 +335,17 @@ return(
     gridHeader={false}
 />
 <View style={styles.Form}>
+<KeyboardAvoidingView>
 <Card>
 
 
 <Card.Title 
 style={styles.Card}
-title="Articulos" 
-subtitle="Todas l" 
+title="Artículos" 
+subtitle="Registro de un Artículo" 
 left={(props) => <Avatar.Icon {...props} 
-icon="account" />} 
-                        />
+icon="basket" />} 
+/>
 
 <Card.Content>
 
@@ -333,9 +353,9 @@ icon="account" />}
  <TextInput 
 style={styles.Input}
 model='flat'
-label='Nombre a mostrar'
-value={this.state.DescripcionPantalla}
-onChangeText={(DescripcionPantalla) => this.setState({DescripcionPantalla:DescripcionPantalla})}
+label='Abreviatura'
+value={this.state.Abreviatura}
+onChangeText={(Abreviatura) => this.setState({Abreviatura:Abreviatura})}
 
 
  />
@@ -343,7 +363,7 @@ onChangeText={(DescripcionPantalla) => this.setState({DescripcionPantalla:Descri
  <TextInput 
 style={styles.Input}
 model='flat'
-label='Nombre Articulo'
+label='Nombre del Artículo'
 value={this.state.NombreArticulo}
 onChangeText ={(NombreArticulo)=>this.setState({NombreArticulo:NombreArticulo})}
 
@@ -361,7 +381,7 @@ onChangeText={(CodigoDeBarra)=>this.setState({CodigoDeBarra:CodigoDeBarra})}
  <TextInput 
 style={styles.Input}
 model='flat'
-label='Precido de costo'
+label='Precio de Costo'
 keyboardType="numeric"
 value={this.state.PrecioCosto}
 onChangeText={(PrecioCosto) => this.setState({PrecioCosto:PrecioCosto})}
@@ -375,17 +395,44 @@ keyboardType="numeric"
 value={this.state.PrecioVenta}
 onChangeText={(PrecioVenta) => this.setState({PrecioVenta:PrecioVenta})}
 />
-<Text>{"\n"}</Text>
 <TextInput 
 style={styles.Input}
 model='flat'
-label='Cantidad Existencia'
-keyboardType="numeric"
+label='Cantidad inicial en Existencia'
+keyboardType="numeric"CatidadExistencia
 value={this.state.CatidadExistencia}
 onChangeText={(CatidadExistencia) => this.setState({CatidadExistencia:CatidadExistencia})}
 />
 <Text>{"\n"}</Text>
-
+<Text style={{fontSize:16, fontWeight:'bold'}}>Agregar imagen del artículo</Text>
+{/* <ButtonGroup
+      onPress={this.updateIndex}
+      selectedIndex={selectedIndex}
+      buttons={buttons}
+      containerStyle={{height: 40}}
+    /> */}
+    <View>
+      <Button
+        icon="camera" 
+        mode="outlined" 
+        onPress={this.launchCamera}
+        style={{width:windowWidth * 0.28 ,padding:5, marginTop:15}}
+      >
+        Cámara
+      </Button>
+      <Button
+        icon="image" 
+        mode="outlined" 
+        onPress={this.selectImage}
+        style={{width:windowWidth * 0.28 ,padding:5, marginTop:15}}
+      >
+        Cargar
+      </Button>
+    </View>
+    <Image
+        style={this.state.showAvatar!== '' ? styles.logo : ''}
+        source={this.state.showAvatar}
+      />
 <Text>Seleccionar una Categoria:</Text>
 <Picker
     selectedValue={this.state.CategoriaId}
@@ -393,15 +440,14 @@ onChangeText={(CatidadExistencia) => this.setState({CatidadExistencia:CatidadExi
     onValueChange={(itemValue, itemIndex) =>
         this.setState({CategoriaId: itemValue})
     }>
-                                     {
+  {
 
-this.state.Categorias.map(cat =>(
-
-<Picker.Item label={cat.NombreCategoria.toString()} value={cat.rowid.toString()}  key={cat.rowid.toString()} />
+this.state.Categorias.map(cat =>
+    (<Picker.Item label={cat.NombreCategoria.toString()} 
+                  value={cat.rowid.toString()}  
+                  key={cat.rowid.toString()} />
     )
-    
-  
-    )
+  )
 }
 </Picker>
 
@@ -428,136 +474,171 @@ this.state.Proveedores.map(prob =>(
                                 onValueChange={(itemValue, itemIndex) =>
                                     this.setState({MedidaDeVenta: itemValue})
                                 }>
-    <Picker.Item label="Unidad" value="1" />
-    <Picker.Item label="Libra" value="2" />
-    <Picker.Item label="Docena" value="3" />
-    <Picker.Item label="Libra" value="4" />
-</Picker>
+                    <Picker.Item label="Unidad" value="1" />
+                    <Picker.Item label="Libra" value="2" />
+                    <Picker.Item label="Docena" value="3" />
+                    <Picker.Item label="Libra" value="4" />
+                </Picker>
                 <Button
                     labelStyle={styles.Button} 
-                    icon="account" 
+                    icon="folder" 
                     mode="contained" 
                     onPress={this.GuardarArticulo}
                 >
-                    Agregar
+                    Guardar
                 </Button>
             </Card.Content>
         </Card>
+        </KeyboardAvoidingView>
     </View>
 </View>
 </ScrollView>
 )
     }
 }
-Validaciones = ()=>{
-
-    try{
-
-        if(this.state.CategoriaId ===""){  
-
-            Alert.alert("Debe elegir una categoria de producto!");
-            return;
-            }
-
-            if(this.state.NombreArticulo ===""){
-            
-                Alert.alert("Debe elegir una descripcion!");
-                return;
-            }
-
-            if(this.state.PrecioCosto ===""){
-            
-                Alert.alert("Debe elegir el precio de costo!");
-                return;
-            }
-            
-            if(this.state.PrecioVenta ===""){
-            
-                Alert.alert("Debe elegir el precio de venta!");
-                return;
-            
-            }
-            
-            if(this.state.PrecioVenta===""){
-            Alert.alert("Debe elegir el precio de venta");
-            
-            
-            
-            }
 
 
-    } catch(e){
-
-Alert.alert("Ha ocurrido un error:"+ e);
-
+selectImage = async (id) => {
+  const options = {
+    title: 'Agregar Imagen',
+    chooseFromLibraryButtonTitle:'Selecciona una foto de la Libreria',
+  };
+  ImagePicker.launchImageLibrary(options, (response) => {
+    if (response.didCancel) {
+      console.log('User cancelled image picker');
+    } else if (response.error) {
+      console.log('ImagePicker Error: ', response.error);
+    } else if (response.customButton) {
+      console.log('User tapped custom button: ', response.customButton);
+    } else {
+      const source = { uri: 'file://'+response.path };
+      const sourceShow = { uri: response.uri };
+      this.setState({ 
+        avatarSource: source,
+        showAvatar:sourceShow
+      });
+      console.log(this.state.avatarSource,'here')
     }
-
-
-
-
-    
+  });
 }
 
- 
-GuardarArticulo = async () =>{
-try  {
-
-// Articulos.dropTable();
-  
-const fecha = new Date();
-  // this.Validaciones();
-    const Model ={
-        Codigo: null,
-        CategoriaId: this.state.CategoriaId,
-        DescripcionPantalla: this.state.DescripcionPantalla,
-        NombreArticulo: this.state.NombreArticulo,
-        CodigoDeBarra: this.state.CodigoDeBarra,
-        PrecioCosto: this.state.PrecioCosto,
-        CatidadExistencia: this.state.CatidadExistencia,
-        PrecioVenta:this.state.PrecioVenta,
-        ProveedoresId:this.state.ProveedoresId,
-        MedidaDeVenta:this.state.MedidaDeVenta,
-        Activo:1,
-        IdEmpresa:1,
-        IdSucursal:1,
-        FechaCreacion: fecha.toString(),
-        FechaModificacion:null,
-        UsuarioCreacion:"system",
-        UsuarioModificacion:null
-        
-    
-    
-    };
-
-    console.log(Model)
-
-this.SaveArticulos(Model);
-    
-
-
-
-
-           this.setState(InitialState)
-  
-
-}   
-catch(ex){
-
-
-    console.log(ex)
-
+launchCamera = async (id) => {
+  const options = {
+    title: 'Agregar Imagen',
+    chooseFromLibraryButtonTitle:'Selecciona una foto de la Libreria',
+  };
+  ImagePicker.launchCamera(options, (response) => {
+    if (response.didCancel) {
+      console.log('User cancelled image picker');
+    } else if (response.error) {
+      console.log('ImagePicker Error: ', response.error);
+    } else if (response.customButton) {
+      console.log('User tapped custom button: ', response.customButton);
+    } else {
+      const source = { uri: 'file://'+response.path };
+      const sourceShow = { uri: response.uri };
+      this.setState({ 
+        avatarSource: source,
+        showAvatar:sourceShow
+      });
+      console.log(this.state.avatarSource,'here')
+    }
+  });
 }
 
-
-
+catchErrors = (field) =>{
+  Alert.alert('Campos faltantes',`${field}`);
+  this.setState({error: true});
+  return
 }
-
-
+Validaciones = ()=>{
+  this.setState({error: true});
+  console.log(this.state.error,'TRUE')
+    try{
+            if(this.state.CategoriaId === ""){  
+              this.catchErrors('Categoria')
+              return
+            }
+            if(this.state.NombreArticulo === ""){
+              this.catchErrors('Nombre')
+              return
+            }
+            if(this.state.Abreviatura === ""){
+              this.catchErrors('Abreviatura')
+              return
+            }
+            if(this.state.PrecioCosto === ""){
+              this.catchErrors('Precio de Costo')
+              return
+            }
+            if(this.state.PrecioVenta === ""){
+              this.catchErrors('Precio de Venta')
+              return
+            }
+    }catch(e){
+      Alert.alert("Ha ocurrido un error:"+ e);
+    }    
+    return;
 }
-
+GuardarArticulo = () =>{
+  if(this.state.CategoriaId === ""){  
+    this.catchErrors('Categoria')
+    return
+  }
+  if(this.state.NombreArticulo === ""){
+    this.catchErrors('Nombre')
+    return
+  }
+  if(this.state.Abreviatura === ""){
+    this.catchErrors('Abreviatura')
+    return
+  }
+  if(this.state.PrecioCosto === ""){
+    this.catchErrors('Precio de Costo')
+    return
+  }
+  if(this.state.PrecioVenta === ""){
+    this.catchErrors('Precio de Venta')
+    return
+  } else {
+  try  {
+  const fecha = new Date();
+      const Model ={
+          Codigo: null,
+          CategoriaId: this.state.CategoriaId,
+          Abreviatura: this.state.Abreviatura,
+          NombreArticulo: this.state.NombreArticulo,
+          CodigoDeBarra: this.state.CodigoDeBarra,
+          PrecioCosto: this.state.PrecioCosto,
+          CatidadExistencia: this.state.CatidadExistencia,
+          PrecioVenta:this.state.PrecioVenta,
+          ProveedoresId:this.state.ProveedoresId,
+          MedidaDeVenta:this.state.MedidaDeVenta,
+          Activo:1,
+          Descripcion:'',
+          Img:this.state.avatarSource,
+          IdEmpresa:1,
+          IdSucursal:1,
+          FechaCreacion: fecha.toString(),
+          FechaModificacion:null,
+          UsuarioCreacion:"system",
+          UsuarioModificacion:null
+      };
+  this.SaveArticulos(Model);
+  this.setState(InitialState)
+  }catch(ex){
+        console.log(ex)
+      }
+    }
+  }
+}
 const styles = StyleSheet.create({
     ViewStyle:{
         backgroundColor:"#f6f6f6",
+    },
+    logo:{
+      width:100,
+      height:100,
     },
     Form: {
         padding:normalize(15),

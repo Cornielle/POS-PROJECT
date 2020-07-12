@@ -2,18 +2,15 @@ import React from 'react';
 import { ListItem } from 'react-native-elements'
 import { Avatar,Searchbar,Card, TextInput , FAB } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/FontAwesome';
-import  ModalControls from '../Components/ModalControls'
-import { View, StyleSheet, Modal, Text, Image,ScrollView, ToastAndroid, Button} from 'react-native'
+import { View, StyleSheet, Modal, Text, Image,ScrollView, ToastAndroid, Button, Dimensions} from 'react-native'
 import normalize from 'react-native-normalize';
 import HeaderGrid from '../Components/HeaderGrid'
-import Articulos from '../../Models/Articulos';
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler';
 import ActionSheet from 'react-native-actionsheet';
 import ArticulosFields from '../../src/Fields/Articulos'
 import  SQLite  from 'react-native-sqlite-storage';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-import { Dimensions } from 'react-native';
 SQLite.DEBUG(true);
 SQLite.enablePromise(true);
 const database_name = "PuntoVenta.db";
@@ -23,10 +20,7 @@ const database_size = 200000;
 const items= [];
 const editIcon = props => <Avatar.Icon {...props} icon="pen" />
 const detailIcon = props => <Avatar.Icon {...props} icon="folder" />
-const RNFS = require('react-native-fs');
 import ImagePicker from 'react-native-image-picker';
-
-
 export default class ArticulosGridScreen extends React.Component{
     constructor(props) {
         super(props);
@@ -53,7 +47,8 @@ export default class ArticulosGridScreen extends React.Component{
           'Eliminar',
           'Editar',
           'Cargar imagen',
-          'Cancel'
+          'Cancel',
+          'Tomar imagen con Camara',
         ],
         render:false,
         addRecord:false,
@@ -84,7 +79,7 @@ export default class ArticulosGridScreen extends React.Component{
         FechaModificacion:'',
         UsuarioCreacion:'',
         UsuarioModificacion:'',
-        HoraCreacion:''
+        Abreviatura:''
         },
     };
   _showModal = () => this.setState({visible:true})
@@ -113,19 +108,18 @@ export default class ArticulosGridScreen extends React.Component{
                  let row = result[0].rows.item(i);
                  artiobj.push(row);
                }
-               console.log('Articulos Data:',artiobj)
-               this.state.HoraCreacion = ''
                artiobj.map(x => {
-                 const{rowid, NombreArticulo, PrecioCosto,FechaCreacion,PrecioVenta, Activo} = x;
+                 const{rowid, NombreArticulo, PrecioCosto,FechaCreacion,PrecioVenta, Activo, Img, Abreviatura} = x;
                  console.log(PrecioCosto,'costo')
                  let date = FechaCreacion.split(' ');
                  let objeto = {
                  key: rowid,
                  name:NombreArticulo,
                  FechaCreacion:`${date[2]}/${date[1]}/${date[3]}` ,
-                 HoraCreacion: date[4][0]+date[4][1] > 11 && date[4][0]+date[4][1] < 23 ? `${ date[4]}PM` :`${ date[4]}AM`,
-                 avatar_url:'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
-                 subtitle: `Costo: RD$ ${PrecioCosto} ${"\n"}Venta: RD$ ${PrecioVenta}`,
+                 //HoraCreacion: date[4][0]+date[4][1] > 11 && date[4][0]+date[4][1] < 23 ? `${ date[4]}PM` :`${ date[4]}AM`,
+                 Abreviatura: Abreviatura,
+                 subtitle: `P. Costo: RD$ ${PrecioCosto} ${"\n"}P. Venta: RD$ ${PrecioVenta}`,
+                 Img: JSON.parse(Img),
                  estado: Activo ?true: false
                }
                arra.push(objeto)
@@ -134,7 +128,6 @@ export default class ArticulosGridScreen extends React.Component{
                this.setState({
                  filterData:arra
                })
-               console.log(this.state.data, 'here')
           }).catch((error) =>{      
           console.log("Error a cargar datos", error);  
         });
@@ -152,12 +145,14 @@ export default class ArticulosGridScreen extends React.Component{
     this.LoadArticuloData() 
     this.forceUpdateHandle()
   }
-  selectImage = async () => {
-
-    console.log('called')
-    ImagePicker.showImagePicker({noData:true, mediaType:'photo'}, (response) => {
-      let decodeURI = decodeURIComponent(response.uri)
-      console.log('Response = ', response);
+  /*Launch From Camera*/
+  fromCamera = async (id) => {
+    const options = {
+      title: 'Tomar imagen desde la Camara',
+      chooseFromLibraryButtonTitle:'Selecciona una foto de la Libreria',
+    };
+    console.log('WHEYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY')
+    ImagePicker.launchCamera(options, (response) => {
       if (response.didCancel) {
         console.log('User cancelled image picker');
       } else if (response.error) {
@@ -165,15 +160,110 @@ export default class ArticulosGridScreen extends React.Component{
       } else if (response.customButton) {
         console.log('User tapped custom button: ', response.customButton);
       } else {
-        const source = { uri: response.uri };
-        RNFS.copyFile(decodeURI, './Images')
-        
-        // You can also display the image using data:
-        // const source = { uri: 'data:image/jpeg;base64,' + response.data };
-    
-        this.setState({
+        const source = { uri: 'file://'+response.path };
+        this.setState({ 
           avatarSource: source,
         });
+        new Promise((resolve) => {
+          let db;
+          console.log("Plugin integrity check ...");
+          SQLite.echoTest()
+            .then(() => {
+              console.log("Integrity check passed ...");
+              console.log("Opening database ...");
+              SQLite.openDatabase(
+                database_name,
+                database_version,       
+                database_displayname,
+                database_size
+              ).then(DB => {
+                db = DB;
+                console.log("Database OPEN");
+                db.executeSql(`UPDATE Articulos SET Img = ? WHERE rowid = ${id}`,
+                [JSON.stringify(this.state.avatarSource)]).then((result) => {
+                  ToastAndroid.show("Imagen agregada correctamente!", ToastAndroid.SHORT);
+                  this.setState({
+                    visible:false
+                  })
+                  this.LoadArticuloData()
+              }).catch((error) =>{      
+              console.log("Error al colocar la imagen", error);  
+            });
+          })
+          .catch(error => {
+            console.log(error);
+          });
+        })
+          .catch(error => {
+          console.log("echoTest failed - plugin not functional");
+          });
+        });
+
+        this.setState({ 
+          avatarSource: source,
+        });
+        console.log(this.state.avatarSource,'here')
+      }
+    });
+  }
+
+  /*SELECTING IMAGE*/
+  selectImage = async (id) => {
+    const options = {
+      title: 'Agregar Imagen',
+      chooseFromLibraryButtonTitle:'Selecciona una foto de la Libreria',
+    };
+    ImagePicker.launchImageLibrary(options, (response) => {
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      } else {
+        const source = { uri: 'file://'+response.path };
+        this.setState({ 
+          avatarSource: source,
+        });
+        new Promise((resolve) => {
+          let db;
+          console.log("Plugin integrity check ...");
+          SQLite.echoTest()
+            .then(() => {
+              console.log("Integrity check passed ...");
+              console.log("Opening database ...");
+              SQLite.openDatabase(
+                database_name,
+                database_version,       
+                database_displayname,
+                database_size
+              ).then(DB => {
+                db = DB;
+                console.log("Database OPEN");
+                db.executeSql(`UPDATE Articulos SET Img = ? WHERE rowid = ${id}`,
+                [JSON.stringify(this.state.avatarSource)]).then((result) => {
+                  ToastAndroid.show("Imagen agregada correctamente!", ToastAndroid.SHORT);
+                  this.setState({
+                    visible:false
+                  })
+                  this.LoadArticuloData()
+              }).catch((error) =>{      
+              console.log("Error al colocar la imagen", error);  
+            });
+          })
+          .catch(error => {
+            console.log(error);
+          });
+        })
+          .catch(error => {
+          console.log("echoTest failed - plugin not functional");
+          });
+        });
+
+        this.setState({ 
+          avatarSource: source,
+        });
+        console.log(this.state.avatarSource,'here')
       }
     });
   }
@@ -255,13 +345,10 @@ export default class ArticulosGridScreen extends React.Component{
               db = DB;
               console.log("Database OPEN");
               db.executeSql(`SELECT * FROM Articulos WHERE rowid = ${key}`,[]).then((result) => {
-                console.log(result, 'el resultado que quiero')
                  for (let i = 0; i < result[0].rows.length; i++) {
                    let row = result[0].rows.item(i);
-                   console.log(row, 'let you goo?')
                    this.setState({Articulo: row})
                  }
-                 console.log(this.state.Articulo.PrecioCosto, 'let you goo?')
             }).catch((error) =>{      
             console.log("Error a cargar datos", error);  
           });
@@ -336,6 +423,7 @@ _showMenu(index){
 _makeAction(action){ 
   const idIndex = (this.state.index);
   const id = this.state.data[idIndex];
+  console.log(id.key, 'this id')
   this.setState({modalTitle:''})
   switch(action){
     case 0:
@@ -359,13 +447,13 @@ _makeAction(action){
       })
       this._showModal()
       break
-      case 3: 
-      // this.FillArticulo(id)
-      // this.setState({
-      //   modalTitle:'Editar Artículo',
-      //   editFields:false
-      // })
-      this.selectImage()
+      case 3:
+        /*Select Image from Library*/ 
+      this.selectImage(id.key)
+      break
+      case 5:
+        /*Took Image from Camera*/
+      this.fromCamera(id.key)
       break
     default:
       break
@@ -409,20 +497,13 @@ editField = (fieldValue, name) =>{
       this.setState({Descripcion:fieldValue})
       this.state.Articulo.Descripcion = fieldValue
     } 
-    else if(name==='UsuarioCreacion'){
-      this.setState({UsuarioCreacion:fieldValue})
-      this.state.Articulo.UsuarioCreacion = fieldValue
-    } 
-    else if(name==='UsuarioModificacion'){
-      this.setState({UsuarioModificacion:fieldValue})
-      this.state.Articulo.UsuarioModificacion = fieldValue
-    } 
 }
 render(){
   const {name, subtitle, navigation} = this.props
   const {visible, editFields} = this.state
 return(
 <View>
+<Image source={this.state.avatarSource} style={styles.uploadAvatar} />
 <Modal visible={visible} transparent={true} >
   <View style={styles.Form}> 
   <Card style={{marginTop:windowHeight * 0.17}}>
@@ -447,6 +528,7 @@ return(
    style={{
       borderBottomColor: 'black',
       borderBottomWidth: 0.5,
+      fontSize:16
     }}
   />
   <ScrollView style={{height:windowHeight*0.5}}>
@@ -459,16 +541,6 @@ return(
             disabled={editFields}
             editable={true}
             onChangeText={(NombreArticulo)=> this.editField(NombreArticulo, 'NombreArticulo')}
-            />
-            {/*El codigo del articulos siempre sera*/}
-              <TextInput
-            style={styles.Input}
-            mode='flat'
-            label='Código del Artículo'
-            value={this.state.Articulo.rowid !==null ? this.state.Articulo.rowid.toString() : 'Cargando...'}
-            disabled={true}
-            editable={true}
-            onChangeText={(rowid) => this.editField(rowid,'rowid')}
             />
               <TextInput
             style={styles.Input}
@@ -498,6 +570,16 @@ return(
             />
             {this.state.editFields &&
             <View>
+              {/*El codigo del articulos siempre sera*/}
+                <TextInput
+              style={styles.Input}
+              mode='flat'
+              label='Código del Artículo'
+              value={this.state.Articulo.rowid !==null ? this.state.Articulo.rowid.toString() : 'Cargando...'}
+              disabled={true}
+              editable={true}
+              onChangeText={(rowid) => this.editField(rowid,'rowid')}
+              />
                 <TextInput
               style={styles.Input}
               mode='flat'
@@ -516,6 +598,7 @@ return(
               editable={true}
               onChangeText={(UsuarioModificacion) => this.editField( UsuarioModificacion,'UsuarioModificacion')}
               />
+              
             </View>
             }
             </Card.Content>
@@ -554,10 +637,10 @@ return(
             <ListItem 
               style={{zIndex:-2}}
               onPress={() => this._showMenu(index)}
-              leftAvatar={{ source: { uri: item.avatar_url } }}
+              leftAvatar={{source:item.Img, width:60, height:60, resizeMode: 'cover', rounded: false}}
               rightAvatar={ 
-                <View>                 
-                  {/* {item.estado === true ? <Badge>Activado</Badge> : <Badge>Desactivado</Badge>} */}
+                <View>             
+                  {/* {item.estado === true ? <BadgeActivado</Badge> : <Badge>Desactivado</Badge>} */}
                 <Text>Fecha de Creación:{"\n"}
                 <Icon
                   name="calendar-check-o"
@@ -568,14 +651,9 @@ return(
                     {item.FechaCreacion}
                   </Text>
                 </Text>
-                <Text>Hora de Creación:{"\n"}
-                <Icon
-                  name="clock-o"
-                  size={15}
-                  color="rgba(0, 0, 0, .5)"
-                />{" "}
-                  <Text style={{fontSize:12, color:'rgba(0, 0, 0, .5)'}}>
-                    {item.HoraCreacion}
+                <Text>Abreviatura:{"\n"}
+                  <Text style={{color:'rgba(0, 0, 0, .5)'}}>
+                    {item.Abreviatura}
                   </Text>
                 </Text>
               </View>
