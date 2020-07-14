@@ -73,7 +73,6 @@ export const InventoryManagement = ({navigation}) => <Screen navigation={navigat
 export const TableManagement = ({navigation}) => <Screen navigation={navigation} name="Manejo de Mesas" />
 export const TaxReceipt = ({navigation}) => <Screen navigation={navigation} name="Comprobante Fiscal" />
 export const CategoryManagement =({navigation}) => <CategoriasGridScreen navigation ={navigation} subtitle="Categorias" name="Categorias" />
-// export const ArticulosManagemet =({navigation}) => <Articulos navigation={navigation} subtitle="Articulos" name="Articulos del stock" />
 export const StockManagement =({navigation}) => <StockGridScreen navigation={navigation} subtitle="Control de Almacén" name="Almacén"  />
 export const RolesManagement = ({navigation}) => <RolesScreen navigation={navigation} subtitle="Roles" name="Roles" />
 export const AccionesManagement = ({navigation}) => <AccionesGridScreen navigation={navigation} subtitle="Control de Acciones" name="Acciones" />
@@ -83,9 +82,7 @@ export const RolesMenuManagement = ({navigation}) => <RolesMenuScreen navigation
 export const RolesGridManagement = ({navigation}) => <RolesGridScreen navigation={navigation} subtitle="Roles" name="Roles" />
 export const MenuAccionesManagement =({navigation}) => <AccionesMenuGridScreen navigation={navigation} subtitle="Menu Acciones" name="Menu Acciones" />
 export const OptionManagement = ({navigation}) =><OptionScreen navigation={navigation} subtitle="Opciones" name="Opciones" />
-export const ProveedoresManagement = ({navigation}) => <ProovedoresGridScreen navigation={navigation} subtitle="Proveedores" name="Proveedores" /> 
-// export const VentasManagement =({navigation}) => <VentasGridScreen navigation={navigation} subtitle="Ventas" name="Ventas" />
-// // configuracion del tema por defecto de react native paper
+export const ProveedoresManagement = ({navigation}) => <ProovedoresGridScreen navigation={navigation} subtitle="Proveedores" name="Proveedores" /> // // configuracion del tema por defecto de react native paper
 const theme = {
     ...DefaultTheme,
     roundness: 4,

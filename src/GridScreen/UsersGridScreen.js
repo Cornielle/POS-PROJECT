@@ -46,9 +46,7 @@ export default class EmpleadosGridScreen extends React.Component{
           'Detalle',
           'Eliminar',
           'Editar',
-          'Cargar imagen',
           'Cancel',
-          'Tomar imagen con Camara',
         ],
         render:false,
         addRecord:false,
@@ -65,9 +63,7 @@ export default class EmpleadosGridScreen extends React.Component{
         CategoriaId: 0,
         Descripcion:'',
         DescripcionPantalla:'',
-        NombreEmpleado:'',
-        CodigoDeBarra:'',
-        PrecioCosto:'',
+        NombrePersona:'',
         PrecioVenta:'',
         ProveedoresId:'',
         CatidadExistencia:'',
@@ -102,24 +98,20 @@ export default class EmpleadosGridScreen extends React.Component{
           ).then(DB => {
             db = DB;
             console.log("Database OPEN");
-            db.executeSql(`SELECT * FROM Empleados WHERE Activo = 1 ORDER BY NombreEmpleado ASC`,[]).then((result) => {
+            db.executeSql(`SELECT * FROM Empleados WHERE Activo = 1 ORDER BY NombrePersona ASC`,[]).then((result) => {
               console.log(result)
                for (let i = 0; i < result[0].rows.length; i++) {
                  let row = result[0].rows.item(i);
                  artiobj.push(row);
                }
                artiobj.map(x => {
-                 const{rowid, NombreEmpleado, PrecioCosto,FechaCreacion,PrecioVenta, Activo, Img, Abreviatura} = x;
-                 console.log(PrecioCosto,'costo')
-                 let date = FechaCreacion.split(' ');
+                 const{rowid, NombrePersona, ApellidoPersona, Activo, Identificacion} = x;
+                 console.log(ApellidoPersona,'costo')
                  let objeto = {
                  key: rowid,
-                 name:NombreEmpleado,
-                 FechaCreacion:`${date[2]}/${date[1]}/${date[3]}` ,
-                 //HoraCreacion: date[4][0]+date[4][1] > 11 && date[4][0]+date[4][1] < 23 ? `${ date[4]}PM` :`${ date[4]}AM`,
-                 Abreviatura: Abreviatura,
-                 subtitle: `P. Costo: RD$ ${PrecioCosto} ${"\n"}P. Venta: RD$ ${PrecioVenta}`,
-                 Img: JSON.parse(Img),
+                 NombrePersona:NombrePersona,
+                 ApellidoPersona:ApellidoPersona,
+                 Identificacion:Identificacion,
                  estado: Activo ?true: false
                }
                arra.push(objeto)
@@ -276,13 +268,7 @@ export default class EmpleadosGridScreen extends React.Component{
     let params = []
     try{
       const param =  [
-        this.state.Empleado.Codigo,
-        this.state.Empleado.CodigoDeBarra,
-        this.state.Empleado.FechaModificacion,
-        this.state.Empleado.NombreEmpleado,
-        this.state.Empleado.PrecioCosto,
-        this.state.Empleado.PrecioVenta,
-        this.state.Empleado.UsuarioModificacion,
+        this.state.Empleado.NombrePersona,
         this.state.Empleado.rowid,
       ]
       param.map(item=>{
@@ -302,7 +288,7 @@ export default class EmpleadosGridScreen extends React.Component{
             ).then(DB => {
               db = DB;
               console.log("Database OPEN");
-              db.executeSql(`UPDATE Empleados SET Codigo = ? , CodigoDeBarra = ?, FechaModificacion = ?, NombreEmpleado = ?, PrecioCosto = ?, PrecioVenta = ?, UsuarioModificacion = ? WHERE rowid = ?`,
+              db.executeSql(`UPDATE Empleados SET NombrePersona = ? WHERE rowid = ?`,
               params).then((result) => {
                 ToastAndroid.show("Artículo editado correctamente!", ToastAndroid.SHORT);
                 this.setState({
@@ -447,14 +433,6 @@ _makeAction(action){
       })
       this._showModal()
       break
-      case 3:
-        /*Select Image from Library*/ 
-      this.selectImage(id.key)
-      break
-      case 5:
-        /*Took Image from Camera*/
-      this.fromCamera(id.key)
-      break
     default:
       break
   }
@@ -473,30 +451,14 @@ setModalVisible(visible) {
 }
 editField = (fieldValue, name) =>{
     console.log(fieldValue, 'checking')
-    if(name==='NombreEmpleado'){
-      this.setState({NombreEmpleado:fieldValue})
-      this.state.Empleado.NombreEmpleado = fieldValue 
+    if(name==='NombrePersona'){
+      this.setState({NombrePersona:fieldValue})
+      this.state.Empleado.NombrePersona = fieldValue 
     }
-    else if(name==='Codigo'){
-      this.setState({Codigo:fieldValue})
-      this.state.Empleado.Codigo = fieldValue
+    else if(name==='ApellidoPersona'){
+      this.setState({ApellidoPersona:ApellidoPersona})
+      this.state.Empleado.ApellidoPersona = fielApellidoPersonadValue
     }
-    else if(name==='CodigoDeBarra'){
-      this.setState({CodigoDeBarra:fieldValue})
-      this.state.Empleado.CodigoDeBarra = fieldValue
-    } 
-    else if(name==='PrecioCosto'){
-      this.setState({PrecioCosto:fieldValue})
-      this.state.Empleado.PrecioCosto = fieldValue
-    } 
-    else if(name==='PrecioVenta'){
-      this.setState({PrecioVenta:fieldValue})
-      this.state.Empleado.PrecioVenta = fieldValue
-    } 
-    else if(name==='Descripcion'){
-      this.setState({Descripcion:fieldValue})
-      this.state.Empleado.Descripcion = fieldValue
-    } 
 }
 render(){
   const {name, subtitle, navigation} = this.props
@@ -523,7 +485,7 @@ return(
     }
   </View>
   <Card.Title title= {!editFields ? "Editar Artículo":"Detalles del Artículo"}
-   subtitle={this.state.Empleado.NombreEmpleado} 
+   subtitle={this.state.Empleado.NombrePersona} 
    left = {!editFields ? editIcon: detailIcon}
    style={{
       borderBottomColor: 'black',
@@ -536,71 +498,20 @@ return(
         <TextInput
             style={styles.Input}
             mode='flat'
-            label='Nombre del Artículo'
-            value={this.state.Empleado.NombreEmpleado !==null ? this.state.Empleado.NombreEmpleado : 'Cargando...'}
+            label='Nombres'
+            value={this.state.Empleado.NombrePersona !==null ? this.state.Empleado.NombrePersona : 'Cargando...'}
             disabled={editFields}
             editable={true}
-            onChangeText={(NombreEmpleado)=> this.editField(NombreEmpleado, 'NombreEmpleado')}
+            onChangeText={(NombrePersona)=> this.editField(NombrePersona, 'NombrePersona')}
             />
               <TextInput
             style={styles.Input}
             mode='flat'
-            label='Código de Barra'
-            value={this.state.Empleado.CodigoDeBarra !==null ? this.state.Empleado.CodigoDeBarra : 'Cargando...'}
+            label='Apellido'
+            value={this.state.Empleado.ApellidoPersona !==null ? this.state.Empleado.ApellidoPersona : 'Cargando...'}
             disabled={editFields}
-            onChangeText={(CodigoDeBarra) => this.editField(CodigoDeBarra,'CodigoDeBarra')}
+            onChangeText={(ApellidoPersona) => this.editField(ApellidoPersona,'ApellidoPersona')}
             />
-              <TextInput
-            style={styles.Input}
-            mode='flat'
-            label='Precio de Costo'
-            value={this.state.Empleado.PrecioCosto !==null ? this.state.Empleado.PrecioCosto.toString() : 'Cargando...'}
-            disabled={editFields}
-            editable={true}
-            onChangeText={(PrecioCosto) => this.editField( PrecioCosto, 'PrecioCosto' )}
-            />
-              <TextInput
-            style={styles.Input}
-            mode='flat'
-            label='Precio de Venta'
-            value={this.state.Empleado.PrecioVenta !==null ? this.state.Empleado.PrecioVenta.toString()  : 'Cargando...'}
-            disabled={editFields}
-            editable={true}
-            onChangeText={(PrecioVenta) => this.editField( PrecioVenta, 'PrecioVenta' )}
-            />
-            {this.state.editFields &&
-            <View>
-              {/*El codigo del Empleados siempre sera*/}
-                <TextInput
-              style={styles.Input}
-              mode='flat'
-              label='Código del Artículo'
-              value={this.state.Empleado.rowid !==null ? this.state.Empleado.rowid.toString() : 'Cargando...'}
-              disabled={true}
-              editable={true}
-              onChangeText={(rowid) => this.editField(rowid,'rowid')}
-              />
-                <TextInput
-              style={styles.Input}
-              mode='flat'
-              label='Usuario Creación'
-              value={this.state.Empleado.UsuarioCreacion !==null ? this.state.Empleado.UsuarioCreacion : 'Cargando...'}
-              disabled={editFields}
-              editable={true}
-              onChangeText={(UsuarioCreacion) => this.editField( UsuarioCreacion, 'UsuarioCreacion')}
-              />
-                <TextInput
-              style={styles.Input}
-              mode='flat'
-              label='Usuario Modificación'
-              value={this.state.Empleado.UsuarioModificacion !==null ? this.state.Empleado.UsuarioModificacion : 'Cargando...'}
-              disabled={editFields}
-              editable={true}
-              onChangeText={(UsuarioModificacion) => this.editField( UsuarioModificacion,'UsuarioModificacion')}
-              />
-              
-            </View>
-            }
             </Card.Content>
         </ScrollView>
     </Card>
@@ -637,29 +548,14 @@ return(
             <ListItem 
               style={{zIndex:-2}}
               onPress={() => this._showMenu(index)}
-              leftAvatar={{source:item.Img, width:60, height:60, resizeMode: 'cover', rounded: false}}
+              leftAvatar={<Avatar.Icon size={48} icon="account" />}
               rightAvatar={ 
-                <View>             
-                  {/* {item.estado === true ? <BadgeActivado</Badge> : <Badge>Desactivado</Badge>} */}
-                <Text>Fecha de Creación:{"\n"}
-                <Icon
-                  name="calendar-check-o"
-                  size={15}
-                  color="rgba(0, 0, 0, .5)"
-                />{" "}
-                  <Text style={{fontSize:12, color:'rgba(0, 0, 0, .5)'}}>
-                    {item.FechaCreacion}
-                  </Text>
-                </Text>
-                <Text>Abreviatura:{"\n"}
-                  <Text style={{color:'rgba(0, 0, 0, .5)'}}>
-                    {item.Abreviatura}
-                  </Text>
-                </Text>
-              </View>
+              <Text style={{fontSize:14, color:'rgba(0, 0, 0, .5)'}}> 
+              Identificación: {"\n"}{item.Identificacion}
+              </Text>
               }
-              title={item.name}
-              subtitle={item.subtitle}
+              title={item.NombrePersona}
+              subtitle={item.ApellidoPersona}
               bottomDivider
             />
               </TouchableOpacity>
@@ -675,7 +571,7 @@ return(
           options={this.state.optionArray}
           //Define cancel button index in the option array
           //this will take the cancel option in bottom and will highlight it
-          cancelButtonIndex={4}
+          cancelButtonIndex={3}
           //If you want to highlight any specific option you can use below prop
           destructiveButtonIndex={1}
         />

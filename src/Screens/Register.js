@@ -169,9 +169,9 @@ SaveEmp(Model) {
                   console.log("Database is ready ... executing query ...");
                   ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
 
-db.executeSql("SELECT * FROM Empleados").then((resulst) =>{
+db.executeSql("SELECT * FROM Empleados").then((result) =>{
 
-Console.log(resulst);
+console.log(result);
 
 /*
   console.log("Query completed");
