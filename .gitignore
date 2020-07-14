@@ -11,6 +11,7 @@ web-build/
 web-report/
 .packager-info.json
 # macOS
+android/
 .DS_Store
 yarn.lock
 package-info.json
