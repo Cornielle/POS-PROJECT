@@ -20,10 +20,14 @@ import org.reactnative.maskedview.RNCMaskedViewPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 // react-native-extra-dimensions-android
 import ca.jaysoo.extradimensions.ExtraDimensionsPackage;
+// react-native-fs
+import com.rnfs.RNFSPackage;
 // react-native-gesture-handler
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 // react-native-network-info
 import com.pusherman.networkinfo.RNNetworkInfoPackage;
+// react-native-image-picker
+import com.imagepicker.ImagePickerPackage;
 // react-native-orientation
 import com.github.yamill.orientation.OrientationPackage;
 // react-native-printer
@@ -34,6 +38,8 @@ import com.swmansion.reanimated.ReanimatedPackage;
 import com.th3rdwave.safeareacontext.SafeAreaContextPackage;
 // react-native-screens
 import com.swmansion.rnscreens.RNScreensPackage;
+// react-native-splash-screen
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
 // react-native-sqlite-storage
 import org.pgsqlite.SQLitePluginPackage;
 // react-native-text-input-mask
@@ -88,13 +94,16 @@ public class PackageList {
       new RNCMaskedViewPackage(),
       new RNDeviceInfo(),
       new ExtraDimensionsPackage(),
+      new RNFSPackage(),
       new RNGestureHandlerPackage(),
       new RNNetworkInfoPackage(),
+      new ImagePickerPackage(),
       new OrientationPackage(),
       new RNPrinterPackage(),
       new ReanimatedPackage(),
       new SafeAreaContextPackage(),
       new RNScreensPackage(),
+      new SplashScreenReactPackage(),
       new SQLitePluginPackage(),
       new RNTextInputMaskPackage(),
       new VectorIconsPackage()

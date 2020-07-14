@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, SafeAreaView, TouchableOpacity } from 'react-native';
-import { Appbar } from 'react-native-paper';
+import { AppBar } from 'react-native-paper';
 import normalize from 'react-native-normalize';
 import { Text } from 'native-base';
 
@@ -10,12 +10,12 @@ export default class ModalControls extends React.Component {
     const { modalTitle } = this.props
     return (
         <SafeAreaView>
-          <Appbar.Header style={styles.Header } noShadow={true} >
-          <Appbar.BackAction
+          <AppBar.Header style={styles.Header } noShadow={true} >
+          <AppBar.BackAction
             onPress={this.props.hideModal}
             color={styles.title.color} 
           />
-          <Appbar.Content 
+          <AppBar.Content 
             color={styles.title.color}
             title={modalTitle} 
             titleStyle={modalTitle.length>15? {marginLeft:normalize(60),fontSize:16} : {marginLeft:normalize(61),fontSize:16} }
@@ -30,7 +30,7 @@ export default class ModalControls extends React.Component {
               >Guardar</Text>
             }
           </TouchableOpacity>
-        </Appbar.Header>
+        </AppBar.Header>
       </SafeAreaView>
     );
   }

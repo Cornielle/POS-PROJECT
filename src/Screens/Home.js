@@ -126,36 +126,28 @@ PosTableCreator();
   }; 
   renderCategory = ({ item }) => (
     <>
+    <TouchableHighlight   underlayColor="#ffffff" onPress={() => this.onPressCategory(item)}>
     <Card style={styles.Card}>
-    <TouchableHighlight underlayColor='#2193b0' onPress={() => this.onPressCategory(item)}>
       <View style={styles.menuItemContainer}>
       {(item.name === 'Artículos'? 
       <ImageBackground style={styles.absoluteFillObject} source={require(`../img/cart.png`)}>
-       <Text style={styles.menuName}>{item.name}</Text>
-      </ImageBackground>
-      : (item.name === 'Stock'? 
+      </ImageBackground> 
+      : (item.name === 'Almacén'? 
       <ImageBackground style={styles.absoluteFillObject} source={require(`../img/stock.png`)}>
-       <Text style={styles.menuName}>{item.name}</Text>
       </ImageBackground>  
       : (item.name === 'Categorías'? <ImageBackground style={styles.absoluteFillObject} source={require(`../img/categories.png`)}>
-        <Text style={styles.menuName}>{item.name}</Text>
         </ImageBackground> 
       : (item.name === 'Ventas'? <ImageBackground style={styles.absoluteFillObject} source={require(`../img/ventas.png`)}>
-          <Text style={styles.menuName}>{item.name}</Text>
         </ImageBackground> 
-      :(item.name === 'Usuarios'? <ImageBackground style={styles.absoluteFillObject} source={require(`../img/usuarios.png`)}>
-            <Text style={styles.menuName}>{item.name}</Text>
+      :(item.name === 'Empleados'? <ImageBackground style={styles.absoluteFillObject} source={require(`../img/usuarios.png`)}>
           </ImageBackground> 
-      : (item.name === 'Acciones'? <ImageBackground style={styles.absoluteFillObject} source={require(`../img/acciones.png`)}>
-      <Text style={styles.menuName}>{item.name}</Text>
-    </ImageBackground> 
+    //   : (item.name === 'Acciones'? <ImageBackground style={styles.absoluteFillObject} source={require(`../img/acciones.png`)}>
+    // </ImageBackground>
     :(item.name ==='Roles'? <ImageBackground style={styles.absoluteFillObject} source={require(`../img/roles.png`)}>
-      <Text style={styles.menuName}>{item.name}</Text>
     </ImageBackground> :
     <ImageBackground style={styles.absoluteFillObject} source={require(`../img/cierrecaja.png`)}>
-      <Text style={styles.menuName}>{item.name}</Text>
     </ImageBackground> 
-        ))))))
+        )))))
       )}
       {/* <ImageBackground style={styles.absoluteFillObject} source={require(`../img/cart.png`)}>
         <Text style={styles.menuName}>{item.name}</Text>
@@ -173,10 +165,10 @@ PosTableCreator();
         <Text style={styles.menuName}>{item.name}</Text>
       </ImageBackground> */}
           <View style={styles.overlay} />
-        <Text style={styles.menuName}>{item.name}</Text>
       </View>
-    </TouchableHighlight>
+    <Text style={styles.menuName}>{item.name}</Text>
     </Card>
+    </TouchableHighlight>
     </>
   );
   render() {
@@ -194,8 +186,8 @@ PosTableCreator();
 const styles = StyleSheet.create({
   overlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.4)',
-    padding:20   
+    backgroundColor: 'rgba(0,0,0,0.2)',
+    padding:10   
   },
     menuItemContainer: {
       flex: 1,
@@ -209,7 +201,8 @@ const styles = StyleSheet.create({
       borderRadius:10,
       width:'100%',
       marginTop:5,
-      elevation:5
+      elevation:5,
+      marginBottom:5
     },  
     menuPhoto: {
       width: '100%',
@@ -223,11 +216,11 @@ const styles = StyleSheet.create({
     },
     menuName: {
       flex: 1,
-      fontSize: 28,
+      fontSize: 20,
       fontWeight: 'bold',
       textAlign: 'center',
-      color: '#ffffff',
-      marginTop: 28
+      color: '#383838',
+      marginBottom:3
     },
     menuInfo: {
       marginTop: 3,

@@ -56,17 +56,17 @@ const DrawerNavigation = createDrawerNavigator({
   //     title: 'Iniciar Sesión'
   //   }
   // },
-  'Articulos':{
+  'Artículos':{
     screen:ArticulosManagement,
     navigationOptions:{
-      title:"Articulos"
+      title:"Artículos"
     }
   },
   'Stock':{
     screen:StockManagement,
     path:'./src/Component',
     navigationOptions:{
-      title:"Stock"
+      title:"Almacén"
     }
   },
   'Categorias':{
@@ -79,15 +79,21 @@ const DrawerNavigation = createDrawerNavigator({
   'Usuarios':{
     screen: UsersManagement,
     navigationOptions:{
-      title:'Users'
+      title:'Empleados'
     }
   },
-  'Vistas':{
-    screen: MenuManagement,
+  'Home':{
+    screen:DashboardHome,
     navigationOptions:{
-      title:'Menu'
+    title:'Inicio'
     }
-      },
+  },
+  // 'Vistas':{
+  //   screen: MenuManagement,
+  //   navigationOptions:{
+  //     title:'Menu'
+  //   }
+  //     },
   'Roles':{
     screen: RolesGridManagement,
     navigationOptions:{
@@ -143,12 +149,12 @@ const DrawerNavigation = createDrawerNavigator({
   //   title:"Apertura/Cierre de caja"
   //   }
   // },
-"Menu Acciones":{
-  screen:MenuAccionesManagement,
-  navigationOptions:{
-  title:"Menu Acciones"
-  }
-},
+// "Menu Acciones":{
+//   screen:MenuAccionesManagement,
+//   navigationOptions:{
+//   title:"Menu Acciones"
+//   }
+// },
 "Proveedores":{
 screen:ProveedoresManagement,
 navigationOptions:{

@@ -4,11 +4,11 @@ export const categories = [
     id: 1,
     name: 'Artículos',
     photo_url:'../img/cart.png',
-    nav:'Articulos'
+    nav:'Artículos'
   },
   {
     id: 2,
-    name: 'Stock',
+    name: 'Almacén',
     photo_url: 'https://ak1.picdn.net/shutterstock/videos/19498861/thumb/1.jpg',
     nav:'Stock'
   },
@@ -28,10 +28,10 @@ export const categories = [
   },
   {
     id: 5,
-    name: 'Usuarios',
+    name: 'Empleados',
     photo_url:
     'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/still-life-of-three-fresh-smoothies-in-front-of-royalty-free-image-561093647-1544042068.jpg?crop=0.715xw:0.534xh;0.0945xw,0.451xh&resize=768:*',
-    nav:'Users'
+    nav:'Usuarios'
   },
   {
     id: 7,
@@ -39,13 +39,13 @@ export const categories = [
     photo_url: 'https://ak1.picdn.net/shutterstock/videos/19498861/thumb/1.jpg',
     nav:'Roles'
   },
-  {
-    id: 8,
-    name: 'Acciones',
-    photo_url:
-      'https://images.unsplash.com/photo-1533777324565-a040eb52facd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-      nav:'Menu Acciones'
-  },
+  // {
+  //   id: 8,
+  //   name: 'Acciones',
+  //   photo_url:
+  //     'https://images.unsplash.com/photo-1533777324565-a040eb52facd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
+  //     nav:'Menu Acciones'
+  // },
   {
     id: 9,
     name: 'Cierre de Caja',

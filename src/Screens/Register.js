@@ -220,11 +220,11 @@ console.log(error)
             <ScrollView>
             <View style={styles.ViewStyle}>
                 {/*Header generico que debe ser reutilizado en casi todas las vistas */}
-                <Header name={'Registro'} 
-                        subtitle={'Crear perfil de Usuario'}
+                <Header name={'Empleados'} 
+                        subtitle={'Crear perfil de Empleado'}
                         goBackEnabled={true}
                         goBackNavigationName={'Grid'}
-                        navigationEnabled={true}
+                        navigationEnabled={false}
                         navigation={this.props.navigationValue}
                         toggleFormHeader={this.props.toggleForm}
                         gridHeader={false}
@@ -233,8 +233,7 @@ console.log(error)
                     <Card>
                         <Card.Title 
                             style={styles.Card}
-                            title="POS PROJECT" 
-                            subtitle="Todas las tiendas en un solo lugar" 
+                            title="Registro de Empleados"  
                             left={(props) => <Avatar.Icon {...props} 
                             icon="account" />} 
                         />

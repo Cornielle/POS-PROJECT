@@ -22,7 +22,7 @@ const database_size = 200000;
 const InitialState ={
 
     NombreRol:"",
-    Comentario :""
+    Descripcion :""
 
 }
 
@@ -95,7 +95,7 @@ console.log(result);
 }
 state={
 NombreRol:"",
-Comentario :"",
+Descripcion :"",
 ExistNombre:false
 }
 render(){
@@ -136,9 +136,9 @@ render(){
                         <TextInput
                             style={styles.Input}
                             mode='flat'
-                            label='Comentario'
-                            value={this.state.Comentario}
-                            onChangeText={(Comentario) => this.setState({ Comentario })}
+                            label='Descripcion'
+                            value={this.state.Descripcion}
+                            onChangeText={(Descripcion) => this.setState({ Descripcion })}
                         />
                         <Text>{"\n"}</Text>
                      
@@ -188,6 +188,7 @@ render(){
                   ,[ValInsert.NombreRol,ValInsert.Descripcion,1,ValInsert.IdEmpresa,ValInsert.IdSucursal,ValInsert.FechaCreacion,null,ValInsert.UsuarioCreacion,null]).then(() => {
                       console.log("Database is ready ... executing query ...");
                       ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
+                      this.props.toggleForm(false)
 
                   }).catch((error) =>{
                       console.log("Received error: ", error);
@@ -255,7 +256,7 @@ console.log(this.state.ExistNombre);
         const fecha = new Date();
         const ValInsert ={
             NombreRol: this.state.NombreRol,
-            Descripcion: this.state.Comentario, 
+            Descripcion: this.state.Descripcion, 
             Activo:1,
             IdEmpresa:1,
             IdSucursal:1,

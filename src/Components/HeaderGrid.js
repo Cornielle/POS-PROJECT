@@ -4,7 +4,12 @@ import { Appbar } from 'react-native-paper';
 import normalize from 'react-native-normalize';
 import {FontAwesome5} from '@expo/vector-icons';
 export default class MyComponent extends React.Component {
-  _goBack = () => {this.props.navigation.navigate('Home')};
+  _goBack = () => {
+    this.setState({
+      state:this.state
+    })
+    this.props.navigation.navigate('Home')
+  };
   render() {
 
     // console.log(this.props.navigation.navigate(this.props.goBackNavigationName))
@@ -40,7 +45,6 @@ export default class MyComponent extends React.Component {
     );
   }
 }
-
 const styles = StyleSheet.create({
   titleContent: {
     left: normalize(50),

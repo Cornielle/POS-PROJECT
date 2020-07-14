@@ -5,11 +5,7 @@ const database_name = "PuntoVenta.db";
 const database_version = "1.0";
 const database_displayname = "SQLite React Offline Database";
 const database_size = 200000;
-//var db = openDatabase({ nam
-
-
 export default function PosTableCreator(){
-console.log("me llamaron");
     let db;
     return new Promise((resolve) => {
       console.log("Plugin integrity check ...");
@@ -20,7 +16,6 @@ console.log("me llamaron");
           SQLite.openDatabase(
             database_name,
             database_version,       
-            database_displayname,
             database_size
           )
             .then(DB => {
@@ -94,12 +89,11 @@ db.executeSql('CREATE TABLE IF NOT EXISTS Categorias(rowid integer primary key,N
 }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABLA Categorias");    });
 /*************************************************************************************************/  
 
-
 db.executeSql('CREATE TABLE IF NOT EXISTS Articulos(rowid integer primary key,Codigo VARCHAR(300), CategoriaId INTEGER NOT NULL,'+
-'DescripcionPantalla VARCHAR(1000) , NombreArticulo VARCHAR(1000) NOT NULL, CodigoDeBarra VARCHAR(100),'+
+'Abreviatura VARCHAR(1000) , NombreArticulo VARCHAR(1000) NOT NULL, CodigoDeBarra VARCHAR(100),'+
 'PrecioCosto REAL NOT NULL, PrecioVenta REAL NOT NULL, ProveedoresId INTEGER, MedidaDeVenta VARCHAR(1000) NOT NULL'+
-', Activo INTEGER NOT NULL , IdEmpresa INTEGER NOT NULL, IdSucursal INTEGER, FechaCreacion VARCHAR(150) NOT NULL ,FechaModificacion VARCHAR(150)'+
-', UsuarioCreacion VARCHAR(100) NOT NULL ,UsuarioModificacion VARCHAR(100))',[]).then(() => {
+', Activo INTEGER NOT NULL ,Descripcion VARCHAR(1000), IdEmpresa INTEGER NOT NULL, IdSucursal INTEGER, FechaCreacion VARCHAR(150) NOT NULL ,FechaModificacion VARCHAR(150)'+
+', UsuarioCreacion VARCHAR(100) NOT NULL ,UsuarioModificacion VARCHAR(100), Img VARCHAR(1000))',[]).then(() => {
     console.log("LA TABLA Articulos HA SIDO CREADA SATISFACTORIAMENTE");
 }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABLA Articulos");    });
 /*************************************************************************************************/  
@@ -122,9 +116,9 @@ db.executeSql('CREATE TABLE IF NOT EXISTS VentasDetalle(rowid integer primary ke
 }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABLA VentasDetalle");    });
 /*************************************************************************************************/ 
 
-db.executeSql('CREATE TABLE IF NOT EXISTS Almacen(rowid integer primary key, ArticuloId REAL NOT NULL,'+
-'CantidadActual REAL NOT NULL, Descripcion VARCHAR(1000) '+
-', Activo INTEGER NOT NULL , IdEmpresa INTEGER NOT NULL, IdSucursal INTEGER, FechaCreacion VARCHAR(150) ,FechaModificacion VARCHAR(150)'+
+db.executeSql('CREATE TABLE IF NOT EXISTS Almacen(rowid integer primary key,Activo INTEGER NOT NULL, ArticuloId REAL NOT NULL,'+
+'CantidadActual REAL NOT NULL'+
+', IdEmpresa INTEGER NOT NULL, IdSucursal INTEGER, FechaCreacion VARCHAR(150) ,FechaModificacion VARCHAR(150)'+
 ', UsuarioCreacion VARCHAR(100) ,UsuarioModificacion VARCHAR(100))',[]).then(() => {
     console.log("LA TABLA Almacen HA SIDO CREADA SATISFACTORIAMENTE");
 }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABLA Almacen");    });
@@ -135,7 +129,7 @@ db.executeSql('CREATE TABLE IF NOT EXISTS Almacen(rowid integer primary key, Art
 
 db.executeSql('CREATE TABLE IF NOT EXISTS AlmacenDetalle(rowid integer primary key, AlmacenId REAL NOT NULL,'+
 'CantidadIngreso REAL NOT NULL'+
-', Activo INTEGER NOT NULL , IdEmpresa INTEGER NOT NULL, IdSucursal INTEGER, FechaCreacion VARCHAR(150) NOT NULL ,FechaModificacion VARCHAR(150)'+
+', IdEmpresa INTEGER NOT NULL, IdSucursal INTEGER, FechaCreacion VARCHAR(150) NOT NULL ,FechaModificacion VARCHAR(150)'+
 ', UsuarioCreacion VARCHAR(100) NOT NULL ,UsuarioModificacion VARCHAR(100))',[]).then(() => {
     console.log("LA TABLA AlmacenDetalle HA SIDO CREADA SATISFACTORIAMENTE");
 }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABLA AlmacenDetalle");    });

@@ -1040,6 +1040,10 @@
         "source": "C:\\Users\\USER\\.gradle\\caches\\transforms-1\\files-1.1\\material-1.0.0.aar\\005d81596bc0dee0d6afb85c7cde4034\\res\\color\\mtrl_chip_text_color.xml"
     },
     {
+        "merged": "C:\\Users\\USER\\Documents\\POS\\POS_Project\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout_list_item.xml.flat",
+        "source": "C:\\Users\\USER\\Documents\\POS\\POS_Project\\node_modules\\react-native-image-picker\\android\\build\\intermediates\\packaged_res\\debug\\layout\\list_item.xml"
+    },
+    {
         "merged": "C:\\Users\\USER\\Documents\\POS\\POS_Project\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout_abc_action_bar_title_item.xml.flat",
         "source": "C:\\Users\\USER\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-1.1.0.aar\\dc2800f18d49462a649c47c7c0a1a66f\\res\\layout\\abc_action_bar_title_item.xml"
     },
@@ -1174,6 +1178,10 @@
     {
         "merged": "C:\\Users\\USER\\Documents\\POS\\POS_Project\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_abc_cab_background_top_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\USER\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-1.1.0.aar\\dc2800f18d49462a649c47c7c0a1a66f\\res\\drawable-hdpi-v4\\abc_cab_background_top_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "C:\\Users\\USER\\Documents\\POS\\POS_Project\\android\\app\\build\\intermediates\\res\\merged\\debug\\xml_provider_paths.xml.flat",
+        "source": "C:\\Users\\USER\\Documents\\POS\\POS_Project\\node_modules\\react-native-image-picker\\android\\build\\intermediates\\packaged_res\\debug\\xml\\provider_paths.xml"
     },
     {
         "merged": "C:\\Users\\USER\\Documents\\POS\\POS_Project\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_textfield_activated_mtrl_alpha.9.png.flat",

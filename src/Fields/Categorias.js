@@ -133,8 +133,8 @@ LoadData = async () =>{
                   ,[Model.NombreCategoria,Model.Descripcion,Model.Activo,Model.IdEmpresa,Model.IdSucursal,
                     Model.FechaCreacion,Model.FechaModificacion,Model.UsuarioCreacion,Model.UsuarioModificacion]).then(() => {
                       console.log("Database is ready ... executing query ...");
-
                       ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
+                      this.props.toggleForm(false)
     
 
     

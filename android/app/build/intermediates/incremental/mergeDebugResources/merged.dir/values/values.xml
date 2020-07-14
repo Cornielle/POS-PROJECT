@@ -470,6 +470,9 @@
     <integer name="react_native_inspector_proxy_port">8081</integer>
     <integer name="show_password_duration">200</integer>
     <integer name="status_bar_notification_info_maxnum">999</integer>
+    <item name="launch_screen" type="layout">
+        @layout/launch_screen
+    </item>
     <string name="abc_action_bar_home_description">Navigate home</string>
     <string name="abc_action_bar_up_description">Navigate up</string>
     <string name="abc_action_menu_overflow_description">More options</string>
@@ -2044,6 +2047,14 @@
     <style name="ClockTimePickerStyle" ns2:targetApi="lollipop" parent="android:Widget.Material.Light.TimePicker">
       <item name="android:timePickerMode">clock</item>
     </style>
+    <style name="DefaultExplainingPermissionsTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Used for the buttons -->
+        <item name="colorAccent">#61c3e7</item>
+        <!-- Used for the title and text -->
+        <item name="android:textColorPrimary">#3d3d3d</item>
+        <!-- Used for the background -->
+        <item name="android:background">@android:color/white</item>
+    </style>
     <style name="DialogAnimationFade">
     <item name="android:windowEnterAnimation">@anim/catalyst_fade_in</item>
     <item name="android:windowExitAnimation">@anim/catalyst_fade_out</item>
@@ -2282,6 +2293,15 @@
     </style>
     <style name="SpinnerTimePickerStyle" ns2:targetApi="lollipop" parent="android:Widget.Material.Light.TimePicker">
       <item name="android:timePickerMode">spinner</item>
+    </style>
+    <style name="SplashScreen_Fullscreen" parent="SplashScreen_SplashTheme">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+    <style name="SplashScreen_SplashAnimation">
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+    <style name="SplashScreen_SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowAnimationStyle">@style/SplashScreen_SplashAnimation</item>
     </style>
     <style name="TextAppearance.AppCompat" parent="Base.TextAppearance.AppCompat"/>
     <style name="TextAppearance.AppCompat.Body1" parent="Base.TextAppearance.AppCompat.Body1"/>

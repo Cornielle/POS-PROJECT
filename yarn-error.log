@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add react-native-sqlite-storage
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js install
 
 PATH: 
-  C:\Python27\;C:\Python27\Scripts;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Common Files\lenovo\easyplussdk\bin;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\Tools\Binn\ManagementStudio\;C:\Program Files\Microsoft SQL Server\140\DTS\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\140\Tools\Binn\;C:\WINDOWS\System32\OpenSSH\;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\nodejs\;C:\Program Files\Java\jdk1.8.0_211\bin;C:\Users\USER\AppData\Local\Microsoft\WindowsApps;C:\Users\USER\AppData\Local\Programs\Microsoft VS Code\bin;C:\tools\dart-sdk\bin;C:\Users\USER\AppData\Roaming\Pub\Cache\bin;C:\src\flutter\bin;C:\Users\USER\AppData\Local\Yarn\bin;C:\Users\USER\.dotnet\tools;C:\Users\USER\AppData\Roaming\npm;C:\Users\USER\AppData\Local\Android\Sdk\platform-tools;
+  C:\Python27\;C:\Python27\Scripts;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Common Files\lenovo\easyplussdk\bin;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\140\Tools\Binn\ManagementStudio\;C:\Program Files\Microsoft SQL Server\140\DTS\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\140\Tools\Binn\;C:\WINDOWS\System32\OpenSSH\;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\nodejs\;C:\Program Files\Java\jdk1.8.0_211\bin;C:\Users\USER\AppData\Local\Microsoft\WindowsApps;C:\Users\USER\AppData\Local\Programs\Microsoft VS Code\bin;C:\tools\dart-sdk\bin;C:\Users\USER\AppData\Roaming\Pub\Cache\bin;C:\src\flutter\bin;C:\Users\USER\AppData\Local\Yarn\bin;C:\Users\USER\.dotnet\tools;C:\Users\USER\AppData\Roaming\npm;C:\Users\USER\AppData\Local\Android\Sdk\platform-tools
 
 Yarn version: 
   1.21.1
@@ -14,7 +14,12 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: EPERM: operation not permitted, unlink 'C:\Users\USER\Documents\POS\POS_Project\node_modules\@babel\compat-data\node_modules\.bin'
+  SyntaxError: C:\Users\USER\Documents\POS\POS_Project\package.json: Unexpected token < in JSON at position 938
+      at JSON.parse (<anonymous>)
+      at C:\Program Files (x86)\Yarn\lib\cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (C:\Program Files (x86)\Yarn\lib\cli.js:310:30)
+      at C:\Program Files (x86)\Yarn\lib\cli.js:321:13
 
 npm manifest: 
   {
@@ -27,6 +32,7 @@ npm manifest:
     },
     "dependencies": {
       "@react-native-community/masked-view": "^0.1.6",
+      "axios": "^0.19.2",
       "expo": "~36.0.0",
       "expo-cli": "^3.11.7",
       "expo-file-system": "~8.0.0",
@@ -41,9 +47,16 @@ npm manifest:
       "react-native": "~0.61.4",
       "react-native-actionsheet": "^2.4.2",
       "react-native-awesome-alerts": "^1.3.0",
+      "react-native-device-info": "^5.6.1",
       "react-native-elements": "^1.2.7",
       "react-native-extra-dimensions-android": "^1.2.5",
+      "react-native-fs": "^2.16.6",
       "react-native-gesture-handler": "~1.5.0",
+  <<<<<<< HEAD
+      "react-native-network-info": "^5.2.1",
+  =======
+      "react-native-image-picker": "^2.3.1",
+  >>>>>>> ae092c6548177a1b6369dcd359538ee9aa73fb4a
       "react-native-normalize": "^1.0.1",
       "react-native-numeric-input": "^1.8.3",
       "react-native-orientation": "^3.1.3",
@@ -54,6 +67,9 @@ npm manifest:
       "react-native-router-flux": "^4.2.0",
       "react-native-safe-area-context": "^0.7.3",
       "react-native-screens": "2.0.0-alpha.12",
+      "react-native-searchable-dropdown": "^1.1.1",
+      "react-native-splash-screen": "^3.2.0",
+      "react-native-sqlite-storage": "^5.0.0",
       "react-native-tab-view": "^2.14.0",
       "react-native-text-input-mask": "^2.0.0",
       "react-native-unimodules": "~0.7.0",
@@ -3081,6 +3097,13 @@ Lockfile:
       follow-redirects "^1.2.5"
       is-buffer "^1.1.5"
   
+  axios@^0.19.2:
+    version "0.19.2"
+    resolved "https://registry.yarnpkg.com/axios/-/axios-0.19.2.tgz#3ea36c5d8818d0d5f8a8a97a6d36b86cdc00cb27"
+    integrity sha512-fjgm5MvRHLhx+osE2xoekY70AhARk3a6hkN+3Io1jc00jtquGvxYlKlsFUhmUET0V5te6CcZI7lcv2Ym61mjHA==
+    dependencies:
+      follow-redirects "1.5.10"
+  
   babel-code-frame@^6.22.0:
     version "6.26.0"
     resolved "https://registry.yarnpkg.com/babel-code-frame/-/babel-code-frame-6.26.0.tgz#63fd43f7dc1e3bb7ce35947db8fe369a3f58c74b"
@@ -3274,6 +3297,11 @@ Lockfile:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
     integrity sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
+  
+  base-64@^0.1.0:
+    version "0.1.0"
+    resolved "https://registry.yarnpkg.com/base-64/-/base-64-0.1.0.tgz#780a99c84e7d600260361511c4877613bf24f6bb"
+    integrity sha1-eAqZyE59YAJgNhURxId2E78k9rs=
   
   base32.js@0.1.0:
     version "0.1.0"
@@ -11262,6 +11290,11 @@ Lockfile:
     dependencies:
       prop-types "^15.7.2"
   
+  react-native-device-info@^5.6.1:
+    version "5.6.1"
+    resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-5.6.1.tgz#3ae88d8659b7b64d204dbfc39f69126b769363d4"
+    integrity sha512-FxjenoDZJKT53pp/Tl5gMsw5DA82Y5tOuySQlKS5AaDmw+Bu6EqEJjt0z4TRhJOVoqVJ35oCiZ3xViVbz/hB0w==
+  
   react-native-drawer@2.5.1:
     version "2.5.1"
     resolved "https://registry.yarnpkg.com/react-native-drawer/-/react-native-drawer-2.5.1.tgz#08b9314184f48c724f1b467f8859797369798654"
@@ -11296,6 +11329,14 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/react-native-extra-dimensions-android/-/react-native-extra-dimensions-android-1.2.5.tgz#8ade91029aaac7519bf305116d39019e618a60f0"
     integrity sha512-eorFo9X1vEqAWUkgcZ300yKBG1wtgNeE7tdWAH2CE+P50FGTniJg5Sr6l1iPWG8ZskQOuF+KeiSTFlDa4vLfMw==
   
+  react-native-fs@^2.16.6:
+    version "2.16.6"
+    resolved "https://registry.yarnpkg.com/react-native-fs/-/react-native-fs-2.16.6.tgz#2901789a43210a35a0ef0a098019bbef3af395fd"
+    integrity sha512-ZWOooD1AuFoAGY3HS2GY7Qx2LZo4oIg6AK0wbC68detxwvX75R/q9lRqThXNKP6vIo2VHWa0fYUo/SrLw80E8w==
+    dependencies:
+      base-64 "^0.1.0"
+      utf8 "^3.0.0"
+  
   react-native-gesture-handler@~1.5.0:
     version "1.5.3"
     resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.5.3.tgz#191b44701fab7ba54c27a2438cb5eaa252666e66"
@@ -11305,6 +11346,11 @@ Lockfile:
       hoist-non-react-statics "^2.3.1"
       invariant "^2.2.4"
       prop-types "^15.7.2"
+  
+  react-native-image-picker@^2.3.1:
+    version "2.3.1"
+    resolved "https://registry.yarnpkg.com/react-native-image-picker/-/react-native-image-picker-2.3.1.tgz#1977b65e07793d2c0b2d1976fb675c5f75ad7f11"
+    integrity sha512-c/a2h7/T7yBo5KlNQhcSn4xf4+6Li6LfJ59+GZT1ZzzWrj/6X8DiJ/TJBOlOZMC5tJriZKuRkWSsr74k6z+brw==
   
   react-native-iphone-x-helper@^1.0.3, react-native-iphone-x-helper@^1.2.1:
     version "1.2.1"
@@ -11318,6 +11364,11 @@ Lockfile:
     dependencies:
       prop-types "^15.6.2"
       react-native-iphone-x-helper "^1.0.3"
+  
+  react-native-network-info@^5.2.1:
+    version "5.2.1"
+    resolved "https://registry.yarnpkg.com/react-native-network-info/-/react-native-network-info-5.2.1.tgz#b701f10d4ed1aeadcfe77b197328d1ae846f6d3a"
+    integrity sha512-iam74xXtrSqqZurCl1/bSjZ9jXcsJY84g7brx1/4uVGCY26c6m+4CArHNSHOsz5ATg2NQT+81sjNy0KlCPyK4g==
   
   react-native-normalize@^1.0.1:
     version "1.0.1"
@@ -11423,6 +11474,21 @@ Lockfile:
     integrity sha512-tOxHGQUN83MTmQB4ghoQkibqOdGiX4JQEmeyEv96MKWO/x8T2PJv84ECUos9hD3blPRQwVwSpAid1PPPhrVEaw==
     dependencies:
       debounce "^1.2.0"
+  
+  react-native-searchable-dropdown@^1.1.1:
+    version "1.1.1"
+    resolved "https://registry.yarnpkg.com/react-native-searchable-dropdown/-/react-native-searchable-dropdown-1.1.1.tgz#73d2cdd71b82af1299b2fe280ce4b7102797e826"
+    integrity sha512-A7vGyOlYGpXyMws71qwVuYwPzr7CXFDZfVFVhm44r3yxbohzpAC8PnoA644S6yUloyj9NauVNDcZTrVlcHVxcw==
+  
+  react-native-splash-screen@^3.2.0:
+    version "3.2.0"
+    resolved "https://registry.yarnpkg.com/react-native-splash-screen/-/react-native-splash-screen-3.2.0.tgz#d47ec8557b1ba988ee3ea98d01463081b60fff45"
+    integrity sha512-Ls9qiNZzW/OLFoI25wfjjAcrf2DZ975hn2vr6U9gyuxi2nooVbzQeFoQS5vQcbCt9QX5NY8ASEEAtlLdIa6KVg==
+  
+  react-native-sqlite-storage@^5.0.0:
+    version "5.0.0"
+    resolved "https://registry.yarnpkg.com/react-native-sqlite-storage/-/react-native-sqlite-storage-5.0.0.tgz#fb015c928b59d3000360fb0774a99545e7a695d6"
+    integrity sha512-c1Joq3/tO1nmIcP8SkRZNolPSbfvY8uZg5lXse0TmjIPC0qHVbk96IMvWGyly1TmYCIpxpuDRc0/xCffDbYIvg==
   
   react-native-status-bar-height@^2.2.0:
     version "2.4.0"
@@ -13805,6 +13871,11 @@ Lockfile:
     version "3.1.1"
     resolved "https://registry.yarnpkg.com/use/-/use-3.1.1.tgz#d50c8cac79a19fbc20f2911f56eb973f4e10070f"
     integrity sha512-cwESVXlO3url9YWlFW/TA9cshCEhtu7IKJ/p5soJ/gGpj7vbvFrAY/eIioQ6Dw23KjZhYgiIo8HOs1nQ2vr/oQ==
+  
+  utf8@^3.0.0:
+    version "3.0.0"
+    resolved "https://registry.yarnpkg.com/utf8/-/utf8-3.0.0.tgz#f052eed1364d696e769ef058b183df88c87f69d1"
+    integrity sha512-E8VjFIQ/TyQgp+TZfS6l8yp/xWppSAHzidGiRrqe4bK4XP9pTRyKFgGJpO3SN7zdX4DeomTrwaseCHovfpFcqQ==
   
   utif@^2.0.1:
     version "2.0.1"

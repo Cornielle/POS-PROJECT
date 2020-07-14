@@ -82,6 +82,7 @@ super();
                     Model.FechaCreacion,Model.FechaModificacion,Model.UsuarioCreacion,Model.UsuarioModificacion]).then(() => {
                       console.log("Database is ready ... executing query ...");
                       ToastAndroid.show("Guardado Correctamente",ToastAndroid.SHORT)
+                      this.props.toggleForm(false)
     
     db.executeSql("SELECT * from Proveedores").then((resulst) =>{
     
@@ -154,8 +155,7 @@ super();
                     <Card>
                         <Card.Title 
                             style={styles.Card}
-                            title="POS PROJECT" 
-                            subtitle="Todas las tiendas en un solo lugar" 
+                            title="Registro de Proveedores" 
                             left={(props) => <Avatar.Icon {...props} 
                             icon="account" />} 
                         />
