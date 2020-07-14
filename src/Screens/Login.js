@@ -576,7 +576,7 @@ console.log("Adentro",Id)
 const IdCaja = await AsyncStorage.setItem("CajaActivaId",JSON.stringify({IdCaja:Id}))
 }
 
-
+ 
 AddToCashier = async(result)=>{
 
     this.setState({loading:true})

@@ -24,6 +24,19 @@ const database_size = 200000;
 import { USBPrinter, NetPrinter, BLEPrinter } from 'react-native-printer';
  
 
+const InitialState ={
+  isCash:false,
+  isCard:true, 
+  IsDeposit:true,
+  IdCajaActiva:0,
+  MontoTarjeta:0,
+  MontoEfectivo:0,
+  MontoTransferencia:0,
+
+  arrayArticulos:[]
+
+}
+
 export default class VentasMain extends React.Component {
   constructor(props) {
     super(props);
@@ -44,8 +57,6 @@ export default class VentasMain extends React.Component {
       isReady: false,
       searchQuery:'',
       loadingState:false,
-      checked:false,
-      mainTotal:[],
       articulos:[],
       articulosSelected: [],
       categorias:[],
@@ -89,6 +100,26 @@ state={
 IdVenta:0,
 ListaArti:[]
 
+}
+
+
+UnselectArticulos =() =>{
+
+
+  try{
+    this.state.articulos.forEach((item)=>{
+
+
+item.selected = false
+
+    });
+
+  }
+  catch(ex){
+
+console.log(ex)
+
+  }
 }
 
   loadDatadd =() =>{
@@ -392,9 +423,8 @@ console.log(finalrecipe);
  
 this.printtest(finalrecipe);
 
-  console.log("ModelModelModelModelModelModel", Model);
-  console.log("VentaIdVentaIdVentaIdVentaIdVentaIdVentaId",VentaId)
-
+this.setState(InitialState);
+this.UnselectArticulos();
 } catch(ex){
 
   console.log(ex)

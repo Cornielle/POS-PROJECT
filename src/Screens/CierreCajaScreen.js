@@ -18,7 +18,12 @@ const database_size = 200000;
 const InitialState={
 
   MontoSalida:0,
-MotivoSalida:"",
+  MontoEfectivo:0,
+  MontoTarjeta:0,
+  MontoDeposito:0,
+  Montogeneral:0,
+  MontoACuadrar:0
+
 };
 
 export default class CierreCajaScreen extends React.Component {
@@ -33,17 +38,84 @@ super(props)
 }
 
 state={ 
-MontoCaja:0,
-MontoTarjeta:0
-
+  MontoSalida:null,
+  MontoEfectivo:null,
+  MontoTarjeta:null,
+  MontoDeposito:null,
+  Montogeneral:null,
+  MontoACuadrar:null,
+  TbxMonCaja:null
 
 }
 
 
  componentDidMount (){
    this.GetCajaInfo();
+   this.GetSalidaCaja();
+
+  this.SelectDbInfo();
+}
+
+
+SelectDbInfo =() =>{
+
+
+        
+  let db;
+  return new Promise((resolve) => {
+    console.log("Plugin integrity check ...");
+    SQLite.echoTest()
+      .then(() => {
+        console.log("Integrity check passed ...");
+        console.log("Opening database ...");
+        SQLite.openDatabase(
+          database_name,
+          database_version,       
+          database_displayname,
+          database_size
+        )
+
+          .then(DB => {
+db = DB;
+console.log("Database OPEN"); 
+db.executeSql("PRAGMA table_info(Caja)"
+,[]).then((Result) => {
+
+
+
+
+for(let i =0; i< 17; i++){
+
+
+console.log(Result[0].rows.item(i))
 
 }
+
+
+}).catch((error) =>{
+console.log(error)
+});
+        
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      })
+      .catch(error => {
+        console.log("echoTest failed - plugin not functional");
+      });
+    });
+
+}
+catch(ex){
+
+console.log(ex);
+
+}
+
+
+
+
 
 
 
@@ -90,24 +162,29 @@ return(
 
 <DataTable.Row>
       <DataTable.Cell>Venta Efectivo</DataTable.Cell>
-      <DataTable.Cell numeric>159</DataTable.Cell>
+<DataTable.Cell numeric>{this.state.MontoEfectivo !==null ? this.state.MontoEfectivo : 'Cargando...'}</DataTable.Cell>
     </DataTable.Row>
     <DataTable.Row>
       <DataTable.Cell>Venta Tarjeta</DataTable.Cell>
-      <DataTable.Cell numeric>159</DataTable.Cell>
+<DataTable.Cell numeric>{this.state.MontoTarjeta !== null?this.state.MontoTarjeta: 'Cargando...'}</DataTable.Cell>
     </DataTable.Row>
     <DataTable.Row>
       <DataTable.Cell>Venta Desposito</DataTable.Cell>
-      <DataTable.Cell numeric>159</DataTable.Cell>
+<DataTable.Cell numeric>{this.state.MontoDeposito !== null ? this.state.MontoDeposito : "Cargando..."}</DataTable.Cell>
     </DataTable.Row>
     <DataTable.Row>
       <DataTable.Cell>Retiro Caja</DataTable.Cell>
-      <DataTable.Cell numeric>159</DataTable.Cell>
+<DataTable.Cell numeric>{this.state.MontoSalida !==null?this.state.MontoSalida:"Cargando..."}</DataTable.Cell>
     </DataTable.Row>
     <DataTable.Row>
-      <DataTable.Cell>Venta total</DataTable.Cell>
-      <DataTable.Cell numeric>159</DataTable.Cell>
+      <DataTable.Cell>Venta General</DataTable.Cell>
+      <DataTable.Cell numeric>{this.state.Montogeneral !==null?this.state.Montogeneral:"Cargando..."}</DataTable.Cell>
     </DataTable.Row>
+    <DataTable.Row>
+      <DataTable.Cell>Cuadre caja</DataTable.Cell>
+      <DataTable.Cell numeric>{this.state.MontoACuadrar !==null?this.state.MontoACuadrar:"Cargando..."}</DataTable.Cell>
+    </DataTable.Row>
+
 
 
 
@@ -118,11 +195,15 @@ return(
               style={styles.Input}
               mode='flat'
               label='Monto Efectivo'
-              value={this.state.MontoCaja !==null ? this.state.MontoCaja : 'Cargando...'}
+              value={this.state.TbxMonCaja !==null ? this.state.TbxMonCaja : 'Cargando...'}
               //disabled={editFields}
               editable={true}
-              onChangeText={(MenuLabel) => this.editField(MenuLabel,'MenuLabel')}
+
+              onChangeText={(TbxMonCaja) => this.setState({ TbxMonCaja })}
+
             /> 
+            <Text>{"\n"}</Text>
+{/* 
 
 <TextInput
               style={styles.Input}
@@ -134,10 +215,15 @@ return(
               onChangeText={(MenuLabel) => this.editField(MenuLabel,'MenuLabel')}
             /> 
 
+
+
+
+*/}
+
 <Button
   labelStyle={styles.Button} 
   mode="contained" 
-  onPress={this.GetCajaInfo}
+  onPress={this.CloseCaja}
 >
 <Icon 
   name="save" 
@@ -145,7 +231,7 @@ return(
   color="#ffffff" 
   style={styles.Icon}
   /> <Text>{"  "}</Text>   
-  Agregar
+  Cerrar Caja
 </Button>
 
   
@@ -167,7 +253,95 @@ return(
   }
 
 
+GetSalidaCaja = async() =>{
 
+
+  try{
+    
+    let MSalida = 0;
+   
+    const Caja = await AsyncStorage.getItem("CajaActivaId");
+  
+   
+      const CajaActiv = JSON.parse(Caja);
+    
+
+    console.log(CajaActiv);
+    
+    var fecha = new Date();
+        console.log("")
+        console.log("")
+        console.log("/****************************************************************************/");
+        console.log("")
+        console.log("")
+        
+        let db;
+        return new Promise((resolve) => {
+          console.log("Plugin integrity check ...");
+          SQLite.echoTest()
+            .then(() => {
+              console.log("Integrity check passed ...");
+              console.log("Opening database ...");
+              SQLite.openDatabase(
+                database_name,
+                database_version,       
+                database_displayname,
+                database_size
+              )
+    
+                .then(DB => {
+     db = DB;
+    console.log("Database OPEN"); 
+    db.executeSql("SELECT * FROM SalidaCaja WHERE Activo = ? AND IdAperturaCaja =?",[1,CajaActiv.IdCaja]).then((Result) => {
+
+
+      const ResulLength= Result[0].rows.length;
+
+      for(let i = 0; i < ResulLength; i++){
+      
+        let dataVenta = Result[0].rows.item(i)
+       
+        MSalida += dataVenta.MontoSalida;
+
+      
+      }
+
+console.log("Salida de caja",MSalida);
+
+this.setState({MontoSalida:MSalida});
+
+                            
+ let montog = ( this.state.MontoEfectivo - this.state.MontoSalida );
+ let montoGeneral = (this.state.MontoEfectivo+this.state.MontoTarjeta + this.state.MontoDeposito)
+ this.setState({Montogeneral:montoGeneral})
+ console.log("monto a cuadrar", montog);
+ 
+  this.setState({MontoACuadrar:montog})
+                                           
+    }).catch((error) =>{
+    console.log(error)
+    });
+              
+                })
+                .catch(error => {
+                  console.log(error);
+                });
+            })
+            .catch(error => {
+              console.log("echoTest failed - plugin not functional");
+            });
+          });
+    
+    }
+    catch(ex){
+    
+    console.log(ex);
+    
+    }
+
+
+
+}
 
   CloseCaja  = async () =>{
 
@@ -225,9 +399,10 @@ return(
                 .then(DB => {
      db = DB;
     console.log("Database OPEN"); 
-    db.executeSql("UPDATE Ventas SET Activo =? , UsuarioModificacion = ?, MontoVentaTarjetaCredito =?, MontoVentaEfectivo=?"
-    +",MontoVentaTotal =?, UsuarioCierreCaja =?, MontoSalidaDeCaja =? WHERE Activo=? AND rowid =?"
-    ,[0,AperturaUsuario.Usuario,CajaActiv.IdCaja]).then((Result) => {
+    db.executeSql("UPDATE Ventas SET Activo =? , UsuarioModificacion = ?,  MontoVentaEfectivo=?"
+    +", MontoVentaTotal =?, UsuarioCierreCaja =?, MontoSalidaDeCaja =? WHERE Activo=? AND rowid =?"
+    ,[0,AperturaUsuario.Usuario,this.state.MontoEfectivo ,this.state.Montogeneral,AperturaUsuario.Usuario,
+      this.state.MontoSalida,1,CajaActiv.IdCaja]).then((Result) => {
 
 console.log(Result)
 
@@ -258,10 +433,7 @@ console.log(Result)
     try{
     
     
-   let MEfectivo =0;
-   let MTargeta = 0;
-   let MTransferencia = 0;
-   let MSalidaCaja = 0; 
+
 
     const Caja = await AsyncStorage.getItem("CajaActivaId");
     /*
@@ -284,7 +456,10 @@ console.log(Result)
       console.log(Dispositivo);
       */
       const CajaActiv = JSON.parse(Caja);
-    
+      let MEfectivo =0;
+      let MTarjeta = 0;
+      let MTransferencia = 0;
+      let MSalidaCaja = 0; 
 
     console.log(CajaActiv);
     
@@ -319,10 +494,23 @@ const ResulLength= Result[0].rows.length;
 
 for(let i = 0; i < ResulLength; i++){
 
-  let wao = Result[0].rows.item(i)
- console.log(wao);
+  let dataVenta = Result[0].rows.item(i)
+ 
+  MEfectivo += dataVenta.PagoEfectivo;
+  MTarjeta += dataVenta.PagoTarjeta;
+  MTransferencia += dataVenta.PagoTransferencia;
 
 }
+
+
+
+this.setState({MontoEfectivo:MEfectivo});
+this.setState({MontoTarjeta:MTarjeta})
+this.setState({MontoDeposito:MTransferencia});
+
+console.log("cantidad efectivo",this.state.MontoEfectivo);
+console.log("cantidad tarjeta",this.state.MontoTarjeta)
+console.log("cantidad deposito", this.state.MontoDeposito)
 
 console.log(Result)
 

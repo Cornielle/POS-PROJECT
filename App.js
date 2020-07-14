@@ -166,7 +166,7 @@ navigationOptions:{
 },  {
   initialRouteName: "Home"
 })
- export default createAppContainer(DrawerNavigation);
+ //export default createAppContainer(DrawerNavigation);
   
 /*
   'Control de Caja': {
@@ -203,7 +203,7 @@ navigationOptions:{
 
 */
 
-/*
+
 const  navigationOptions = {
   title: 'Iniciar Sesión',
   headerTitleStyle:{textAlign:'center', color:'white'},
@@ -224,6 +224,6 @@ export default createAppContainer(createSwitchNavigator({
   App:DrawerNavigation,
   Auth:AuthStack
 }))
-*/
+
 
 //CloseCashierGridScreen

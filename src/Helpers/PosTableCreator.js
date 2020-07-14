@@ -27,6 +27,25 @@ console.log("me llamaron");
               db = DB;
               console.log("Database OPEN");
    
+
+
+
+         
+              /*
+                            db.executeSql('Delete FROM Ventas',[]).then(() => {
+                console.log("LA TABLA Empleados HA SIDO Dropeada SATISFACTORIAMENTE");
+            }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
+
+            db.executeSql('Delete FROM VentasDetalle',[]).then(() => {
+                console.log("LA TABLA Empleados HA SIDO Dropeada SATISFACTORIAMENTE");
+            }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
+
+
+            
+            db.executeSql('Delete FROM SalidaCaja',[]).then(() => {
+                console.log("LA TABLA Empleados HA SIDO Dropeada SATISFACTORIAMENTE");
+            }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
+*/
               /* 
               db.executeSql('DROP TABLE Ventas',[]).then(() => {
                 console.log("LA TABLA Empleados HA SIDO Dropeada SATISFACTORIAMENTE");
@@ -36,12 +55,12 @@ console.log("me llamaron");
         db.executeSql('DROP TABLE SalidaCaja',[]).then(() => {
                 console.log("LA TABLA ROLES HA SIDO CREADA SATISFACTORIAMENTE");
             }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
-                   
-      db.executeSql('DROP TABLE Almacen',[]).then(() => {
-                  console.log("LA TABLA ROLES HA SIDO CREADA SATISFACTORIAMENTE");
-              }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
-*/
+            
+      db.executeSql('DROP TABLE Caja',[]).then(() => {
+                  console.log("LA TABLA Caja HA SIDO drop SATISFACTORIAMENTE");
+              }).catch((error) =>{      console.log("ERROR A LA HORA DE drop LA TABAL ROLES");    });
 
+      */ 
 
 db.executeSql('CREATE TABLE IF NOT EXISTS Roles(rowid integer primary key, NombreRol '+
 'VARCHAR(500) NOT NULL, Descripcion VARCHAR(5000), Activo INTEGER NOT NULL ,  IdEmpresa INTEGER NOT NULL, IdSucursal INTEGER,  FechaCreacion VARCHAR(150) NOT NULL'
@@ -126,8 +145,8 @@ db.executeSql('CREATE TABLE IF NOT EXISTS AlmacenDetalle(rowid integer primary k
 
 
 
-db.executeSql('CREATE TABLE IF NOT EXISTS Caja(rowid integer primary key, MontoApertura REAL NOT NULL,'+
-'FechaInicioApertura VARCHAR(150) NOT NULL, UsuarioApertura  VARCHAR(100) NOT NULL, MontoVentaTarjetaCredito REAL,'+
+db.executeSql('CREATE TABLE IF NOT EXISTS Caja(rowid integer primary key, MontoApertura REAL,'+
+'FechaInicioApertura VARCHAR(150) , UsuarioApertura  VARCHAR(100) , MontoVentaTarjetaCredito REAL,'+
 'MontoVentaEfectivo Real, MontoVentaTotal REAL,MontoSalidaDeCaja Real,UsuarioCierreCaja VARCHAR(100), '+
 'FechaCierreAperturaCaja VARCHAR(150)'+
 ', Activo INTEGER NOT NULL , IdEmpresa INTEGER NOT NULL, IdSucursal INTEGER, FechaCreacion VARCHAR(150) NOT NULL ,FechaModificacion VARCHAR(150)'+
