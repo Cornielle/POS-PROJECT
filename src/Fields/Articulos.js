@@ -86,6 +86,58 @@ constructor(props){
 //}
 
 
+ViewData = ()=> {
+
+
+  console.log("")
+  console.log("")
+  console.log("/****************************************************************************/");
+  console.log("")
+  console.log("")
+  var fecha = new Date();
+  let db;
+  return new Promise((resolve) => {
+    console.log("Plugin integrity check ...");
+    SQLite.echoTest()
+      .then(() => {
+        console.log("Integrity check passed ...");
+        console.log("Opening database ...");
+        SQLite.openDatabase(
+          database_name,
+          database_version,       
+          database_displayname,
+          database_size
+        )
+          .then(DB => {
+            db = DB;
+            console.log("Database OPEN"); 
+db.executeSql("SELECT * FROM Articulos",[]).then((result) => {
+            
+
+  console.log(result);
+
+}).catch((error) =>{
+console.log(error)
+});
+        
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      })
+      .catch(error => {
+        console.log("echoTest failed - plugin not functional");
+      });
+    });
+
+
+
+
+
+
+
+}
+
 
 LoadData = async () =>{
     let ProveedoresCollection=[];
@@ -229,8 +281,8 @@ SaveArticulos(Model) {
             .then(DB => {
               db = DB;
               console.log("Database OPEN"); 
-db.executeSql("INSERT INTO Articulos(Codigo,CategoriaId,Descripcion,Abreviatura,NombreArticulo,CodigoDeBarra,PrecioCosto,PrecioVenta,ProveedoresId,MedidaDeVenta,Activo,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,UsuarioCreacion,UsuarioModificacion, Img) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
-              ,[Model.Codigo,Model.CategoriaId,Model.Descripcion,Model.Abreviatura,Model.NombreArticulo,
+db.executeSql("INSERT INTO Articulos(Codigo,CategoriaId,Abreviatura,NombreArticulo,CodigoDeBarra,PrecioCosto,PrecioVenta,ProveedoresId,MedidaDeVenta,Activo,IdEmpresa,IdSucursal,FechaCreacion,FechaModificacion,UsuarioCreacion,UsuarioModificacion, Img) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+              ,[Model.Codigo,Model.CategoriaId,Model.Abreviatura,Model.NombreArticulo,
                 Model.CodigoDeBarra,Model.PrecioCosto,Model.PrecioVenta,Model.ProveedoresId,Model.MedidaDeVenta,Model.Activo,Model.IdEmpresa,Model.IdSucursal,
                 Model.FechaCreacion,Model.FechaModificacion,Model.UsuarioCreacion,Model.UsuarioModificacion,JSON.stringify(Model.Img)]).then((result) => {
                   console.log("Database is ready ... executing query ...");
@@ -264,23 +316,6 @@ db.executeSql('INSERT INTO AlmacenDetalle(AlmacenId,'+
  });
 
 
-/*
-db.executeSql("SELECT * FROM Articulos").then((resulst) =>{
-
-console.log(resulst);
-
-
-  console.log("Query completed");
-  var len = resulst[0].rows.length;
-  console.log(len)
-  for (let i = 0; i < len; i++) {
-    let row = resulst[0].rows.item(i);
-    console.log(row)
-  }
-
-
-})
-*/
 
 }).catch((error) =>{
 console.log(error)
@@ -300,6 +335,7 @@ console.log(error)
 
   componentDidMount(){   
 
+    this.ViewData();
 this.loadTable()
 
     /*

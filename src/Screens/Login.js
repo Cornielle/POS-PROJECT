@@ -18,6 +18,7 @@ const windowHeight = Dimensions.get('window').height;
 import  SQLite  from 'react-native-sqlite-storage';
 import { getUniqueId, getManufacturer } from 'react-native-device-info';
 import DeviceInfo from 'react-native-device-info';
+import PosTableCreator from '../Helpers/PosTableCreator'
 SQLite.DEBUG(true);
 SQLite.enablePromise(true);
 const database_name = "PuntoVenta.db";
@@ -46,6 +47,7 @@ const database_size = 200000;
         loading:false
           };
   componentDidMount(){
+   // PosTableCreator();
       console.log(SQLite)
     this.verifyLog();
  //this.Deletekey();

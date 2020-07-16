@@ -68,7 +68,7 @@ export default class VentasMain extends React.Component {
         Codigo:'',
         CategoriaId: 0,
         Descripcion:'',
-        DescripcionPantalla:'',
+        Abreviatura:'',
         NombreArticulo:'',
         CodigoDeBarra:'',
         PrecioCosto:'',
@@ -129,16 +129,17 @@ console.log(ex)
 return new Promise((resolve) => {SQLite.echoTest().then(() => {
  console.log("Opening database ...");
 SQLite.openDatabase(database_name,database_version,database_displayname,database_size).then(DB => {db = DB;
-db.executeSql("SELECT Categorias.rowid as id ,Articulos.rowid as idArticulo, Articulos.NombreArticulo as NombreArticulo,Categorias.NombreCategoria as NombreCategoria , Articulos.DescripcionPantalla as DescripcionPantalla,Articulos.PrecioVenta as PrecioVenta, Almacen.CantidadActual as CantidadExistencia  from Categorias inner join Articulos on Categorias.rowid = Articulos.CategoriaId inner join Almacen on Articulos.rowid = Almacen.ArticuloId",[]).then((results) => {
+db.executeSql("SELECT Categorias.rowid as id ,Articulos.rowid as idArticulo, Articulos.NombreArticulo as NombreArticulo,Categorias.NombreCategoria as NombreCategoria , Articulos.Abreviatura as Abreviatura,Articulos.PrecioVenta as PrecioVenta, Almacen.CantidadActual as CantidadExistencia  from Categorias inner join Articulos on Categorias.rowid = Articulos.CategoriaId inner join Almacen on Articulos.rowid = Almacen.ArticuloId",[]).then((results) => {
 console.log("Database is ready ... executing query ...");
- console.log(results);
+ console.log("Categoria: ",results);
 let arrayArticulos = []
-var len = results[0].rows.length;
+var len = results[0].rows.length; 
 
  for (let i = 0; i < len; i++) {
 
 var item=  results[0].rows.item(i);
-let articulos = { CantidadExistencia: item.CantidadExistencia,DescripcionPantalla: item.DescripcionPantalla,NombreArticulo: item.NombreArticulo,
+console.log(item);
+let articulos = { CantidadExistencia: item.CantidadExistencia,Abreviatura: item.Abreviatura,NombreArticulo: item.NombreArticulo,
 NombreCategoria: item.NombreCategoria,PrecioVenta: item.PrecioVenta,id: item.idArticulo,selected:false,quantitySelected:1,
   pricePerArticle:item.PrecioVenta
 }

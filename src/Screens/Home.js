@@ -6,25 +6,13 @@ import {
   Image,
   TouchableHighlight,
   StyleSheet,
-  ImageBackground,
-  AsyncStorage
+  ImageBackground, AsyncStorage
 } from 'react-native';
 import { Card } from 'react-native-paper';
 import { categories } from '../Data/dataMenuArrays';
-
-
+import * as SQLite from "expo-sqlite"
+import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
 import PosTableCreator from '../Helpers/PosTableCreator'
-import axios from 'axios'
-import  SQLite  from 'react-native-sqlite-storage';
-import { getUniqueId, getManufacturer } from 'react-native-device-info';
-import DeviceInfo from 'react-native-device-info';
-SQLite.DEBUG(true);
-SQLite.enablePromise(true);
-const database_name = "PuntoVenta.db";
-const database_version = "1.0";
-const database_displayname = "SQLite React Offline Database";
-const database_size = 200000;
-
 
 export default class CloseCashierGridScreen extends React.Component {
   static navigationOptions = {
@@ -32,93 +20,80 @@ export default class CloseCashierGridScreen extends React.Component {
   };
   constructor(props) {
     super(props);
-    //`console.log(categories,'check')
-    
+    console.log(categories,'check')
   }
-  Deletekey = async() =>{
-    try{
-        await AsyncStorage.removeItem('LoggedUser');
-        await AsyncStorage.removeItem('CashierOpen');
-        await AsyncStorage.removeItem('CajaActivaId');
-
-        await AsyncStorage.removeItem('SucursalTemp');
-
-      await AsyncStorage.removeItem('EmpresaTemp');
-
-      await AsyncStorage.removeItem('DeviceIdTemp');
-      
-        const LoggedUser = await AsyncStorage.getItem('LoggedUser');
-        const CashierOpen = await AsyncStorage.getItem('CashierOpen');
-        const CajaActivaId = await AsyncStorage.getItem('CajaActivaId');
-        const empresa = await AsyncStorage.getItem('EmpresaTemp');
-        const sucursal = await AsyncStorage.getItem('SucursalTemp');
-        const DeviceT = await AsyncStorage.getItem('DeviceIdTemp');
-        console.log("eleme: ", LoggedUser)
-        console.log("eleme: ", CashierOpen)
-        console.log("eleme: ", CajaActivaId)
-        console.log("eleme: ", empresa)
-        console.log("eleme: ", sucursal)
-        console.log("eleme",DeviceT );
-    }
-    catch(ex){
-        console.log(ex);
-    }
-}
-
-
-
-
-DeleteNegocioInfo = async () =>{
-
-
-
-try{
-
-  await AsyncStorage.removeItem('EmpresaTemp');
-  await AsyncStorage.removeItem('SucursalTemp');
-  
-
-}
-catch(ex){
-
-console.log(ex);
-
-
-}
-
-}
-
- 
-
 
 
 componentDidMount(){
-  //this.Deletekey();
-  axios.get('http://netapi.cobeltec.com/api/WeatherForecast').then(result =>{
+ // this.Deletekey();
+//PosTableCreator();
+this.GetAllAsyncKeys();
 
-
-  //console.log(result)
-
-  });
-
- // this.ShowDeviceInfo();
-
-  //this.DeleteNegocioInfo();
- 
-/*
-  const sqlStock = "SELECT * FROM Caja WHERE Activo=?"
-  const paramsStock = [1];
-  const databaseLayerStock = new DatabaseLayer(async () => SQLite.openDatabase('PuntoVentaDb.db'))
-  databaseLayerStock.executeSql(sqlStock,paramsStock).then(  ({ rows }) => {
-  
-   console.log(rows)
-  } ) 
-
-*/
-
-PosTableCreator();
 }
 
+GetAllAsyncKeys = async() =>{
+try{
+
+  const LoggedUser = await AsyncStorage.getItem('LoggedUser');
+ const ActiveCashId=  await AsyncStorage.getItem('CajaActivaId');
+  const CashierOp= await AsyncStorage.getItem('CashierOpen');
+  const  sucu =  await AsyncStorage.getItem('SucursalTemp');
+ 
+  const emp = await AsyncStorage.getItem('EmpresaTemp');
+  
+ const Dispo = await AsyncStorage.getItem('DeviceIdTemp');
+ 
+   const AperturaUsuario = JSON.parse(LoggedUser);
+   const sucursal = JSON.parse(sucu);
+   const empresa = JSON.parse(emp);
+   const Dispositivo = JSON.parse(Dispo);
+   const CashierOpen = JSON.parse(CashierOp);
+   const caja =  JSON.parse(ActiveCashId);
+
+   console.log("Usuario: ",AperturaUsuario)
+   console.log("Sucursa: ",sucursal);
+   console.log("Empresa: ",empresa);
+   console.log("Dispositivo: ",Dispositivo);
+   console.log("Estado Caja: ",CashierOpen);
+   console.log("ID Caja",caja);
+}
+catch(ex){
+
+
+}
+
+
+}
+
+Deletekey = async() =>{
+  try{
+      await AsyncStorage.removeItem('LoggedUser');
+      await AsyncStorage.removeItem('CashierOpen');
+      await AsyncStorage.removeItem('CajaActivaId');
+
+      await AsyncStorage.removeItem('SucursalTemp');
+
+    await AsyncStorage.removeItem('EmpresaTemp');
+
+    await AsyncStorage.removeItem('DeviceIdTemp');
+    
+  const LoggedUser = await AsyncStorage.getItem('LoggedUser');
+      const CashierOpen = await AsyncStorage.getItem('CashierOpen');
+      const CajaActivaId = await AsyncStorage.getItem('CajaActivaId');
+     const empresa = await AsyncStorage.getItem('EmpresaTemp');
+      const sucursal = await AsyncStorage.getItem('SucursalTemp');
+      const DeviceT = await AsyncStorage.getItem('DeviceIdTemp');
+      console.log("<Borrar> Usuario: ", LoggedUser)
+      console.log("<Borrar> Estado Caja: ", CashierOpen)
+      console.log("<Borrar> ID Caja: ", CajaActivaId)
+      console.log("<Borrar> Empresa:", empresa)
+      console.log("<Borrar> Sucursal:", sucursal)
+      console.log("<Borrar> Dispositivo",DeviceT );
+  }
+  catch(ex){
+      console.log(ex);
+  }
+}
   onPressCategory = item => {
     const title = item.name;
     const category = item;
@@ -234,4 +209,3 @@ const styles = StyleSheet.create({
       bottom: 0,     
     }
   });
-  

@@ -55,7 +55,40 @@ export default function PosTableCreator(){
                   console.log("LA TABLA Caja HA SIDO drop SATISFACTORIAMENTE");
               }).catch((error) =>{      console.log("ERROR A LA HORA DE drop LA TABAL ROLES");    });
 
-      */ 
+        db.executeSql('DROP TABLE SalidaCaja',[]).then(() => {
+                console.log("LA TABLA ROLES HA SIDO CREADA SATISFACTORIAMENTE");
+            }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
+            
+      db.executeSql('DROP TABLE Caja',[]).then(() => {
+                  console.log("LA TABLA Caja HA SIDO drop SATISFACTORIAMENTE");
+              }).catch((error) =>{      console.log("ERROR A LA HORA DE drop LA TABAL ROLES");    });
+
+
+
+        db.executeSql('DROP TABLE SalidaCaja',[]).then(() => {
+                console.log("LA TABLA ROLES HA SIDO CREADA SATISFACTORIAMENTE");
+            }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
+            
+      db.executeSql('DROP TABLE Caja',[]).then(() => {
+                  console.log("LA TABLA Caja HA SIDO drop SATISFACTORIAMENTE");
+              }).catch((error) =>{      console.log("ERROR A LA HORA DE drop LA TABAL ROLES");    });
+
+
+
+        db.executeSql('DROP TABLE Articulos',[]).then(() => {
+        console.log("LA TABLA Articulos HA SIDO drop SATISFACTORIAMENTE");
+    }).catch((error) =>{      console.log("ERROR A LA HORA DE drop LA Articulos ROLES");    });
+    db.executeSql('DROP TABLE SalidaCaja',[]).then(() => {
+        console.log("LA TABLA SalidaCaja HA SIDO dro SATISFACTORIAMENTE");
+    }).catch((error) =>{      console.log("ERROR A LA HORA DE DROP LA TABAL SalidaCaja");    });
+    
+    db.executeSql('DROP TABLE Caja',[]).then(() => {
+        console.log("LA TABLA Caja HA SIDO drop SATISFACTORIAMENTE");
+    }).catch((error) =>{      console.log("ERROR A LA HORA DE drop LA TABAL ROLES");    });
+
+
+      */
+ 
 
 db.executeSql('CREATE TABLE IF NOT EXISTS Roles(rowid integer primary key, NombreRol '+
 'VARCHAR(500) NOT NULL, Descripcion VARCHAR(5000), Activo INTEGER NOT NULL ,  IdEmpresa INTEGER NOT NULL, IdSucursal INTEGER,  FechaCreacion VARCHAR(150) NOT NULL'
