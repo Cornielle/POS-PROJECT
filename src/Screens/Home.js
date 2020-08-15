@@ -26,7 +26,7 @@ export default class CloseCashierGridScreen extends React.Component {
 
 componentDidMount(){
  // this.Deletekey();
-//PosTableCreator();
+PosTableCreator();
 this.GetAllAsyncKeys();
 
 }

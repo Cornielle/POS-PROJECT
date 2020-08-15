@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\USER\\Documents\\POS\\POS_Project\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+            "outputFile": "/Users/macbookpro/Projects/POS-PROJECT/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-sw600dp-v13/values-sw600dp-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\USER\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-1.1.0.aar\\dc2800f18d49462a649c47c7c0a1a66f\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+                    "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/appcompat-1.1.0.aar/a480b5746a9c22c1f18827050aa94cf8/res/values-sw600dp-v13/values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\USER\\.gradle\\caches\\transforms-1\\files-1.1\\material-1.0.0.aar\\005d81596bc0dee0d6afb85c7cde4034\\res\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+                    "source": "/Users/macbookpro/.gradle/caches/transforms-1/files-1.1/material-1.0.0.aar/7db1a37c40b4f86eb5f6cb6d1a59f12e/res/values-sw600dp-v13/values-sw600dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,10,11,12",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",

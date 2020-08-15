@@ -129,7 +129,13 @@ console.log(ex)
 return new Promise((resolve) => {SQLite.echoTest().then(() => {
  console.log("Opening database ...");
 SQLite.openDatabase(database_name,database_version,database_displayname,database_size).then(DB => {db = DB;
-db.executeSql("SELECT Categorias.rowid as id ,Articulos.rowid as idArticulo, Articulos.NombreArticulo as NombreArticulo,Categorias.NombreCategoria as NombreCategoria , Articulos.Abreviatura as Abreviatura,Articulos.PrecioVenta as PrecioVenta, Almacen.CantidadActual as CantidadExistencia  from Categorias inner join Articulos on Categorias.rowid = Articulos.CategoriaId inner join Almacen on Articulos.rowid = Almacen.ArticuloId",[]).then((results) => {
+db.executeSql(`SELECT Categorias.rowid as id ,Articulos.rowid as idArticulo,
+ Articulos.NombreArticulo as NombreArticulo,Categorias.NombreCategoria as NombreCategoria ,
+ Articulos.Abreviatura as Abreviatura,Articulos.PrecioVenta as PrecioVenta,
+ Almacen.CantidadActual as CantidadExistencia , Articulos.Img from Categorias
+ inner join Articulos on Categorias.rowid = Articulos.CategoriaId inner join Almacen 
+ on Articulos.rowid = Almacen.ArticuloId`
+ ,[]).then((results) => {
 console.log("Database is ready ... executing query ...");
  console.log("Categoria: ",results);
 let arrayArticulos = []
@@ -139,17 +145,27 @@ var len = results[0].rows.length;
 
 var item=  results[0].rows.item(i);
 console.log(item);
-let articulos = { CantidadExistencia: item.CantidadExistencia,Abreviatura: item.Abreviatura,NombreArticulo: item.NombreArticulo,
-NombreCategoria: item.NombreCategoria,PrecioVenta: item.PrecioVenta,id: item.idArticulo,selected:false,quantitySelected:1,
-  pricePerArticle:item.PrecioVenta
+let articulos = { 
+CantidadExistencia: item.CantidadExistencia,
+Abreviatura: item.Abreviatura,NombreArticulo: item.NombreArticulo,
+NombreCategoria: item.NombreCategoria,
+PrecioVenta: item.PrecioVenta,
+id: item.idArticulo,
+selected:false,
+quantitySelected:1,
+pricePerArticle: item.PrecioVenta,
+Img:item.Img
 }
 arrayArticulos.push(articulos) 
 
  }
 
+
+
  let categorias = [...new Set(arrayArticulos.map(item => item.NombreCategoria))];
  this.setState({categorias})
 this.setState({articulos:arrayArticulos})  
+console.log(JSON.parse(this.state.articulos[0].Img).uri, 'check articulos')
 this.fontload();
  }).catch((error) =>{console.log("Received error: ", error);});})
 .catch(error => {console.log(error);});})
@@ -206,23 +222,17 @@ db.executeSql('INSERT INTO Ventas(PrecioBruto, PrecioNeto, DescuentoAplicado, It
   Model.PagoTarjeta,Model.PagoTransferencia,Model.Activo,Model.IdAperturaCaja,Model.IdEmpresa,Model.IdSucursal,
   Model.FechaCreacion,Model.FechaModificacion,Model.UsuarioCreacion,Model.UsuarioModificacion]).then((results) => {
              //   console.log("Database is ready ... executing query ...");
-
 console.log("Se Inserto Ventas");
 console.log(results);
-
 const VentaId=  results[0].insertId;
-
 this.setState({VentaId:VentaId})
-
 this.state.articulos.map(item =>{
 if( item.selected === true){
 db.executeSql('INSERT INTO VentasDetalle (IdArticulo , PrecioaVenta ,Cantidad , IdVenta , Activo , IdAperturaCaja , IdEmpresa , IdSucursal , FechaCreacion ,FechaModificacion'+
                 ', UsuarioCreacion , UsuarioModificacion) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',[item.id,item.PrecioVenta,item.quantitySelected,VentaId,Model.Activo,this.state.IdCajaActiva,Model.IdEmpresa,Model.IdSucursal,
                   Model.FechaCreacion,Model.FechaModificacion,Model.UsuarioCreacion,Model.UsuarioModificacion]).then((DetailReults) => {
-
 console.log("Se inserto Detalle!!");
 console.log("aqui el item: ",item);
-
                     ListArticulos.push(item); 
                   }).catch((error) =>{
 
@@ -633,12 +643,13 @@ if( item.selected === true){
               item.selected === true &&(  
               <ListItem thumbnail>
                   <Left>
-                      <Thumbnail circle source={{ 
-                        uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' 
+                  <Thumbnail circle source={{ 
+                        uri: JSON.parse(item.Img).uri 
                       }} />
                   </Left>
                   <Body>  
-                    <Text>{item.NombreArticulo}</Text>     
+                    <Text>{item.NombreArticulo}</Text>   
+                    <Text>{item.Img.uri}</Text>     
                   </Body>
                   <Right>
                     <Text note numberOfLines={1}>Cantidad: {item.quantitySelected}</Text>
@@ -736,7 +747,7 @@ if( item.selected === true){
                   </Left>
                   <Left>
                       <Thumbnail circle source={{ 
-                        uri: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg' 
+                        uri: JSON.parse(item.Img).uri 
                       }} />
                   </Left>
                   <Body>  

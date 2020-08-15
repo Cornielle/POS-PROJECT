@@ -12,7 +12,7 @@ export default function PosTableCreator(){
       SQLite.echoTest()
         .then(() => {
           console.log("Integrity check passed ...");
-          console.log("Opening database ...");
+          console.log("Opening database ..");
           SQLite.openDatabase(
             database_name,
             database_version,       
@@ -26,68 +26,67 @@ export default function PosTableCreator(){
 
 
          
-              /*
-                            db.executeSql('Delete FROM Ventas',[]).then(() => {
-                console.log("LA TABLA Empleados HA SIDO Dropeada SATISFACTORIAMENTE");
-            }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
+    //                         db.executeSql('Delete FROM Ventas',[]).then(() => {
+    //             console.log("LA TABLA Empleados HA SIDO Dropeada SATISFACTORIAMENTE");
+    //         }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
 
-            db.executeSql('Delete FROM VentasDetalle',[]).then(() => {
-                console.log("LA TABLA Empleados HA SIDO Dropeada SATISFACTORIAMENTE");
-            }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
+    //         db.executeSql('Delete FROM VentasDetalle',[]).then(() => {
+    //             console.log("LA TABLA Empleados HA SIDO Dropeada SATISFACTORIAMENTE");
+    //         }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
 
 
             
-            db.executeSql('Delete FROM SalidaCaja',[]).then(() => {
-                console.log("LA TABLA Empleados HA SIDO Dropeada SATISFACTORIAMENTE");
-            }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
-*/
-              /* 
-              db.executeSql('DROP TABLE Ventas',[]).then(() => {
-                console.log("LA TABLA Empleados HA SIDO Dropeada SATISFACTORIAMENTE");
-            }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
+    //         db.executeSql('Delete FROM SalidaCaja',[]).then(() => {
+    //             console.log("LA TABLA Empleados HA SIDO Dropeada SATISFACTORIAMENTE");
+    //         }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
+
+              
+    //           db.executeSql('DROP TABLE Ventas',[]).then(() => {
+    //             console.log("LA TABLA Empleados HA SIDO Dropeada SATISFACTORIAMENTE");
+    //         }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
 
 
-        db.executeSql('DROP TABLE SalidaCaja',[]).then(() => {
-                console.log("LA TABLA ROLES HA SIDO CREADA SATISFACTORIAMENTE");
-            }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
+    //     db.executeSql('DROP TABLE SalidaCaja',[]).then(() => {
+    //             console.log("LA TABLA ROLES HA SIDO CREADA SATISFACTORIAMENTE");
+    //         }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
             
-      db.executeSql('DROP TABLE Caja',[]).then(() => {
-                  console.log("LA TABLA Caja HA SIDO drop SATISFACTORIAMENTE");
-              }).catch((error) =>{      console.log("ERROR A LA HORA DE drop LA TABAL ROLES");    });
+    //   db.executeSql('DROP TABLE Caja',[]).then(() => {
+    //               console.log("LA TABLA Caja HA SIDO drop SATISFACTORIAMENTE");
+    //           }).catch((error) =>{      console.log("ERROR A LA HORA DE drop LA TABAL ROLES");    });
 
-        db.executeSql('DROP TABLE SalidaCaja',[]).then(() => {
-                console.log("LA TABLA ROLES HA SIDO CREADA SATISFACTORIAMENTE");
-            }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
+    //     db.executeSql('DROP TABLE SalidaCaja',[]).then(() => {
+    //             console.log("LA TABLA ROLES HA SIDO CREADA SATISFACTORIAMENTE");
+    //         }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
             
-      db.executeSql('DROP TABLE Caja',[]).then(() => {
-                  console.log("LA TABLA Caja HA SIDO drop SATISFACTORIAMENTE");
-              }).catch((error) =>{      console.log("ERROR A LA HORA DE drop LA TABAL ROLES");    });
+    //   db.executeSql('DROP TABLE Caja',[]).then(() => {
+    //               console.log("LA TABLA Caja HA SIDO drop SATISFACTORIAMENTE");
+    //           }).catch((error) =>{      console.log("ERROR A LA HORA DE drop LA TABAL ROLES");    });
 
 
 
-        db.executeSql('DROP TABLE SalidaCaja',[]).then(() => {
-                console.log("LA TABLA ROLES HA SIDO CREADA SATISFACTORIAMENTE");
-            }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
+    //     db.executeSql('DROP TABLE SalidaCaja',[]).then(() => {
+    //             console.log("LA TABLA ROLES HA SIDO CREADA SATISFACTORIAMENTE");
+    //         }).catch((error) =>{      console.log("ERROR A LA HORA DE CREAR LA TABAL ROLES");    });
             
-      db.executeSql('DROP TABLE Caja',[]).then(() => {
-                  console.log("LA TABLA Caja HA SIDO drop SATISFACTORIAMENTE");
-              }).catch((error) =>{      console.log("ERROR A LA HORA DE drop LA TABAL ROLES");    });
+    //   db.executeSql('DROP TABLE Caja',[]).then(() => {
+    //               console.log("LA TABLA Caja HA SIDO drop SATISFACTORIAMENTE");
+    //           }).catch((error) =>{      console.log("ERROR A LA HORA DE drop LA TABAL ROLES");    });
 
 
 
-        db.executeSql('DROP TABLE Articulos',[]).then(() => {
-        console.log("LA TABLA Articulos HA SIDO drop SATISFACTORIAMENTE");
-    }).catch((error) =>{      console.log("ERROR A LA HORA DE drop LA Articulos ROLES");    });
-    db.executeSql('DROP TABLE SalidaCaja',[]).then(() => {
-        console.log("LA TABLA SalidaCaja HA SIDO dro SATISFACTORIAMENTE");
-    }).catch((error) =>{      console.log("ERROR A LA HORA DE DROP LA TABAL SalidaCaja");    });
+    //     db.executeSql('DROP TABLE Articulos',[]).then(() => {
+    //     console.log("LA TABLA Articulos HA SIDO drop SATISFACTORIAMENTE");
+    // }).catch((error) =>{      console.log("ERROR A LA HORA DE drop LA Articulos ROLES");    });
+    // db.executeSql('DROP TABLE SalidaCaja',[]).then(() => {
+    //     console.log("LA TABLA SalidaCaja HA SIDO dro SATISFACTORIAMENTE");
+    // }).catch((error) =>{      console.log("ERROR A LA HORA DE DROP LA TABAL SalidaCaja");    });
     
-    db.executeSql('DROP TABLE Caja',[]).then(() => {
-        console.log("LA TABLA Caja HA SIDO drop SATISFACTORIAMENTE");
-    }).catch((error) =>{      console.log("ERROR A LA HORA DE drop LA TABAL ROLES");    });
+    // db.executeSql('DROP TABLE Caja',[]).then(() => {
+    //     console.log("LA TABLA Caja HA SIDO drop SATISFACTORIAMENTE");
+    // }).catch((error) =>{      console.log("ERROR A LA HORA DE drop LA TABAL ROLES");    });
 
 
-      */
+      
  
 
 db.executeSql('CREATE TABLE IF NOT EXISTS Roles(rowid integer primary key, NombreRol '+
