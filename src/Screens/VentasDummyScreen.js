@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions,StyleSheet,Modal, View,Alert, AsyncStorage,ToastAndroid} from 'react-native';
+import { Dimensions,StyleSheet,Modal,FlatList, View,Alert, AsyncStorage,ToastAndroid} from 'react-native';
 import * as SQLite1 from "expo-sqlite"
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
 import {TextInput,Searchbar, FAB} from 'react-native-paper';
@@ -506,24 +506,15 @@ return;
  }   else {
 
   const Caja = await AsyncStorage.getItem("CajaActivaId");
-
-
   const LoggedUser = await AsyncStorage.getItem('LoggedUser');
-
-  
- const  sucu =  await AsyncStorage.getItem('SucursalTemp');
-
- const emp = await AsyncStorage.getItem('EmpresaTemp');
- 
-
+  const  sucu =  await AsyncStorage.getItem('SucursalTemp');
+  const emp = await AsyncStorage.getItem('EmpresaTemp');
   const AperturaUsuario = JSON.parse(LoggedUser);
   const sucursal = JSON.parse(sucu);
   const empresa = JSON.parse(emp);
-const CajaActiva = JSON.parse(Caja);
+  const CajaActiva = JSON.parse(Caja);
   const SelectedProduct =[];
-
   let total =0;
-
   const Itbis = 18;
   const Descuento =0;
  this.state.articulos.map(item=>{
@@ -535,7 +526,6 @@ SelectedProduct.push(item)
  });
 
 const porcItbis= ((total*Itbis)/100);
-
 console.log("el precio a introducir",porcItbis);
  this.setState({ListaArti:SelectedProduct})
  const fecha = new Date();
@@ -555,10 +545,8 @@ console.log("el precio a introducir",porcItbis);
    FechaModificacion:null,
    UsuarioCreacion:AperturaUsuario.Usuario,
    UsuarioModificacion:null
-   
   }
   this.GuardarVentas(ventasItem);
-
 
  }
 
@@ -566,31 +554,20 @@ console.log("el precio a introducir",porcItbis);
 
 catch(ex){
 
-console.log(ex);
+  console.log(ex);
 
+  }
 }
 
-
-   }
-
-   sum = () =>{
-
-let PrecioTotal=[]
-
+sum = () =>{
+  let PrecioTotal=[]
   const array =  this.state.articulos.map(item =>{
-if( item.selected === true){
-  PrecioTotal.push((item.quantitySelected * item.PrecioVenta)) ;
-
-}
-
-
-  })
-
-  
-  const preciotot = PrecioTotal.reduce((a, b) => a + b, 0);
-
-  return preciotot ;
- 
+  if( item.selected === true){
+    PrecioTotal.push((item.quantitySelected * item.PrecioVenta)) ;
+  }
+    })
+    const preciotot = PrecioTotal.reduce((a, b) => a + b, 0);
+    return preciotot;
 }
   fontload = async () =>{
     await Font.loadAsync({
@@ -601,11 +578,8 @@ if( item.selected === true){
     this.setState({ isReady: true });
   }
   _hideModal = () => this.setState({ visible: false });
-  // setArticulos = () => {
-  //   console.lodg("articulos")
-  // }
-  render() {
 
+  render() {
     const { visible, isCash, isCard ,IsDeposit, product, searchQuery,articulos } = this.state;
     if (!this.state.isReady) {
       return (
@@ -626,7 +600,7 @@ if( item.selected === true){
             </Button>
           </Left>
           <Right>
-            <Title style={{fontSize:20}}>Punto de Ventas</Title>
+            <Title style={{fontSize:18}}>Punto de Ventas</Title>
           </Right>
           <Right>
             <Button
@@ -637,7 +611,7 @@ if( item.selected === true){
           </Right>
         </Header>
       <Content>
-        <Card style={{height:windowHeight * 0.6536}}>
+        <Card style={{height:windowHeight * 0.5866}}>
           <ScrollView>
               {articulos.map(item=>(
               item.selected === true &&(  
@@ -662,31 +636,25 @@ if( item.selected === true){
         <Card>
             <CardItem>
               <Body>
-                <Text style={{ fontSize:14,paddingLeft:windowWidth * 0.184}} note numberOfLines={1}>
+                <Text style={{ fontSize:14,paddingLeft:windowWidth * 0.104}} note numberOfLines={1}>
                   Monto Neto:
                 </Text>
-                <Text style={{ fontSize:14, paddingLeft:windowWidth * 0.184}} note numberOfLines={1}>
+                <Text style={{ fontSize:14, paddingLeft:windowWidth * 0.104}} note numberOfLines={1}>
                   ITBIS:
                 </Text>
-                <Text style={{ fontSize:16, paddingLeft:windowWidth * 0.183}}>
+                <Text style={{ fontSize:16, paddingLeft:windowWidth * 0.103}}>
                   Total:
                 </Text>
               </Body>        
               <Body>
                 <Text style={{ fontSize:16,paddingLeft:windowWidth * 0.004}} note numberOfLines={1}>
-                
                 </Text>
-       
-             
                 <Text style={{ fontSize:16, paddingLeft:windowWidth * 0.003}}>
                  RD$ 2.00000000
                 </Text>
-    
                 <Text style={{ fontSize:16, paddingLeft:windowWidth * 0.003}}>
                 {this.sum()}
                 </Text>
-
-
               </Body>
             </CardItem>
           </Card>
@@ -733,46 +701,50 @@ if( item.selected === true){
               <Tab heading={
                 <TabHeading><Text>{element}</Text></TabHeading>
               }>
-              {articulos.map(item=>(
-              item.NombreCategoria === element &&(  
-              <ListItem thumbnail>
-                  <Left>
-                    <Checkbox
-                      style={{marginRight:6}}
-                      value={this.state.checked}
-                      onChange={(selected) => {
-                        item.selected = selected
-                      }}
-                    />
-                  </Left>
-                  <Left>
-                      <Thumbnail circle source={{ 
-                        uri: JSON.parse(item.Img).uri 
-                      }} />
-                  </Left>
-                  <Body>  
-                    <Text>{item.NombreArticulo}</Text>     
-                    <Text note numberOfLines={1}>Disponibles: {item.CantidadExistencia}</Text>
-                    <Text note numberOfLines={1}>Precio: RD$ {item.PrecioVenta}.00</Text>
-                  </Body>
-                  <Right>
-                  <NumericInput
-                      totalWidth={80} 
-                      totalHeight={40}
-                      valueType={'real'}
-                      disable={true}
-                      minValue={1}
-                      initValue={1}
-                      onChange={(quantity) => {
-                        item.quantitySelected = quantity, 
-                        item.pricePerArticle = (item.quantitySelected * item.PrecioVenta),
-                        item.quantityLeft = item.CantidadExistencia - quantity
-                      }}
-                      rounded 
-                    />
-                  </Right>
-                </ListItem>)
-                ))}
+              <FlatList
+              data={articulos}
+              renderItem={({item})=>
+                <ListItem thumbnail>
+                    {/* <Left>
+                      <Checkbox
+                        style={{marginRight:6}}
+                        value={this.state.checked}
+                        onChange={(selected) => {
+                          item.selected = selected
+                        }}
+                      />
+                    </Left> */}
+                    <Left>
+                        <Thumbnail circle source={{ 
+                          uri: JSON.parse(item.Img).uri 
+                        }} />
+                    </Left>
+                    <Body>  
+                      <Text>{item.NombreArticulo}</Text>     
+                      <Text note numberOfLines={1}>Disponibles: {item.CantidadExistencia}</Text>
+                      <Text note numberOfLines={1}>Precio: RD$ {item.PrecioVenta}.00</Text>
+                    </Body>
+                    <Right>
+
+                    <NumericInput
+                        totalWidth={65} 
+                        totalHeight={35}
+                        valueType={'real'}
+                        disable={true}
+                        minValue={1}
+                        initValue={1}
+                        onChange={(quantity) => {
+                          item.quantitySelected = quantity, 
+                          item.pricePerArticle = (item.quantitySelected * item.PrecioVenta),
+                          item.quantityLeft = item.CantidadExistencia - quantity
+                        }}
+                        rounded 
+                      />
+                    </Right>
+                  </ListItem>
+                  }
+                />
+              
               </Tab>
               ))}
             </Tabs>
@@ -821,7 +793,7 @@ if( item.selected === true){
             keyboardType="numeric"
           />
 
-<TextInput
+          <TextInput
             style={styles.Input}
             mode='flat'
             label='Monto Transferencia'
