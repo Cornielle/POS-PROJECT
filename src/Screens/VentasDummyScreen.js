@@ -162,7 +162,7 @@ NombreCategoria: item.NombreCategoria,
 PrecioVenta: item.PrecioVenta,
 id: item.idArticulo,
 selected:false,
-quantitySelected:1,
+quantitySelected:0,
 pricePerArticle: item.PrecioVenta,
 Img:item.Img
 }
@@ -753,7 +753,10 @@ sum = () =>{
                   data={articulos}
                   keyExtractor={item=>item.id}
                   extraData={this.state}
-                  renderItem={({item})=>  this.renderListItem(item)}
+                  renderItem={({item})=>  
+                  element ===item.NombreCategoria &&
+                    this.renderListItem(item)
+                  }
 
                   // <ListItem>
                   //   <Text>{item.NombreArticulo}</Text>
