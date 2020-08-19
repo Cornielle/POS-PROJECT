@@ -2,14 +2,14 @@ import React from 'react';
 import { Dimensions,StyleSheet,Modal,FlatList, View,Alert, AsyncStorage,ToastAndroid} from 'react-native';
 import * as SQLite1 from "expo-sqlite"
 import DatabaseLayer from 'expo-sqlite-orm/src/DatabaseLayer'
-import {TextInput,Searchbar, FAB} from 'react-native-paper';
+import {TextInput,Searchbar, FAB,} from 'react-native-paper';
 import { Checkbox } from 'galio-framework';
 import { Container, Header, Content,Title, Icon, List,
-Card, CardItem, ListItem, Thumbnail, Text, Left, Body, 
-Right, Button, Footer, FooterTab,Spinner, Tab, Tabs,TabHeading, ScrollableTab} from 'native-base';
+Card, CardItem, Thumbnail, Text, Left, Body, 
+Right, Button, Footer, FooterTab,Spinner, Tab, Tabs,TabHeading, ScrollableTab, ListItem} from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
-import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
+import {  ScrollView, TouchableHighlight ,  TouchableOpacity } from 'react-native-gesture-handler';
 
 import NumericInput from 'react-native-numeric-input'
 const windowWidth = Dimensions.get('window').width;
@@ -88,6 +88,7 @@ export default class VentasMain extends React.Component {
     }
     this._hideModal =  this._hideModal.bind(this);
     this.goBack = this.goBack.bind(this);
+    this.selectProduct = this.selectProduct.bind(this);
   }
   goBack(){
     this.setState({
@@ -103,8 +104,17 @@ ListaArti:[]
 }
 
 
-UnselectArticulos =() =>{
+/** Select Product **/
 
+selectProduct(articulo){
+  this.state.articulos.filter((item) => {
+    if(item===articulo)
+      item.selected = true
+  })
+  console.log(this.state.articulos,'checking')
+}
+
+UnselectArticulos =() =>{
 
   try{
     this.state.articulos.forEach((item)=>{
@@ -165,7 +175,6 @@ arrayArticulos.push(articulos)
  let categorias = [...new Set(arrayArticulos.map(item => item.NombreCategoria))];
  this.setState({categorias})
 this.setState({articulos:arrayArticulos})  
-console.log(JSON.parse(this.state.articulos[0].Img).uri, 'check articulos')
 this.fontload();
  }).catch((error) =>{console.log("Received error: ", error);});})
 .catch(error => {console.log(error);});})
@@ -559,6 +568,7 @@ catch(ex){
   }
 }
 
+keyExtractor = (item, index) => index.toString()
 sum = () =>{
   let PrecioTotal=[]
   const array =  this.state.articulos.map(item =>{
@@ -578,7 +588,44 @@ sum = () =>{
     this.setState({ isReady: true });
   }
   _hideModal = () => this.setState({ visible: false });
+  renderListItem(item){
+    return(
+      <List>
+      <ListItem thumbnail>
+        <Left>
+          <Thumbnail square 
+          source={{ 
+            uri: JSON.parse(item.Img).uri
+            }} />
+        </Left>
+        <Body>
+          <Text style={{ fontSize:14}}>{item.NombreArticulo}</Text> 
+          <Text style={{ fontSize:12}} note numberOfLines={1}>Cantidad: {item.quantitySelected}</Text>
+          <Text style={{ fontSize:12}} note numberOfLines={1}>Precio: RD$ {item.pricePerArticle}</Text>
+        </Body>
+        <Right>
 
+                     <NumericInput
+                         totalWidth={65} 
+                           totalHeight={35}
+                           valueType={'real'}
+                           disable={true}
+                           minValue={0}
+                           initValue={item.quantitySelected}
+                           onChange={(quantity) => {
+                             item.quantitySelected = quantity, 
+                             item.pricePerArticle = (item.quantitySelected * item.PrecioVenta),
+                             item.quantityLeft = item.CantidadExistencia - quantity
+                             quantity>0?item.selected = true:false
+                             ToastAndroid.show(`Se ha agregado ${quantity} de ${item.NombreArticulo}`,ToastAndroid.SHORT)
+                           }}
+                           rounded
+                           />
+        </Right>
+      </ListItem>
+    </List>
+    )
+  }
   render() {
     const { visible, isCash, isCard ,IsDeposit, product, searchQuery,articulos } = this.state;
     if (!this.state.isReady) {
@@ -614,7 +661,7 @@ sum = () =>{
         <Card style={{height:windowHeight * 0.5866}}>
           <ScrollView>
               {articulos.map(item=>(
-              item.selected === true &&(  
+              item.selected === true && item.quantitySelected!==0 && (  
               <ListItem thumbnail>
                   <Left>
                   <Thumbnail circle source={{ 
@@ -647,9 +694,9 @@ sum = () =>{
                 </Text>
               </Body>        
               <Body>
-                <Text style={{ fontSize:16,paddingLeft:windowWidth * 0.004}} note numberOfLines={1}>
+                <Text style={{ fontSize:16,paddingLeft:windowWidth * 0.0035}} note numberOfLines={1}>
                 </Text>
-                <Text style={{ fontSize:16, paddingLeft:windowWidth * 0.003}}>
+                <Text style={{ fontSize:16, paddingLeft:windowWidth * 0.0040}}>
                  RD$ 2.00000000
                 </Text>
                 <Text style={{ fontSize:16, paddingLeft:windowWidth * 0.003}}>
@@ -701,50 +748,52 @@ sum = () =>{
               <Tab heading={
                 <TabHeading><Text>{element}</Text></TabHeading>
               }>
-              <FlatList
-              data={articulos}
-              renderItem={({item})=>
-                <ListItem thumbnail>
-                    {/* <Left>
-                      <Checkbox
-                        style={{marginRight:6}}
-                        value={this.state.checked}
-                        onChange={(selected) => {
-                          item.selected = selected
-                        }}
-                      />
-                    </Left> */}
-                    <Left>
-                        <Thumbnail circle source={{ 
-                          uri: JSON.parse(item.Img).uri 
-                        }} />
-                    </Left>
-                    <Body>  
-                      <Text>{item.NombreArticulo}</Text>     
-                      <Text note numberOfLines={1}>Disponibles: {item.CantidadExistencia}</Text>
-                      <Text note numberOfLines={1}>Precio: RD$ {item.PrecioVenta}.00</Text>
-                    </Body>
-                    <Right>
+                {/* ListItem Articulos  */}
+                <FlatList
+                  data={articulos}
+                  keyExtractor={item=>item.id}
+                  extraData={this.state}
+                  renderItem={({item})=>  this.renderListItem(item)}
 
-                    <NumericInput
-                        totalWidth={65} 
-                        totalHeight={35}
-                        valueType={'real'}
-                        disable={true}
-                        minValue={1}
-                        initValue={1}
-                        onChange={(quantity) => {
-                          item.quantitySelected = quantity, 
-                          item.pricePerArticle = (item.quantitySelected * item.PrecioVenta),
-                          item.quantityLeft = item.CantidadExistencia - quantity
-                        }}
-                        rounded 
-                      />
-                    </Right>
-                  </ListItem>
-                  }
-                />
-              
+                  // <ListItem>
+                  //   <Text>{item.NombreArticulo}</Text>
+                  // </ListItem>
+                    // <ListItem
+                    //   title={item.NombreArticulo}
+                    //   onPress={(selected)=>{
+                    //     this.selectProduct(item)
+                    //   }}
+                    //   checkmark={item.selected}
+                    //   subtitle={
+                    //     <View>
+                    //       <Text note numberOfLines={1}>Cantidad: {item.quantitySelected}</Text>
+                    //       <Text note numberOfLines={1}>Precio: RD$ {item.pricePerArticle}</Text>
+                    //     </View>
+                    //   }
+                    //   leftAvatar={{
+                    //     source: JSON.parse(item.Img).uri && { uri: JSON.parse(item.Img).uri },
+                    //     title: item.name
+                    //   }}
+                    //   rightAvatar={
+                    //     item.selected &&(
+                    //       <NumericInput
+                    //       totalWidth={65} 
+                    //       totalHeight={35}
+                    //       valueType={'real'}
+                    //       disable={true}
+                    //       minValue={1}
+                    //       initValue={1}
+                    //       onChange={(quantity) => {
+                    //         item.quantitySelected = quantity, 
+                    //         item.pricePerArticle = (item.quantitySelected * item.PrecioVenta),
+                    //         item.quantityLeft = item.CantidadExistencia - quantity
+                    //       }}
+                    //       rounded 
+                    //       /> )
+                    //   }
+                    //   bottomDivider
+                    // />
+                  />
               </Tab>
               ))}
             </Tabs>
