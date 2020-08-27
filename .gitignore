@@ -9,6 +9,18 @@ npm-debug.*
 *.orig.*
 web-build/
 web-report/
-
+.packager-info.json
 # macOS
+# Android Studio
+*.iml
+.idea
+#.idea/workspace.xml - remove # and delete .idea if it better suit your needs.
+.gradle
+build/
+.navigation
+captures/
+output.json 
 .DS_Store
+yarn.lock
+package-info.json
+android/
